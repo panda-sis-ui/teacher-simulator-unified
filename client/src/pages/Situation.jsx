@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
@@ -11,6 +11,9 @@ const Situation = () => {
   const { sitId, nodeId } = useParams();
   const navigate = useNavigate();
 
+  // Добавляем ref для скролла
+  const situationTopRef = useRef(null);
+
   const [situation, setSituation] = useState(null);
   const [currentNode, setCurrentNode] = useState(null);
   const [context, setContext] = useState(null);
@@ -18,7 +21,7 @@ const Situation = () => {
   const [participants, setParticipants] = useState([]);
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [config, setConfig] = useState({
+  const config = {
     icons: {
       problemTypes: {
         'Мотивационные кризисы': 'fas fa-lightbulb',
@@ -60,7 +63,7 @@ const Situation = () => {
     display: {
       defaultImage: 'https://via.placeholder.com/400x300/cccccc/333333?text=Изображение+ситуации'
     }
-  });
+  };
 
   // Базовый URL API
   const API_BASE_URL = 'http://localhost:5000/api';
@@ -255,6 +258,21 @@ const Situation = () => {
       }
     }
   };
+
+  // Функция для скролла к началу страницы
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  // Скролл к началу при изменении узла
+  useEffect(() => {
+    if (currentNode) {
+      scrollToTop();
+    }
+  }, [currentNode]);
 
   // Загрузка данных при монтировании и изменении параметров
   useEffect(() => {
@@ -457,6 +475,9 @@ const Situation = () => {
 
       <main className="situation-main">
         <div className="container">
+          {/* Используем ref для указания начала контента ситуации */}
+          <div ref={situationTopRef} className="situation-content-start"></div>
+
           <div className="situation-breadcrumbs">
             <a href="/catalog">Каталог</a>
             <span> / </span>

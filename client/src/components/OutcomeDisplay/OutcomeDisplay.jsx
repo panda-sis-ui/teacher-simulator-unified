@@ -4,6 +4,28 @@ import './OutcomeDisplay.css';
 const OutcomeDisplay = ({ outcome, onRestart, onBackToStart, config }) => {
   if (!outcome) return null;
 
+  // Функция для перевода ключей метрик на русский
+  const translateMetricKey = (key) => {
+    const translations = {
+      motivation: 'Мотивация',
+      stress: 'Стресс',
+      trust: 'Доверие',
+      classClimate: 'Климат в классе',
+      teacherAuthority: 'Авторитет учителя',
+      burnout: 'Выгорание',
+      motivationChange: 'Изменение мотивации',
+      stressChange: 'Изменение стресса',
+      trustChange: 'Изменение доверия',
+      classClimateChange: 'Изменение климата',
+      teacherAuthorityChange: 'Изменение авторитета',
+      burnoutChange: 'Изменение выгорания'
+    };
+
+    // Удаляем 'Change' из ключа для базового перевода, если не найдено полное совпадение
+    const baseKey = key.replace('Change', '');
+    return translations[key] || translations[baseKey] || key;
+  };
+
   const getOutcomeTypeText = (type) => {
     const texts = config?.texts?.outcomeTypes || {};
     return texts[type] || 'Результат';
@@ -22,12 +44,13 @@ const OutcomeDisplay = ({ outcome, onRestart, onBackToStart, config }) => {
     if (!metrics) return [];
 
     return Object.entries(metrics).map(([key, value]) => {
-      const formattedKey = key.replace('Change', '').replace(/([A-Z])/g, ' $1');
+      // Переводим ключ метрики на русский
+      const translatedKey = translateMetricKey(key);
       const sign = value >= 0 ? '+' : '';
       const valueClass = value > 0 ? 'positive' : value < 0 ? 'negative' : 'neutral';
 
       return {
-        key: formattedKey,
+        key: translatedKey,
         originalKey: key,
         value,
         sign,

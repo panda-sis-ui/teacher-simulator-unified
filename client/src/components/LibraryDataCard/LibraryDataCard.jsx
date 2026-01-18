@@ -3,6 +3,35 @@ import React from 'react';
 import './LibraryDataCard.css';
 
 const LibraryDataCard = ({ data, category }) => {
+  // Функция для перевода ключей метрик на русский
+  const translateMetricKey = (key) => {
+    const translations = {
+      motivation: 'Мотивация',
+      stress: 'Стресс',
+      trust: 'Доверие',
+      classClimate: 'Климат в классе',
+      teacherAuthority: 'Авторитет учителя',
+      burnout: 'Выгорание',
+      motivationChange: 'Изменение мотивации',
+      stressChange: 'Изменение стресса',
+      trustChange: 'Изменение доверия',
+      classClimateChange: 'Изменение климата',
+      teacherAuthorityChange: 'Изменение авторитета',
+      burnoutChange: 'Изменение выгорания'
+    };
+
+    return translations[key] || key;
+  };
+
+  // Функция для форматирования значения метрики
+  const formatMetricValue = (value) => {
+    if (typeof value === 'number') {
+      const formatted = value > 0 ? `+${value.toFixed(1)}` : value.toFixed(1);
+      return formatted;
+    }
+    return value;
+  };
+
   // Функции для рендеринга разных типов данных
   const renderContext = () => (
     <>
@@ -235,9 +264,9 @@ const LibraryDataCard = ({ data, category }) => {
               <div className="metrics-grid">
                 {Object.entries(data.metrics).map(([key, value]) => (
                   <div key={key} className="metric-item">
-                    <span className="metric-label">{key.replace('Change', '')}</span>
+                    <span className="metric-label">{translateMetricKey(key)}</span>
                     <span className={`metric-value ${value > 0 ? 'positive' : value < 0 ? 'negative' : 'neutral'}`}>
-                      {value > 0 ? '+' : ''}{value.toFixed(1)}
+                      {formatMetricValue(value)}
                     </span>
                   </div>
                 ))}
