@@ -187,3 +187,403 @@
   color: var(--text-light);
   font-size: 0.9rem;
 }
+/* Стили для скролла и анимаций */
+.situation-content-start {
+  position: relative;
+  top: -80px;
+  height: 0;
+}
+
+/* Стили для секции с диаграммой */
+.spider-chart-section {
+  margin: 30px 0;
+  animation: fadeIn 0.5s ease;
+}
+
+.outcome-metrics-table {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 25px 0;
+  animation: fadeIn 0.6s ease;
+}
+
+.outcome-metrics-table h4 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.metrics-table {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.metric-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.metric-label {
+  flex: 1;
+  font-weight: 500;
+  color: #34495e;
+  min-width: 200px;
+}
+
+.metric-value {
+  font-weight: bold;
+  font-size: 16px;
+  min-width: 60px;
+  text-align: right;
+}
+
+.metric-value.positive {
+  color: #27ae60;
+}
+
+.metric-value.negative {
+  color: #e74c3c;
+}
+
+.metric-value.neutral {
+  color: #7f8c8d;
+}
+
+.metric-bar-container {
+  flex: 2;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  min-width: 150px;
+}
+
+.metric-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.metric-bar.positive {
+  background: #27ae60;
+}
+
+.metric-bar.negative {
+  background: #e74c3c;
+  transform-origin: right;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Стили для карточки результата */
+.outcome-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  margin: 30px 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.4s ease;
+}
+
+.outcome-card.success {
+  border-top: 5px solid #4caf50;
+}
+
+.outcome-card.partial {
+  border-top: 5px solid #ff9800;
+}
+
+.outcome-card.failure {
+  border-top: 5px solid #f44336;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.outcome-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.outcome-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.outcome-icon {
+  font-size: 2.5rem;
+}
+
+.outcome-card.success .outcome-icon {
+  color: #4caf50;
+}
+
+.outcome-card.partial .outcome-icon {
+  color: #ff9800;
+}
+
+.outcome-card.failure .outcome-icon {
+  color: #f44336;
+}
+
+.outcome-title h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #2c3e50;
+}
+
+.outcome-intensity {
+  text-align: right;
+}
+
+.intensity-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.intensity-value {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.intensity-bar {
+  width: 150px;
+  height: 10px;
+  background: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.intensity-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #2196f3);
+  border-radius: 5px;
+  transition: width 1s ease;
+}
+
+.outcome-text-container {
+  position: relative;
+  margin: 25px 0;
+  padding: 0 40px;
+}
+
+.outcome-text-container .fa-quote-left,
+.outcome-text-container .fa-quote-right {
+  position: absolute;
+  color: #ddd;
+  font-size: 1.5rem;
+}
+
+.outcome-text-container .fa-quote-left {
+  left: 0;
+  top: 0;
+}
+
+.outcome-text-container .fa-quote-right {
+  right: 0;
+  bottom: 0;
+}
+
+.outcome-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+  text-align: center;
+  font-style: italic;
+}
+
+.outcome-meta {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 25px 0;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.meta-icon {
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.meta-icon i {
+  font-size: 1.2rem;
+  color: #6c5ce7;
+}
+
+.meta-content {
+  flex: 1;
+}
+
+.meta-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.meta-value {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.outcome-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #eee;
+  flex-wrap: wrap;
+}
+
+.outcome-actions .btn {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* Стили для состояний загрузки и ошибок */
+.situation-loading {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 100px 20px;
+  color: #666;
+}
+
+.loading-spinner i {
+  margin-bottom: 20px;
+}
+
+.situation-error {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.error-message {
+  text-align: center;
+  padding: 100px 20px;
+  color: #666;
+}
+
+.error-message i {
+  margin-bottom: 20px;
+  color: #f44336;
+}
+
+.error-message h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .outcome-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .outcome-intensity {
+    text-align: left;
+    width: 100%;
+  }
+
+  .meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .outcome-actions .btn {
+    min-width: 100%;
+  }
+
+  .outcome-text-container {
+    padding: 0 20px;
+  }
+
+  .metric-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .metric-label {
+    min-width: auto;
+  }
+
+  .metric-bar-container {
+    width: 100%;
+  }
+
+  .intensity-bar {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .outcome-card {
+    padding: 20px;
+  }
+
+  .outcome-title h3 {
+    font-size: 1.4rem;
+  }
+
+  .outcome-icon {
+    font-size: 2rem;
+  }
+}

@@ -5,6 +5,7 @@ import Footer from '../components/Footer/Footer';
 import SituationViewer from '../components/SituationViewer/SituationViewer';
 import ChoiceCard from '../components/ChoiceCard/ChoiceCard';
 import OutcomeDisplay from '../components/OutcomeDisplay/OutcomeDisplay';
+import SimpleSpiderChart from '../components/SimpleSpiderChart/SimpleSpiderChart';
 import './Situation.css';
 
 const Situation = () => {
@@ -13,6 +14,7 @@ const Situation = () => {
 
   // Добавляем ref для скролла
   const situationTopRef = useRef(null);
+  const prevNodeIdRef = useRef(null);
 
   const [situation, setSituation] = useState(null);
   const [currentNode, setCurrentNode] = useState(null);
@@ -196,6 +198,15 @@ const Situation = () => {
     }
   };
 
+  // Функция для скролла к началу страницы
+  const scrollToTop = () => {
+    console.log('Скроллим к началу страницы');
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   const makeChoice = async (choice) => {
     if (choice.next) {
       // Сохраняем текущий узел в историю
@@ -209,6 +220,11 @@ const Situation = () => {
       if (nextNode) {
         setCurrentNode(nextNode);
         navigate(`/situation/${sitId}/${choice.next}`);
+
+        // Скроллим после небольшой задержки
+        setTimeout(() => {
+          scrollToTop();
+        }, 100);
       } else {
         console.error(`Не удалось загрузить узел ${choice.next}`);
         // Возвращаем предыдущее состояние
@@ -234,6 +250,11 @@ const Situation = () => {
           navigate(`/situation/${sitId}/${nodeKey}`);
         }
       }
+
+      // Скроллим вверх
+      setTimeout(() => {
+        scrollToTop();
+      }, 100);
     }
   };
 
@@ -244,6 +265,10 @@ const Situation = () => {
         setCurrentNode(initialNode);
         setHistory([]);
         navigate(`/situation/${sitId}/${situation.initialNode}`);
+
+        setTimeout(() => {
+          scrollToTop();
+        }, 100);
       }
     }
   };
@@ -255,22 +280,25 @@ const Situation = () => {
         setCurrentNode(initialNode);
         setHistory([]);
         navigate(`/situation/${sitId}/${situation.initialNode}`);
+
+        setTimeout(() => {
+          scrollToTop();
+        }, 100);
       }
     }
   };
 
-  // Функция для скролла к началу страницы
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
   // Скролл к началу при изменении узла
   useEffect(() => {
-    if (currentNode) {
-      scrollToTop();
+    if (currentNode && currentNode.id !== prevNodeIdRef.current) {
+      prevNodeIdRef.current = currentNode.id;
+
+      // Небольшая задержка для гарантии отрисовки нового контента
+      const timer = setTimeout(() => {
+        scrollToTop();
+      }, 150);
+
+      return () => clearTimeout(timer);
     }
   }, [currentNode]);
 
@@ -350,6 +378,7 @@ const Situation = () => {
     }, [choice.solutionRef]);
 
     const handleClick = () => {
+      console.log('Клик по выбору:', choice.description);
       makeChoice(choice);
     };
 
@@ -379,7 +408,7 @@ const Situation = () => {
     );
   };
 
-  // Компонент для отображения результата
+  // Компонент для отображения результата с диаграммой
   const OutcomeDisplayWithData = ({ outcomeRef }) => {
     const [outcome, setOutcome] = useState(null);
     const [loadingOutcome, setLoadingOutcome] = useState(false);
@@ -425,26 +454,156 @@ const Situation = () => {
       );
     }
 
-    return outcome ? (
-      <OutcomeDisplay
-        outcome={outcome}
-        onRestart={restartSituation}
-        onBackToStart={goToInitialNode}
-        config={config}
-      />
-    ) : null;
+    if (!outcome) return null;
+
+    return (
+      <div className={`outcome-card outcome-${outcome.type}`}>
+        <div className="outcome-header">
+          <div className="outcome-title">
+            <i className={`outcome-icon fas fa-${outcome.type === 'success' ? 'check-circle' : outcome.type === 'failure' ? 'times-circle' : 'minus-circle'}`}></i>
+            <h3>
+              {outcome.type === 'success' ? '✅ Успех' :
+               outcome.type === 'failure' ? '❌ Провал' : '⚠️ Частичный успех'}
+            </h3>
+          </div>
+
+          <div className="outcome-intensity">
+            <div className="intensity-label">Интенсивность воздействия:</div>
+            <div className="intensity-value">
+              <div className="intensity-bar">
+                <div
+                  className="intensity-fill"
+                  style={{ width: `${outcome.intensity || 0}%` }}
+                ></div>
+              </div>
+              <strong>{outcome.intensity || 0}/100</strong>
+            </div>
+          </div>
+        </div>
+
+        <div className="outcome-content">
+          <div className="outcome-text-container">
+            <i className="fas fa-quote-left"></i>
+            <p className="outcome-text">{outcome.text}</p>
+            <i className="fas fa-quote-right"></i>
+          </div>
+
+          <div className="outcome-meta">
+            <div className="meta-grid">
+              <div className="meta-item">
+                <div className="meta-icon">
+                  <i className="fas fa-clock"></i>
+                </div>
+                <div className="meta-content">
+                  <div className="meta-label">Длительность эффекта</div>
+                  <div className="meta-value">
+                    {outcome.longTerm ? 'Долгосрочный' : 'Краткосрочный'}
+                  </div>
+                </div>
+              </div>
+
+              <div className="meta-item">
+                <div className="meta-icon">
+                  <i className="fas fa-undo"></i>
+                </div>
+                <div className="meta-content">
+                  <div className="meta-label">Обратимость</div>
+                  <div className="meta-value">
+                    {outcome.reversible ? 'Обратимый' : 'Необратимый'}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Добавляем диаграмму-паутинку если есть метрики */}
+          {outcome.metrics && Object.keys(outcome.metrics).length > 0 && (
+            <div className="spider-chart-section">
+              <SimpleSpiderChart
+                metrics={outcome.metrics}
+                title="Изменения ключевых показателей"
+              />
+            </div>
+          )}
+
+          {/* Табличное представление метрик (опционально) */}
+          {outcome.metrics && Object.keys(outcome.metrics).length > 0 && (
+            <div className="outcome-metrics-table">
+              <h4><i className="fas fa-chart-bar"></i> Детали изменений:</h4>
+              <div className="metrics-table">
+                {Object.entries(outcome.metrics).map(([key, value]) => {
+                  // Функция для перевода ключей метрик на русский
+                  const translateMetricKey = (key) => {
+                    const translations = {
+                      motivation: 'Мотивация',
+                      stress: 'Стресс',
+                      trust: 'Доверие',
+                      classClimate: 'Климат в классе',
+                      teacherAuthority: 'Авторитет учителя',
+                      burnout: 'Выгорание',
+                      motivationChange: 'Изменение мотивации',
+                      stressChange: 'Изменение стресса',
+                      trustChange: 'Изменение доверия',
+                      classClimateChange: 'Изменение климата',
+                      teacherAuthorityChange: 'Изменение авторитета',
+                      burnoutChange: 'Изменение выгорания'
+                    };
+                    return translations[key] || key;
+                  };
+
+                  const valueClass = value > 0 ? 'positive' : value < 0 ? 'negative' : 'neutral';
+                  const sign = value > 0 ? '+' : '';
+
+                  return (
+                    <div key={key} className="metric-row">
+                      <div className="metric-label">{translateMetricKey(key)}:</div>
+                      <div className={`metric-value ${valueClass}`}>
+                        {sign}{value.toFixed(1)}
+                      </div>
+                      <div className="metric-bar-container">
+                        <div
+                          className={`metric-bar ${valueClass}`}
+                          style={{
+                            width: `${Math.min(Math.abs(value) * 100, 100)}%`,
+                            transform: value < 0 ? 'scaleX(-1)' : 'none'
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          <div className="outcome-actions">
+            <button className="btn btn-primary" onClick={restartSituation}>
+              <i className="fas fa-redo"></i> Начать заново
+            </button>
+            <button className="btn btn-outline" onClick={goToInitialNode}>
+              <i className="fas fa-arrow-left"></i> К началу ситуации
+            </button>
+            <button className="btn btn-secondary" onClick={() => window.location.href = '/catalog'}>
+              <i className="fas fa-list"></i> В каталог
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   if (loading) {
     return (
       <div className="situation-loading">
         <Header />
-        <div className="container">
-          <div className="loading-spinner">
-            <i className="fas fa-spinner fa-spin fa-3x"></i>
-            <p>Загрузка ситуации...</p>
+        <main className="situation-main">
+          <div className="container">
+            <div className="loading-spinner">
+              <i className="fas fa-spinner fa-spin fa-3x"></i>
+              <p>Загрузка ситуации...</p>
+            </div>
           </div>
-        </div>
+        </main>
         <Footer />
       </div>
     );
@@ -454,16 +613,18 @@ const Situation = () => {
     return (
       <div className="situation-error">
         <Header />
-        <div className="container">
-          <div className="error-message">
-            <i className="fas fa-exclamation-triangle fa-3x"></i>
-            <h3>Ситуация не найдена</h3>
-            <p>Пожалуйста, вернитесь в каталог и выберите другую ситуацию.</p>
-            <a href="/catalog" className="btn btn-primary">
-              Вернуться в каталог
-            </a>
+        <main className="situation-main">
+          <div className="container">
+            <div className="error-message">
+              <i className="fas fa-exclamation-triangle fa-3x"></i>
+              <h3>Ситуация не найдена</h3>
+              <p>Пожалуйста, вернитесь в каталог и выберите другую ситуацию.</p>
+              <a href="/catalog" className="btn btn-primary">
+                Вернуться в каталог
+              </a>
+            </div>
           </div>
-        </div>
+        </main>
         <Footer />
       </div>
     );
