@@ -1,0 +1,285 @@
+/* Онтология страница */
+.ontology-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ontology-header {
+  background: linear-gradient(135deg, #2c6e49 0%, #4c956c 100%);
+  color: white;
+  padding: 60px 0 40px;
+  text-align: center;
+}
+
+.ontology-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.ontology-header p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.ontology-content {
+  flex: 1;
+  padding: 40px 20px;
+}
+
+/* Карточка с контентом */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 40px;
+}
+
+.section-title {
+  color: #2c6e49;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-subtitle {
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 25px;
+  font-size: 1.05rem;
+}
+
+.example-note {
+  background: #e8f4fd;
+  border-left: 4px solid #1976d2;
+  padding: 16px;
+  border-radius: 4px;
+  margin: 25px 0;
+  color: #0d47a1;
+}
+
+.example-note code {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+}
+
+/* Контейнер для схемы */
+.diagram-container {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fafafa;
+  margin: 25px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+#ontologyCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: move;
+}
+
+.diagram-controls {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.scale-indicator {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.diagram-hint {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.diagram-hint i {
+  margin-right: 4px;
+}
+
+/* Подсказка при наведении */
+.node-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+  margin-top: -10px;
+  z-index: 100;
+  max-width: 250px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.tooltip-info {
+  color: #ddd;
+  font-size: 0.85rem;
+}
+
+/* Легенда */
+.legend-section {
+  margin: 30px 0;
+}
+
+.toggle-legend-btn {
+  margin-left: auto;
+}
+
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+
+.legend-color {
+  width: 24px;
+  height: 24px;
+  border: 2px solid;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.legend-symbol {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.legend-text {
+  color: #333;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+/* Панель инструментов */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid #dee2e6;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+  .diagram-container {
+    height: 600px;
+  }
+
+  .legend-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .ontology-header h1 {
+    font-size: 2rem;
+  }
+
+  .ontology-header p {
+    font-size: 1rem;
+    padding: 0 15px;
+  }
+
+  .diagram-container {
+    height: 500px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .toolbar .btn {
+    width: 100%;
+  }
+
+  .legend-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .toggle-legend-btn {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 20px;
+  }
+
+  .diagram-container {
+    height: 400px;
+  }
+
+  .diagram-hint {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+  }
+
+  .ontology-header {
+    padding: 40px 0 30px;
+  }
+}

@@ -1,0 +1,303 @@
+// src/pages/Home.jsx
+import React, { useRef, useEffect, useState } from 'react';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
+import ScenarioCard from '../components/ScenarioCard/ScenarioCard';
+import './Home.css';
+
+const Home = () => {
+  const scrollerRef = useRef(null);
+  const gridRef = useRef(null);
+  const [isLeftDisabled, setIsLeftDisabled] = useState(true);
+  const [isRightDisabled, setIsRightDisabled] = useState(false);
+  const [randomScenarios, setRandomScenarios] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Данные для онтологических карточек
+  const ontologyCards = [
+    {
+      icon: 'chart-line',
+      title: 'Мотивационные кризисы',
+      description: 'Демотивация, апатия, сопротивление, «непрактичность» обучения (сценарий «Скука на уроке»)'
+    },
+    {
+      icon: 'tasks',
+      title: 'Организационные конфликты',
+      description: 'Нарушения в структуре урока, распределении времени, заданий (сценарий «Невыполнение ДЗ», «Разный уровень»)'
+    },
+    {
+      icon: 'comments',
+      title: 'Конфликты взаимодействия',
+      description: 'Нарушения прямого общения: агрессия, игнорирование, публичное унижение (сценарий «Гаджеты», «Плагиат»)'
+    },
+    {
+      icon: 'user-injured',
+      title: 'Внутриличностные конфликты',
+      description: 'Дилеммы педагога: «жёсткость vs. поддержка», «требования vs. эмпатия» (во всех сценариях)'
+    },
+    {
+      icon: 'user-friends',
+      title: 'Межличностные конфликты',
+      description: 'Парные отношения: ученик–ученик, учитель–ученик, учитель–родитель'
+    },
+    {
+      icon: 'user-shield',
+      title: 'Личность vs. группа',
+      description: 'Один против коллектива: изгой, «нарушитель», одарённый ученик (сценарий «Работа в группе», «Гаджеты»)'
+    },
+    {
+      icon: 'users',
+      title: 'Межгрупповые конфликты',
+      description: 'Противостояние подгрупп: «сильные vs. слабые», «активные vs. пассивные» (сценарий «Разный уровень», «Работа в группе»)'
+    }
+  ];
+
+  // Функция для получения 3 случайных ситуаций
+  const getRandomScenarios = (scenarios) => {
+    if (scenarios.length <= 3) return scenarios;
+
+    // Создаем копию массива, чтобы не изменять оригинал
+    const shuffled = [...scenarios].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 3);
+  };
+
+  // Загрузка данных с сервера
+  const fetchRandomScenarios = async () => {
+    try {
+      console.log('🔄 Загружаю случайные ситуации с сервера...');
+      setLoading(true);
+
+      const response = await fetch('http://localhost:5000/api/situations');
+
+      if (!response.ok) {
+        throw new Error(`Ошибка сервера: ${response.status}`);
+      }
+
+      const allScenarios = await response.json();
+      console.log('✅ Все ситуации получены:', allScenarios.length);
+
+      // Выбираем 3 случайные
+      const randomThree = getRandomScenarios(allScenarios);
+      console.log('🎲 Выбраны 3 случайные:', randomThree);
+
+      setRandomScenarios(randomThree);
+      setError(null);
+
+    } catch (err) {
+      console.error('❌ Ошибка загрузки:', err);
+      setError('Не удалось загрузить данные с сервера');
+
+      // Используем локальные данные как fallback
+      const localScenarios = [
+        {
+          id: 1,
+          title: "«Экран важнее алгоритмов»: ученик погружен в телефон",
+          description: "Как вернуть внимание к уроку, не разрушая доверительные отношения?",
+          difficulty: "easy",
+          type: "Мотивационные кризисы",
+          duration: 10,
+          typeIcon: "lightbulb",
+          dataType: "motivational"
+        },
+        {
+          id: 2,
+          title: "«Я не успеваю, а он уже всё сделал»",
+          description: "Как организовать урок, чтобы не демотивировать ни сильных, ни слабых?",
+          difficulty: "medium",
+          type: "Организационные конфликты",
+          duration: 10,
+          typeIcon: "tasks",
+          dataType: "organizational"
+        },
+        {
+          id: 3,
+          title: "«Шайба гнева»: хоккеист против «несправедливости» учителя",
+          description: "Как перевести агрессию спортивного лидера в конструктивное русло, не теряя авторитет перед классом?",
+          difficulty: "medium",
+          type: "Конфликты взаимодействия",
+          duration: 8,
+          typeIcon: "comments",
+          dataType: "interaction"
+        }
+      ];
+
+      setRandomScenarios(getRandomScenarios(localScenarios));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Функция для обновления (получить другие случайные)
+  const handleRefreshRandom = () => {
+    fetchRandomScenarios();
+  };
+
+  // Загружаем при монтировании
+  useEffect(() => {
+    fetchRandomScenarios();
+  }, []);
+
+  // Функции для прокрутки онтологии
+  const scrollOntology = (direction) => {
+    if (!gridRef.current) return;
+
+    const scrollAmount = 280;
+    gridRef.current.scrollBy({
+      left: direction === 'right' ? scrollAmount : -scrollAmount,
+      behavior: 'smooth'
+    });
+  };
+
+  const updateScrollButtons = () => {
+    if (!gridRef.current) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = gridRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+
+    setIsLeftDisabled(scrollLeft <= 10);
+    setIsRightDisabled(scrollLeft >= maxScroll - 10);
+  };
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (grid) {
+      grid.addEventListener('scroll', updateScrollButtons);
+      updateScrollButtons();
+
+      return () => grid.removeEventListener('scroll', updateScrollButtons);
+    }
+  }, []);
+
+  return (
+    <>
+      <Header />
+
+      {/* Герой секция */}
+      <section className="hero">
+        <div className="container">
+          <h2>Готовы принять педагогическое решение в условиях неопределённости?</h2>
+          <p className="hero-desc">
+            Симулятор учителя — интерактивная среда имитации сложных педагогических ситуаций, построенных на онтологической модели знаний.
+            Развивайте рефлексивность, стратегическое мышление и этическую компетентность через практику.
+          </p>
+
+          {/* Панель случайных ситуаций */}
+          <div className="random-controls">
+            <button
+              onClick={handleRefreshRandom}
+              className="random-btn"
+              disabled={loading}
+            >
+              {loading ? '🎲 Загрузка...' : '🎲 Новые случайные ситуации'}
+            </button>
+            <div className="random-info">
+              <small>Показано: {randomScenarios.length} случайных ситуаций из базы данных</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Онтологический навигатор */}
+      <section className="ontology-section">
+        <div className="container">
+          <h3 className="section-title">Категории педагогических ситуаций</h3>
+          <p className="section-subtitle">Выберите тип ситуации для тренировки</p>
+
+          <div className="ontology-scroller" ref={scrollerRef}>
+            <button
+              className={`scroll-btn scroll-btn-left ${isLeftDisabled ? 'disabled' : ''}`}
+              aria-label="Прокрутить влево"
+              onClick={() => scrollOntology('left')}
+              disabled={isLeftDisabled}
+            >
+              <i className="fas fa-chevron-left"></i>
+            </button>
+
+            <div className="ontology-grid" ref={gridRef}>
+              {ontologyCards.map((card, index) => (
+                <div className="ontology-card" key={index}>
+                  <div className="icon-box">
+                    <i className={`fas fa-${card.icon}`}></i>
+                  </div>
+                  <h4>{card.title}</h4>
+                  <p>{card.description}</p>
+                </div>
+              ))}
+            </div>
+
+            <button
+              className={`scroll-btn scroll-btn-right ${isRightDisabled ? 'disabled' : ''}`}
+              aria-label="Прокрутить вправо"
+              onClick={() => scrollOntology('right')}
+              disabled={isRightDisabled}
+            >
+              <i className="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Случайные сценарии */}
+      <section className="scenarios-section">
+        <div className="container">
+          <div className="section-header">
+            <h3 className="section-title">
+              Случайные сценарии для практики
+              {loading && <span className="loading-badge">загрузка...</span>}
+            </h3>
+            <p className="section-subtitle">
+              Каждый раз новые ситуации для тренировки принятия решений
+            </p>
+          </div>
+
+          {loading ? (
+            <div className="loading-random">
+              <div className="spinner"></div>
+              <p>Загружаем случайные ситуации с сервера...</p>
+            </div>
+          ) : error ? (
+            <div className="random-error">
+              <i className="fas fa-exclamation-circle"></i>
+              <p>{error}. Показаны локальные данные.</p>
+            </div>
+          ) : randomScenarios.length === 0 ? (
+            <div className="no-scenarios">
+              <i className="fas fa-search"></i>
+              <p>Нет доступных ситуаций</p>
+            </div>
+          ) : (
+            <>
+              <div className="scenarios-grid">
+                {randomScenarios.map(scenario => (
+                  <ScenarioCard
+                    key={scenario.id}
+                    title={scenario.title}
+                    description={scenario.description}
+                    difficulty={scenario.difficulty}
+                    type={scenario.type}
+                    duration={scenario.duration || 10}
+                    typeIcon={scenario.typeIcon}
+                    id={String(scenario.id)}
+                    dataType={scenario.dataType}
+                  />
+                ))}
+              </div>
+
+              <div className="random-footer">
+                <p className="random-hint">
+                  <i className="fas fa-info-circle"></i>
+                  Нажмите "Новые случайные ситуации", чтобы получить другие ситуации для практики
+                </p>
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+
+      <Footer isCatalogPage={false} />
+    </>
+  );
+};
+
+export default Home;

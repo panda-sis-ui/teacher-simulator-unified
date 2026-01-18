@@ -1,0 +1,108 @@
+/* Кнопки */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* Варианты кнопок */
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #225739;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #3e805a;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: rgba(44, 110, 73, 0.05);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  color: white;
+  border-radius: 6px;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #c1121f;
+  transform: translateY(-2px);
+}
+
+/* Размеры кнопок */
+.btn-large {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+
+/* Состояния */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Иконки в кнопках */
+.btn i {
+  font-size: 1em;
+}
+
+.btn-large i {
+  font-size: 1.2em;
+}
+
+.btn-sm i {
+  font-size: 0.9em;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-cta .btn {
+    max-width: 300px;
+  }
+}

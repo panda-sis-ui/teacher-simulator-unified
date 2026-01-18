@@ -1,0 +1,189 @@
+.situation-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.situation-main {
+  flex: 1;
+  padding: 2rem 0;
+  background-color: var(--bg-light);
+}
+
+.situation-breadcrumbs {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.situation-breadcrumbs a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.situation-breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.situation-navigation {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.choices-title {
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  font-size: 1.5rem;
+}
+
+.choices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.situation-metadata {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.metadata-section {
+  margin-bottom: 1.5rem;
+}
+
+.metadata-section h4 {
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  background-color: var(--primary-light);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  color: var(--text-light);
+}
+
+.loading-spinner i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .choices-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .situation-navigation {
+    flex-direction: column;
+  }
+
+  .situation-metadata {
+    padding: 1rem;
+  }
+}
+/* Стили для состояний загрузки и ошибок */
+.loading-container,
+.error-container,
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--primary-color);
+}
+
+.loading-spinner p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+}
+
+.error-container,
+.not-found-container {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem;
+  box-shadow: var(--shadow);
+}
+
+.error-icon {
+  color: var(--danger-color);
+  margin-bottom: 1.5rem;
+}
+
+.error-container h2,
+.not-found-container h2 {
+  color: var(--danger-color);
+  margin-bottom: 1rem;
+}
+
+.error-container p {
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Хлебные крошки */
+.breadcrumb-link {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  text-decoration: underline;
+}
+
+.breadcrumb-link:hover {
+  color: var(--primary-light);
+}
+
+.breadcrumb-current {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.breadcrumb-step {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
