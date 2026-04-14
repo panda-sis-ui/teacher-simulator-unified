@@ -1,0 +1,363 @@
+
+	1. Регистрация
+curl -X POST http://localhost:8080/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "login": "testuser",
+    "password": "password123"
+  }'
+Вывод успех
+200
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3NzYxMzYxNjcsImV4cCI6MTc3NjIyMjU2N30.mRzTbEkciuCC6D81s9GHJj6eJpl-iofxrXLjBgWSH3V16q_dET-BYInydAygv2t-sZnxJUki5dTVgp36oLYIkQ",
+    "login": "testuser1",
+    "role": "Студент"
+}
+Неудача
+404
+{
+    "error": "Пользователь с логином «testuser» уже существует",
+    "timestamp": "2026-04-14T08:09:11.890412900",
+    "status": 404
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	2. Вход
+curl -X POST http://localhost:8080/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "login": "testuser",
+    "password": "password123"
+  }'
+Успех
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc3NjEzMTExOSwiZXhwIjoxNzc2MjE3NTE5fQ.UcwU5kY5Sutva4iiw2MCFeSZHLlPUXcQiem1spt7kPKizoRULbAIhrae6uFp-9Z984o7Ezhl7QYe00tL29Kppg",
+    "login": "testuser",
+    "role": "ROLE_СТУДЕНТ"
+}
+
+Неудача
+401
+{
+    "error": "Неверный логин или пароль",
+    "timestamp": "2026-04-14T08:07:59.488873400",
+    "status": 401
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	3. Получение списка всех ситуаций
+curl -X GET http://localhost:8080/api/situations \
+  -H "Authorization: Bearer {{access_token}}"
+Успех
+200
+
+[
+    {
+        "id": 6,
+        "name": "Обвинение ученика в предвзятости оценивания",
+        "typeProblem": "Организационные конфликты",
+        "lessonName": "Информатика",
+        "lessonFormat": "Очный",
+        "problemIntensity": 0.5
+    },
+    {
+        "id": 7,
+        "name": "Тревога при публичном выступлении на уроке",
+        "typeProblem": "Конфликты взаимодействия",
+        "lessonName": "Литература",
+        "lessonFormat": "Очный",
+        "problemIntensity": 0.6
+    },
+]
+
+Неудача (не авторизован)
+403
+Тела нет
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+	4. Получение деталий конкретной ситуации
+# Ситуация ID=6 (Обвинение ученика в предвзятости оценивания)
+curl -X GET http://localhost:8080/api/situations/6 \
+  -H "Authorization: Bearer {{access_token}}"
+Успех
+200
+{
+    "id": 6,
+    "name": "Обвинение ученика в предвзятости оценивания",
+    "context": {
+        "lesson": "Информатика",
+        "classroom": "9",
+        "lessonStage": "Первичное закрепление",
+        "lessonFormat": "Очный",
+        "techEquip": "ПК+Интернет",
+        "duration": 45
+    },
+    "problem": {
+        "typeProblem": "Организационные конфликты",
+        "sourceProblem": "Внутренний",
+        "intensity": 0.5,
+        "description": "Ученик публично заявляет о предвзятости учителя после получения низкой оценки за контрольную работу.",
+        "emotions": [
+            "Раздражение",
+            "Обида",
+            "Тревога"
+        ]
+    },
+    "participants": [
+        {
+            "id": 38,
+            "fullName": "Мария Петровна",
+            "age": 44,
+            "type": "TEACHER",
+            "pedagogicalStyle": "Демократический",
+            "emotionIntelligence": "Средний",
+            "professionalRole": "Предметник",
+            "experience": 8,
+            "communicationStyle": null,
+            "socialStatus": null,
+            "techEquip": null,
+            "motivation": null,
+            "preparation": null
+        },
+        {
+            "id": 39,
+            "fullName": "Дмитрий Волков",
+            "age": 15,
+            "type": "STUDENT",
+            "pedagogicalStyle": null,
+            "emotionIntelligence": null,
+            "professionalRole": null,
+            "experience": null,
+            "communicationStyle": "Конфликтный",
+            "socialStatus": "Принятые",
+            "techEquip": "ПК+Интернет",
+            "motivation": 0.5,
+            "preparation": 0.5
+        }
+    ],
+    "startNodeId": 221
+}
+Неудача (ситуации не существует)
+404
+{
+    "timestamp": "2026-04-14T08:26:10.506662700",
+    "error": "Ситуация не найдена: 6666",
+    "status": 404
+}
+Неудача (не авторизован)
+403
+Тела нет
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+	5. Начало прохождения ситуации
+# Запуск ситуации ID=6
+curl -X POST http://localhost:8080/api/play/situations/6/start \
+  -H "Authorization: Bearer {{access_token}}"
+Успех
+200
+{
+    "currentNode": {
+        "id": 221,
+        "description": "После объявления оценок за контрольную работу Дмитрий резко встаёт и заявляет: «Это несправедливо! Вы всегда занижаете мне оценки!». Класс затихает, все смотрят на учителя. Лицо Дмитрия покраснело от возмущения, несколько учеников переглядываются. Учитель чувствует, как нарастает напряжение — от её реакции зависит, перерастёт ли это в открытый конфликт или удастся перевести ситуацию в конструктивное русло.",
+        "urlImage": "https://disk.yandex.ru/i/9sBlDMAJoHlTYw",
+        "isTerminal": false,
+        "choices": [
+            {
+                "id": 68,
+                "description": "Предоставлю письменные критерии оценки"
+            },
+            {
+                "id": 65,
+                "description": "Давайте разберём критерии оценивания вместе"
+            },
+            {
+                "id": 58,
+                "description": "Жёсткая защита позиции. Оценка выставлена по правилам, обсуждению не подлежит"
+            }
+        ]
+    },
+    "metrics": {
+        "motivation": 0.3,
+        "stress": 0.8,
+        "trust": 0.3,
+        "classClimate": 0.3,
+        "teacherAuthority": 0.4,
+        "teacherBurnout": 0.5
+    }
+}
+Неудача (ситуация не существует)
+404
+{
+    "error": "Ситуация не найдена: 699",
+    "timestamp": "2026-04-14T08:14:01.548939900",
+    "status": 404
+}
+Не авторизован
+403
+Тела нет
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+	6. Получение конкретного узла (не особо нужен, можно не использовать)
+# Получить узел с ID=221 (стартовый узел ситуации 6)
+curl -X GET http://localhost:8080/api/play/situations/6/node/221 \
+  -H "Authorization: Bearer {{access_token}}"
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+	7. Совершение выбора
+# Пример выбора (нужно указать реальный choice ID из узла)
+# Сначала получите узел, чтобы увидеть доступные choices
+# Выбор (choiceId нужно взять из ответа /start или /node)
+curl -X POST http://localhost:8080/api/play/situations/6/choose \
+  -H "Authorization: Bearer {{access_token}}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "choiceId": <id_выбора>
+  }'
+Успех (следующий выбор)
+200
+{
+    "consequenceText": null,
+    "typeConsequenceName": null,
+    "nextNode": {
+        "id": 224,
+        "description": "Учитель выбрал формальный подход к решению конфликта. Дмитрий ожидает конкретных действий. Класс наблюдает, насколько серьёзно учитель относится к процедуре оценивания. Необходимо выбрать способ документирования, который покажет прозрачность без излишней бюрократизации.",
+        "urlImage": "https://disk.yandex.ru/i/WPblkgyistH_xg",
+        "isTerminal": false,
+        "choices": [
+            {
+                "id": 63,
+                "description": "Попросить оформить претензию официально с подписью"
+            },
+            {
+                "id": 67,
+                "description": "Раздать распечатанные критерии с баллами за каждый пункт"
+            },
+            {
+                "id": 69,
+                "description": "Предложить проверить работу другим преподавателем"
+            }
+        ]
+    },
+    "metrics": {
+        "motivation": 0.5,
+        "stress": 0.5,
+        "trust": 0.6,
+        "classClimate": 0.4,
+        "teacherAuthority": 0.6000000000000001,
+        "teacherBurnout": 0.4
+    },
+    "isFinished": false
+}
+Успех (конец ситуации)
+200
+{
+    "consequenceText": null,
+    "typeConsequenceName": null,
+    "nextNode": {
+        "id": 233,
+        "description": "Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.",
+        "urlImage": "https://disk.yandex.ru/i/NI2ReFyZpBvOPw",
+        "isTerminal": true,
+        "choices": []
+    },
+    "metrics": {
+        "motivation": 0.5,
+        "stress": 0.4,
+        "trust": 0.7,
+        "classClimate": 0.4,
+        "teacherAuthority": 0.7000000000000001,
+        "teacherBurnout": 0.30000000000000004
+    },
+    "isFinished": true
+}
+Неудача (вариант выбора не найден)
+404
+{
+    "timestamp": "2026-04-14T08:31:08.184331800",
+    "error": "Вариант выбора не найден: 630",
+    "status": 404
+}
+Неудача (выбор не соответствует ситуации, например выбор 63 у ситуации 7, или ситуация не начата)
+{
+    "timestamp": "2026-04-14T08:32:40.096254200",
+    "error": "Сессия прохождения не найдена. Сначала вызовите /start",
+    "status": 400
+}
+Неудача (неавторизован)
+403
+Тела нет
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+	8. Получение итогового результата
+# После завершения всех выборов получить результат
+curl -X GET http://localhost:8080/api/play/situations/6/result \
+  -H "Authorization: Bearer {{access_token}}"
+Успех
+200
+{
+    "situationName": "Обвинение ученика в предвзятости оценивания",
+    "result": "PARTIAL_SUCCESS",
+    "metricsPassed": 4,
+    "finalMetrics": {
+        "motivation": 0.5,
+        "stress": 0.0,
+        "trust": 1.0,
+        "classClimate": 0.4,
+        "teacherAuthority": 1.0,
+        "teacherBurnout": 0.0
+    },
+    "normativeChecks": {
+        "motivation": false,
+        "stress": true,
+        "trust": true,
+        "classClimate": false,
+        "teacherAuthority": true,
+        "teacherBurnout": true
+    }
+}
+Неудача (ситуация ни разу не была начата)
+400
+{
+    "timestamp": "2026-04-14T08:34:26.709942900",
+    "error": "Сессия прохождения не найдена. Сначала вызовите /start",
+    "status": 400
+}
+Неудача (неавторизован)
+403
+Тела нет
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+	9. Получение истории прохождений
+curl -X GET http://localhost:8080/api/play/history \
+  -H "Authorization: Bearer {{access_token}}"
+
+Успех
+200
+[
+    {
+        "situationId": 6,
+        "situationName": "Обвинение ученика в предвзятости оценивания",
+        "passedAt": "2026-04-14T08:29:02.47523",
+        "result": "PARTIAL_SUCCESS",
+        "metricsPassed": 4,
+        "finalMetrics": {
+            "motivation": 0.5,
+            "stress": 0.0,
+            "trust": 1.0,
+            "classClimate": 0.4,
+            "teacherAuthority": 1.0,
+            "teacherBurnout": 0.0
+        },
+        "normativeChecks": {
+            "motivation": false,
+            "stress": true,
+            "trust": true,
+            "classClimate": false,
+            "teacherAuthority": true,
+            "teacherBurnout": true
+        }
+    }
+]
+Успех (ничего не пройдено)
+200
+[]
+Неудача (не авторизован)
+403
+Тела нет
