@@ -127,45 +127,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51be8d69-d0cb-40f0-9712-f5c39c4d238c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/amplicode.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/access/Page.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/access/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/access/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/dictionary/Resource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/dictionary/ResponseStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/metrics/ChangeMetrics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/metrics/Consequence.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/metrics/TypeConsequence.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/CommunicationStyle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/EmotionIntelligence.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/Participant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/PedagogicalStyle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/ProfessionalRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/SocialStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/Teacher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/TechEquip.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/problem/Emotion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/problem/Problem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/problem/SourceProblem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/problem/TypeProblem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/script/Choice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/script/ScriptNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/Classroom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/Context.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/Lesson.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/LessonFormat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/LessonStage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/Situation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/SituationsPassedUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/solution/Solution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/solution/SolutionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/db.changelog-master.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/migrations/001_initial_schema.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/temp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/SituationsPassedUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/SituationsPassedUser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,6 +161,9 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="3AAuqK2i4FeOzxfSVjBkuZ2czZr" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -250,8 +217,14 @@ distributionType=only-script
 distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.12/apache-maven-3.9.12-bin.zip
 package com.mmarkov.eduteach.config;
 
+import com.mmarkov.eduteach.security.JwtAuthFilter;
+import com.mmarkov.eduteach.security.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -259,28 +232,499 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final JwtAuthFilter jwtAuthFilter;
+    private final UserDetailsServiceImpl userDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(AbstractHttpConfigurer::disable)
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .anyRequest().authenticated()
-            );
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+}
+package com.mmarkov.eduteach.controller;
+
+import com.mmarkov.eduteach.dto.auth.LoginRequest;
+import com.mmarkov.eduteach.dto.auth.LoginResponse;
+import com.mmarkov.eduteach.dto.auth.RegisterRequest;
+import com.mmarkov.eduteach.service.AuthService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
+public class AuthController {
+
+    private final AuthService authService;
+
+    @PostMapping("/register")
+    public ResponseEntity<LoginResponse> register(
+            @Valid @RequestBody RegisterRequest request) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(authService.register(request));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(
+            @Valid @RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
+    }
+}
+package com.mmarkov.eduteach.controller;
+
+import com.mmarkov.eduteach.dto.history.HistoryItemDto;
+import com.mmarkov.eduteach.service.HistoryService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/play")
+@RequiredArgsConstructor
+public class HistoryController {
+
+    private final HistoryService historyService;
+
+    /**
+     * РСЃС‚РѕСЂРёСЏ РїСЂРѕС…РѕР¶РґРµРЅРёР№ С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ.
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёСЃРѕРє СЃ РёС‚РѕРіРѕРІС‹РјРё РјРµС‚СЂРёРєР°РјРё Рё СЂРµР·СѓР»СЊС‚Р°С‚РѕРј РїРѕ РєР°Р¶РґРѕР№ СЃРёС‚СѓР°С†РёРё.
+     */
+    @GetMapping("/history")
+    public ResponseEntity<List<HistoryItemDto>> getHistory() {
+        return ResponseEntity.ok(historyService.getHistory());
+    }
+}
+package com.mmarkov.eduteach.controller;
+
+import com.mmarkov.eduteach.dto.play.*;
+import com.mmarkov.eduteach.service.PlayService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/play")
+@RequiredArgsConstructor
+public class PlayController {
+
+    private final PlayService playService;
+
+    /**
+     * РЎС‚Р°СЂС‚ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ СЃРёС‚СѓР°С†РёРё.
+     * РЎРѕР·РґР°С‘С‚ РјРµС‚СЂРёРєРё РёР· СЃС‚Р°СЂС‚РѕРІС‹С… Р·РЅР°С‡РµРЅРёР№ РїСЂРѕР±Р»РµРјС‹.
+     * Р•СЃР»Рё РїСЂРѕС…РѕР¶РґРµРЅРёРµ СѓР¶Рµ Р±С‹Р»Рѕ вЂ” РїРµСЂРµР·Р°РїСѓСЃРєР°РµС‚.
+     */
+    @PostMapping("/situations/{situationId}/start")
+    public ResponseEntity<StartSessionResponse> startSession(
+            @PathVariable Integer situationId) {
+        return ResponseEntity.ok(playService.startSession(situationId));
+    }
+
+    /**
+     * РџРѕР»СѓС‡РёС‚СЊ С‚РµРєСѓС‰РёР№ СѓР·РµР» Рё РјРµС‚СЂРёРєРё.
+     * РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїРѕСЃР»Рµ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃС‚СЂР°РЅРёС†С‹.
+     */
+    @GetMapping("/situations/{situationId}/node/{nodeId}")
+    public ResponseEntity<StartSessionResponse> getNode(
+            @PathVariable Integer situationId,
+            @PathVariable Integer nodeId) {
+        return ResponseEntity.ok(playService.getNode(situationId, nodeId));
+    }
+
+    /**
+     * РЎРѕРІРµСЂС€РёС‚СЊ РІС‹Р±РѕСЂ РЅР° С‚РµРєСѓС‰РµРј СѓР·Р»Рµ.
+     * РџСЂРёРјРµРЅСЏРµС‚ РґРµР»СЊС‚С‹ РјРµС‚СЂРёРє Рё РІРѕР·РІСЂР°С‰Р°РµС‚ СЃР»РµРґСѓСЋС‰РёР№ СѓР·РµР».
+     */
+    @PostMapping("/situations/{situationId}/choose")
+    public ResponseEntity<ChooseResponse> choose(
+            @PathVariable Integer situationId,
+            @Valid @RequestBody ChooseRequest request) {
+        return ResponseEntity.ok(playService.choose(situationId, request.getChoiceId()));
+    }
+
+    /**
+     * РџРѕР»СѓС‡РёС‚СЊ РёС‚РѕРіРѕРІС‹Р№ СЂРµР·СѓР»СЊС‚Р°С‚ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ.
+     * РџСЂРѕРІРµСЂСЏРµС‚ РјРµС‚СЂРёРєРё РїРѕ РЅРѕСЂРјР°С‚РёРІР°Рј Рё РѕРїСЂРµРґРµР»СЏРµС‚ SUCCESS/PARTIAL_SUCCESS/FAILURE.
+     */
+    @GetMapping("/situations/{situationId}/result")
+    public ResponseEntity<ResultResponse> getResult(
+            @PathVariable Integer situationId) {
+        return ResponseEntity.ok(playService.getResult(situationId));
+    }
+}
+package com.mmarkov.eduteach.controller;
+
+import com.mmarkov.eduteach.dto.situation.SituationDetailDto;
+import com.mmarkov.eduteach.dto.situation.SituationListItemDto;
+import com.mmarkov.eduteach.service.SituationService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/situations")
+@RequiredArgsConstructor
+public class SituationController {
+
+    private final SituationService situationService;
+
+    /**
+     * РЎРїРёСЃРѕРє РІСЃРµС… РґРѕСЃС‚СѓРїРЅС‹С… СЃРёС‚СѓР°С†РёР№.
+     */
+    @GetMapping
+    public ResponseEntity<List<SituationListItemDto>> getAll() {
+        return ResponseEntity.ok(situationService.getAll());
+    }
+
+    /**
+     * Р”РµС‚Р°Р»СЊРЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ СЃРёС‚СѓР°С†РёРё:
+     * РєРѕРЅС‚РµРєСЃС‚, РїСЂРѕР±Р»РµРјР°, СѓС‡Р°СЃС‚РЅРёРєРё, id СЃС‚Р°СЂС‚РѕРІРѕРіРѕ СѓР·Р»Р°.
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<SituationDetailDto> getById(@PathVariable Integer id) {
+        return ResponseEntity.ok(situationService.getById(id));
+    }
+}
+package com.mmarkov.eduteach.dto.auth;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class LoginRequest {
+
+    @NotBlank(message = "Р›РѕРіРёРЅ РѕР±СЏР·Р°С‚РµР»РµРЅ")
+    private String login;
+
+    @NotBlank(message = "РџР°СЂРѕР»СЊ РѕР±СЏР·Р°С‚РµР»РµРЅ")
+    private String password;
+}
+package com.mmarkov.eduteach.dto.auth;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class LoginResponse {
+    private String token;
+    private String login;
+    private String role;
+}
+package com.mmarkov.eduteach.dto.auth;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class RegisterRequest {
+
+    @NotBlank(message = "Р›РѕРіРёРЅ РѕР±СЏР·Р°С‚РµР»РµРЅ")
+    @Size(min = 3, max = 50, message = "Р›РѕРіРёРЅ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РѕС‚ 3 РґРѕ 50 СЃРёРјРІРѕР»РѕРІ")
+    private String login;
+
+    @NotBlank(message = "РџР°СЂРѕР»СЊ РѕР±СЏР·Р°С‚РµР»РµРЅ")
+    @Size(min = 6, max = 100, message = "РџР°СЂРѕР»СЊ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РѕС‚ 6 РґРѕ 100 СЃРёРјРІРѕР»РѕРІ")
+    private String password;
+}
+package com.mmarkov.eduteach.dto.history;
+
+import com.mmarkov.eduteach.dto.play.MetricsDto;
+import com.mmarkov.eduteach.dto.play.NormativeChecksDto;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class HistoryItemDto {
+    private Integer situationId;
+    private String situationName;
+    private LocalDateTime passedAt;
+    private String result;
+    private Integer metricsPassed;
+    private MetricsDto finalMetrics;
+    private NormativeChecksDto normativeChecks;
+}
+package com.mmarkov.eduteach.dto.play;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ChoiceDto {
+    private Integer id;
+    private String description;
+}
+package com.mmarkov.eduteach.dto.play;
+
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ChooseRequest {
+
+    @NotNull(message = "choiceId РѕР±СЏР·Р°С‚РµР»РµРЅ")
+    private Integer choiceId;
+}
+package com.mmarkov.eduteach.dto.play;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ChooseResponse {
+    private String consequenceText;
+    private String typeConsequenceName;
+    private NodeDto nextNode;      // null РµСЃР»Рё isFinished = true
+    private MetricsDto metrics;
+    private Boolean isFinished;
+}
+package com.mmarkov.eduteach.dto.play;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class MetricsDto {
+    private Double motivation;
+    private Double stress;
+    private Double trust;
+    private Double classClimate;
+    private Double teacherAuthority;
+    private Double teacherBurnout;
+}
+package com.mmarkov.eduteach.dto.play;
+
+import lombok.*;
+
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class NodeDto {
+    private Integer id;
+    private String description;
+    private String urlImage;
+    private Boolean isTerminal;
+    private List<ChoiceDto> choices;
+}
+package com.mmarkov.eduteach.dto.play;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class NormativeChecksDto {
+    private Boolean motivation;
+    private Boolean stress;
+    private Boolean trust;
+    private Boolean classClimate;
+    private Boolean teacherAuthority;
+    private Boolean teacherBurnout;
+}
+package com.mmarkov.eduteach.dto.play;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ResultResponse {
+    private String situationName;
+    private String result;           // SUCCESS / PARTIAL_SUCCESS / FAILURE
+    private Integer metricsPassed;
+    private MetricsDto finalMetrics;
+    private NormativeChecksDto normativeChecks;
+}
+package com.mmarkov.eduteach.dto.play;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class StartSessionResponse {
+    private NodeDto currentNode;
+    private MetricsDto metrics;
+}
+package com.mmarkov.eduteach.dto.situation;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ContextDto {
+    private String lesson;
+    private String classroom;
+    private String lessonStage;
+    private String lessonFormat;
+    private String techEquip;
+    private Integer duration;
+}
+package com.mmarkov.eduteach.dto.situation;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ParticipantDto {
+    private Integer id;
+    private String fullName;
+    private Integer age;
+    private String type;      // TEACHER РёР»Рё STUDENT
+
+    // РџРѕР»СЏ СѓС‡РёС‚РµР»СЏ
+    private String pedagogicalStyle;
+    private String emotionIntelligence;
+    private String professionalRole;
+    private Integer experience;
+
+    // РџРѕР»СЏ СѓС‡РµРЅРёРєР°
+    private String communicationStyle;
+    private String socialStatus;
+    private String techEquip;
+    private Double motivation;
+    private Double preparation;
+}
+package com.mmarkov.eduteach.dto.situation;
+
+import lombok.*;
+
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ProblemDto {
+    private String typeProblem;
+    private String sourceProblem;
+    private Double intensity;
+    private String description;
+    private List<String> emotions;
+}
+package com.mmarkov.eduteach.dto.situation;
+
+import lombok.*;
+
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SituationDetailDto {
+    private Integer id;
+    private String name;
+    private ContextDto context;
+    private ProblemDto problem;
+    private List<ParticipantDto> participants;
+    private Integer startNodeId;
+}
+package com.mmarkov.eduteach.dto.situation;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SituationListItemDto {
+    private Integer id;
+    private String name;
+    private String typeProblem;
+    private String lessonName;
+    private String lessonFormat;
+    private Double problemIntensity;
 }
 package com.mmarkov.eduteach.entity.access;
 
@@ -1231,29 +1675,47 @@ import java.time.LocalDateTime;
 @Builder
 public class SituationsPassedUser {
 
-    @Id
-    @Column(name = "user_id")
-    private Integer userId;
-
-    @Id
-    @Column(name = "situation_id")
-    private Integer situationId;
+    @EmbeddedId
+    private SituationsPassedUserId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @MapsId("userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "situation_id", insertable = false, updatable = false)
+    @MapsId("situationId")
+    @JoinColumn(name = "situation_id")
     private Situation situation;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "final_metrics_id", unique = true)
     private ChangeMetrics finalMetrics;
 
     @Column(name = "passed_at")
-    @Builder.Default
-    private LocalDateTime passedAt = LocalDateTime.now();
+    private LocalDateTime passedAt;
+}
+package com.mmarkov.eduteach.entity.situation;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import lombok.*;
+
+import java.io.Serializable;
+
+@Embeddable
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+public class SituationsPassedUserId implements Serializable {
+
+    @Column(name = "user_id")
+    private Integer userId;
+
+    @Column(name = "situation_id")
+    private Integer situationId;
 }
 package com.mmarkov.eduteach.entity.solution;
 
@@ -1322,6 +1784,1084 @@ public class SolutionType {
 
     @Column(name = "name", nullable = false)
     private String name;
+}
+package com.mmarkov.eduteach.exception;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Slf4j
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, Object>> handleIllegalArgument(
+            IllegalArgumentException ex) {
+        return buildError(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<Map<String, Object>> handleIllegalState(
+            IllegalStateException ex) {
+        return buildError(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<Map<String, Object>> handleBadCredentials(
+            BadCredentialsException ex) {
+        return buildError(HttpStatus.UNAUTHORIZED, "РќРµРІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ");
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleValidation(
+            MethodArgumentNotValidException ex) {
+        String errors = ex.getBindingResult().getFieldErrors().stream()
+                .map(e -> e.getField() + ": " + e.getDefaultMessage())
+                .collect(Collectors.joining(", "));
+        return buildError(HttpStatus.BAD_REQUEST, errors);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleGeneral(Exception ex) {
+        log.error("РќРµРѕР±СЂР°Р±РѕС‚Р°РЅРЅРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ", ex);
+        return buildError(HttpStatus.INTERNAL_SERVER_ERROR, "Р’РЅСѓС‚СЂРµРЅРЅСЏСЏ РѕС€РёР±РєР° СЃРµСЂРІРµСЂР°");
+    }
+
+    private ResponseEntity<Map<String, Object>> buildError(HttpStatus status, String message) {
+        return ResponseEntity.status(status).body(Map.of(
+                "timestamp", LocalDateTime.now().toString(),
+                "status", status.value(),
+                "error", message
+        ));
+    }
+}
+package com.mmarkov.eduteach.repository;
+
+import com.mmarkov.eduteach.entity.metrics.ChangeMetrics;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ChangeMetricsRepository extends JpaRepository<ChangeMetrics, Integer> {
+}
+package com.mmarkov.eduteach.repository;
+
+import com.mmarkov.eduteach.entity.script.Choice;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface ChoiceRepository extends JpaRepository<Choice, Integer> {
+
+    @Query("""
+        SELECT c FROM Choice c
+        JOIN FETCH c.fromScriptNode fsn
+        LEFT JOIN FETCH c.nextScriptNode nsn
+        LEFT JOIN FETCH nsn.choicesFrom nc
+        LEFT JOIN FETCH c.typeConsequence
+        WHERE c.id = :id
+    """)
+    Optional<Choice> findByIdWithNodes(@Param("id") Integer id);
+}
+package com.mmarkov.eduteach.repository;
+
+import com.mmarkov.eduteach.entity.participant.Participant;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface ParticipantRepository extends JpaRepository<Participant, Integer> {
+
+    // Р—Р°РіСЂСѓР¶Р°РµРј СѓС‡Р°СЃС‚РЅРёРєРѕРІ СЃРёС‚СѓР°С†РёРё вЂ” СѓС‡РёС‚РµР»РµР№
+    @Query("""
+        SELECT p FROM Participant p
+        JOIN FETCH p.teacher t
+        LEFT JOIN FETCH t.pedagogicalStyle
+        LEFT JOIN FETCH t.emotionIntelligence
+        LEFT JOIN FETCH t.professionalRole
+        WHERE p.id IN (
+            SELECT part.id FROM Situation s
+            JOIN s.participants part
+            WHERE s.id = :situationId
+        )
+    """)
+    List<Participant> findTeachersBySituationId(@Param("situationId") Integer situationId);
+
+    // Р—Р°РіСЂСѓР¶Р°РµРј СѓС‡Р°СЃС‚РЅРёРєРѕРІ СЃРёС‚СѓР°С†РёРё вЂ” СѓС‡РµРЅРёРєРѕРІ
+    @Query("""
+        SELECT p FROM Participant p
+        JOIN FETCH p.student st
+        LEFT JOIN FETCH st.commStyle
+        LEFT JOIN FETCH st.socialStatus
+        LEFT JOIN FETCH st.techEquip
+        WHERE p.id IN (
+            SELECT part.id FROM Situation s
+            JOIN s.participants part
+            WHERE s.id = :situationId
+        )
+    """)
+    List<Participant> findStudentsBySituationId(@Param("situationId") Integer situationId);
+}
+package com.mmarkov.eduteach.repository;
+
+import com.mmarkov.eduteach.entity.access.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface RoleRepository extends JpaRepository<Role, Integer> {
+
+    Optional<Role> findByName(String name);
+}
+package com.mmarkov.eduteach.repository;
+
+import com.mmarkov.eduteach.entity.script.ScriptNode;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface ScriptNodeRepository extends JpaRepository<ScriptNode, Integer> {
+
+    @Query("""
+        SELECT sn FROM ScriptNode sn
+        LEFT JOIN FETCH sn.choicesFrom c
+        LEFT JOIN FETCH c.solution sol
+        LEFT JOIN FETCH c.typeConsequence
+        WHERE sn.id = :id
+    """)
+    Optional<ScriptNode> findByIdWithChoices(@Param("id") Integer id);
+
+    /**
+     * РџСЂРѕРІРµСЂСЏРµС‚, РґРѕСЃС‚РёР¶РёРј Р»Рё СѓР·РµР» fromNodeId РёР· СЃС‚Р°СЂС‚РѕРІРѕРіРѕ СѓР·Р»Р° СЃРёС‚СѓР°С†РёРё.
+     * РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РІР°Р»РёРґР°С†РёРё: РїСЂРёРЅР°РґР»РµР¶РёС‚ Р»Рё РІС‹Р±РѕСЂ РґР°РЅРЅРѕР№ СЃРёС‚СѓР°С†РёРё.
+     */
+    @Query("""
+        SELECT COUNT(c) > 0
+        FROM Choice c
+        WHERE c.fromScriptNode.id = :fromNodeId
+          AND c.id = :choiceId
+    """)
+    boolean existsChoiceForNode(
+            @Param("fromNodeId") Integer fromNodeId,
+            @Param("choiceId") Integer choiceId
+    );
+}
+package com.mmarkov.eduteach.repository;
+
+import com.mmarkov.eduteach.entity.situation.Situation;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface SituationRepository extends JpaRepository<Situation, Integer> {
+
+    // Р”Р»СЏ PlayService вЂ” С‚РѕР»СЊРєРѕ С‚Рѕ С‡С‚Рѕ РЅСѓР¶РЅРѕ РґР»СЏ СЃС‚Р°СЂС‚Р°
+    @Query("""
+        SELECT s FROM Situation s
+        JOIN FETCH s.problem p
+        JOIN FETCH s.scriptNode sn
+        JOIN FETCH s.context c
+        WHERE s.id = :id
+    """)
+    Optional<Situation> findByIdWithDetails(@Param("id") Integer id);
+
+    // Р”Р»СЏ СЃРїРёСЃРєР° СЃРёС‚СѓР°С†РёР№
+    @Query("""
+        SELECT s FROM Situation s
+        JOIN FETCH s.problem p
+        JOIN FETCH p.typeProblem
+        JOIN FETCH s.context c
+        JOIN FETCH c.lesson
+        JOIN FETCH c.lessonFormat
+        JOIN FETCH s.scriptNode
+    """)
+    List<Situation> findAllWithSummary();
+
+    // Р”Р»СЏ РґРµС‚Р°Р»СЊРЅРѕР№ РєР°СЂС‚РѕС‡РєРё СЃРёС‚СѓР°С†РёРё вЂ” Р±РµР· СѓС‡Р°СЃС‚РЅРёРєРѕРІ
+    @Query("""
+        SELECT s FROM Situation s
+        JOIN FETCH s.problem p
+        JOIN FETCH p.typeProblem
+        JOIN FETCH p.sourceProblem
+        LEFT JOIN FETCH p.emotions
+        JOIN FETCH s.context c
+        JOIN FETCH c.lesson
+        JOIN FETCH c.classroom
+        JOIN FETCH c.lessonStage
+        JOIN FETCH c.lessonFormat
+        LEFT JOIN FETCH c.techEquip
+        JOIN FETCH s.scriptNode sn
+        WHERE s.id = :id
+    """)
+    Optional<Situation> findByIdForDetail(@Param("id") Integer id);
+
+    // РЈС‡Р°СЃС‚РЅРёРєРё СЃРёС‚СѓР°С†РёРё вЂ” РѕС‚РґРµР»СЊРЅС‹Рј Р·Р°РїСЂРѕСЃРѕРј
+    @Query("""
+        SELECT s FROM Situation s
+        JOIN FETCH s.participants p
+        WHERE s.id = :id
+    """)
+    Optional<Situation> findByIdWithParticipants(@Param("id") Integer id);
+}
+package com.mmarkov.eduteach.repository;
+
+import com.mmarkov.eduteach.entity.situation.SituationsPassedUser;
+import com.mmarkov.eduteach.entity.situation.SituationsPassedUserId;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface SituationsPassedUserRepository
+        extends JpaRepository<SituationsPassedUser, SituationsPassedUserId> {
+
+    @Query("""
+        SELECT spu FROM SituationsPassedUser spu
+        JOIN FETCH spu.situation sit
+        JOIN FETCH sit.problem p
+        JOIN FETCH spu.finalMetrics fm
+        WHERE spu.id.userId = :userId
+          AND spu.id.situationId = :situationId
+    """)
+    Optional<SituationsPassedUser> findByUserIdAndSituationId(
+            @Param("userId") Integer userId,
+            @Param("situationId") Integer situationId
+    );
+
+    @Query("""
+        SELECT spu FROM SituationsPassedUser spu
+        JOIN FETCH spu.situation sit
+        JOIN FETCH spu.finalMetrics fm
+        WHERE spu.id.userId = :userId
+        ORDER BY spu.passedAt DESC
+    """)
+    List<SituationsPassedUser> findAllByUserId(@Param("userId") Integer userId);
+}
+package com.mmarkov.eduteach.repository;
+
+import com.mmarkov.eduteach.entity.access.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Integer> {
+
+    Optional<User> findByLogin(String login);
+
+    @Query("""
+        SELECT u FROM User u
+        JOIN FETCH u.role r
+        WHERE u.login = :login
+    """)
+    Optional<User> findByLoginWithRole(@Param("login") String login);
+}
+package com.mmarkov.eduteach.security;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
+
+@Slf4j
+@Component
+@RequiredArgsConstructor
+public class JwtAuthFilter extends OncePerRequestFilter {
+
+    private final JwtUtils jwtUtils;
+    private final UserDetailsServiceImpl userDetailsService;
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
+
+        String token = parseJwt(request);
+
+        if (token != null && jwtUtils.validateToken(token)) {
+            String login = jwtUtils.getLoginFromToken(token);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(login);
+
+            UsernamePasswordAuthenticationToken auth =
+                    new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities()
+                    );
+            auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        }
+
+        filterChain.doFilter(request, response);
+    }
+
+    private String parseJwt(HttpServletRequest request) {
+        String headerAuth = request.getHeader("Authorization");
+        if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
+            return headerAuth.substring(7);
+        }
+        return null;
+    }
+}
+package com.mmarkov.eduteach.security;
+
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+
+@Slf4j
+@Component
+public class JwtUtils {
+
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
+    @Value("${jwt.expiration}")
+    private long jwtExpirationMs;
+
+    private SecretKey key;
+
+    @PostConstruct
+    public void init() {
+        this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public String generateToken(String login) {
+        return Jwts.builder()
+                .subject(login)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
+                .signWith(key)
+                .compact();
+    }
+
+    public String getLoginFromToken(String token) {
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().verifyWith(key).build().parseSignedClaims(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException e) {
+            log.warn("РќРµРІР°Р»РёРґРЅС‹Р№ JWT С‚РѕРєРµРЅ: {}", e.getMessage());
+            return false;
+        }
+    }
+}
+package com.mmarkov.eduteach.security;
+
+import com.mmarkov.eduteach.entity.access.User;
+import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
+
+@Getter
+public class UserDetailsImpl implements UserDetails {
+
+    private final Integer id;
+    private final String login;
+    private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
+
+    public UserDetailsImpl(User user) {
+        this.id = user.getId();
+        this.login = user.getLogin();
+        this.password = user.getPasswordHash();
+        this.authorities = List.of(
+                new SimpleGrantedAuthority("ROLE_" + user.getRole().getName().toUpperCase())
+        );
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() { return true; }
+
+    @Override
+    public boolean isAccountNonLocked() { return true; }
+
+    @Override
+    public boolean isCredentialsNonExpired() { return true; }
+
+    @Override
+    public boolean isEnabled() { return true; }
+}
+package com.mmarkov.eduteach.security;
+
+import com.mmarkov.eduteach.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+public class UserDetailsServiceImpl implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        return userRepository.findByLoginWithRole(login)
+                .map(UserDetailsImpl::new)
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        "РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅРµ РЅР°Р№РґРµРЅ: " + login
+                ));
+    }
+}
+package com.mmarkov.eduteach.service;
+
+import com.mmarkov.eduteach.dto.auth.LoginRequest;
+import com.mmarkov.eduteach.dto.auth.LoginResponse;
+import com.mmarkov.eduteach.dto.auth.RegisterRequest;
+import com.mmarkov.eduteach.entity.access.Role;
+import com.mmarkov.eduteach.entity.access.User;
+import com.mmarkov.eduteach.repository.RoleRepository;
+import com.mmarkov.eduteach.repository.UserRepository;
+import com.mmarkov.eduteach.security.JwtUtils;
+import com.mmarkov.eduteach.security.UserDetailsImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+public class AuthService {
+
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtils jwtUtils;
+
+    // Р РѕР»СЊ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ РЅРѕРІС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
+    private static final String DEFAULT_ROLE = "STUDENT";
+
+    @Transactional
+    public LoginResponse register(RegisterRequest request) {
+        if (userRepository.findByLogin(request.getLogin()).isPresent()) {
+            throw new IllegalArgumentException(
+                    "РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ Р»РѕРіРёРЅРѕРј В«" + request.getLogin() + "В» СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚"
+            );
+        }
+
+        Role role = roleRepository.findByName(DEFAULT_ROLE)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Р РѕР»СЊ В«" + DEFAULT_ROLE + "В» РЅРµ РЅР°Р№РґРµРЅР° РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…"
+                ));
+
+        User user = User.builder()
+                .login(request.getLogin())
+                .passwordHash(passwordEncoder.encode(request.getPassword()))
+                .role(role)
+                .build();
+
+        userRepository.save(user);
+
+        String token = jwtUtils.generateToken(user.getLogin());
+
+        return LoginResponse.builder()
+                .token(token)
+                .login(user.getLogin())
+                .role(role.getName())
+                .build();
+    }
+
+    @Transactional(readOnly = true)
+    public LoginResponse login(LoginRequest request) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getLogin(),
+                        request.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        String token = jwtUtils.generateToken(userDetails.getUsername());
+        String role = userDetails.getAuthorities().iterator().next().getAuthority();
+
+        return LoginResponse.builder()
+                .token(token)
+                .login(userDetails.getUsername())
+                .role(role)
+                .build();
+    }
+}
+package com.mmarkov.eduteach.service;
+
+import com.mmarkov.eduteach.dto.history.HistoryItemDto;
+import com.mmarkov.eduteach.dto.play.MetricsDto;
+import com.mmarkov.eduteach.dto.play.NormativeChecksDto;
+import com.mmarkov.eduteach.entity.metrics.ChangeMetrics;
+import com.mmarkov.eduteach.entity.situation.SituationsPassedUser;
+import com.mmarkov.eduteach.repository.SituationsPassedUserRepository;
+import com.mmarkov.eduteach.security.UserDetailsImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class HistoryService {
+
+    private final SituationsPassedUserRepository situationsPassedUserRepository;
+
+    @Transactional(readOnly = true)
+    public List<HistoryItemDto> getHistory() {
+        Integer userId = getCurrentUserId();
+
+        return situationsPassedUserRepository.findAllByUserId(userId).stream()
+                .map(this::mapToHistoryItem)
+                .toList();
+    }
+
+    // =========================================================================
+    // РњРђРџРџРРќР“
+    // =========================================================================
+
+    private HistoryItemDto mapToHistoryItem(SituationsPassedUser spu) {
+        ChangeMetrics m = spu.getFinalMetrics();
+
+        boolean motivationOk   = m.getMotivation()       != null && m.getMotivation()       >= 0.7;
+        boolean stressOk       = m.getStress()           != null && m.getStress()           <= 0.4;
+        boolean trustOk        = m.getTrust()            != null && m.getTrust()            >= 0.6;
+        boolean classClimateOk = m.getClassClimate()     != null && m.getClassClimate()     >= 0.7;
+        boolean authorityOk    = m.getTeacherAuthority() != null && m.getTeacherAuthority() >= 0.6;
+        boolean burnoutOk      = m.getTeacherBurnout()   != null && m.getTeacherBurnout()   <= 0.3;
+
+        int passed = countPassed(motivationOk, stressOk, trustOk,
+                classClimateOk, authorityOk, burnoutOk);
+
+        String result;
+        if (passed == 6)      result = "SUCCESS";
+        else if (passed >= 4) result = "PARTIAL_SUCCESS";
+        else                  result = "FAILURE";
+
+        return HistoryItemDto.builder()
+                .situationId(spu.getSituation().getId())
+                .situationName(spu.getSituation().getName())
+                .passedAt(spu.getPassedAt())
+                .result(result)
+                .metricsPassed(passed)
+                .finalMetrics(MetricsDto.builder()
+                        .motivation(m.getMotivation())
+                        .stress(m.getStress())
+                        .trust(m.getTrust())
+                        .classClimate(m.getClassClimate())
+                        .teacherAuthority(m.getTeacherAuthority())
+                        .teacherBurnout(m.getTeacherBurnout())
+                        .build())
+                .normativeChecks(NormativeChecksDto.builder()
+                        .motivation(motivationOk)
+                        .stress(stressOk)
+                        .trust(trustOk)
+                        .classClimate(classClimateOk)
+                        .teacherAuthority(authorityOk)
+                        .teacherBurnout(burnoutOk)
+                        .build())
+                .build();
+    }
+
+    private int countPassed(boolean... checks) {
+        int count = 0;
+        for (boolean check : checks) if (check) count++;
+        return count;
+    }
+
+    private Integer getCurrentUserId() {
+        UserDetailsImpl userDetails = (UserDetailsImpl)
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDetails.getId();
+    }
+}
+package com.mmarkov.eduteach.service;
+
+import com.mmarkov.eduteach.dto.play.*;
+import com.mmarkov.eduteach.entity.metrics.ChangeMetrics;
+import com.mmarkov.eduteach.entity.script.Choice;
+import com.mmarkov.eduteach.entity.script.ScriptNode;
+import com.mmarkov.eduteach.entity.situation.Situation;
+import com.mmarkov.eduteach.entity.situation.SituationsPassedUser;
+import com.mmarkov.eduteach.entity.situation.SituationsPassedUserId;
+import com.mmarkov.eduteach.repository.*;
+import com.mmarkov.eduteach.security.UserDetailsImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class PlayService {
+
+    private final SituationRepository situationRepository;
+    private final ScriptNodeRepository scriptNodeRepository;
+    private final ChoiceRepository choiceRepository;
+    private final ChangeMetricsRepository changeMetricsRepository;
+    private final SituationsPassedUserRepository situationsPassedUserRepository;
+    private final UserRepository userRepository;
+
+    // =========================================================================
+    // РЎРўРђР Рў РџР РћРҐРћР–Р”Р•РќРРЇ
+    // =========================================================================
+
+    @Transactional
+    public StartSessionResponse startSession(Integer situationId) {
+        Integer userId = getCurrentUserId();
+
+        Situation situation = situationRepository.findByIdWithDetails(situationId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "РЎРёС‚СѓР°С†РёСЏ РЅРµ РЅР°Р№РґРµРЅР°: " + situationId));
+
+        // РЎРѕР·РґР°С‘Рј РЅРѕРІС‹Рµ РјРµС‚СЂРёРєРё РёР· СЃС‚Р°СЂС‚РѕРІС‹С… Р·РЅР°С‡РµРЅРёР№ РїСЂРѕР±Р»РµРјС‹
+        ChangeMetrics metrics = ChangeMetrics.builder()
+                .motivation(situation.getProblem().getStartMotivation())
+                .stress(situation.getProblem().getStartStress())
+                .trust(situation.getProblem().getStartTrust())
+                .classClimate(situation.getProblem().getStartClassClimate())
+                .teacherAuthority(situation.getProblem().getStartTeacherAuthority())
+                .teacherBurnout(situation.getProblem().getStartTeacherBurnout())
+                .build();
+        metrics = changeMetricsRepository.save(metrics);
+
+        // РЈРґР°Р»СЏРµРј СЃС‚Р°СЂСѓСЋ Р·Р°РїРёСЃСЊ РµСЃР»Рё РµСЃС‚СЊ (СЂРµСЃС‚Р°СЂС‚)
+        SituationsPassedUserId compositeId =
+                new SituationsPassedUserId(userId, situationId);
+        situationsPassedUserRepository.findById(compositeId)
+                .ifPresent(situationsPassedUserRepository::delete);
+        situationsPassedUserRepository.flush();
+
+        // РЎРѕР·РґР°С‘Рј РЅРѕРІСѓСЋ Р·Р°РїРёСЃСЊ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ
+        SituationsPassedUser session = SituationsPassedUser.builder()
+                .id(compositeId)
+                .user(userRepository.getReferenceById(userId))
+                .situation(situation)
+                .finalMetrics(metrics)
+                .passedAt(LocalDateTime.now())
+                .build();
+        situationsPassedUserRepository.save(session);
+
+        // Р—Р°РіСЂСѓР¶Р°РµРј СЃС‚Р°СЂС‚РѕРІС‹Р№ СѓР·РµР» СЃ РІР°СЂРёР°РЅС‚Р°РјРё РІС‹Р±РѕСЂР°
+        ScriptNode startNode = scriptNodeRepository
+                .findByIdWithChoices(situation.getScriptNode().getId())
+                .orElseThrow(() -> new IllegalStateException(
+                        "РЎС‚Р°СЂС‚РѕРІС‹Р№ СѓР·РµР» РЅРµ РЅР°Р№РґРµРЅ"));
+
+        return StartSessionResponse.builder()
+                .currentNode(mapToNodeDto(startNode))
+                .metrics(mapToMetricsDto(metrics))
+                .build();
+    }
+
+    // =========================================================================
+    // РџРћР›РЈР§Р•РќРР• РЈР—Р›Рђ
+    // =========================================================================
+
+    @Transactional(readOnly = true)
+    public StartSessionResponse getNode(Integer situationId, Integer nodeId) {
+        Integer userId = getCurrentUserId();
+
+        SituationsPassedUser session = getSessionOrThrow(userId, situationId);
+
+        ScriptNode node = scriptNodeRepository.findByIdWithChoices(nodeId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "РЈР·РµР» РЅРµ РЅР°Р№РґРµРЅ: " + nodeId));
+
+        return StartSessionResponse.builder()
+                .currentNode(mapToNodeDto(node))
+                .metrics(mapToMetricsDto(session.getFinalMetrics()))
+                .build();
+    }
+
+    // =========================================================================
+    // РЎРћР’Р•Р РЁР•РќРР• Р’Р«Р‘РћР Рђ
+    // =========================================================================
+
+    @Transactional
+    public ChooseResponse choose(Integer situationId, Integer choiceId) {
+        Integer userId = getCurrentUserId();
+
+        SituationsPassedUser session = getSessionOrThrow(userId, situationId);
+
+        Choice choice = choiceRepository.findByIdWithNodes(choiceId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Р’Р°СЂРёР°РЅС‚ РІС‹Р±РѕСЂР° РЅРµ РЅР°Р№РґРµРЅ: " + choiceId));
+
+        // Р’Р°Р»РёРґР°С†РёСЏ: РІС‹Р±РѕСЂ РґРѕР»Р¶РµРЅ РїСЂРёРЅР°РґР»РµР¶Р°С‚СЊ РїСЂР°РІРёР»СЊРЅРѕРјСѓ СѓР·Р»Сѓ
+        if (choice.getFromScriptNode() == null) {
+            throw new IllegalStateException("Р’С‹Р±РѕСЂ РЅРµ РїСЂРёРІСЏР·Р°РЅ Рє СѓР·Р»Сѓ СЃС†РµРЅР°СЂРёСЏ");
+        }
+
+        boolean valid = scriptNodeRepository.existsChoiceForNode(
+                choice.getFromScriptNode().getId(), choiceId);
+        if (!valid) {
+            throw new IllegalArgumentException(
+                    "Р’С‹Р±РѕСЂ РЅРµ РїСЂРёРЅР°РґР»РµР¶РёС‚ С‚РµРєСѓС‰РµРјСѓ СѓР·Р»Сѓ СЃРёС‚СѓР°С†РёРё");
+        }
+
+        // РџСЂРёРјРµРЅСЏРµРј РґРµР»СЊС‚С‹ Рє РјРµС‚СЂРёРєР°Рј
+        ChangeMetrics metrics = session.getFinalMetrics();
+        applyDeltas(metrics, choice);
+        changeMetricsRepository.save(metrics);
+
+        // РћРїСЂРµРґРµР»СЏРµРј СЃР»РµРґСѓСЋС‰РёР№ СѓР·РµР»
+        ScriptNode nextNode = choice.getNextScriptNode();
+        boolean isFinished = (nextNode == null) || Boolean.TRUE.equals(nextNode.getIsTerminal());
+
+        NodeDto nextNodeDto = null;
+        if (!isFinished) {
+            nextNodeDto = scriptNodeRepository
+                    .findByIdWithChoices(nextNode.getId())
+                    .map(this::mapToNodeDto)
+                    .orElseThrow(() -> new IllegalStateException(
+                            "РЎР»РµРґСѓСЋС‰РёР№ СѓР·РµР» РЅРµ РЅР°Р№РґРµРЅ: " + nextNode.getId()));
+        } else if (nextNode != null) {
+            nextNodeDto = NodeDto.builder()
+                    .id(nextNode.getId())
+                    .description(nextNode.getDescription())
+                    .urlImage(nextNode.getUrlImage())
+                    .isTerminal(true)
+                    .choices(List.of())
+                    .build();
+        }
+
+        String typeConsequenceName = null;
+        if (choice.getTypeConsequence() != null) {
+            typeConsequenceName = choice.getTypeConsequence().getName();
+        }
+
+        return ChooseResponse.builder()
+                .consequenceText(choice.getConsequenceText())
+                .typeConsequenceName(typeConsequenceName)
+                .nextNode(nextNodeDto)
+                .metrics(mapToMetricsDto(metrics))
+                .isFinished(isFinished)
+                .build();
+    }
+
+    // =========================================================================
+    // Р Р•Р—РЈР›Р¬РўРђРў
+    // =========================================================================
+
+    @Transactional(readOnly = true)
+    public ResultResponse getResult(Integer situationId) {
+        Integer userId = getCurrentUserId();
+        SituationsPassedUser session = getSessionOrThrow(userId, situationId);
+
+        ChangeMetrics metrics = session.getFinalMetrics();
+
+        // РџСЂРѕРІРµСЂРєР° РЅРѕСЂРјР°С‚РёРІРѕРІ
+        boolean motivationOk      = metrics.getMotivation()       != null && metrics.getMotivation()       >= 0.7;
+        boolean stressOk          = metrics.getStress()           != null && metrics.getStress()           <= 0.4;
+        boolean trustOk           = metrics.getTrust()            != null && metrics.getTrust()            >= 0.6;
+        boolean classClimateOk    = metrics.getClassClimate()     != null && metrics.getClassClimate()     >= 0.7;
+        boolean authorityOk       = metrics.getTeacherAuthority() != null && metrics.getTeacherAuthority() >= 0.6;
+        boolean burnoutOk         = metrics.getTeacherBurnout()   != null && metrics.getTeacherBurnout()   <= 0.3;
+
+        int passed = countPassed(motivationOk, stressOk, trustOk,
+                classClimateOk, authorityOk, burnoutOk);
+
+        String result;
+        if (passed == 6)      result = "SUCCESS";
+        else if (passed >= 4) result = "PARTIAL_SUCCESS";
+        else                  result = "FAILURE";
+
+        return ResultResponse.builder()
+                .situationName(session.getSituation().getName())
+                .result(result)
+                .metricsPassed(passed)
+                .finalMetrics(mapToMetricsDto(metrics))
+                .normativeChecks(NormativeChecksDto.builder()
+                        .motivation(motivationOk)
+                        .stress(stressOk)
+                        .trust(trustOk)
+                        .classClimate(classClimateOk)
+                        .teacherAuthority(authorityOk)
+                        .teacherBurnout(burnoutOk)
+                        .build())
+                .build();
+    }
+
+    // =========================================================================
+    // Р’РЎРџРћРњРћР“РђРўР•Р›Р¬РќР«Р• РњР•РўРћР”Р«
+    // =========================================================================
+
+    private void applyDeltas(ChangeMetrics metrics, Choice choice) {
+        metrics.setMotivation(clamp(
+                safeGet(metrics.getMotivation()) + safeGet(choice.getDeltaMotivation())));
+        metrics.setStress(clamp(
+                safeGet(metrics.getStress()) + safeGet(choice.getDeltaStress())));
+        metrics.setTrust(clamp(
+                safeGet(metrics.getTrust()) + safeGet(choice.getDeltaTrust())));
+        metrics.setClassClimate(clamp(
+                safeGet(metrics.getClassClimate()) + safeGet(choice.getDeltaClassClimate())));
+        metrics.setTeacherAuthority(clamp(
+                safeGet(metrics.getTeacherAuthority()) + safeGet(choice.getDeltaTeacherAuthority())));
+        metrics.setTeacherBurnout(clamp(
+                safeGet(metrics.getTeacherBurnout()) + safeGet(choice.getDeltaTeacherBurnout())));
+    }
+
+    private double clamp(double value) {
+        return Math.max(0.0, Math.min(1.0, value));
+    }
+
+    private double safeGet(Double value) {
+        return value != null ? value : 0.0;
+    }
+
+    private int countPassed(boolean... checks) {
+        int count = 0;
+        for (boolean check : checks) {
+            if (check) count++;
+        }
+        return count;
+    }
+
+    private Integer getCurrentUserId() {
+        UserDetailsImpl userDetails = (UserDetailsImpl)
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDetails.getId();
+    }
+
+    private SituationsPassedUser getSessionOrThrow(Integer userId, Integer situationId) {
+        return situationsPassedUserRepository
+                .findByUserIdAndSituationId(userId, situationId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "РЎРµСЃСЃРёСЏ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ РЅРµ РЅР°Р№РґРµРЅР°. РЎРЅР°С‡Р°Р»Р° РІС‹Р·РѕРІРёС‚Рµ /start"));
+    }
+
+    private NodeDto mapToNodeDto(ScriptNode node) {
+        List<ChoiceDto> choices = node.getChoicesFrom().stream()
+                .map(c -> ChoiceDto.builder()
+                        .id(c.getId())
+                        .description(c.getDescription())
+                        .build())
+                .toList();
+
+        return NodeDto.builder()
+                .id(node.getId())
+                .description(node.getDescription())
+                .urlImage(node.getUrlImage())
+                .isTerminal(node.getIsTerminal())
+                .choices(choices)
+                .build();
+    }
+
+    private MetricsDto mapToMetricsDto(ChangeMetrics m) {
+        return MetricsDto.builder()
+                .motivation(m.getMotivation())
+                .stress(m.getStress())
+                .trust(m.getTrust())
+                .classClimate(m.getClassClimate())
+                .teacherAuthority(m.getTeacherAuthority())
+                .teacherBurnout(m.getTeacherBurnout())
+                .build();
+    }
+}
+package com.mmarkov.eduteach.service;
+
+import com.mmarkov.eduteach.dto.situation.*;
+import com.mmarkov.eduteach.entity.participant.Participant;
+import com.mmarkov.eduteach.entity.situation.Situation;
+import com.mmarkov.eduteach.repository.ParticipantRepository;
+import com.mmarkov.eduteach.repository.SituationRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class SituationService {
+
+    private final SituationRepository situationRepository;
+    private final ParticipantRepository participantRepository;
+
+    @Transactional(readOnly = true)
+    public List<SituationListItemDto> getAll() {
+        return situationRepository.findAllWithSummary().stream()
+                .map(this::mapToListItem)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public SituationDetailDto getById(Integer id) {
+        Situation situation = situationRepository.findByIdForDetail(id)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "РЎРёС‚СѓР°С†РёСЏ РЅРµ РЅР°Р№РґРµРЅР°: " + id));
+
+        // Р—Р°РіСЂСѓР¶Р°РµРј СѓС‡РёС‚РµР»РµР№ Рё СѓС‡РµРЅРёРєРѕРІ РѕС‚РґРµР»СЊРЅС‹РјРё Р·Р°РїСЂРѕСЃР°РјРё
+        List<Participant> teachers = participantRepository.findTeachersBySituationId(id);
+        List<Participant> students = participantRepository.findStudentsBySituationId(id);
+
+        List<ParticipantDto> allParticipants = new ArrayList<>();
+        teachers.stream().map(this::mapParticipant).forEach(allParticipants::add);
+        students.stream().map(this::mapParticipant).forEach(allParticipants::add);
+
+        return SituationDetailDto.builder()
+                .id(situation.getId())
+                .name(situation.getName())
+                .context(mapContext(situation))
+                .problem(mapProblem(situation))
+                .participants(allParticipants)
+                .startNodeId(situation.getScriptNode().getId())
+                .build();
+    }
+
+    // =========================================================================
+    // РњРђРџРџРРќР“
+    // =========================================================================
+
+    private SituationListItemDto mapToListItem(Situation s) {
+        return SituationListItemDto.builder()
+                .id(s.getId())
+                .name(s.getName())
+                .typeProblem(s.getProblem().getTypeProblem().getName())
+                .lessonName(s.getContext().getLesson().getName())
+                .lessonFormat(s.getContext().getLessonFormat().getName())
+                .problemIntensity(s.getProblem().getIntensity())
+                .build();
+    }
+
+    private ContextDto mapContext(Situation s) {
+        var c = s.getContext();
+        return ContextDto.builder()
+                .lesson(c.getLesson().getName())
+                .classroom(c.getClassroom().getName())
+                .lessonStage(c.getLessonStage().getName())
+                .lessonFormat(c.getLessonFormat().getName())
+                .techEquip(c.getTechEquip() != null ? c.getTechEquip().getName() : null)
+                .duration(c.getDuration())
+                .build();
+    }
+
+    private ProblemDto mapProblem(Situation s) {
+        var p = s.getProblem();
+        return ProblemDto.builder()
+                .typeProblem(p.getTypeProblem().getName())
+                .sourceProblem(p.getSourceProblem().getName())
+                .intensity(p.getIntensity())
+                .description(p.getDescription())
+                .emotions(p.getEmotions().stream()
+                        .map(e -> e.getName())
+                        .toList())
+                .build();
+    }
+
+    private ParticipantDto mapParticipant(Participant p) {
+        ParticipantDto.ParticipantDtoBuilder builder = ParticipantDto.builder()
+                .id(p.getId())
+                .fullName(p.getFullName())
+                .age(p.getAge());
+
+        if (p.getTeacher() != null) {
+            var t = p.getTeacher();
+            builder.type("TEACHER")
+                    .pedagogicalStyle(t.getPedagogicalStyle() != null
+                            ? t.getPedagogicalStyle().getName() : null)
+                    .emotionIntelligence(t.getEmotionIntelligence() != null
+                            ? t.getEmotionIntelligence().getName() : null)
+                    .professionalRole(t.getProfessionalRole() != null
+                            ? t.getProfessionalRole().getName() : null)
+                    .experience(t.getExperience());
+        } else if (p.getStudent() != null) {
+            var st = p.getStudent();
+            builder.type("STUDENT")
+                    .communicationStyle(st.getCommStyle() != null
+                            ? st.getCommStyle().getName() : null)
+                    .socialStatus(st.getSocialStatus() != null
+                            ? st.getSocialStatus().getName() : null)
+                    .techEquip(st.getTechEquip() != null
+                            ? st.getTechEquip().getName() : null)
+                    .motivation(st.getMotivation())
+                    .preparation(st.getPreparation());
+        }
+
+        return builder.build();
+    }
 }
 package com.mmarkov.eduteach;
 
@@ -2402,10 +3942,10 @@ spring:
   application:
     name: eduteach
   datasource:
-    url: 1111
-    username: 111
-    password: 111
-    driver-class-name: 111
+    url: jdbc:postgresql://db.prisma.io:5432/postgres?sslmode=require
+    username: 9a82b9da326f9893870c6e9237b866d896231a1a1de439b9b784a9b3bbc1a865
+    password: sk_UXYmDmuGuBX6-eo4Vgj7h
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: validate

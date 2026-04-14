@@ -16,27 +16,23 @@ import java.time.LocalDateTime;
 @Builder
 public class SituationsPassedUser {
 
-    @Id
-    @Column(name = "user_id")
-    private Integer userId;
-
-    @Id
-    @Column(name = "situation_id")
-    private Integer situationId;
+    @EmbeddedId
+    private SituationsPassedUserId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @MapsId("userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "situation_id", insertable = false, updatable = false)
+    @MapsId("situationId")
+    @JoinColumn(name = "situation_id")
     private Situation situation;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "final_metrics_id", unique = true)
     private ChangeMetrics finalMetrics;
 
     @Column(name = "passed_at")
-    @Builder.Default
-    private LocalDateTime passedAt = LocalDateTime.now();
+    private LocalDateTime passedAt;
 }
