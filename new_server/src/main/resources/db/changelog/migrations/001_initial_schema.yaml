@@ -1,0 +1,1059 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001_create_tables
+      author: max
+      changes:
+        # ================================================================================
+        # УПРАВЛЕНИЕ ДОСТУПОМ И ПОЛЬЗОВАТЕЛИ
+        # ================================================================================
+
+        # Справочник страниц системы
+        - createTable:
+            tableName: page
+            remarks: Справочник доступных страниц/эндпоинтов системы
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: url_page
+                  type: VARCHAR(500)
+                  constraints:
+                    unique: true
+                    nullable: false
+                  remarks: Уникальная ссылка на страницу
+
+        # Справочник ролей
+        - createTable:
+            tableName: role
+            remarks: Роли пользователей в системе
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Связь ролей и страниц (Many-to-Many)
+        - createTable:
+            tableName: pages_of_role
+            remarks: Настройка прав доступа, какие страницы доступны роли
+            columns:
+              - column:
+                  name: role_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: page_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+            foreignKeyConstraints:
+              - foreignKeyName: fk_pages_of_role_role
+                referencedTableName: role
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_pages_of_role_page
+                referencedTableName: page
+                referencedColumnNames: id
+                onDelete: CASCADE
+
+        # Пользователи системы
+        - createTable:
+            tableName: user
+            remarks: Учетные записи пользователей
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: role_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: login
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password_hash
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                  remarks: Хешированный пароль
+            foreignKeyConstraints:
+              - foreignKeyName: fk_user_role
+                referencedTableName: role
+                referencedColumnNames: id
+
+        # ================================================================================
+        # СПРАВОЧНИКИ
+        # ================================================================================
+
+        # Типы решений
+        - createTable:
+            tableName: solution_type
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Стратегии реагирования
+        - createTable:
+            tableName: response_strategy
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Ресурсы
+        - createTable:
+            tableName: resource
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # ================================================================================
+        # РЕШЕНИЯ И ИХ КОМПОНЕНТЫ
+        # ================================================================================
+
+        # Решения (Solution)
+        - createTable:
+            tableName: solution
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: sol_type_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: resp_strat_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: risk
+                  type: INTEGER
+                  constraints:
+                    checkConstraint: risk BETWEEN 0 AND 10
+                  remarks: Уровень риска (0-10)
+              - column:
+                  name: student_autonomy
+                  type: INTEGER
+                  remarks: Уровень автономии студента
+            foreignKeyConstraints:
+              - foreignKeyName: fk_solution_type
+                referencedTableName: solution_type
+                referencedColumnNames: id
+              - foreignKeyName: fk_solution_resp_strategy
+                referencedTableName: response_strategy
+                referencedColumnNames: id
+
+        # Связь решений с ресурсами (Many-to-Many)
+        - createTable:
+            tableName: solution_resource
+            columns:
+              - column:
+                  name: resource_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: solution_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+            foreignKeyConstraints:
+              - foreignKeyName: fk_solution_resource_resource
+                referencedTableName: resource
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_solution_resource_solution
+                referencedTableName: solution
+                referencedColumnNames: id
+                onDelete: CASCADE
+
+        # ================================================================================
+        # МЕТРИКИ И ИХ ПОСЛЕДСТВИЯ
+        # ================================================================================
+
+        # Метрики изменений (0-1)
+        - createTable:
+            tableName: change_metrics
+            remarks: Хранение метрик состояния при прохождении ситуации
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: motivation
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: motivation BETWEEN 0 AND 1
+              - column:
+                  name: stress
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: stress BETWEEN 0 AND 1
+              - column:
+                  name: trust
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: trust BETWEEN 0 AND 1
+              - column:
+                  name: class_climate
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: class_climate BETWEEN 0 AND 1
+              - column:
+                  name: teacher_authority
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: teacher_authority BETWEEN 0 AND 1
+              - column:
+                  name: teacher_burnout
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: teacher_burnout BETWEEN 0 AND 1
+
+        # Типы последствий
+        - createTable:
+            tableName: type_consequence
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Последствия
+        - createTable:
+            tableName: consequence
+            remarks: Последствия выбора решения
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: change_metrics_id
+                  type: INTEGER
+                  constraints:
+                    unique: true
+                    nullable: false
+                  remarks: Связь 1к1 с метриками изменений
+              - column:
+                  name: type_conseq_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text
+                  type: TEXT
+              - column:
+                  name: long_term
+                  type: BOOLEAN
+                  defaultValue: false
+                  remarks: Долгосрочное ли последствие
+              - column:
+                  name: reversible
+                  type: BOOLEAN
+                  defaultValue: false
+                  remarks: Обратимое ли последствие
+              - column:
+                  name: intensity
+                  type: DOUBLE PRECISION
+            foreignKeyConstraints:
+              - foreignKeyName: fk_consequence_change_metrics
+                referencedTableName: change_metrics
+                referencedColumnNames: id
+              - foreignKeyName: fk_consequence_type_consequence
+                referencedTableName: type_consequence
+                referencedColumnNames: id
+
+        # ================================================================================
+        # СЦЕНАРИЙ И ВЫБОРЫ
+        # ================================================================================
+
+        # Узлы сценария
+        - createTable:
+            tableName: script_node
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: url_image
+                  type: VARCHAR(500)
+              - column:
+                  name: is_terminal
+                  type: BOOLEAN
+                  defaultValue: false
+                  remarks: Является ли узел конечным
+
+        # Выборы/переходы в сценарии
+        - createTable:
+            tableName: choice
+            remarks: Варианты выбора/переходы между узлами сценария
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: solution_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: from_script_node_id
+                  type: INTEGER
+              - column:
+                  name: next_script_node_id
+                  type: INTEGER
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: delta_motivation
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_motivation BETWEEN -1 AND 1
+                  remarks: Изменение мотивации при выборе
+              - column:
+                  name: delta_stress
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_stress BETWEEN -1 AND 1
+                  remarks: Изменение стресса при выборе
+              - column:
+                  name: delta_trust
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_trust BETWEEN -1 AND 1
+                  remarks: Изменение доверия при выборе
+              - column:
+                  name: delta_class_climate
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_class_climate BETWEEN -1 AND 1
+                  remarks: Изменение климата при выборе
+              - column:
+                  name: delta_teacher_authority
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_teacher_authority BETWEEN -1 AND 1
+                  remarks: Изменение авторитета при выборе
+              - column:
+                  name: delta_teacher_burnout
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_teacher_burnout BETWEEN -1 AND 1
+                  remarks: Изменение выгорания при выборе
+              - column:
+                  name: consequence_text
+                  type: TEXT
+                  remarks: Текстовое описание последствия
+              - column:
+                  name: type_consequence_id
+                  type: INTEGER
+                  remarks: Тип последствия (успех/частичный/неудача)
+            foreignKeyConstraints:
+              - foreignKeyName: fk_choice_solution
+                referencedTableName: solution
+                referencedColumnNames: id
+              - foreignKeyName: fk_choice_from_script_node
+                referencedTableName: script_node
+                referencedColumnNames: id
+              - foreignKeyName: fk_choice_next_script_node
+                referencedTableName: script_node
+                referencedColumnNames: id
+              - foreignKeyName: fk_choice_type_consequence
+                referencedTableName: type_consequence
+                referencedColumnNames: id
+
+        # ================================================================================
+        # СПРАВОЧНИКИ ПРОБЛЕМ
+        # ================================================================================
+
+        # Источники проблем
+        - createTable:
+            tableName: source_problem
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Типы проблем
+        - createTable:
+            tableName: type_problem
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Эмоции
+        - createTable:
+            tableName: emotion
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # ================================================================================
+        # ПРОБЛЕМЫ И ИХ ХАРАКТЕРИСТИКИ
+        # ================================================================================
+
+        # Проблемы
+        - createTable:
+            tableName: problem
+            remarks: Проблемы педагогических ситуаций
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: type_problem_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: source_problem_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: intensity
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: intensity BETWEEN 0 AND 1
+                  remarks: Интенсивность проблемы (0-1)
+              - column:
+                  name: tension_factor
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: tension_factor BETWEEN 0 AND 1
+                  remarks: Фактор напряжённости (0-1)
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: start_motivation
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.5
+                  constraints:
+                    checkConstraint: start_motivation BETWEEN 0 AND 1
+                  remarks: Стартовая мотивация учеников
+              - column:
+                  name: start_stress
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.3
+                  constraints:
+                    checkConstraint: start_stress BETWEEN 0 AND 1
+                  remarks: Стартовый уровень стресса
+              - column:
+                  name: start_trust
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.5
+                  constraints:
+                    checkConstraint: start_trust BETWEEN 0 AND 1
+                  remarks: Стартовый уровень доверия
+              - column:
+                  name: start_class_climate
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.5
+                  constraints:
+                    checkConstraint: start_class_climate BETWEEN 0 AND 1
+                  remarks: Стартовый климат в классе
+              - column:
+                  name: start_teacher_authority
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.5
+                  constraints:
+                    checkConstraint: start_teacher_authority BETWEEN 0 AND 1
+                  remarks: Стартовый авторитет учителя
+              - column:
+                  name: start_teacher_burnout
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.2
+                  constraints:
+                    checkConstraint: start_teacher_burnout BETWEEN 0 AND 1
+                  remarks: Стартовый уровень выгорания
+            foreignKeyConstraints:
+              - foreignKeyName: fk_problem_type_problem
+                referencedTableName: type_problem
+                referencedColumnNames: id
+              - foreignKeyName: fk_problem_source_problem
+                referencedTableName: source_problem
+                referencedColumnNames: id
+
+        # Связь проблем с эмоциями (Many-to-Many)
+        - createTable:
+            tableName: problem_emotions
+            columns:
+              - column:
+                  name: emotion_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: problem_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+            foreignKeyConstraints:
+              - foreignKeyName: fk_problem_emotions_emotion
+                referencedTableName: emotion
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_problem_emotions_problem
+                referencedTableName: problem
+                referencedColumnNames: id
+                onDelete: CASCADE
+
+        # ================================================================================
+        # СПРАВОЧНИКИ УЧАСТНИКОВ
+        # ================================================================================
+
+        # Эмоциональный интеллект
+        - createTable:
+            tableName: emotion_intelligence
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Педагогический стиль
+        - createTable:
+            tableName: pedagogical_style
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Профессиональная роль
+        - createTable:
+            tableName: professional_role
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Техническое оснащение
+        - createTable:
+            tableName: tech_equip
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Стиль коммуникации
+        - createTable:
+            tableName: communication_style
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Социальный статус
+        - createTable:
+            tableName: social_status
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # ================================================================================
+        # УЧАСТНИКИ
+        # ================================================================================
+
+        # Базовая таблица участников
+        - createTable:
+            tableName: participant
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: full_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: age
+                  type: INTEGER
+                  constraints:
+                    checkConstraint: age > 0
+
+        # Студенты (наследование 1:1 от Participant)
+        - createTable:
+            tableName: student
+            remarks: Дочерняя таблица для типа участника "Студент"
+            columns:
+              - column:
+                  name: participant_id
+                  type: INTEGER
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: tech_equip_id
+                  type: INTEGER
+              - column:
+                  name: comm_style_id
+                  type: INTEGER
+              - column:
+                  name: social_status_id
+                  type: INTEGER
+              - column:
+                  name: motivation
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: motivation BETWEEN 0 AND 1
+              - column:
+                  name: preparation
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: preparation BETWEEN 0 AND 1
+            foreignKeyConstraints:
+              - foreignKeyName: fk_student_participant
+                referencedTableName: participant
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_student_tech_equip
+                referencedTableName: tech_equip
+                referencedColumnNames: id
+              - foreignKeyName: fk_student_comm_style
+                referencedTableName: communication_style
+                referencedColumnNames: id
+              - foreignKeyName: fk_student_social_status
+                referencedTableName: social_status
+                referencedColumnNames: id
+
+        # Учителя (наследование 1:1 от Participant)
+        - createTable:
+            tableName: teacher
+            remarks: Дочерняя таблица для типа участника "Учитель"
+            columns:
+              - column:
+                  name: participant_id
+                  type: INTEGER
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: emotion_intell_id
+                  type: INTEGER
+              - column:
+                  name: style_id
+                  type: INTEGER
+              - column:
+                  name: prof_role_id
+                  type: INTEGER
+              - column:
+                  name: experience
+                  type: INTEGER
+                  constraints:
+                    checkConstraint: experience >= 0
+                  remarks: Стаж работы (лет)
+            foreignKeyConstraints:
+              - foreignKeyName: fk_teacher_participant
+                referencedTableName: participant
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_teacher_emotion_intell
+                referencedTableName: emotion_intelligence
+                referencedColumnNames: id
+              - foreignKeyName: fk_teacher_style
+                referencedTableName: pedagogical_style
+                referencedColumnNames: id
+              - foreignKeyName: fk_teacher_prof_role
+                referencedTableName: professional_role
+                referencedColumnNames: id
+
+        # ================================================================================
+        # КОНТЕКСТ УРОКА
+        # ================================================================================
+
+        # Урок
+        - createTable:
+            tableName: lesson
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Класс/Аудитория
+        - createTable:
+            tableName: classroom
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Этапы урока
+        - createTable:
+            tableName: lesson_stage
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Форматы урока
+        - createTable:
+            tableName: lesson_format
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Контекст проведения урока
+        - createTable:
+            tableName: context
+            remarks: Описание условий проведения урока
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: lesson_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: classroom_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lesson_stage_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lesson_format_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tech_equip_id
+                  type: INTEGER
+              - column:
+                  name: duration
+                  type: INTEGER
+                  constraints:
+                    checkConstraint: duration > 0
+                  remarks: Длительность в минутах
+            foreignKeyConstraints:
+              - foreignKeyName: fk_context_lesson
+                referencedTableName: lesson
+                referencedColumnNames: id
+              - foreignKeyName: fk_context_classroom
+                referencedTableName: classroom
+                referencedColumnNames: id
+              - foreignKeyName: fk_context_lesson_stage
+                referencedTableName: lesson_stage
+                referencedColumnNames: id
+              - foreignKeyName: fk_context_lesson_format
+                referencedTableName: lesson_format
+                referencedColumnNames: id
+              - foreignKeyName: fk_context_tech_equip
+                referencedTableName: tech_equip
+                referencedColumnNames: id
+
+        # ================================================================================
+        # СИТУАЦИИ И ПРОХОЖДЕНИЕ
+        # ================================================================================
+
+        # Ситуации (тренажеры/сценарии)
+        - createTable:
+            tableName: situation
+            remarks: Обучающая ситуация со стартовым узлом сценария
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: context_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: problem_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: script_node_id
+                  type: INTEGER
+                  constraints:
+                    unique: true
+                    nullable: false
+                  remarks: Стартовый узел сценария (1к1)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+            foreignKeyConstraints:
+              - foreignKeyName: fk_situation_context
+                referencedTableName: context
+                referencedColumnNames: id
+              - foreignKeyName: fk_situation_problem
+                referencedTableName: problem
+                referencedColumnNames: id
+              - foreignKeyName: fk_situation_script_node
+                referencedTableName: script_node
+                referencedColumnNames: id
+
+        # Связь ситуаций и участников (Many-to-Many)
+        - createTable:
+            tableName: situation_participants
+            columns:
+              - column:
+                  name: situation_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: participant_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+            foreignKeyConstraints:
+              - foreignKeyName: fk_situation_participants_situation
+                referencedTableName: situation
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_situation_participants_participant
+                referencedTableName: participant
+                referencedColumnNames: id
+                onDelete: CASCADE
+
+        # История прохождения ситуаций пользователями
+        - createTable:
+            tableName: situations_passed_user
+            remarks: Лог прохождения тренажеров пользователями
+            columns:
+              - column:
+                  name: user_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: situation_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: final_metrics_id
+                  type: INTEGER
+                  constraints:
+                    unique: true
+                  remarks: Итоговые метрики прохождения (1к1)
+              - column:
+                  name: passed_at
+                  type: TIMESTAMP
+            foreignKeyConstraints:
+              - foreignKeyName: fk_situations_passed_user_user
+                referencedTableName: user
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_situations_passed_user_situation
+                referencedTableName: situation
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_situations_passed_user_final_metrics
+                referencedTableName: change_metrics
+                referencedColumnNames: id
+
+        # ================================================================================
+        # ИНДЕКСЫ
+        # ================================================================================
+
+        - createIndex:
+            indexName: idx_choice_from_node
+            tableName: choice
+            columns:
+              - column:
+                  name: from_script_node_id
+
+        - createIndex:
+            indexName: idx_choice_next_node
+            tableName: choice
+            columns:
+              - column:
+                  name: next_script_node_id
+
+        - createIndex:
+            indexName: idx_situations_passed_at
+            tableName: situations_passed_user
+            columns:
+              - column:
+                  name: passed_at

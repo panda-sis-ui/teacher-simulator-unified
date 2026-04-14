@@ -1,0 +1,2573 @@
+﻿<component name="ProjectDictionaryState">
+  <dictionary name="project">
+    <words>
+      <w>liquibase</w>
+    </words>
+  </dictionary>
+</component>
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AmplicodeJpaDataSourceConfig">
+    <data-sources>
+      <data-source id="e8bc7d03-4ce1-41d1-b309-af3320116832" name="postgresEduTeachPrisma" url="jdbc:postgresql://db.prisma.io:5432/postgres?sslmode=require" driverClass="org.postgresql.Driver" />
+    </data-sources>
+  </component>
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AmplicodeJpaIdeaProjectConfig">
+    <option name="defaultUnitInitialized" value="true" />
+    <option name="renamerInitialized" value="true" />
+    <option name="sourceModelValue" value="Default" />
+    <option name="targetDbValue" value="e8bc7d03-4ce1-41d1-b309-af3320116832" />
+  </component>
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SpringProjectLocalState">
+    <option name="firstOpen" value="false" />
+  </component>
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Annotation profile for eduteach" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
+        </processorPath>
+        <module name="eduteach" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="eduteach" options="-parameters" />
+    </option>
+  </component>
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="IU-253.32098.37">
+    <data-source name="postgres@db.prisma.io" uuid="955c0f33-417b-4248-85c9-6de8f060a7b0">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>/9a82b9da326f9893870c6e9237b866d896231a1a1de439b9b784a9b3bbc1a865</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="postgres@db.prisma.io" uuid="955c0f33-417b-4248-85c9-6de8f060a7b0">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://db.prisma.io:5432/postgres</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+  </component>
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+  </component>
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-24" project-jdk-type="JavaSDK" />
+  <component name="ProjectType">
+    <option name="id" value="jpab" />
+  </component>
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+  </component>
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="51be8d69-d0cb-40f0-9712-f5c39c4d238c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/amplicode.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/access/Page.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/access/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/access/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/dictionary/Resource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/dictionary/ResponseStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/metrics/ChangeMetrics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/metrics/Consequence.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/metrics/TypeConsequence.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/CommunicationStyle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/EmotionIntelligence.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/Participant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/PedagogicalStyle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/ProfessionalRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/SocialStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/Teacher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/participant/TechEquip.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/problem/Emotion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/problem/Problem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/problem/SourceProblem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/problem/TypeProblem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/script/Choice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/script/ScriptNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/Classroom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/Context.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/Lesson.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/LessonFormat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/LessonStage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/Situation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/situation/SituationsPassedUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/solution/Solution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmarkov/eduteach/entity/solution/SolutionType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/db.changelog-master.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/migrations/001_initial_schema.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="com.haulmont.ampjpb.JpaLiquibaseChangeLog" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GradleModuleStateConfig" initialized="true" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="3AAuqK2i4FeOzxfSVjBkuZ2czZr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot Application.EduTeachApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="EduTeachApplication" type="AmplicodeSpringBootApplication" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mmarkov.eduteach.EduTeachApplication" />
+      <module name="eduteach" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.32098.37" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="51be8d69-d0cb-40f0-9712-f5c39c4d238c" name="Changes" comment="" />
+      <created>1772047887195</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1772047887195</updated>
+    </task>
+    <servers />
+  </component>
+</project>
+wrapperVersion=3.3.4
+distributionType=only-script
+distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.12/apache-maven-3.9.12-bin.zip
+package com.mmarkov.eduteach.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/auth/**").permitAll()
+                .anyRequest().authenticated()
+            );
+
+        return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+package com.mmarkov.eduteach.entity.access;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "page")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Page {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "url_page", unique = true, nullable = false, length = 500)
+    private String urlPage;
+
+    @ManyToMany(mappedBy = "pages")
+    @Builder.Default
+    private Set<Role> roles = new HashSet<>();
+}
+package com.mmarkov.eduteach.entity.access;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "role")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Role {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @ManyToMany
+    @JoinTable(
+        name = "pages_of_role",
+        joinColumns = @JoinColumn(name = "role_id"),
+        inverseJoinColumns = @JoinColumn(name = "page_id")
+    )
+    @Builder.Default
+    private Set<Page> pages = new HashSet<>();
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private Set<User> users = new HashSet<>();
+}
+package com.mmarkov.eduteach.entity.access;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "user")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
+    @Column(name = "login", unique = true, nullable = false)
+    private String login;
+
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
+}
+package com.mmarkov.eduteach.entity.dictionary;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "resource")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Resource {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.dictionary;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "response_strategy")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ResponseStrategy {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.metrics;
+
+import com.mmarkov.eduteach.entity.situation.SituationsPassedUser;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "change_metrics")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ChangeMetrics {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "motivation")
+    private Double motivation;
+
+    @Column(name = "stress")
+    private Double stress;
+
+    @Column(name = "trust")
+    private Double trust;
+
+    @Column(name = "class_climate")
+    private Double classClimate;
+
+    @Column(name = "teacher_authority")
+    private Double teacherAuthority;
+
+    @Column(name = "teacher_burnout")
+    private Double teacherBurnout;
+
+    @OneToOne(mappedBy = "changeMetrics")
+    private Consequence consequence;
+
+    @OneToOne(mappedBy = "finalMetrics")
+    private SituationsPassedUser situationsPassedUser;
+}
+package com.mmarkov.eduteach.entity.metrics;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "consequence")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Consequence {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "change_metrics_id", unique = true, nullable = false)
+    private ChangeMetrics changeMetrics;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_conseq_id", nullable = false)
+    private TypeConsequence typeConsequence;
+
+    @Column(name = "text", columnDefinition = "TEXT")
+    private String text;
+
+    @Column(name = "long_term")
+    @Builder.Default
+    private Boolean longTerm = false;
+
+    @Column(name = "reversible")
+    @Builder.Default
+    private Boolean reversible = false;
+
+    @Column(name = "intensity")
+    private Double intensity;
+}
+package com.mmarkov.eduteach.entity.metrics;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "type_consequence")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class TypeConsequence {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.participant;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "communication_style")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class CommunicationStyle {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.participant;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "emotion_intelligence")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class EmotionIntelligence {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.participant;
+
+import com.mmarkov.eduteach.entity.situation.Situation;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "participant")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Participant {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
+
+    @Column(name = "age")
+    private Integer age;
+
+    @OneToOne(mappedBy = "participant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Student student;
+
+    @OneToOne(mappedBy = "participant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Teacher teacher;
+
+    @ManyToMany
+    @JoinTable(
+        name = "situation_participants",
+        joinColumns = @JoinColumn(name = "participant_id"),
+        inverseJoinColumns = @JoinColumn(name = "situation_id")
+    )
+    @Builder.Default
+    private List<Situation> situations = new ArrayList<>();
+}
+package com.mmarkov.eduteach.entity.participant;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "pedagogical_style")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class PedagogicalStyle {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.participant;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "professional_role")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ProfessionalRole {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.participant;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "social_status")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SocialStatus {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.participant;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "student")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Student {
+
+    @Id
+    @Column(name = "participant_id")
+    private Integer participantId;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "participant_id", nullable = false)
+    @MapsId
+    private Participant participant;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tech_equip_id")
+    private TechEquip techEquip;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comm_style_id")
+    private CommunicationStyle commStyle;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "social_status_id")
+    private SocialStatus socialStatus;
+
+    @Column(name = "motivation")
+    private Double motivation;
+
+    @Column(name = "preparation")
+    private Double preparation;
+}
+package com.mmarkov.eduteach.entity.participant;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "teacher")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Teacher {
+
+    @Id
+    @Column(name = "participant_id")
+    private Integer participantId;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "participant_id", nullable = false)
+    @MapsId
+    private Participant participant;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "emotion_intell_id")
+    private EmotionIntelligence emotionIntelligence;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "style_id")
+    private PedagogicalStyle pedagogicalStyle;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prof_role_id")
+    private ProfessionalRole professionalRole;
+
+    @Column(name = "experience")
+    private Integer experience;
+}
+package com.mmarkov.eduteach.entity.participant;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "tech_equip")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class TechEquip {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.problem;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "emotion")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Emotion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.problem;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "problem")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Problem {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_problem_id", nullable = false)
+    private TypeProblem typeProblem;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "source_problem_id", nullable = false)
+    private SourceProblem sourceProblem;
+
+    @Column(name = "intensity")
+    private Double intensity;
+
+    @Column(name = "tension_factor")
+    private Double tensionFactor;
+
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "start_motivation")
+    @Builder.Default
+    private Double startMotivation = 0.5;
+
+    @Column(name = "start_stress")
+    @Builder.Default
+    private Double startStress = 0.3;
+
+    @Column(name = "start_trust")
+    @Builder.Default
+    private Double startTrust = 0.5;
+
+    @Column(name = "start_class_climate")
+    @Builder.Default
+    private Double startClassClimate = 0.5;
+
+    @Column(name = "start_teacher_authority")
+    @Builder.Default
+    private Double startTeacherAuthority = 0.5;
+
+    @Column(name = "start_teacher_burnout")
+    @Builder.Default
+    private Double startTeacherBurnout = 0.2;
+
+    @ManyToMany
+    @JoinTable(
+        name = "problem_emotions",
+        joinColumns = @JoinColumn(name = "problem_id"),
+        inverseJoinColumns = @JoinColumn(name = "emotion_id")
+    )
+    @Builder.Default
+    private Set<Emotion> emotions = new HashSet<>();
+}
+package com.mmarkov.eduteach.entity.problem;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "source_problem")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SourceProblem {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.problem;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "type_problem")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class TypeProblem {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.script;
+
+import com.mmarkov.eduteach.entity.metrics.TypeConsequence;
+import com.mmarkov.eduteach.entity.solution.Solution;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "choice")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Choice {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "solution_id", nullable = false)
+    private Solution solution;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "from_script_node_id")
+    private ScriptNode fromScriptNode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "next_script_node_id")
+    private ScriptNode nextScriptNode;
+
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "delta_motivation")
+    @Builder.Default
+    private Double deltaMotivation = 0.0;
+
+    @Column(name = "delta_stress")
+    @Builder.Default
+    private Double deltaStress = 0.0;
+
+    @Column(name = "delta_trust")
+    @Builder.Default
+    private Double deltaTrust = 0.0;
+
+    @Column(name = "delta_class_climate")
+    @Builder.Default
+    private Double deltaClassClimate = 0.0;
+
+    @Column(name = "delta_teacher_authority")
+    @Builder.Default
+    private Double deltaTeacherAuthority = 0.0;
+
+    @Column(name = "delta_teacher_burnout")
+    @Builder.Default
+    private Double deltaTeacherBurnout = 0.0;
+
+    @Column(name = "consequence_text", columnDefinition = "TEXT")
+    private String consequenceText;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_consequence_id")
+    private TypeConsequence typeConsequence;
+}
+package com.mmarkov.eduteach.entity.script;
+
+import com.mmarkov.eduteach.entity.situation.Situation;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "script_node")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ScriptNode {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "url_image", length = 500)
+    private String urlImage;
+
+    @Column(name = "is_terminal")
+    @Builder.Default
+    private Boolean isTerminal = false;
+
+    @OneToMany(mappedBy = "fromScriptNode", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<Choice> choicesFrom = new ArrayList<>();
+
+    @OneToMany(mappedBy = "nextScriptNode", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<Choice> choicesTo = new ArrayList<>();
+
+    @OneToOne(mappedBy = "scriptNode")
+    private Situation situation;
+}
+package com.mmarkov.eduteach.entity.situation;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "classroom")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Classroom {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.situation;
+
+import com.mmarkov.eduteach.entity.participant.TechEquip;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "context")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Context {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lesson_id", nullable = false)
+    private Lesson lesson;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "classroom_id", nullable = false)
+    private Classroom classroom;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lesson_stage_id", nullable = false)
+    private LessonStage lessonStage;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lesson_format_id", nullable = false)
+    private LessonFormat lessonFormat;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tech_equip_id")
+    private TechEquip techEquip;
+
+    @Column(name = "duration")
+    private Integer duration;
+}
+package com.mmarkov.eduteach.entity.situation;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "lesson")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Lesson {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.situation;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "lesson_format")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class LessonFormat {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.situation;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "lesson_stage")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class LessonStage {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach.entity.situation;
+
+import com.mmarkov.eduteach.entity.participant.Participant;
+import com.mmarkov.eduteach.entity.problem.Problem;
+import com.mmarkov.eduteach.entity.script.ScriptNode;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "situation")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Situation {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "context_id", nullable = false)
+    private Context context;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "problem_id", nullable = false)
+    private Problem problem;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "script_node_id", unique = true, nullable = false)
+    private ScriptNode scriptNode;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @ManyToMany
+    @JoinTable(
+        name = "situation_participants",
+        joinColumns = @JoinColumn(name = "situation_id"),
+        inverseJoinColumns = @JoinColumn(name = "participant_id")
+    )
+    @Builder.Default
+    private List<Participant> participants = new ArrayList<>();
+}
+package com.mmarkov.eduteach.entity.situation;
+
+import com.mmarkov.eduteach.entity.access.User;
+import com.mmarkov.eduteach.entity.metrics.ChangeMetrics;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "situations_passed_user")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SituationsPassedUser {
+
+    @Id
+    @Column(name = "user_id")
+    private Integer userId;
+
+    @Id
+    @Column(name = "situation_id")
+    private Integer situationId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "situation_id", insertable = false, updatable = false)
+    private Situation situation;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "final_metrics_id", unique = true)
+    private ChangeMetrics finalMetrics;
+
+    @Column(name = "passed_at")
+    @Builder.Default
+    private LocalDateTime passedAt = LocalDateTime.now();
+}
+package com.mmarkov.eduteach.entity.solution;
+
+import com.mmarkov.eduteach.entity.dictionary.*;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "solution")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Solution {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sol_type_id", nullable = false)
+    private SolutionType solutionType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resp_strat_id", nullable = false)
+    private ResponseStrategy responseStrategy;
+
+    @Column(name = "risk")
+    private Integer risk;
+
+    @Column(name = "student_autonomy")
+    private Integer studentAutonomy;
+
+    @ManyToMany
+    @JoinTable(
+        name = "solution_Resource",
+        joinColumns = @JoinColumn(name = "solution_id"),
+        inverseJoinColumns = @JoinColumn(name = "resource_id")
+    )
+    @Builder.Default
+    private Set<Resource> resources = new HashSet<>();
+}
+package com.mmarkov.eduteach.entity.solution;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "solution_type")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SolutionType {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+}
+package com.mmarkov.eduteach;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class EduTeachApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(EduTeachApplication.class, args);
+	}
+
+}
+databaseChangeLog:
+  - changeSet:
+      id: 001_create_tables
+      author: max
+      changes:
+        # ================================================================================
+        # РЈРџР РђР’Р›Р•РќРР• Р”РћРЎРўРЈРџРћРњ Р РџРћР›Р¬Р—РћР’РђРўР•Р›Р
+        # ================================================================================
+
+        # РЎРїСЂР°РІРѕС‡РЅРёРє СЃС‚СЂР°РЅРёС† СЃРёСЃС‚РµРјС‹
+        - createTable:
+            tableName: page
+            remarks: РЎРїСЂР°РІРѕС‡РЅРёРє РґРѕСЃС‚СѓРїРЅС‹С… СЃС‚СЂР°РЅРёС†/СЌРЅРґРїРѕРёРЅС‚РѕРІ СЃРёСЃС‚РµРјС‹
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: url_page
+                  type: VARCHAR(500)
+                  constraints:
+                    unique: true
+                    nullable: false
+                  remarks: РЈРЅРёРєР°Р»СЊРЅР°СЏ СЃСЃС‹Р»РєР° РЅР° СЃС‚СЂР°РЅРёС†Сѓ
+
+        # РЎРїСЂР°РІРѕС‡РЅРёРє СЂРѕР»РµР№
+        - createTable:
+            tableName: role
+            remarks: Р РѕР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РІ СЃРёСЃС‚РµРјРµ
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # РЎРІСЏР·СЊ СЂРѕР»РµР№ Рё СЃС‚СЂР°РЅРёС† (Many-to-Many)
+        - createTable:
+            tableName: pages_of_role
+            remarks: РќР°СЃС‚СЂРѕР№РєР° РїСЂР°РІ РґРѕСЃС‚СѓРїР°, РєР°РєРёРµ СЃС‚СЂР°РЅРёС†С‹ РґРѕСЃС‚СѓРїРЅС‹ СЂРѕР»Рё
+            columns:
+              - column:
+                  name: role_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: page_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+            foreignKeyConstraints:
+              - foreignKeyName: fk_pages_of_role_role
+                referencedTableName: role
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_pages_of_role_page
+                referencedTableName: page
+                referencedColumnNames: id
+                onDelete: CASCADE
+
+        # РџРѕР»СЊР·РѕРІР°С‚РµР»Рё СЃРёСЃС‚РµРјС‹
+        - createTable:
+            tableName: user
+            remarks: РЈС‡РµС‚РЅС‹Рµ Р·Р°РїРёСЃРё РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: role_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: login
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password_hash
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                  remarks: РҐРµС€РёСЂРѕРІР°РЅРЅС‹Р№ РїР°СЂРѕР»СЊ
+            foreignKeyConstraints:
+              - foreignKeyName: fk_user_role
+                referencedTableName: role
+                referencedColumnNames: id
+
+        # ================================================================================
+        # РЎРџР РђР’РћР§РќРРљР
+        # ================================================================================
+
+        # РўРёРїС‹ СЂРµС€РµРЅРёР№
+        - createTable:
+            tableName: solution_type
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # РЎС‚СЂР°С‚РµРіРёРё СЂРµР°РіРёСЂРѕРІР°РЅРёСЏ
+        - createTable:
+            tableName: response_strategy
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Р РµСЃСѓСЂСЃС‹
+        - createTable:
+            tableName: resource
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # ================================================================================
+        # Р Р•РЁР•РќРРЇ Р РРҐ РљРћРњРџРћРќР•РќРўР«
+        # ================================================================================
+
+        # Р РµС€РµРЅРёСЏ (Solution)
+        - createTable:
+            tableName: solution
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: sol_type_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: resp_strat_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: risk
+                  type: INTEGER
+                  constraints:
+                    checkConstraint: risk BETWEEN 0 AND 10
+                  remarks: РЈСЂРѕРІРµРЅСЊ СЂРёСЃРєР° (0-10)
+              - column:
+                  name: student_autonomy
+                  type: INTEGER
+                  remarks: РЈСЂРѕРІРµРЅСЊ Р°РІС‚РѕРЅРѕРјРёРё СЃС‚СѓРґРµРЅС‚Р°
+            foreignKeyConstraints:
+              - foreignKeyName: fk_solution_type
+                referencedTableName: solution_type
+                referencedColumnNames: id
+              - foreignKeyName: fk_solution_resp_strategy
+                referencedTableName: response_strategy
+                referencedColumnNames: id
+
+        # РЎРІСЏР·СЊ СЂРµС€РµРЅРёР№ СЃ СЂРµСЃСѓСЂСЃР°РјРё (Many-to-Many)
+        - createTable:
+            tableName: solution_resource
+            columns:
+              - column:
+                  name: resource_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: solution_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+            foreignKeyConstraints:
+              - foreignKeyName: fk_solution_resource_resource
+                referencedTableName: resource
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_solution_resource_solution
+                referencedTableName: solution
+                referencedColumnNames: id
+                onDelete: CASCADE
+
+        # ================================================================================
+        # РњР•РўР РРљР Р РРҐ РџРћРЎР›Р•Р”РЎРўР’РРЇ
+        # ================================================================================
+
+        # РњРµС‚СЂРёРєРё РёР·РјРµРЅРµРЅРёР№ (0-1)
+        - createTable:
+            tableName: change_metrics
+            remarks: РҐСЂР°РЅРµРЅРёРµ РјРµС‚СЂРёРє СЃРѕСЃС‚РѕСЏРЅРёСЏ РїСЂРё РїСЂРѕС…РѕР¶РґРµРЅРёРё СЃРёС‚СѓР°С†РёРё
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: motivation
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: motivation BETWEEN 0 AND 1
+              - column:
+                  name: stress
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: stress BETWEEN 0 AND 1
+              - column:
+                  name: trust
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: trust BETWEEN 0 AND 1
+              - column:
+                  name: class_climate
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: class_climate BETWEEN 0 AND 1
+              - column:
+                  name: teacher_authority
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: teacher_authority BETWEEN 0 AND 1
+              - column:
+                  name: teacher_burnout
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: teacher_burnout BETWEEN 0 AND 1
+
+        # РўРёРїС‹ РїРѕСЃР»РµРґСЃС‚РІРёР№
+        - createTable:
+            tableName: type_consequence
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # РџРѕСЃР»РµРґСЃС‚РІРёСЏ
+        - createTable:
+            tableName: consequence
+            remarks: РџРѕСЃР»РµРґСЃС‚РІРёСЏ РІС‹Р±РѕСЂР° СЂРµС€РµРЅРёСЏ
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: change_metrics_id
+                  type: INTEGER
+                  constraints:
+                    unique: true
+                    nullable: false
+                  remarks: РЎРІСЏР·СЊ 1Рє1 СЃ РјРµС‚СЂРёРєР°РјРё РёР·РјРµРЅРµРЅРёР№
+              - column:
+                  name: type_conseq_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text
+                  type: TEXT
+              - column:
+                  name: long_term
+                  type: BOOLEAN
+                  defaultValue: false
+                  remarks: Р”РѕР»РіРѕСЃСЂРѕС‡РЅРѕРµ Р»Рё РїРѕСЃР»РµРґСЃС‚РІРёРµ
+              - column:
+                  name: reversible
+                  type: BOOLEAN
+                  defaultValue: false
+                  remarks: РћР±СЂР°С‚РёРјРѕРµ Р»Рё РїРѕСЃР»РµРґСЃС‚РІРёРµ
+              - column:
+                  name: intensity
+                  type: DOUBLE PRECISION
+            foreignKeyConstraints:
+              - foreignKeyName: fk_consequence_change_metrics
+                referencedTableName: change_metrics
+                referencedColumnNames: id
+              - foreignKeyName: fk_consequence_type_consequence
+                referencedTableName: type_consequence
+                referencedColumnNames: id
+
+        # ================================================================================
+        # РЎР¦Р•РќРђР РР™ Р Р’Р«Р‘РћР Р«
+        # ================================================================================
+
+        # РЈР·Р»С‹ СЃС†РµРЅР°СЂРёСЏ
+        - createTable:
+            tableName: script_node
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: url_image
+                  type: VARCHAR(500)
+              - column:
+                  name: is_terminal
+                  type: BOOLEAN
+                  defaultValue: false
+                  remarks: РЇРІР»СЏРµС‚СЃСЏ Р»Рё СѓР·РµР» РєРѕРЅРµС‡РЅС‹Рј
+
+        # Р’С‹Р±РѕСЂС‹/РїРµСЂРµС…РѕРґС‹ РІ СЃС†РµРЅР°СЂРёРё
+        - createTable:
+            tableName: choice
+            remarks: Р’Р°СЂРёР°РЅС‚С‹ РІС‹Р±РѕСЂР°/РїРµСЂРµС…РѕРґС‹ РјРµР¶РґСѓ СѓР·Р»Р°РјРё СЃС†РµРЅР°СЂРёСЏ
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: solution_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: from_script_node_id
+                  type: INTEGER
+              - column:
+                  name: next_script_node_id
+                  type: INTEGER
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: delta_motivation
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_motivation BETWEEN -1 AND 1
+                  remarks: РР·РјРµРЅРµРЅРёРµ РјРѕС‚РёРІР°С†РёРё РїСЂРё РІС‹Р±РѕСЂРµ
+              - column:
+                  name: delta_stress
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_stress BETWEEN -1 AND 1
+                  remarks: РР·РјРµРЅРµРЅРёРµ СЃС‚СЂРµСЃСЃР° РїСЂРё РІС‹Р±РѕСЂРµ
+              - column:
+                  name: delta_trust
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_trust BETWEEN -1 AND 1
+                  remarks: РР·РјРµРЅРµРЅРёРµ РґРѕРІРµСЂРёСЏ РїСЂРё РІС‹Р±РѕСЂРµ
+              - column:
+                  name: delta_class_climate
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_class_climate BETWEEN -1 AND 1
+                  remarks: РР·РјРµРЅРµРЅРёРµ РєР»РёРјР°С‚Р° РїСЂРё РІС‹Р±РѕСЂРµ
+              - column:
+                  name: delta_teacher_authority
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_teacher_authority BETWEEN -1 AND 1
+                  remarks: РР·РјРµРЅРµРЅРёРµ Р°РІС‚РѕСЂРёС‚РµС‚Р° РїСЂРё РІС‹Р±РѕСЂРµ
+              - column:
+                  name: delta_teacher_burnout
+                  type: DOUBLE PRECISION
+                  defaultValue: 0
+                  constraints:
+                    checkConstraint: delta_teacher_burnout BETWEEN -1 AND 1
+                  remarks: РР·РјРµРЅРµРЅРёРµ РІС‹РіРѕСЂР°РЅРёСЏ РїСЂРё РІС‹Р±РѕСЂРµ
+              - column:
+                  name: consequence_text
+                  type: TEXT
+                  remarks: РўРµРєСЃС‚РѕРІРѕРµ РѕРїРёСЃР°РЅРёРµ РїРѕСЃР»РµРґСЃС‚РІРёСЏ
+              - column:
+                  name: type_consequence_id
+                  type: INTEGER
+                  remarks: РўРёРї РїРѕСЃР»РµРґСЃС‚РІРёСЏ (СѓСЃРїРµС…/С‡Р°СЃС‚РёС‡РЅС‹Р№/РЅРµСѓРґР°С‡Р°)
+            foreignKeyConstraints:
+              - foreignKeyName: fk_choice_solution
+                referencedTableName: solution
+                referencedColumnNames: id
+              - foreignKeyName: fk_choice_from_script_node
+                referencedTableName: script_node
+                referencedColumnNames: id
+              - foreignKeyName: fk_choice_next_script_node
+                referencedTableName: script_node
+                referencedColumnNames: id
+              - foreignKeyName: fk_choice_type_consequence
+                referencedTableName: type_consequence
+                referencedColumnNames: id
+
+        # ================================================================================
+        # РЎРџР РђР’РћР§РќРРљР РџР РћР‘Р›Р•Рњ
+        # ================================================================================
+
+        # РСЃС‚РѕС‡РЅРёРєРё РїСЂРѕР±Р»РµРј
+        - createTable:
+            tableName: source_problem
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # РўРёРїС‹ РїСЂРѕР±Р»РµРј
+        - createTable:
+            tableName: type_problem
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Р­РјРѕС†РёРё
+        - createTable:
+            tableName: emotion
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # ================================================================================
+        # РџР РћР‘Р›Р•РњР« Р РРҐ РҐРђР РђРљРўР•Р РРЎРўРРљР
+        # ================================================================================
+
+        # РџСЂРѕР±Р»РµРјС‹
+        - createTable:
+            tableName: problem
+            remarks: РџСЂРѕР±Р»РµРјС‹ РїРµРґР°РіРѕРіРёС‡РµСЃРєРёС… СЃРёС‚СѓР°С†РёР№
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: type_problem_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: source_problem_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: intensity
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: intensity BETWEEN 0 AND 1
+                  remarks: РРЅС‚РµРЅСЃРёРІРЅРѕСЃС‚СЊ РїСЂРѕР±Р»РµРјС‹ (0-1)
+              - column:
+                  name: tension_factor
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: tension_factor BETWEEN 0 AND 1
+                  remarks: Р¤Р°РєС‚РѕСЂ РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё (0-1)
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: start_motivation
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.5
+                  constraints:
+                    checkConstraint: start_motivation BETWEEN 0 AND 1
+                  remarks: РЎС‚Р°СЂС‚РѕРІР°СЏ РјРѕС‚РёРІР°С†РёСЏ СѓС‡РµРЅРёРєРѕРІ
+              - column:
+                  name: start_stress
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.3
+                  constraints:
+                    checkConstraint: start_stress BETWEEN 0 AND 1
+                  remarks: РЎС‚Р°СЂС‚РѕРІС‹Р№ СѓСЂРѕРІРµРЅСЊ СЃС‚СЂРµСЃСЃР°
+              - column:
+                  name: start_trust
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.5
+                  constraints:
+                    checkConstraint: start_trust BETWEEN 0 AND 1
+                  remarks: РЎС‚Р°СЂС‚РѕРІС‹Р№ СѓСЂРѕРІРµРЅСЊ РґРѕРІРµСЂРёСЏ
+              - column:
+                  name: start_class_climate
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.5
+                  constraints:
+                    checkConstraint: start_class_climate BETWEEN 0 AND 1
+                  remarks: РЎС‚Р°СЂС‚РѕРІС‹Р№ РєР»РёРјР°С‚ РІ РєР»Р°СЃСЃРµ
+              - column:
+                  name: start_teacher_authority
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.5
+                  constraints:
+                    checkConstraint: start_teacher_authority BETWEEN 0 AND 1
+                  remarks: РЎС‚Р°СЂС‚РѕРІС‹Р№ Р°РІС‚РѕСЂРёС‚РµС‚ СѓС‡РёС‚РµР»СЏ
+              - column:
+                  name: start_teacher_burnout
+                  type: DOUBLE PRECISION
+                  defaultValue: 0.2
+                  constraints:
+                    checkConstraint: start_teacher_burnout BETWEEN 0 AND 1
+                  remarks: РЎС‚Р°СЂС‚РѕРІС‹Р№ СѓСЂРѕРІРµРЅСЊ РІС‹РіРѕСЂР°РЅРёСЏ
+            foreignKeyConstraints:
+              - foreignKeyName: fk_problem_type_problem
+                referencedTableName: type_problem
+                referencedColumnNames: id
+              - foreignKeyName: fk_problem_source_problem
+                referencedTableName: source_problem
+                referencedColumnNames: id
+
+        # РЎРІСЏР·СЊ РїСЂРѕР±Р»РµРј СЃ СЌРјРѕС†РёСЏРјРё (Many-to-Many)
+        - createTable:
+            tableName: problem_emotions
+            columns:
+              - column:
+                  name: emotion_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: problem_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+            foreignKeyConstraints:
+              - foreignKeyName: fk_problem_emotions_emotion
+                referencedTableName: emotion
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_problem_emotions_problem
+                referencedTableName: problem
+                referencedColumnNames: id
+                onDelete: CASCADE
+
+        # ================================================================================
+        # РЎРџР РђР’РћР§РќРРљР РЈР§РђРЎРўРќРРљРћР’
+        # ================================================================================
+
+        # Р­РјРѕС†РёРѕРЅР°Р»СЊРЅС‹Р№ РёРЅС‚РµР»Р»РµРєС‚
+        - createTable:
+            tableName: emotion_intelligence
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # РџРµРґР°РіРѕРіРёС‡РµСЃРєРёР№ СЃС‚РёР»СЊ
+        - createTable:
+            tableName: pedagogical_style
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # РџСЂРѕС„РµСЃСЃРёРѕРЅР°Р»СЊРЅР°СЏ СЂРѕР»СЊ
+        - createTable:
+            tableName: professional_role
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # РўРµС…РЅРёС‡РµСЃРєРѕРµ РѕСЃРЅР°С‰РµРЅРёРµ
+        - createTable:
+            tableName: tech_equip
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # РЎС‚РёР»СЊ РєРѕРјРјСѓРЅРёРєР°С†РёРё
+        - createTable:
+            tableName: communication_style
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # РЎРѕС†РёР°Р»СЊРЅС‹Р№ СЃС‚Р°С‚СѓСЃ
+        - createTable:
+            tableName: social_status
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # ================================================================================
+        # РЈР§РђРЎРўРќРРљР
+        # ================================================================================
+
+        # Р‘Р°Р·РѕРІР°СЏ С‚Р°Р±Р»РёС†Р° СѓС‡Р°СЃС‚РЅРёРєРѕРІ
+        - createTable:
+            tableName: participant
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: full_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: age
+                  type: INTEGER
+                  constraints:
+                    checkConstraint: age > 0
+
+        # РЎС‚СѓРґРµРЅС‚С‹ (РЅР°СЃР»РµРґРѕРІР°РЅРёРµ 1:1 РѕС‚ Participant)
+        - createTable:
+            tableName: student
+            remarks: Р”РѕС‡РµСЂРЅСЏСЏ С‚Р°Р±Р»РёС†Р° РґР»СЏ С‚РёРїР° СѓС‡Р°СЃС‚РЅРёРєР° "РЎС‚СѓРґРµРЅС‚"
+            columns:
+              - column:
+                  name: participant_id
+                  type: INTEGER
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: tech_equip_id
+                  type: INTEGER
+              - column:
+                  name: comm_style_id
+                  type: INTEGER
+              - column:
+                  name: social_status_id
+                  type: INTEGER
+              - column:
+                  name: motivation
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: motivation BETWEEN 0 AND 1
+              - column:
+                  name: preparation
+                  type: DOUBLE PRECISION
+                  constraints:
+                    checkConstraint: preparation BETWEEN 0 AND 1
+            foreignKeyConstraints:
+              - foreignKeyName: fk_student_participant
+                referencedTableName: participant
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_student_tech_equip
+                referencedTableName: tech_equip
+                referencedColumnNames: id
+              - foreignKeyName: fk_student_comm_style
+                referencedTableName: communication_style
+                referencedColumnNames: id
+              - foreignKeyName: fk_student_social_status
+                referencedTableName: social_status
+                referencedColumnNames: id
+
+        # РЈС‡РёС‚РµР»СЏ (РЅР°СЃР»РµРґРѕРІР°РЅРёРµ 1:1 РѕС‚ Participant)
+        - createTable:
+            tableName: teacher
+            remarks: Р”РѕС‡РµСЂРЅСЏСЏ С‚Р°Р±Р»РёС†Р° РґР»СЏ С‚РёРїР° СѓС‡Р°СЃС‚РЅРёРєР° "РЈС‡РёС‚РµР»СЊ"
+            columns:
+              - column:
+                  name: participant_id
+                  type: INTEGER
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: emotion_intell_id
+                  type: INTEGER
+              - column:
+                  name: style_id
+                  type: INTEGER
+              - column:
+                  name: prof_role_id
+                  type: INTEGER
+              - column:
+                  name: experience
+                  type: INTEGER
+                  constraints:
+                    checkConstraint: experience >= 0
+                  remarks: РЎС‚Р°Р¶ СЂР°Р±РѕС‚С‹ (Р»РµС‚)
+            foreignKeyConstraints:
+              - foreignKeyName: fk_teacher_participant
+                referencedTableName: participant
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_teacher_emotion_intell
+                referencedTableName: emotion_intelligence
+                referencedColumnNames: id
+              - foreignKeyName: fk_teacher_style
+                referencedTableName: pedagogical_style
+                referencedColumnNames: id
+              - foreignKeyName: fk_teacher_prof_role
+                referencedTableName: professional_role
+                referencedColumnNames: id
+
+        # ================================================================================
+        # РљРћРќРўР•РљРЎРў РЈР РћРљРђ
+        # ================================================================================
+
+        # РЈСЂРѕРє
+        - createTable:
+            tableName: lesson
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # РљР»Р°СЃСЃ/РђСѓРґРёС‚РѕСЂРёСЏ
+        - createTable:
+            tableName: classroom
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Р­С‚Р°РїС‹ СѓСЂРѕРєР°
+        - createTable:
+            tableName: lesson_stage
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Р¤РѕСЂРјР°С‚С‹ СѓСЂРѕРєР°
+        - createTable:
+            tableName: lesson_format
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # РљРѕРЅС‚РµРєСЃС‚ РїСЂРѕРІРµРґРµРЅРёСЏ СѓСЂРѕРєР°
+        - createTable:
+            tableName: context
+            remarks: РћРїРёСЃР°РЅРёРµ СѓСЃР»РѕРІРёР№ РїСЂРѕРІРµРґРµРЅРёСЏ СѓСЂРѕРєР°
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: lesson_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: classroom_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lesson_stage_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lesson_format_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tech_equip_id
+                  type: INTEGER
+              - column:
+                  name: duration
+                  type: INTEGER
+                  constraints:
+                    checkConstraint: duration > 0
+                  remarks: Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РІ РјРёРЅСѓС‚Р°С…
+            foreignKeyConstraints:
+              - foreignKeyName: fk_context_lesson
+                referencedTableName: lesson
+                referencedColumnNames: id
+              - foreignKeyName: fk_context_classroom
+                referencedTableName: classroom
+                referencedColumnNames: id
+              - foreignKeyName: fk_context_lesson_stage
+                referencedTableName: lesson_stage
+                referencedColumnNames: id
+              - foreignKeyName: fk_context_lesson_format
+                referencedTableName: lesson_format
+                referencedColumnNames: id
+              - foreignKeyName: fk_context_tech_equip
+                referencedTableName: tech_equip
+                referencedColumnNames: id
+
+        # ================================================================================
+        # РЎРРўРЈРђР¦РР Р РџР РћРҐРћР–Р”Р•РќРР•
+        # ================================================================================
+
+        # РЎРёС‚СѓР°С†РёРё (С‚СЂРµРЅР°Р¶РµСЂС‹/СЃС†РµРЅР°СЂРёРё)
+        - createTable:
+            tableName: situation
+            remarks: РћР±СѓС‡Р°СЋС‰Р°СЏ СЃРёС‚СѓР°С†РёСЏ СЃРѕ СЃС‚Р°СЂС‚РѕРІС‹Рј СѓР·Р»РѕРј СЃС†РµРЅР°СЂРёСЏ
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: context_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: problem_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: script_node_id
+                  type: INTEGER
+                  constraints:
+                    unique: true
+                    nullable: false
+                  remarks: РЎС‚Р°СЂС‚РѕРІС‹Р№ СѓР·РµР» СЃС†РµРЅР°СЂРёСЏ (1Рє1)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+            foreignKeyConstraints:
+              - foreignKeyName: fk_situation_context
+                referencedTableName: context
+                referencedColumnNames: id
+              - foreignKeyName: fk_situation_problem
+                referencedTableName: problem
+                referencedColumnNames: id
+              - foreignKeyName: fk_situation_script_node
+                referencedTableName: script_node
+                referencedColumnNames: id
+
+        # РЎРІСЏР·СЊ СЃРёС‚СѓР°С†РёР№ Рё СѓС‡Р°СЃС‚РЅРёРєРѕРІ (Many-to-Many)
+        - createTable:
+            tableName: situation_participants
+            columns:
+              - column:
+                  name: situation_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: participant_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+            foreignKeyConstraints:
+              - foreignKeyName: fk_situation_participants_situation
+                referencedTableName: situation
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_situation_participants_participant
+                referencedTableName: participant
+                referencedColumnNames: id
+                onDelete: CASCADE
+
+        # РСЃС‚РѕСЂРёСЏ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ СЃРёС‚СѓР°С†РёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРјРё
+        - createTable:
+            tableName: situations_passed_user
+            remarks: Р›РѕРі РїСЂРѕС…РѕР¶РґРµРЅРёСЏ С‚СЂРµРЅР°Р¶РµСЂРѕРІ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРјРё
+            columns:
+              - column:
+                  name: user_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: situation_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: final_metrics_id
+                  type: INTEGER
+                  constraints:
+                    unique: true
+                  remarks: РС‚РѕРіРѕРІС‹Рµ РјРµС‚СЂРёРєРё РїСЂРѕС…РѕР¶РґРµРЅРёСЏ (1Рє1)
+              - column:
+                  name: passed_at
+                  type: TIMESTAMP
+            foreignKeyConstraints:
+              - foreignKeyName: fk_situations_passed_user_user
+                referencedTableName: user
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_situations_passed_user_situation
+                referencedTableName: situation
+                referencedColumnNames: id
+                onDelete: CASCADE
+              - foreignKeyName: fk_situations_passed_user_final_metrics
+                referencedTableName: change_metrics
+                referencedColumnNames: id
+
+        # ================================================================================
+        # РРќР”Р•РљРЎР«
+        # ================================================================================
+
+        - createIndex:
+            indexName: idx_choice_from_node
+            tableName: choice
+            columns:
+              - column:
+                  name: from_script_node_id
+
+        - createIndex:
+            indexName: idx_choice_next_node
+            tableName: choice
+            columns:
+              - column:
+                  name: next_script_node_id
+
+        - createIndex:
+            indexName: idx_situations_passed_at
+            tableName: situations_passed_user
+            columns:
+              - column:
+                  name: passed_at
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/migrations/001_initial_schema.yaml
+spring:
+  application:
+    name: eduteach
+  datasource:
+    url: 1111
+    username: 111
+    password: 111
+    driver-class-name: 111
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+jwt:
+  secret: your-256-bit-secret-key-for-jwt-token-generation-must-be-long-enough
+  expiration: 86400000
+
+server:
+  port: 8080
+package com.mmarkov.eduteach;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class EduTeachApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AmplicodeDatabaseMigrationSettings" liquibaseFileType="YAML" />
+  <component name="AmplicodePersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit name="Default" defaultIncludeChangeLogFile="src/main/resources/db/changelog/db.changelog-master.yaml">
+        <packages>
+          <package value="com.mmarkov.eduteach" />
+        </packages>
+      </persistence-unit>
+    </persistence-units>
+  </component>
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.5.11</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.mmarkov</groupId>
+	<artifactId>eduteach</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>eduteach</name>
+	<description>Edu simulator</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.13.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.13.0</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.13.0</version>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
