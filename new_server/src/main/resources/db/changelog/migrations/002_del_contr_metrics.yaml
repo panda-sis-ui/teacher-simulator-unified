@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002_drop_unique_constraint_change_metrics
+      author: max
+      changes:
+        - dropUniqueConstraint:
+            tableName: change_metrics
+            constraintName: change_metrics_unique_metrics
