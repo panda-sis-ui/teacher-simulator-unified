@@ -2313,6 +2313,6 @@ app.listen(PORT, () => {
     console.log(`🌐 React приложение доступно: http://localhost:${PORT}`);
   } else {
     console.log(`📡 API доступен: http://localhost:${PORT}/api/situations`);
-    console.log(`⚛️ React dev server: http://localhost:3000 (запустить отдельно)`);
+    console.log(`⚛️ React dev server: http://localhost:8080 (запустить отдельно)`);
   }
 });

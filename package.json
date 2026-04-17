@@ -4,7 +4,7 @@
   "description": "Педагогический симулятор - единый проект",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "java -jar new_server/working_build/eduteach-0.0.1-SNAPSHOT.jar",
     "dev:server": "java -jar new_server/working_build/eduteach-0.0.1-SNAPSHOT.jar",
     "dev:client": "cd client && npm start",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",

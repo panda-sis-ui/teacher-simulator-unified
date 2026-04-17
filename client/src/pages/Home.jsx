@@ -1,5 +1,7 @@
 // src/pages/Home.jsx
 import React, { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import apiService from '../services/api';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import ScenarioCard from '../components/ScenarioCard/ScenarioCard';
@@ -11,137 +13,150 @@ const Home = () => {
   const [isLeftDisabled, setIsLeftDisabled] = useState(true);
   const [isRightDisabled, setIsRightDisabled] = useState(false);
   const [randomScenarios, setRandomScenarios] = useState([]);
+  const [allScenarios, setAllScenarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Данные для онтологических карточек
   const ontologyCards = [
     {
       icon: 'chart-line',
       title: 'Мотивационные кризисы',
-      description: 'Демотивация, апатия, сопротивление, «непрактичность» обучения (сценарий «Скука на уроке»)'
+      description: 'Демотивация, апатия, сопротивление, «непрактичность» обучения'
     },
     {
       icon: 'tasks',
       title: 'Организационные конфликты',
-      description: 'Нарушения в структуре урока, распределении времени, заданий (сценарий «Невыполнение ДЗ», «Разный уровень»)'
+      description: 'Нарушения в структуре урока, распределении времени, заданий'
     },
     {
       icon: 'comments',
       title: 'Конфликты взаимодействия',
-      description: 'Нарушения прямого общения: агрессия, игнорирование, публичное унижение (сценарий «Гаджеты», «Плагиат»)'
-    }/*,
-    {
-      icon: 'user-injured',
-      title: 'Внутриличностные конфликты',
-      description: 'Дилеммы педагога: «жёсткость vs. поддержка», «требования vs. эмпатия» (во всех сценариях)'
-    },
-    {
-      icon: 'user-friends',
-      title: 'Межличностные конфликты',
-      description: 'Парные отношения: ученик–ученик, учитель–ученик, учитель–родитель'
-    },
-    {
-      icon: 'user-shield',
-      title: 'Личность vs. группа',
-      description: 'Один против коллектива: изгой, «нарушитель», одарённый ученик (сценарий «Работа в группе», «Гаджеты»)'
-    },
-    {
-      icon: 'users',
-      title: 'Межгрупповые конфликты',
-      description: 'Противостояние подгрупп: «сильные vs. слабые», «активные vs. пассивные» (сценарий «Разный уровень», «Работа в группе»)'
-    }*/
+      description: 'Нарушения прямого общения: агрессия, игнорирование, публичное унижение'
+    }
   ];
 
-  // Функция для получения 3 случайных ситуаций
-  const getRandomScenarios = (scenarios) => {
-    if (scenarios.length <= 3) return scenarios;
-
-    // Создаем копию массива, чтобы не изменять оригинал
+  // Функция для получения случайных сценариев
+  const getRandomScenarios = (scenarios, count = 3) => {
+    if (scenarios.length <= count) return scenarios;
     const shuffled = [...scenarios].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 3);
+    return shuffled.slice(0, count);
   };
 
   // Загрузка данных с сервера
-  const fetchRandomScenarios = async () => {
+  const fetchData = async () => {
     try {
-      console.log('🔄 Загружаю случайные ситуации с сервера...');
+      console.log('📥 Загружаем данные с сервера...');
       setLoading(true);
+      setError(null);
 
-      const response = await fetch('/api/situations');
+      // Проверяем авторизацию
+      const authenticated = apiService.isAuthenticated();
+      setIsLoggedIn(authenticated);
 
-      if (!response.ok) {
-        throw new Error(`Ошибка сервера: ${response.status}`);
+      if (!authenticated) {
+        console.log('⚠️ Пользователь не авторизован, используем локальные данные');
+        const localData = getLocalScenarios();
+        setAllScenarios(localData);
+        setRandomScenarios(getRandomScenarios(localData));
+        return;
       }
 
-      const allScenarios = await response.json();
-      console.log('✅ Все ситуации получены:', allScenarios.length);
+      // Получаем данные с сервера
+      const data = await apiService.getSituations();
+      console.log('✅ Данные получены:', data);
 
-      // Выбираем 3 случайные
-      const randomThree = getRandomScenarios(allScenarios);
-      console.log('🎲 Выбраны 3 случайные:', randomThree);
+      // Форматируем данные
+      const formattedScenarios = data.map(item => ({
+        id: item.id,
+        title: item.name,
+        description: `${item.typeProblem} - ${item.lessonName}`,
+        typeProblem: item.typeProblem,
+        lessonName: item.lessonName,
+        lessonFormat: item.lessonFormat,
+        problemIntensity: item.problemIntensity,
+        difficulty: item.problemIntensity >= 0.7 ? 'hard' : 
+                   item.problemIntensity >= 0.4 ? 'medium' : 'easy',
+        type: item.typeProblem,
+        duration: 10,
+        typeIcon: 'question-circle',
+        dataType: 'scenario'
+      }));
 
-      setRandomScenarios(randomThree);
-      setError(null);
+      setAllScenarios(formattedScenarios);
+      setRandomScenarios(getRandomScenarios(formattedScenarios));
 
     } catch (err) {
       console.error('❌ Ошибка загрузки:', err);
-      setError('Не удалось загрузить данные с сервера');
+      
+      if (err.message.includes('авториз')) {
+        setError('Для загрузки данных необходимо войти в систему');
+        setIsLoggedIn(false);
+      } else {
+        setError('Не удалось загрузить данные с сервера');
+      }
 
       // Используем локальные данные как fallback
-      const localScenarios = [
-        {
-          id: 1,
-          title: "«Экран важнее алгоритмов»: ученик погружен в телефон",
-          description: "Как вернуть внимание к уроку, не разрушая доверительные отношения?",
-          difficulty: "easy",
-          type: "Мотивационные кризисы",
-          duration: 10,
-          typeIcon: "lightbulb",
-          dataType: "motivational"
-        },
-        {
-          id: 2,
-          title: "«Я не успеваю, а он уже всё сделал»",
-          description: "Как организовать урок, чтобы не демотивировать ни сильных, ни слабых?",
-          difficulty: "medium",
-          type: "Организационные конфликты",
-          duration: 10,
-          typeIcon: "tasks",
-          dataType: "organizational"
-        },
-        {
-          id: 3,
-          title: "«Шайба гнева»: хоккеист против «несправедливости» учителя",
-          description: "Как перевести агрессию спортивного лидера в конструктивное русло, не теряя авторитет перед классом?",
-          difficulty: "medium",
-          type: "Конфликты взаимодействия",
-          duration: 8,
-          typeIcon: "comments",
-          dataType: "interaction"
-        }
-      ];
+      const localData = getLocalScenarios();
+      setAllScenarios(localData);
+      setRandomScenarios(getRandomScenarios(localData));
 
-      setRandomScenarios(getRandomScenarios(localScenarios));
     } finally {
       setLoading(false);
     }
   };
 
-  // Функция для обновления (получить другие случайные)
-  const handleRefreshRandom = () => {
-    fetchRandomScenarios();
+  // Локальные данные (fallback)
+  const getLocalScenarios = () => {
+    return [
+      {
+        id: 1,
+        title: "Обвинение ученика в предвзятости оценивания",
+        description: "Организационные конфликты - Информатика",
+        difficulty: "medium",
+        type: "Организационные конфликты",
+        duration: 10,
+        typeIcon: "lightbulb",
+        dataType: "organizational"
+      },
+      {
+        id: 2,
+        title: "Тревога при публичном выступлении на уроке",
+        description: "Конфликты взаимодействия - Литература",
+        difficulty: "easy",
+        type: "Конфликты взаимодействия",
+        duration: 10,
+        typeIcon: "tasks",
+        dataType: "interaction"
+      },
+      {
+        id: 3,
+        title: "Нарушение дисциплины на уроке",
+        description: "Мотивационные кризисы",
+        difficulty: "hard",
+        type: "Мотивационные кризисы",
+        duration: 10,
+        typeIcon: "comments",
+        dataType: "motivational"
+      }
+    ];
   };
 
-  // Загружаем при монтировании
+  // Функция для обновления случайных сценариев
+  const handleRefreshRandom = () => {
+    const newRandom = getRandomScenarios(allScenarios);
+    setRandomScenarios(newRandom);
+  };
+
+  // Загружаем данные при монтировании
   useEffect(() => {
-    fetchRandomScenarios();
+    fetchData();
   }, []);
 
   // Функции для прокрутки онтологии
   const scrollOntology = (direction) => {
     if (!gridRef.current) return;
-
     const scrollAmount = 280;
     gridRef.current.scrollBy({
       left: direction === 'right' ? scrollAmount : -scrollAmount,
@@ -151,10 +166,8 @@ const Home = () => {
 
   const updateScrollButtons = () => {
     if (!gridRef.current) return;
-
     const { scrollLeft, scrollWidth, clientWidth } = gridRef.current;
     const maxScroll = scrollWidth - clientWidth;
-
     setIsLeftDisabled(scrollLeft <= 10);
     setIsRightDisabled(scrollLeft >= maxScroll - 10);
   };
@@ -164,7 +177,6 @@ const Home = () => {
     if (grid) {
       grid.addEventListener('scroll', updateScrollButtons);
       updateScrollButtons();
-
       return () => grid.removeEventListener('scroll', updateScrollButtons);
     }
   }, []);
@@ -173,27 +185,74 @@ const Home = () => {
     <>
       <Header />
 
-      {/* Герой секция */}
+      {/* Герой-секция */}
       <section className="hero">
         <div className="container">
           <h2>Готовы принять педагогическое решение в условиях неопределённости?</h2>
           <p className="hero-desc">
-            Симулятор учителя — интерактивная среда имитации сложных педагогических ситуаций, построенных на онтологической модели знаний.
-            Развивайте рефлексивность, стратегическое мышление и этическую компетентность через практику.
+            Симулятор учителя — интерактивная среда имитации сложных педагогических ситуаций, 
+            построенная на онтологической модели знаний. Развивайте рефлексивность, 
+            стратегическое мышление и этическую компетентность через практику.
           </p>
 
-          {/* Панель случайных ситуаций */}
-          <div className="random-controls">
-            <button
-              onClick={handleRefreshRandom}
-              className="random-btn"
-              disabled={loading}
-            >
-              {loading ? '🎲 Загрузка...' : '🎲 Новые случайные ситуации'}
-            </button>
-            <div className="random-info">
-              <small>Показано: {randomScenarios.length} случайных ситуаций из базы данных</small>
-            </div>
+          {/* Панель управления */}
+          <div className="hero-cta" style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            gap: '20px',
+            marginTop: '30px'
+          }}>
+            {isLoggedIn ? (
+              <>
+                <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center' }}>
+                  <Link to="/catalog" className="btn btn-primary btn-large">
+                    <i className="fas fa-play"></i> Начать тренировку
+                  </Link>
+                  <button 
+                    onClick={handleRefreshRandom}
+                    className="btn btn-outline btn-large"
+                    disabled={loading}
+                  >
+                    <i className="fas fa-random"></i> Новые случайные
+                  </button>
+                </div>
+                <p style={{ 
+                  color: 'rgba(255,255,255,0.8)', 
+                  fontSize: '0.9rem',
+                  marginTop: '10px'
+                }}>
+                  Загружено ситуаций: {allScenarios.length}
+                </p>
+              </>
+            ) : (
+              <>
+                <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center' }}>
+                  <Link to="/register" className="btn btn-primary btn-large">
+                    <i className="fas fa-user-plus"></i> Зарегистрироваться
+                  </Link>
+                  <Link to="/login" className="btn btn-outline btn-large" style={{ 
+                    background: 'rgba(255,255,255,0.2)', 
+                    borderColor: 'white',
+                    color: 'white'
+                  }}>
+                    <i className="fas fa-sign-in-alt"></i> Войти
+                  </Link>
+                </div>
+                {error && (
+                  <p style={{ 
+                    color: 'rgba(255,200,200,0.9)', 
+                    fontSize: '0.85rem',
+                    marginTop: '10px',
+                    padding: '8px 16px',
+                    background: 'rgba(255,0,0,0.2)',
+                    borderRadius: '4px'
+                  }}>
+                    {error}
+                  </p>
+                )}
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -238,32 +297,42 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Случайные сценарии */}
+      {/* Случайные ситуации */}
       <section className="scenarios-section">
         <div className="container">
           <div className="section-header">
             <h3 className="section-title">
-              Случайные сценарии для практики
-              {loading && <span className="loading-badge">загрузка...</span>}
+              Случайные ситуации для практики
+              {loading && <span className="loading-badge" style={{
+                marginLeft: '15px',
+                fontSize: '0.8rem',
+                padding: '4px 12px',
+                background: 'rgba(44,110,73,0.2)',
+                borderRadius: '12px',
+                color: '#2c6e49'
+              }}>загрузка...</span>}
             </h3>
             <p className="section-subtitle">
-              Каждый раз новые ситуации для тренировки принятия решений
+              Каждый раз новые ситуации для практики принятия решений
             </p>
           </div>
 
           {loading ? (
-            <div className="loading-random">
-              <div className="spinner"></div>
+            <div className="loading-random" style={{
+              textAlign: 'center',
+              padding: '60px 20px',
+              color: '#666'
+            }}>
+              <i className="fas fa-spinner fa-spin fa-3x" style={{ color: '#2c6e49', marginBottom: '20px' }}></i>
               <p>Загружаем случайные ситуации с сервера...</p>
             </div>
-          ) : error ? (
-            <div className="random-error">
-              <i className="fas fa-exclamation-circle"></i>
-              <p>{error}. Показаны локальные данные.</p>
-            </div>
           ) : randomScenarios.length === 0 ? (
-            <div className="no-scenarios">
-              <i className="fas fa-search"></i>
+            <div className="no-scenarios" style={{
+              textAlign: 'center',
+              padding: '60px 20px',
+              color: '#666'
+            }}>
+              <i className="fas fa-search fa-3x" style={{ color: '#ddd', marginBottom: '20px' }}></i>
               <p>Нет доступных ситуаций</p>
             </div>
           ) : (
@@ -284,14 +353,129 @@ const Home = () => {
                 ))}
               </div>
 
-              <div className="random-footer">
-                <p className="random-hint">
-                  <i className="fas fa-info-circle"></i>
-                  Нажмите "Новые случайные ситуации", чтобы получить другие ситуации для практики
+              <div style={{ 
+                textAlign: 'center', 
+                marginTop: '30px',
+                padding: '20px',
+                background: '#f8f9fa',
+                borderRadius: '8px'
+              }}>
+                <p style={{ 
+                  color: '#666', 
+                  fontSize: '0.9rem',
+                  marginBottom: '15px'
+                }}>
+                  <i className="fas fa-info-circle" style={{ marginRight: '8px', color: '#2c6e49' }}></i>
+                  Нажмите «Новые случайные», чтобы получить другие ситуации для практики
                 </p>
+                
+                {isLoggedIn && (
+                  <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <button 
+                      onClick={handleRefreshRandom}
+                      className="btn btn-outline"
+                    >
+                      <i className="fas fa-random"></i> Новые случайные
+                    </button>
+                    <Link to="/catalog" className="btn btn-primary">
+                      <i className="fas fa-list"></i> Открыть каталог
+                    </Link>
+                  </div>
+                )}
               </div>
             </>
           )}
+        </div>
+      </section>
+
+      {/* Секция преимуществ */}
+      <section style={{ 
+        padding: '60px 0', 
+        background: 'white',
+        borderTop: '1px solid #eee'
+      }}>
+        <div className="container">
+          <h3 className="section-title" style={{ marginBottom: '40px' }}>
+            Почему симулятор учителя?
+          </h3>
+          
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '30px'
+          }}>
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '30px 20px',
+              background: '#f9f9f9',
+              borderRadius: '12px'
+            }}>
+              <div style={{ 
+                width: '70px', 
+                height: '70px', 
+                margin: '0 auto 20px',
+                background: 'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <i className="fas fa-brain" style={{ fontSize: '1.8rem', color: '#2c6e49' }}></i>
+              </div>
+              <h4 style={{ marginBottom: '10px', color: '#333' }}>Безопасная среда</h4>
+              <p style={{ color: '#666', fontSize: '0.95rem', lineHeight: '1.6' }}>
+                Отрабатывайте решения без риска для реальных учеников
+              </p>
+            </div>
+
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '30px 20px',
+              background: '#f9f9f9',
+              borderRadius: '12px'
+            }}>
+              <div style={{ 
+                width: '70px', 
+                height: '70px', 
+                margin: '0 auto 20px',
+                background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <i className="fas fa-chart-line" style={{ fontSize: '1.8rem', color: '#1976d2' }}></i>
+              </div>
+              <h4 style={{ marginBottom: '10px', color: '#333' }}>Объективная оценка</h4>
+              <p style={{ color: '#666', fontSize: '0.95rem', lineHeight: '1.6' }}>
+                Метрики мотивации, стресса, доверия и климата в классе
+              </p>
+            </div>
+
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '30px 20px',
+              background: '#f9f9f9',
+              borderRadius: '12px'
+            }}>
+              <div style={{ 
+                width: '70px', 
+                height: '70px', 
+                margin: '0 auto 20px',
+                background: 'linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <i className="fas fa-history" style={{ fontSize: '1.8rem', color: '#f57c00' }}></i>
+              </div>
+              <h4 style={{ marginBottom: '10px', color: '#333' }}>История прогресса</h4>
+              <p style={{ color: '#666', fontSize: '0.95rem', lineHeight: '1.6' }}>
+                Отслеживайте свой рост через историю прохождений
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

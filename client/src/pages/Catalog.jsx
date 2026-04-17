@@ -1,11 +1,14 @@
-// src/pages/Catalog.jsx
+// src/pages/Catalog.jsx - обновлённая версия с интеграцией API
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import apiService from '../services/api';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import ScenarioCard from '../components/ScenarioCard/ScenarioCard';
 import './Catalog.css';
 
 const Catalog = () => {
+  
   const [typeFilter, setTypeFilter] = useState('all');
   const [difficultyFilter, setDifficultyFilter] = useState('all');
   const [filteredScenarios, setFilteredScenarios] = useState([]);
@@ -13,97 +16,111 @@ const Catalog = () => {
   const [error, setError] = useState(null);
   const [serverScenarios, setServerScenarios] = useState([]);
 
-  // 1. Функция для загрузки данных с сервера
+  // Загрузка данных с сервера
   const fetchScenarios = async () => {
     try {
-      console.log('🔄 Загружаю сценарии с сервера...');
+      console.log('📥 Загружаю ситуации с сервера...');
       setLoading(true);
 
-      const response = await fetch('http://localhost:5000/api/situations');
-
-      if (!response.ok) {
-        throw new Error(`Ошибка сервера: ${response.status}`);
+      // Проверяем авторизацию
+      if (!apiService.isAuthenticated()) {
+        throw new Error('Требуется авторизация');
       }
 
-      const data = await response.json();
+      const data = await apiService.getSituations();
       console.log('✅ Данные получены:', data);
 
-      // Данные с сервера уже в правильном формате!
-      setServerScenarios(data);
-      setFilteredScenarios(data);
+      // Преобразуем данные в нужный формат
+      const formattedScenarios = data.map(item => ({
+        id: item.id,
+        title: item.name,
+        description: `${item.typeProblem} - ${item.lessonName}`,
+        typeProblem: item.typeProblem,
+        lessonName: item.lessonName,
+        lessonFormat: item.lessonFormat,
+        problemIntensity: item.problemIntensity,
+        // Вычисляем сложность на основе интенсивности
+        difficulty: item.problemIntensity >= 0.7 ? 'hard' : 
+                   item.problemIntensity >= 0.4 ? 'medium' : 'easy',
+        type: item.typeProblem,
+        duration: 10,
+        typeIcon: 'question-circle',
+        dataType: 'scenario'
+      }));
+
+      setServerScenarios(formattedScenarios);
+      setFilteredScenarios(formattedScenarios);
       setError(null);
 
     } catch (err) {
       console.error('❌ Ошибка загрузки:', err);
-      setError('Не удалось загрузить данные с сервера');
-      // Используем локальные данные как fallback
-      const localData = getLocalScenarios();
-      setServerScenarios(localData);
-      setFilteredScenarios(localData);
+      
+      if (err.message.includes('авториз')) {
+        setError('Для доступа к каталогу необходимо войти.');
+        // Здесь можно добавить редирект на страницу входа
+      } else {
+        setError(err.message || 'Не удалось загрузить данные с сервера');
+      }
+      
+      // Fallback данные
+      const fallbackData = getLocalScenarios();
+      setServerScenarios(fallbackData);
+      setFilteredScenarios(fallbackData);
     } finally {
       setLoading(false);
     }
   };
 
-  // 2. Локальные данные (только как fallback)
+  // Локальные данные (fallback)
   const getLocalScenarios = () => {
     return [
       {
         id: 1,
-        title: "«Экран важнее алгоритмов»: ученик погружен в телефон",
-        description: "Как вернуть внимание к уроку, не разрушая доверительные отношения?",
-        difficulty: "hard",
-        type: "Мотивационные кризисы",
-        duration: 10,
-        typeIcon: "lightbulb",
-        dataType: "motivational"
-      },
-      {
-        id: 2,
-        title: "«Я не успеваю, а он уже всё сделал»",
-        description: "Как организовать урок, чтобы не демотивировать ни сильных, ни слабых?",
+        title: "Обвинение ученика в предвзятости оценивания",
+        description: "Организационные конфликты - Информатика",
         difficulty: "medium",
         type: "Организационные конфликты",
         duration: 10,
-        typeIcon: "tasks",
+        typeIcon: "lightbulb",
         dataType: "organizational"
       },
       {
-        id: 3,
-        title: "«Шайба гнева»: хоккеист против «несправедливости» учителя",
-        description: "Как перевести агрессию спортивного лидера в конструктивное русло, не теряя авторитет перед классом?",
-        difficulty: "easy",
+        id: 2,
+        title: "Тревога при публичном выступлении",
+        description: "Конфликты взаимодействия - Литература",
+        difficulty: "easy", 
         type: "Конфликты взаимодействия",
-        duration: 8,
-        typeIcon: "comments",
+        duration: 10,
+        typeIcon: "tasks",
         dataType: "interaction"
+      },
+      {
+        id: 3,
+        title: "Нарушение дисциплины на уроке",
+        description: "Мотивационные кризисы",
+        difficulty: "hard",
+        type: "Мотивационные кризисы",
+        duration: 10,
+        typeIcon: "comments",
+        dataType: "motivational"
       }
     ];
   };
 
-  // 3. Загружаем данные при монтировании компонента
+  // Загружаем данные при монтировании
   useEffect(() => {
     fetchScenarios();
   }, []);
 
-  // 4. Фильтрация сценариев
+  // Фильтрация сценариев
   useEffect(() => {
     const filtered = serverScenarios.filter(scenario => {
-      // Проверка сложности
-      const difficultyMatch = difficultyFilter === 'all' ||
+      const difficultyMatch = difficultyFilter === 'all' || 
         scenario.difficulty === difficultyFilter;
-
-      // Проверка типа
-      let typeMatch = false;
-      if (typeFilter === 'all') {
-        typeMatch = true;
-      } else if (scenario.dataType && scenario.dataType.includes(' ')) {
-        // Для двойных типов проверяем каждый (например: "organizational interaction")
-        const types = scenario.dataType.split(' ');
-        typeMatch = types.includes(typeFilter);
-      } else {
-        typeMatch = scenario.dataType === typeFilter;
-      }
+      
+      const typeMatch = typeFilter === 'all' || 
+        scenario.dataType === typeFilter ||
+        scenario.type?.toLowerCase().includes(typeFilter);
 
       return difficultyMatch && typeMatch;
     });
@@ -111,19 +128,14 @@ const Catalog = () => {
     setFilteredScenarios(filtered);
   }, [typeFilter, difficultyFilter, serverScenarios]);
 
-  // 5. Типы ситуаций для фильтров
+  // Типы ситуаций для фильтров
   const situationTypes = [
     { value: 'all', label: 'Все' },
     { value: 'motivational', label: 'Мотивационные кризисы' },
     { value: 'organizational', label: 'Организационные конфликты' },
     { value: 'interaction', label: 'Конфликты взаимодействия' },
-    { value: 'intrapersonal', label: 'Внутриличностные конфликты' },
-    { value: 'interpersonal', label: 'Межличностные конфликты' },
-    { value: 'person-vs-group', label: 'Личность vs. группа' },
-    { value: 'intergroup', label: 'Межгрупповые конфликты' }
   ];
 
-  // 6. Уровни сложности
   const difficultyLevels = [
     { value: 'all', label: 'Все' },
     { value: 'easy', label: 'Базовый' },
@@ -131,7 +143,6 @@ const Catalog = () => {
     { value: 'hard', label: 'Продвинутый' }
   ];
 
-  // 7. Функция для обновления данных
   const handleRefresh = () => {
     fetchScenarios();
   };
@@ -140,64 +151,50 @@ const Catalog = () => {
     <>
       <Header />
 
-      {/* Герой секция каталога */}
       <section className="catalog-hero">
         <div className="container">
           <h2>Каталог педагогических ситуаций</h2>
           <p className="hero-desc">
-            {serverScenarios.length} сценариев, структурированных по онтологической классификации педагогических ситуаций.
-            Каждая ситуация — это шаг к осознанному, этичному и стратегически выверенному решению.
+            {serverScenarios.length} ситуаций для отработки навыков принятия педагогических решений.
+            Выберите ситуацию и начните прохождение.
           </p>
 
-          {/* Панель управления загрузкой */}
           <div className="server-controls">
             <button
               onClick={handleRefresh}
-              className="refresh-btn"
+              className="btn btn-outline"
               disabled={loading}
+              style={{ background: 'white', color: '#2c6e49' }}
             >
-              {loading ? '🔄 Загрузка...' : '🔄 Обновить с сервера'}
+              {loading ? '⏳ Загрузка...' : '🔄 Обновить с сервера'}
             </button>
-
-            <div className="server-info">
-              <small>Загружено: {serverScenarios.length} ситуаций</small>
-              <br />
-              <small>Сервер: http://localhost:5000/api/situations</small>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Состояния загрузки и ошибок */}
+      {/* Состояние загрузки */}
       {loading && (
-        <div className="loading-state">
-          <div className="spinner"></div>
-          <h3>Загружаем сценарии с сервера...</h3>
-          <p>Пожалуйста, подождите</p>
+        <div className="container" style={{ padding: '40px 0', textAlign: 'center' }}>
+          <i className="fas fa-spinner fa-spin fa-3x" style={{ color: '#2c6e49' }}></i>
+          <p>Загружаем ситуации с сервера...</p>
         </div>
       )}
 
+      {/* Состояние ошибки */}
       {error && !loading && (
-        <div className="error-state">
-          <div className="error-content">
-            <i className="fas fa-exclamation-triangle"></i>
-            <h3>Внимание: {error}</h3>
-            <p>Используются локальные данные. Убедитесь, что сервер запущен.</p>
-            <button onClick={handleRefresh} className="retry-btn">
-              Повторить попытку
-            </button>
+        <div className="container" style={{ padding: '20px' }}>
+          <div className="alert alert-danger">
+            <i className="fas fa-exclamation-triangle"></i> {error}
           </div>
         </div>
       )}
 
-      {/* Основной контент (показываем когда не загружается) */}
+      {/* Основной контент */}
       {!loading && (
         <>
-          {/* Фильтры */}
           <section className="filters-section">
             <div className="container">
               <div className="filters-grid">
-                {/* Тип ситуации */}
                 <div className="filter-group">
                   <label><i className="fas fa-layer-group"></i> Тип ситуации</label>
                   <div className="filter-buttons">
@@ -206,7 +203,6 @@ const Catalog = () => {
                         key={type.value}
                         className={`filter-btn ${typeFilter === type.value ? 'active' : ''}`}
                         onClick={() => setTypeFilter(type.value)}
-                        data-type={type.value}
                       >
                         {type.label}
                       </button>
@@ -214,7 +210,6 @@ const Catalog = () => {
                   </div>
                 </div>
 
-                {/* Уровень сложности */}
                 <div className="filter-group">
                   <label><i className="fas fa-chart-line"></i> Уровень сложности</label>
                   <div className="filter-buttons">
@@ -223,7 +218,6 @@ const Catalog = () => {
                         key={difficulty.value}
                         className={`filter-btn ${difficultyFilter === difficulty.value ? 'active' : ''}`}
                         onClick={() => setDifficultyFilter(difficulty.value)}
-                        data-diff={difficulty.value}
                       >
                         {difficulty.label}
                       </button>
@@ -234,22 +228,19 @@ const Catalog = () => {
             </div>
           </section>
 
-          {/* Сценарии */}
           <section className="scenarios-section">
             <div className="container">
-              <div className="scenarios-header">
-                <h3 className="section-title">Доступные сценарии</h3>
-                <p className="section-subtitle">
-                  Найдено {filteredScenarios.length} из {serverScenarios.length} сценариев
-                  {error && <span className="local-badge"> (локальные данные)</span>}
-                  {!error && <span className="server-badge"> (данные с сервера)</span>}
-                </p>
-              </div>
+              <h3 className="section-title">Доступные ситуации</h3>
+              <p className="section-subtitle">
+                Найдено {filteredScenarios.length} из {serverScenarios.length} ситуаций
+                {error && <span className="local-badge"> (локальные данные)</span>}
+                {!error && <span className="server-badge"> (данные с сервера)</span>}
+              </p>
 
               {filteredScenarios.length === 0 ? (
                 <div className="no-results">
                   <i className="fas fa-search"></i>
-                  <h3>Сценарии не найдены</h3>
+                  <h3>Ситуации не найдены</h3>
                   <p>Попробуйте изменить параметры фильтрации</p>
                 </div>
               ) : (
@@ -261,7 +252,7 @@ const Catalog = () => {
                       description={scenario.description}
                       difficulty={scenario.difficulty}
                       type={scenario.type}
-                      duration={scenario.duration || 10} // значение по умолчанию
+                      duration={scenario.duration || 10}
                       typeIcon={scenario.typeIcon}
                       id={String(scenario.id)}
                       dataType={scenario.dataType}
@@ -269,14 +260,6 @@ const Catalog = () => {
                   ))}
                 </div>
               )}
-
-              {/* Отладочная информация */}
-              <div className="debug-info">
-                <details>
-                  <summary>Отладочная информация</summary>
-                  <pre>{JSON.stringify(serverScenarios, null, 2)}</pre>
-                </details>
-              </div>
             </div>
           </section>
         </>
