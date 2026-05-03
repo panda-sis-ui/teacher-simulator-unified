@@ -1,4 +1,4 @@
-// src/components/Header/Header.jsx - обновлённая версия
+// src/components/Header/Header.jsx
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import apiService from '../../services/api';
@@ -9,7 +9,6 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
 
-  // Проверяем состояние авторизации при монтировании
   useEffect(() => {
     const checkAuth = () => {
       const authenticated = apiService.isAuthenticated();
@@ -19,13 +18,10 @@ const Header = () => {
     };
 
     checkAuth();
-    
-    // Слушаем изменения storage (для синхронизации между вкладками)
     window.addEventListener('storage', checkAuth);
     return () => window.removeEventListener('storage', checkAuth);
   }, []);
 
-  // Обработчик выхода
   const handleLogout = () => {
     apiService.logout();
     setIsLoggedIn(false);
@@ -33,12 +29,12 @@ const Header = () => {
     window.location.href = '/';
   };
 
-  const navItems = [
+  // Внутренние маршруты (через React Router)
+  const internalNavItems = [
     { path: '/', label: 'Главная' },
     { path: '/catalog', label: 'Каталог ситуаций' },
     { path: '/ontology', label: 'Онтология' },
-    { path: '/converter', label: 'Конвертер JSON' },
-    { path: '/generator', label: 'Генератор JSON' },
+    // { path: '/converter', label: 'Конвертер JSON' },
   ];
 
   return (
@@ -52,7 +48,8 @@ const Header = () => {
         </div>
         
         <nav className="nav">
-          {navItems.map((item) => (
+          {/* Внутренние ссылки */}
+          {internalNavItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
@@ -61,16 +58,22 @@ const Header = () => {
               {item.label}
             </NavLink>
           ))}
+
+          {/* Внешняя ссылка на отдельный HTML‑сайт */}
+          <a 
+            href="/generator.html" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="nav-link"
+          >
+            Создание ситуаций
+          </a>
         </nav>
 
         <div className="auth">
           {isLoggedIn ? (
             <>
-              <span style={{ 
-                marginRight: '15px', 
-                color: '#555',
-                fontSize: '14px'
-              }}>
+              <span style={{ marginRight: '15px', color: '#555', fontSize: '14px' }}>
                 👤 {user?.login || 'Пользователь'}
               </span>
               <Button variant="outline" onClick={handleLogout}>

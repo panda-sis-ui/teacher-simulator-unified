@@ -6,7 +6,7 @@ const Footer = ({ isCatalogPage = false }) => {
     <footer className="footer">
       <div className="container">
         <p>
-          © 2026 {isCatalogPage ? 'PedSim' : 'Симулятор учителя'} —
+          © 2026 {isCatalogPage ? 'Симулятор учителя' : 'Симулятор учителя'} —
           дипломный проект по направлению «Прикладная информатика»
         </p>
         <p>

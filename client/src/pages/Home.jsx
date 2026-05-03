@@ -261,7 +261,6 @@ const Home = () => {
       <section className="ontology-section">
         <div className="container">
           <h3 className="section-title">Категории педагогических ситуаций</h3>
-          <p className="section-subtitle">Выберите тип ситуации для тренировки</p>
 
           <div className="ontology-scroller" ref={scrollerRef}>
             <button

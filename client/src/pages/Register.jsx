@@ -52,9 +52,29 @@ const Register = () => {
       newErrors.confirmPassword = 'Пароли не совпадают';
     }
 
-    if (!formData.agreeToTerms) {
+    /*if (!formData.agreeToTerms) {
       newErrors.agreeToTerms = 'Необходимо согласие с условиями';
-    }
+    }*/
+
+      /*<div className="form-section">
+                <div className="form-check">
+                  <input
+                    type="checkbox"
+                    id="agreeToTerms"
+                    name="agreeToTerms"
+                    checked={formData.agreeToTerms}
+                    onChange={handleInputChange}
+                    className="form-check-input"
+                  />
+                  <label htmlFor="agreeToTerms" className="form-check-label">
+                    Я согласен с условиями использования
+                    <span className="required"> *</span>
+                  </label>
+                </div>
+                {errors.agreeToTerms && (
+                  <div className="invalid-feedback d-block">{errors.agreeToTerms}</div>
+                )}
+              </div>*/
 
     return newErrors;
   };
@@ -182,25 +202,7 @@ const Register = () => {
                 </div>
               </div>
 
-              <div className="form-section">
-                <div className="form-check">
-                  <input
-                    type="checkbox"
-                    id="agreeToTerms"
-                    name="agreeToTerms"
-                    checked={formData.agreeToTerms}
-                    onChange={handleInputChange}
-                    className="form-check-input"
-                  />
-                  <label htmlFor="agreeToTerms" className="form-check-label">
-                    Я согласен с условиями использования
-                    <span className="required"> *</span>
-                  </label>
-                </div>
-                {errors.agreeToTerms && (
-                  <div className="invalid-feedback d-block">{errors.agreeToTerms}</div>
-                )}
-              </div>
+              
 
               <div className="form-actions">
                 <Button

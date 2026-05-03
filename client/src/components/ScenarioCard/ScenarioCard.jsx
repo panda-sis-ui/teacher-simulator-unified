@@ -93,16 +93,16 @@ const ScenarioCard = ({
       </h3>
 
       {/* Описание */}
-      <p className="scenario-description" title={description}>
+      {/*<p className="scenario-description" title={description}>
         {truncateDescription(description)}
-      </p>
+      </p>*/}
 
       {/* Мета-информация */}
       <div className="scenario-meta">
-        <div className="meta-item" title={`Продолжительность: ${duration} минут`}>
+        {/*<div className="meta-item" title={`Продолжительность: ${duration} минут`}>
           <i className="far fa-clock"></i>
           <span>~{duration} мин</span>
-        </div>
+        </div>*/}
 
         <div className="meta-item" title={`Тип: ${type}`}>
           <i className={getIconClass()}></i>
@@ -123,11 +123,11 @@ const ScenarioCard = ({
         </Link>
       </div>
 
-      {/* Дополнительные теги */}
-      <div className="scenario-tags">
+     {/* Дополнительные теги */}
+      {/* <div className="scenario-tags">
         <span className="tag" title="Тип ситуации">{type}</span>
         <span className="tag" title="Сложность">{difficultyConfig.text}</span>
-      </div>
+      </div>*/}
     </div>
   );
 };

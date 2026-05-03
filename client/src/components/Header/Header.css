@@ -38,6 +38,7 @@
   gap: 24px;
   margin-right: 2%;
   margin-left: 2%;
+  width: 80%;
 }
 
 .nav-link {
@@ -47,6 +48,7 @@
   padding: 6px 0;
   position: relative;
   transition: color 0.2s ease;
+  align-content: center;
 }
 
 .nav-link.active,
