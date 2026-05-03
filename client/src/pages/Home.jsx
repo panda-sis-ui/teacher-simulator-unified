@@ -211,7 +211,7 @@ const Home = () => {
                   </Link>
                   <button 
                     onClick={handleRefreshRandom}
-                    className="btn btn-outline btn-large"
+                    className="btn btn-large"
                     disabled={loading}
                   >
                     <i className="fas fa-random"></i> Новые случайные

@@ -28,16 +28,12 @@ const SimpleSpiderChart = ({ metrics, title = "Диаграмма изменен
       trustChange: short ? 'Доверие' : 'Изменение доверия',
       classClimateChange: short ? 'Климат' : 'Изменение климата',
       teacherAuthorityChange: short ? 'Авторитет' : 'Изменение авторитета',
-      burnoutChange: short ? 'Выгорание' : 'Изменение выгорания'
+      burnoutChange: short ? 'Выгорание' : 'Изменение выгорания',
+      teacherBurnout: short ? 'Выгорание' : 'Выгорание учителя'
     };
 
     const baseKey = key.replace('Change', '');
     const result = translations[key] || translations[baseKey] || key;
-
-    // Сокращаем слишком длинные названия
-    if (short && result.length > 8) {
-      return result.substring(0, 8) + (result.length > 8 ? '' : '');
-    }
 
     return result;
   };

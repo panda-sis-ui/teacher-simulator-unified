@@ -73,8 +73,24 @@ const Header = () => {
         <div className="auth">
           {isLoggedIn ? (
             <>
-              <span style={{ marginRight: '15px', color: '#555', fontSize: '14px' }}>
-                👤 {user?.login || 'Пользователь'}
+              <span style={{ 
+                      marginRight: '15px', 
+                      color: '#555', 
+                      fontSize: '20px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      fontWeight: 'bold'
+                    }}>
+                      <img 
+                        src="/user.png" 
+                        alt="avatar" 
+                        style={{ 
+                          width: '50px', 
+                          borderRadius: '50%',
+                          objectFit: 'cover'
+                        }} 
+      /> {user?.login || 'Пользователь'}
               </span>
               <Button variant="outline" onClick={handleLogout}>
                 <i className="fas fa-sign-out-alt"></i> Выйти

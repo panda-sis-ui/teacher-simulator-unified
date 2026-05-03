@@ -31,7 +31,9 @@ const Catalog = () => {
       console.log('✅ Данные получены:', data);
 
       // Преобразуем данные в нужный формат
-      const formattedScenarios = data.map(item => ({
+      const formattedScenarios = data.map(item => {
+          console.log(`🔍 Scenario type from server: ${item.typeProblem}`);
+        return{
         id: item.id,
         title: item.name,
         description: `${item.typeProblem} - ${item.lessonName}`,
@@ -46,7 +48,8 @@ const Catalog = () => {
         duration: 10,
         typeIcon: 'question-circle',
         dataType: 'scenario'
-      }));
+      }
+    });
 
       setServerScenarios(formattedScenarios);
       setFilteredScenarios(formattedScenarios);
@@ -107,23 +110,35 @@ const Catalog = () => {
     ];
   };
 
+  const typeMapping = {
+  motivational: 'Мотивационные кризисы',
+  organizational: 'Организационные конфликты',
+  interaction: 'Конфликты взаимодействия'
+};
   // Загружаем данные при монтировании
   useEffect(() => {
     fetchScenarios();
   }, []);
 
   // Фильтрация сценариев
-  useEffect(() => {
-    const filtered = serverScenarios.filter(scenario => {
-      const difficultyMatch = difficultyFilter === 'all' || 
-        scenario.difficulty === difficultyFilter;
-      
-      const typeMatch = typeFilter === 'all' || 
-        scenario.dataType === typeFilter ||
-        scenario.type?.toLowerCase().includes(typeFilter);
-
-      return difficultyMatch && typeMatch;
-    });
+  // Фильтрация сценариев
+useEffect(() => {
+  const filtered = serverScenarios.filter(scenario => {
+    console.log(`🔎 Фильтрация: scenario.type = "${scenario.type}", dataType = "${scenario.dataType}"`);
+    
+    const difficultyMatch = difficultyFilter === 'all' || 
+      scenario.difficulty === difficultyFilter;
+    
+    let typeMatch = typeFilter === 'all';
+    if (!typeMatch && typeFilter !== 'all') {
+      // Получаем русское название для выбранного фильтра
+      const expectedType = typeMapping[typeFilter];
+      // Сравниваем с типом сценария (который уже на русском)
+      typeMatch = scenario.type === expectedType;
+    }
+    
+    return difficultyMatch && typeMatch;
+  });
 
     setFilteredScenarios(filtered);
   }, [typeFilter, difficultyFilter, serverScenarios]);
