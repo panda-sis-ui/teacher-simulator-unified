@@ -22,6 +22,15 @@ const Situation = () => {
   const [isFinished, setIsFinished] = useState(false);
   const [result, setResult] = useState(null);
 
+  const metricNames = {
+  motivation: 'Мотивация',
+  stress: 'Стресс',
+  trust: 'Доверие',
+  classClimate: 'Климат в классе',
+  teacherAuthority: 'Авторитет учителя',
+  teacherBurnout: 'Выгорание учителя'
+};
+
   // Прокрутка к началу
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -270,7 +279,7 @@ const Situation = () => {
                     borderRadius: '4px',
                     fontSize: '14px'
                   }}>
-                    <strong>{key}:</strong> {typeof value === 'number' ? value.toFixed(1) : value}
+                    <strong>{metricNames[key] || key}:</strong> {typeof value === 'number' ? value.toFixed(1) : value}
                   </div>
                 ))}
               </div>

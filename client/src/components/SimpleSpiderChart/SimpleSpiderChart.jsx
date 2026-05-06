@@ -196,7 +196,7 @@ const SimpleSpiderChart = ({ metrics, title = "Диаграмма изменен
       </div>
 
       <div className="chart-description">
-        <p><i className="fas fa-info-circle"></i> Значения нормализованы для отображения от 0 до 100.</p>
+        <p><i className="fas fa-info-circle"></i> Максимальное значение +1.</p>
       </div>
     </div>
   );
