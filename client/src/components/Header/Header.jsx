@@ -33,7 +33,7 @@ const Header = () => {
   const internalNavItems = [
     { path: '/', label: 'Главная' },
     { path: '/catalog', label: 'Каталог ситуаций' },
-    { path: '/ontology', label: 'Онтология' },
+    // { path: '/ontology', label: 'Онтология' },
     // { path: '/converter', label: 'Конвертер JSON' },
   ];
 
@@ -60,14 +60,14 @@ const Header = () => {
           ))}
 
           {/* Внешняя ссылка на отдельный HTML‑сайт */}
-          <a 
+          {/* <a 
             href="/generator.html" 
             target="_blank" 
             rel="noopener noreferrer"
             className="nav-link"
           >
             Создание ситуаций
-          </a>
+          </a> */}
         </nav>
 
         <div className="auth">
