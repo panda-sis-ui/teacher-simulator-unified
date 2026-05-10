@@ -1,0 +1,747 @@
+-- ============================================
+-- Импорт сценария: Обвинение ученика в предвзятости оценивания
+-- ID: sit_obvinenie_uchitelya_v_predvyatosti
+-- Сгенерировано: 2026-03-21
+-- ============================================
+BEGIN;
+
+-- ============================================
+-- 1. СПРАВОЧНИКИ (с защитой от дублирования)
+-- ============================================
+
+-- solution_type
+INSERT INTO solution_type (name)
+SELECT 'СтратегическоеРешение' 
+WHERE NOT EXISTS (SELECT 1 FROM solution_type WHERE name = 'СтратегическоеРешение');
+
+INSERT INTO solution_type (name)
+SELECT 'ТактическоеРешение' 
+WHERE NOT EXISTS (SELECT 1 FROM solution_type WHERE name = 'ТактическоеРешение');
+
+-- response_strategy
+INSERT INTO response_strategy (name)
+SELECT 'Сотрудничество' 
+WHERE NOT EXISTS (SELECT 1 FROM response_strategy WHERE name = 'Сотрудничество');
+
+INSERT INTO response_strategy (name)
+SELECT 'Компромисс' 
+WHERE NOT EXISTS (SELECT 1 FROM response_strategy WHERE name = 'Компромисс');
+
+INSERT INTO response_strategy (name)
+SELECT 'Соперничество' 
+WHERE NOT EXISTS (SELECT 1 FROM response_strategy WHERE name = 'Соперничество');
+
+INSERT INTO response_strategy (name)
+SELECT 'Избегание' 
+WHERE NOT EXISTS (SELECT 1 FROM response_strategy WHERE name = 'Избегание');
+
+-- resource
+INSERT INTO resource (name)
+SELECT 'Образовательный' 
+WHERE NOT EXISTS (SELECT 1 FROM resource WHERE name = 'Образовательный');
+
+INSERT INTO resource (name)
+SELECT 'Информационный' 
+WHERE NOT EXISTS (SELECT 1 FROM resource WHERE name = 'Информационный');
+
+INSERT INTO resource (name)
+SELECT 'Временной' 
+WHERE NOT EXISTS (SELECT 1 FROM resource WHERE name = 'Временной');
+
+INSERT INTO resource (name)
+SELECT 'Материальный' 
+WHERE NOT EXISTS (SELECT 1 FROM resource WHERE name = 'Материальный');
+
+INSERT INTO resource (name)
+SELECT 'Человеческий' 
+WHERE NOT EXISTS (SELECT 1 FROM resource WHERE name = 'Человеческий');
+
+-- type_consequence
+INSERT INTO type_consequence (name)
+SELECT 'Неудача' 
+WHERE NOT EXISTS (SELECT 1 FROM type_consequence WHERE name = 'Неудача');
+
+INSERT INTO type_consequence (name)
+SELECT 'Успех' 
+WHERE NOT EXISTS (SELECT 1 FROM type_consequence WHERE name = 'Успех');
+
+INSERT INTO type_consequence (name)
+SELECT 'ЧастичныйУспех' 
+WHERE NOT EXISTS (SELECT 1 FROM type_consequence WHERE name = 'ЧастичныйУспех');
+
+
+-- ============================================
+-- 2. КОНТЕКСТ УРОКА
+-- ============================================
+INSERT INTO lesson (name) 
+SELECT 'Информатика' 
+WHERE NOT EXISTS (SELECT 1 FROM lesson WHERE name = 'Информатика');
+
+INSERT INTO classroom (name) 
+SELECT '9 класс' 
+WHERE NOT EXISTS (SELECT 1 FROM classroom WHERE name = '9 класс');
+
+INSERT INTO lesson_stage (name) 
+SELECT 'Первичное закрепление' 
+WHERE NOT EXISTS (SELECT 1 FROM lesson_stage WHERE name = 'Первичное закрепление');
+
+INSERT INTO lesson_format (name) 
+SELECT 'Очный' 
+WHERE NOT EXISTS (SELECT 1 FROM lesson_format WHERE name = 'Очный');
+
+INSERT INTO tech_equip (name) 
+SELECT 'ПК+Интернет' 
+WHERE NOT EXISTS (SELECT 1 FROM tech_equip WHERE name = 'ПК+Интернет');
+
+INSERT INTO context (lesson_id, classroom_id, lesson_stage_id, lesson_format_id, tech_equip_id, duration)
+SELECT
+  (SELECT id FROM lesson WHERE name = 'Информатика' LIMIT 1),
+  (SELECT id FROM classroom WHERE name = '9 класс' LIMIT 1),
+  (SELECT id FROM lesson_stage WHERE name = 'Первичное закрепление' LIMIT 1),
+  (SELECT id FROM lesson_format WHERE name = 'Очный' LIMIT 1),
+  (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет' LIMIT 1),
+  45
+WHERE NOT EXISTS (
+  SELECT 1 FROM context
+  WHERE lesson_id = (SELECT id FROM lesson WHERE name = 'Информатика' LIMIT 1)
+    AND classroom_id = (SELECT id FROM classroom WHERE name = '9 класс' LIMIT 1)
+);
+
+
+-- ============================================
+-- 3. УЧАСТНИКИ
+-- ============================================
+
+-- Участник: Мария Петровна (Учитель)
+INSERT INTO participant (full_name, age) 
+SELECT 'Мария Петровна', 45
+WHERE NOT EXISTS (SELECT 1 FROM participant WHERE full_name = 'Мария Петровна' AND age = 45);
+
+INSERT INTO emotion_intelligence (name) 
+SELECT 'Средний' 
+WHERE NOT EXISTS (SELECT 1 FROM emotion_intelligence WHERE name = 'Средний');
+
+INSERT INTO pedagogical_style (name) 
+SELECT 'Демократический' 
+WHERE NOT EXISTS (SELECT 1 FROM pedagogical_style WHERE name = 'Демократический');
+
+INSERT INTO professional_role (name) 
+SELECT 'Предметник' 
+WHERE NOT EXISTS (SELECT 1 FROM professional_role WHERE name = 'Предметник');
+
+INSERT INTO teacher (participant_id, emotion_intell_id, style_id, prof_role_id, experience)
+SELECT
+  (SELECT id FROM participant WHERE full_name = 'Мария Петровна' ORDER BY id DESC LIMIT 1),
+  (SELECT id FROM emotion_intelligence WHERE name = 'Средний' LIMIT 1),
+  (SELECT id FROM pedagogical_style WHERE name = 'Демократический' LIMIT 1),
+  (SELECT id FROM professional_role WHERE name = 'Предметник' LIMIT 1),
+  8
+WHERE NOT EXISTS (
+  SELECT 1 FROM teacher 
+  WHERE participant_id = (SELECT id FROM participant WHERE full_name = 'Мария Петровна' ORDER BY id DESC LIMIT 1)
+);
+
+-- Участник: Дмитрий Волков (Ученик)
+INSERT INTO participant (full_name, age) 
+SELECT 'Дмитрий Волков', 15
+WHERE NOT EXISTS (SELECT 1 FROM participant WHERE full_name = 'Дмитрий Волков' AND age = 15);
+
+INSERT INTO communication_style (name) 
+SELECT 'Конфликтный' 
+WHERE NOT EXISTS (SELECT 1 FROM communication_style WHERE name = 'Конфликтный');
+
+INSERT INTO social_status (name) 
+SELECT 'Принятые' 
+WHERE NOT EXISTS (SELECT 1 FROM social_status WHERE name = 'Принятые');
+
+-- Для tech_equip запись уже создана выше, но добавляем защиту
+INSERT INTO tech_equip (name) 
+SELECT 'ПК+Интернет' 
+WHERE NOT EXISTS (SELECT 1 FROM tech_equip WHERE name = 'ПК+Интернет');
+
+INSERT INTO student (participant_id, tech_equip_id, comm_style_id, social_status_id, motivation, preparation)
+SELECT
+  (SELECT id FROM participant WHERE full_name = 'Дмитрий Волков' ORDER BY id DESC LIMIT 1),
+  (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет' LIMIT 1),
+  (SELECT id FROM communication_style WHERE name = 'Конфликтный' LIMIT 1),
+  (SELECT id FROM social_status WHERE name = 'Принятые' LIMIT 1),
+  0.5,
+  0.6
+WHERE NOT EXISTS (
+  SELECT 1 FROM student 
+  WHERE participant_id = (SELECT id FROM participant WHERE full_name = 'Дмитрий Волков' ORDER BY id DESC LIMIT 1)
+);
+
+
+-- ============================================
+-- 4. ПРОБЛЕМА
+-- ============================================
+INSERT INTO type_problem (name) 
+SELECT 'Конфликты взаимодействия' 
+WHERE NOT EXISTS (SELECT 1 FROM type_problem WHERE name = 'Конфликты взаимодействия');
+
+INSERT INTO source_problem (name) 
+SELECT 'Внутренний' 
+WHERE NOT EXISTS (SELECT 1 FROM source_problem WHERE name = 'Внутренний');
+
+INSERT INTO emotion (name) 
+SELECT 'Раздражение' 
+WHERE NOT EXISTS (SELECT 1 FROM emotion WHERE name = 'Раздражение');
+
+INSERT INTO emotion (name) 
+SELECT 'Тревога' 
+WHERE NOT EXISTS (SELECT 1 FROM emotion WHERE name = 'Тревога');
+
+INSERT INTO emotion (name) 
+SELECT 'Обида' 
+WHERE NOT EXISTS (SELECT 1 FROM emotion WHERE name = 'Обида');
+
+INSERT INTO problem (
+  type_problem_id, source_problem_id, intensity, tension_factor, description,
+  start_motivation, start_stress, start_trust, start_class_climate,
+  start_teacher_authority, start_teacher_burnout
+)
+SELECT
+  (SELECT id FROM type_problem WHERE name = 'Конфликты взаимодействия' LIMIT 1),
+  (SELECT id FROM source_problem WHERE name = 'Внутренний' LIMIT 1),
+  0.8,
+  0.8,
+  'Ученик публично заявляет о предвзятости учителя после получения низкой оценки за контрольную работу.',
+  0.3,
+  0.8,
+  0.3,
+  0.3,
+  0.4,
+  0.5
+WHERE NOT EXISTS (
+  SELECT 1 FROM problem 
+  WHERE description = 'Ученик публично заявляет о предвзятости учителя после получения низкой оценки за контрольную работу.'
+);
+
+-- Связь проблемы с эмоциями
+INSERT INTO problem_emotions (emotion_id, problem_id)
+SELECT e.id, p.id
+FROM emotion e, problem p
+WHERE e.name IN ('Раздражение', 'Тревога', 'Обида')
+  AND p.description = 'Ученик публично заявляет о предвзятости учителя после получения низкой оценки за контрольную работу.'
+  AND NOT EXISTS (
+    SELECT 1 FROM problem_emotions pe 
+    WHERE pe.emotion_id = e.id AND pe.problem_id = p.id
+  );
+
+
+-- ============================================
+-- 5. УЗЛЫ СЦЕНАРИЯ (с возвратом ID через CTE)
+-- ============================================
+WITH inserted_nodes AS (
+  INSERT INTO script_node (description, url_image, is_terminal) VALUES 
+    ('После объявления оценок за контрольную работу Дмитрий резко встаёт и заявляет: «Это несправедливо! Вы всегда занижаете мне оценки!». Класс затихает, все смотрят на учителя. Лицо Дмитрия покраснело от возмущения, несколько учеников переглядываются. Учитель чувствует, как нарастает напряжение — от её реакции зависит, перерастёт ли это в открытый конфликт или удастся перевести ситуацию в конструктивное русло.', 'https://disk.yandex.ru/i/9sBlDMAJoHlTYw', false),
+    ('Учитель выбрал жёсткую позицию, но конфликт не исчерпан. Дмитрий продолжает настаивать на своём, его голос дрожит от обиды. Класс наблюдает за противостоянием. Необходимо выбрать конкретный способ защиты своей позиции, но каждый вариант несёт риски эскалации конфликта или потери доверия.', 'https://disk.yandex.ru/i/3aY60bUnK3KgpA', false),
+    ('Учитель предложил открытый диалог. Дмитрий немного успокоился, но всё ещё напряжён. Класс внимательно слушает. Теперь важно выбрать формат, который покажет объективность оценивания, не унизив ученика и сохранив учебное время.', 'https://disk.yandex.ru/i/dTDAqDM1ThjfCw', false),
+    ('Учитель выбрал формальный подход к решению конфликта. Дмитрий ожидает конкретных действий. Класс наблюдает, насколько серьёзно учитель относится к процедуре оценивания. Необходимо выбрать способ документирования, который покажет прозрачность без излишней бюрократизации.', 'https://disk.yandex.ru/i/WPblkgyistH_xg', false),
+    ('Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.', '', true),
+    ('Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.', '', true),
+    ('Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.', '', true),
+    ('Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.', '', true),
+    ('Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.', '', true),
+    ('Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».', '', true),
+    ('Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.', '', true),
+    ('Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.', '', true),
+    ('Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.', '', true)
+  RETURNING id, description
+)
+SELECT 1; -- Подтверждение вставки узлов
+
+
+-- ============================================
+-- 6. РЕШЕНИЯ И ВЫБОРЫ
+-- ============================================
+
+-- Решение ch_1 + ресурсы + выбор
+WITH sol1 AS (
+  INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+  SELECT
+    (SELECT id FROM solution_type WHERE name = 'СтратегическоеРешение' LIMIT 1),
+    (SELECT id FROM response_strategy WHERE name = 'Сотрудничество' LIMIT 1),
+    4, 7
+  RETURNING id
+),
+res1 AS (
+  INSERT INTO solution_resource (solution_id, resource_id)
+  SELECT 
+    (SELECT id FROM sol1),
+    (SELECT id FROM resource WHERE name = 'Образовательный' LIMIT 1)
+  WHERE NOT EXISTS (
+    SELECT 1 FROM solution_resource 
+    WHERE solution_id = (SELECT id FROM sol1) 
+      AND resource_id = (SELECT id FROM resource WHERE name = 'Образовательный' LIMIT 1)
+  )
+)
+INSERT INTO choice (
+  solution_id, from_script_node_id, next_script_node_id, description,
+  delta_motivation, delta_stress, delta_trust,
+  delta_class_climate, delta_teacher_authority, delta_teacher_burnout
+)
+SELECT
+  (SELECT id FROM sol1),
+  (SELECT id FROM script_node WHERE description LIKE 'После объявления оценок за контрольную работу Дмитрий%' LIMIT 1),
+  NULL,
+  'Давайте разберём критерии оценивания вместе',
+  0.3, -0.4, 0.4, 0.2, 0.3, -0.1
+WHERE NOT EXISTS (
+  SELECT 1 FROM choice WHERE description = 'Давайте разберём критерии оценивания вместе'
+);
+
+-- Решение ch_2
+WITH sol2 AS (
+  INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+  SELECT
+    (SELECT id FROM solution_type WHERE name = 'СтратегическоеРешение' LIMIT 1),
+    (SELECT id FROM response_strategy WHERE name = 'Компромисс' LIMIT 1),
+    5, 5
+  RETURNING id
+)
+INSERT INTO solution_resource (solution_id, resource_id)
+SELECT 
+  (SELECT id FROM sol2),
+  (SELECT id FROM resource WHERE name = 'Информационный' LIMIT 1)
+WHERE NOT EXISTS (
+  SELECT 1 FROM solution_resource 
+  WHERE solution_id = (SELECT id FROM sol2) 
+    AND resource_id = (SELECT id FROM resource WHERE name = 'Информационный' LIMIT 1)
+);
+
+INSERT INTO choice (
+  solution_id, from_script_node_id, next_script_node_id, description,
+  delta_motivation, delta_stress, delta_trust,
+  delta_class_climate, delta_teacher_authority, delta_teacher_burnout
+)
+SELECT
+  (SELECT id FROM sol2),
+  (SELECT id FROM script_node WHERE description LIKE 'После объявления оценок за контрольную работу Дмитрий%' LIMIT 1),
+  NULL,
+  'Предоставлю письменные критерии оценки',
+  0.2, -0.3, 0.3, 0.1, 0.2, -0.1
+WHERE NOT EXISTS (
+  SELECT 1 FROM choice WHERE description = 'Предоставлю письменные критерии оценки'
+);
+
+-- Решение ch_3
+WITH sol3 AS (
+  INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+  SELECT
+    (SELECT id FROM solution_type WHERE name = 'ТактическоеРешение' LIMIT 1),
+    (SELECT id FROM response_strategy WHERE name = 'Соперничество' LIMIT 1),
+    9, 5
+  RETURNING id
+)
+INSERT INTO solution_resource (solution_id, resource_id)
+SELECT 
+  (SELECT id FROM sol3),
+  (SELECT id FROM resource WHERE name = 'Информационный' LIMIT 1)
+WHERE NOT EXISTS (
+  SELECT 1 FROM solution_resource 
+  WHERE solution_id = (SELECT id FROM sol3) 
+    AND resource_id = (SELECT id FROM resource WHERE name = 'Информационный' LIMIT 1)
+);
+
+INSERT INTO choice (
+  solution_id, from_script_node_id, next_script_node_id, description,
+  delta_motivation, delta_stress, delta_trust,
+  delta_class_climate, delta_teacher_authority, delta_teacher_burnout
+)
+SELECT
+  (SELECT id FROM sol3),
+  (SELECT id FROM script_node WHERE description LIKE 'Учитель выбрал жёсткую позицию%' LIMIT 1),
+  (SELECT id FROM script_node WHERE description LIKE 'Обвиняемый чувствует унижение%' LIMIT 1),
+  'Показать лучшие работы класса в качестве примера',
+  -0.4, 0.5, -0.5, -0.4, -0.2, 0.3
+WHERE NOT EXISTS (
+  SELECT 1 FROM choice WHERE description = 'Показать лучшие работы класса в качестве примера'
+);
+
+-- Решение ch_4
+WITH sol4 AS (
+  INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+  SELECT
+    (SELECT id FROM solution_type WHERE name = 'ТактическоеРешение' LIMIT 1),
+    (SELECT id FROM response_strategy WHERE name = 'Соперничество' LIMIT 1),
+    10, 3
+  RETURNING id
+)
+INSERT INTO solution_resource (solution_id, resource_id)
+SELECT 
+  (SELECT id FROM sol4),
+  (SELECT id FROM resource WHERE name = 'Человеческий' LIMIT 1)
+WHERE NOT EXISTS (
+  SELECT 1 FROM solution_resource 
+  WHERE solution_id = (SELECT id FROM sol4) 
+    AND resource_id = (SELECT id FROM resource WHERE name = 'Человеческий' LIMIT 1)
+);
+
+INSERT INTO choice (
+  solution_id, from_script_node_id, next_script_node_id, description,
+  delta_motivation, delta_stress, delta_trust,
+  delta_class_climate, delta_teacher_authority, delta_teacher_burnout
+)
+SELECT
+  (SELECT id FROM sol4),
+  (SELECT id FROM script_node WHERE description LIKE 'Учитель выбрал жёсткую позицию%' LIMIT 1),
+  (SELECT id FROM script_node WHERE description LIKE 'Конфликт переходит на уровень администрации%' LIMIT 1),
+  'Если не согласны — идите к завучу',
+  -0.2, 0.4, -0.3, -0.3, 0, 0.4
+WHERE NOT EXISTS (
+  SELECT 1 FROM choice WHERE description = 'Если не согласны — идите к завучу'
+);
+
+-- Решение ch_5
+WITH sol5 AS (
+  INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+  SELECT
+    (SELECT id FROM solution_type WHERE name = 'ТактическоеРешение' LIMIT 1),
+    (SELECT id FROM response_strategy WHERE name = 'Компромисс' LIMIT 1),
+    4, 6
+  RETURNING id
+)
+INSERT INTO solution_resource (solution_id, resource_id)
+SELECT 
+  (SELECT id FROM sol5),
+  (SELECT id FROM resource WHERE name = 'Образовательный' LIMIT 1)
+WHERE NOT EXISTS (
+  SELECT 1 FROM solution_resource 
+  WHERE solution_id = (SELECT id FROM sol5) 
+    AND resource_id = (SELECT id FROM resource WHERE name = 'Образовательный' LIMIT 1)
+);
+
+INSERT INTO choice (
+  solution_id, from_script_node_id, next_script_node_id, description,
+  delta_motivation, delta_stress, delta_trust,
+  delta_class_climate, delta_teacher_authority, delta_teacher_burnout
+)
+SELECT
+  (SELECT id FROM sol5),
+  (SELECT id FROM script_node WHERE description LIKE 'Учитель предложил открытый диалог%' LIMIT 1),
+  (SELECT id FROM script_node WHERE description LIKE 'Класс видит единые правила%' LIMIT 1),
+  'Напомнить всем критерии оценки данной работы',
+  0.2, -0.2, 0.3, 0.2, 0.2, 0
+WHERE NOT EXISTS (
+  SELECT 1 FROM choice WHERE description = 'Напомнить всем критерии оценки данной работы'
+);
+
+-- Решение ch_6
+WITH sol6 AS (
+  INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+  SELECT
+    (SELECT id FROM solution_type WHERE name = 'СтратегическоеРешение' LIMIT 1),
+    (SELECT id FROM response_strategy WHERE name = 'Сотрудничество' LIMIT 1),
+    5, 9
+  RETURNING id
+)
+INSERT INTO solution_resource (solution_id, resource_id)
+SELECT 
+  (SELECT id FROM sol6),
+  (SELECT id FROM resource WHERE name = 'Образовательный' LIMIT 1)
+WHERE NOT EXISTS (
+  SELECT 1 FROM solution_resource 
+  WHERE solution_id = (SELECT id FROM sol6) 
+    AND resource_id = (SELECT id FROM resource WHERE name = 'Образовательный' LIMIT 1)
+);
+
+INSERT INTO choice (
+  solution_id, from_script_node_id, next_script_node_id, description,
+  delta_motivation, delta_stress, delta_trust,
+  delta_class_climate, delta_teacher_authority, delta_teacher_burnout
+)
+SELECT
+  (SELECT id FROM sol6),
+  (SELECT id FROM script_node WHERE description LIKE 'Учитель предложил открытый диалог%' LIMIT 1),
+  (SELECT id FROM script_node WHERE description LIKE 'Снижается острота конфликта%' LIMIT 1),
+  'Ученик может улучшить оценку, выполнив работу повторно',
+  0.4, -0.3, 0.3, 0.3, 0.1, 0.1
+WHERE NOT EXISTS (
+  SELECT 1 FROM choice WHERE description = 'Ученик может улучшить оценку, выполнив работу повторно'
+);
+
+-- Решение ch_7
+WITH sol7 AS (
+  INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+  SELECT
+    (SELECT id FROM solution_type WHERE name = 'СтратегическоеРешение' LIMIT 1),
+    (SELECT id FROM response_strategy WHERE name = 'Компромисс' LIMIT 1),
+    6, 7
+  RETURNING id
+)
+INSERT INTO solution_resource (solution_id, resource_id)
+SELECT 
+  (SELECT id FROM sol7),
+  (SELECT id FROM resource WHERE name = 'Человеческий' LIMIT 1)
+WHERE NOT EXISTS (
+  SELECT 1 FROM solution_resource 
+  WHERE solution_id = (SELECT id FROM sol7) 
+    AND resource_id = (SELECT id FROM resource WHERE name = 'Человеческий' LIMIT 1)
+);
+
+INSERT INTO choice (
+  solution_id, from_script_node_id, next_script_node_id, description,
+  delta_motivation, delta_stress, delta_trust,
+  delta_class_climate, delta_teacher_authority, delta_teacher_burnout
+)
+SELECT
+  (SELECT id FROM sol7),
+  (SELECT id FROM script_node WHERE description LIKE 'Учитель выбрал формальный подход%' LIMIT 1),
+  (SELECT id FROM script_node WHERE description LIKE 'Максимальная объективность%' LIMIT 1),
+  'Предложить проверить работу другим преподавателем',
+  0.1, -0.2, 0.2, 0.1, -0.1, 0.1
+WHERE NOT EXISTS (
+  SELECT 1 FROM choice WHERE description = 'Предложить проверить работу другим преподавателем'
+);
+
+-- Решение ch_8
+WITH sol8 AS (
+  INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+  SELECT
+    (SELECT id FROM solution_type WHERE name = 'ТактическоеРешение' LIMIT 1),
+    (SELECT id FROM response_strategy WHERE name = 'Избегание' LIMIT 1),
+    5, 5
+  RETURNING id
+)
+INSERT INTO solution_resource (solution_id, resource_id)
+SELECT 
+  (SELECT id FROM sol8),
+  (SELECT id FROM resource WHERE name = 'Информационный' LIMIT 1)
+WHERE NOT EXISTS (
+  SELECT 1 FROM solution_resource 
+  WHERE solution_id = (SELECT id FROM sol8) 
+    AND resource_id = (SELECT id FROM resource WHERE name = 'Информационный' LIMIT 1)
+);
+
+INSERT INTO choice (
+  solution_id, from_script_node_id, next_script_node_id, description,
+  delta_motivation, delta_stress, delta_trust,
+  delta_class_climate, delta_teacher_authority, delta_teacher_burnout
+)
+SELECT
+  (SELECT id FROM sol8),
+  (SELECT id FROM script_node WHERE description LIKE 'Учитель выбрал формальный подход%' LIMIT 1),
+  (SELECT id FROM script_node WHERE description LIKE 'Многие обвинения снимаются%' LIMIT 1),
+  'Попросить оформить претензию официально с подписью',
+  0, -0.1, 0.1, 0, 0.1, -0.1
+WHERE NOT EXISTS (
+  SELECT 1 FROM choice WHERE description = 'Попросить оформить претензию официально с подписью'
+);
+
+
+-- ============================================
+-- 7. ПОСЛЕДСТВИЯ (конечные узлы)
+-- ============================================
+
+-- out_5: Неудача
+WITH cm5 AS (
+  INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+  VALUES (0, 0.1, -0.1, 0, 0.5, 0.7)
+  RETURNING id
+)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+  (SELECT id FROM cm5),
+  (SELECT id FROM type_consequence WHERE name = 'Неудача' LIMIT 1),
+  'Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.',
+  true, true, 0.5
+WHERE NOT EXISTS (
+  SELECT 1 FROM consequence 
+  WHERE text = 'Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.'
+);
+
+-- out_6: Неудача
+WITH cm6 AS (
+  INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+  VALUES (-0.1, 0.9, -0.2, -0.1, -0.1, 0.8)
+  RETURNING id
+)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+  (SELECT id FROM cm6),
+  (SELECT id FROM type_consequence WHERE name = 'Неудача' LIMIT 1),
+  'Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.',
+  true, true, 0.5
+WHERE NOT EXISTS (
+  SELECT 1 FROM consequence 
+  WHERE text = 'Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.'
+);
+
+-- out_7: Неудача
+WITH cm7 AS (
+  INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+  VALUES (0.1, 0.9, 0, -0.1, 0.1, 0.9)
+  RETURNING id
+)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+  (SELECT id FROM cm7),
+  (SELECT id FROM type_consequence WHERE name = 'Неудача' LIMIT 1),
+  'Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.',
+  true, true, 0.5
+WHERE NOT EXISTS (
+  SELECT 1 FROM consequence 
+  WHERE text = 'Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.'
+);
+
+-- out_8: Успех
+WITH cm8 AS (
+  INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+  VALUES (0.6, -0.4, 0.7, 0.5, 0.6, -0.4)
+  RETURNING id
+)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+  (SELECT id FROM cm8),
+  (SELECT id FROM type_consequence WHERE name = 'Успех' LIMIT 1),
+  'Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.',
+  true, true, 0.5
+WHERE NOT EXISTS (
+  SELECT 1 FROM consequence 
+  WHERE text = 'Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.'
+);
+
+-- out_9: ЧастичныйУспех
+WITH cm9 AS (
+  INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+  VALUES (0.5, -0.3, 0.6, 0.3, 0.3, -0.4)
+  RETURNING id
+)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+  (SELECT id FROM cm9),
+  (SELECT id FROM type_consequence WHERE name = 'ЧастичныйУспех' LIMIT 1),
+  'Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.',
+  true, true, 0.5
+WHERE NOT EXISTS (
+  SELECT 1 FROM consequence 
+  WHERE text = 'Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.'
+);
+
+-- out_10: Успех
+WITH cm10 AS (
+  INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+  VALUES (0.7, -0.5, 0.6, 0.5, 0.3, 0.1)
+  RETURNING id
+)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+  (SELECT id FROM cm10),
+  (SELECT id FROM type_consequence WHERE name = 'Успех' LIMIT 1),
+  'Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».',
+  true, true, 0.5
+WHERE NOT EXISTS (
+  SELECT 1 FROM consequence 
+  WHERE text = 'Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».'
+);
+
+-- out_11: ЧастичныйУспех
+WITH cm11 AS (
+  INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+  VALUES (0.5, -0.5, 0.4, 0.2, 0.2, 0.2)
+  RETURNING id
+)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+  (SELECT id FROM cm11),
+  (SELECT id FROM type_consequence WHERE name = 'ЧастичныйУспех' LIMIT 1),
+  'Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.',
+  true, true, 0.5
+WHERE NOT EXISTS (
+  SELECT 1 FROM consequence 
+  WHERE text = 'Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.'
+);
+
+-- out_12: ЧастичныйУспех
+WITH cm12 AS (
+  INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+  VALUES (0.4, 0.2, 0.1, 0.1, 0.2, -0.1)
+  RETURNING id
+)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+  (SELECT id FROM cm12),
+  (SELECT id FROM type_consequence WHERE name = 'ЧастичныйУспех' LIMIT 1),
+  'Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.',
+  true, true, 0.5
+WHERE NOT EXISTS (
+  SELECT 1 FROM consequence 
+  WHERE text = 'Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.'
+);
+
+-- out_13: ЧастичныйУспех
+WITH cm13 AS (
+  INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+  VALUES (0.3, -0.4, 0.1, 0.1, 0, 0.1)
+  RETURNING id
+)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+  (SELECT id FROM cm13),
+  (SELECT id FROM type_consequence WHERE name = 'ЧастичныйУспех' LIMIT 1),
+  'Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.',
+  true, true, 0.5
+WHERE NOT EXISTS (
+  SELECT 1 FROM consequence 
+  WHERE text = 'Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.'
+);
+
+
+-- ============================================
+-- 8. СИТУАЦИЯ (финальная сборка)
+-- ============================================
+INSERT INTO situation (context_id, problem_id, script_node_id, name)
+SELECT
+  (SELECT id FROM context ORDER BY id DESC LIMIT 1),
+  (SELECT id FROM problem ORDER BY id DESC LIMIT 1),
+  (SELECT id FROM script_node WHERE description LIKE 'После объявления оценок за контрольную работу Дмитрий%' LIMIT 1),
+  'Обвинение ученика в предвзятости оценивания'
+WHERE NOT EXISTS (
+  SELECT 1 FROM situation WHERE name = 'Обвинение ученика в предвзятости оценивания'
+);
+
+-- Связь ситуации с участниками
+INSERT INTO situation_participants (situation_id, participant_id)
+SELECT s.id, p.id
+FROM situation s, participant p
+WHERE s.name = 'Обвинение ученика в предвзятости оценивания'
+  AND p.full_name IN ('Мария Петровна', 'Дмитрий Волков')
+  AND NOT EXISTS (
+    SELECT 1 FROM situation_participants sp 
+    WHERE sp.situation_id = s.id AND sp.participant_id = p.id
+  );
+
+
+-- ============================================
+-- ФИНАЛЬНАЯ ПРОВЕРКА: таблица подтверждения
+-- ============================================
+SELECT 
+  '✅ ИМПОРТ ЗАВЕРШЁН' AS status,
+  'Обвинение ученика в предвзятости оценивания' AS scenario_name,
+  (SELECT COUNT(*) FROM script_node WHERE description LIKE 'После объявления оценок за контрольную работу Дмитрий%') AS nodes_created,
+  (SELECT COUNT(*) FROM choice WHERE description IN (
+    'Давайте разберём критерии оценивания вместе',
+    'Предоставлю письменные критерии оценки',
+    'Показать лучшие работы класса в качестве примера',
+    'Если не согласны — идите к завучу',
+    'Напомнить всем критерии оценки данной работы',
+    'Ученик может улучшить оценку, выполнив работу повторно',
+    'Предложить проверить работу другим преподавателем',
+    'Попросить оформить претензию официально с подписью'
+  )) AS choices_created,
+  (SELECT COUNT(*) FROM consequence WHERE type_conseq_id IN (
+    SELECT id FROM type_consequence WHERE name IN ('Успех', 'ЧастичныйУспех', 'Неудача')
+  ) AND text LIKE 'Ученик видит конкретные ошибки%' 
+   OR text LIKE 'Класс видит единые правила%'
+   OR text LIKE 'Снижается острота конфликта%'
+   OR text LIKE 'Оценка становится объективной%'
+   OR text LIKE 'Максимальная объективность%'
+   OR text LIKE 'Многие обвинения снимаются%'
+   OR text LIKE 'Ученик замолкает%'
+   OR text LIKE 'Обвиняемый чувствует унижение%'
+   OR text LIKE 'Конфликт переходит на уровень администрации%') AS outcomes_created,
+  NOW() AS executed_at;
+
+COMMIT;

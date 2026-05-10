@@ -1,0 +1,540 @@
+{
+  "id": "sit_obvinenie_uchitelya_v_predvyatosti",
+  "title": "Обвинение ученика в предвзятости оценивания",
+  "initialNode": "node_1",
+  "context": {
+    "subject": "Информатика",
+    "grade": "9",
+    "lessonPhase": "Первичное закрепление",
+    "format": "Очный",
+    "duration": 45,
+    "techEquipment": "ПК+Интернет"
+  },
+  "participants": [
+    {
+      "type": "Учитель",
+      "name": "Мария Петровна",
+      "experience": 8,
+      "emotionalIntelligence": "Средний",
+      "teachingStyle": "Демократический",
+      "professionalRole": "Предметник"
+    },
+    {
+      "type": "Ученик",
+      "name": "Дмитрий Волков",
+      "age": 15,
+      "motivation": 0.5,
+      "preparation": "Средний",
+      "socialStatus": "Принятые",
+      "techEquip": "ПК+Интернет",
+      "commStyle": "Конфликтный"
+    }
+  ],
+  "problem": {
+    "type": "Конфликты взаимодействия",
+    "source": "Внутренний",
+    "intensity": "Высокая",
+    "emotions": [
+      "Раздражение",
+      "Тревога",
+      "Обида"
+    ],
+    "description": "Ученик публично заявляет о предвзятости учителя после получения низкой оценки за контрольную работу.",
+    "startMetrics": {
+      "motivation": 0.3,
+      "stress": 0.8,
+      "trust": 0.3,
+      "classClimate": 0.3,
+      "teacherAuthority": 0.4,
+      "teacherBurnout": 0.5
+    }
+  },
+  "nodes": {
+    "node_1": {
+      "description": "После объявления оценок за контрольную работу Дмитрий резко встаёт и заявляет: «Это несправедливо! Вы всегда занижаете мне оценки!». Класс затихает, все смотрят на учителя. Лицо Дмитрия покраснело от возмущения, несколько учеников переглядываются. Учитель чувствует, как нарастает напряжение — от её реакции зависит, перерастёт ли это в открытый конфликт или удастся перевести ситуацию в конструктивное русло.",
+      "image": "https://disk.yandex.ru/i/9sBlDMAJoHlTYw",
+      "choices": [
+        {
+          "id": "ch_1_1",
+          "description": "Жёсткая защита позиции. Оценка выставлена по правилам, обсуждению не подлежит",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 7,
+            "autonomy": 2,
+            "resources": [
+              "Информационный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.3,
+            "stress": 0.3,
+            "trust": -0.4,
+            "classClimate": -0.3,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0.2
+          },
+          "next": "node_1_1"
+        },
+        {
+          "id": "ch_1_2",
+          "description": "Давайте разберём критерии оценивания вместе",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 4,
+            "autonomy": 7,
+            "resources": [
+              "Образовательный",
+              "Информационный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.3,
+            "stress": -0.4,
+            "trust": 0.4,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.3,
+            "teacherBurnout": -0.1
+          },
+          "next": "node_1_2"
+        },
+        {
+          "id": "ch_1_3",
+          "description": "Предоставлю письменные критерии оценки",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Компромисс",
+            "risk": 5,
+            "autonomy": 5,
+            "resources": [
+              "Информационный",
+              "Материальный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.3,
+            "trust": 0.3,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": -0.1
+          },
+          "next": "node_1_3"
+        }
+      ]
+    },
+    "node_1_1": {
+      "description": "Учитель выбрал жёсткую позицию, но конфликт не исчерпан. Дмитрий продолжает настаивать на своём, его голос дрожит от обиды. Класс наблюдает за противостоянием. Необходимо выбрать конкретный способ защиты своей позиции, но каждый вариант несёт риски эскалации конфликта или потери доверия.",
+      "image": "https://disk.yandex.ru/i/3aY60bUnK3KgpA",
+      "choices": [
+        {
+          "id": "ch_1_1_1",
+          "description": "Заявить, что оценка выставлена по правилам, не погружаясь в детали",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 8,
+            "autonomy": 1,
+            "resources": [
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.3,
+            "stress": 0.3,
+            "trust": -0.4,
+            "classClimate": -0.3,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0.2
+          },
+          "next": "out_5"
+        },
+        {
+          "id": "ch_1_1_2",
+          "description": "Показать лучшие работы класса в качестве примера",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 9,
+            "autonomy": 5,
+            "resources": [
+              "Информационный",
+              "Материальный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.4,
+            "stress": 0.5,
+            "trust": -0.5,
+            "classClimate": -0.4,
+            "teacherAuthority": -0.2,
+            "teacherBurnout": 0.3
+          },
+          "next": "out_6"
+        },
+        {
+          "id": "ch_1_1_3",
+          "description": "Если не согласны — идите к завучу",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 10,
+            "autonomy": 3,
+            "resources": [
+              "Человеческий",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.2,
+            "stress": 0.4,
+            "trust": -0.3,
+            "classClimate": -0.3,
+            "teacherAuthority": 0,
+            "teacherBurnout": 0.4
+          },
+          "next": "out_7"
+        }
+      ]
+    },
+    "node_1_2": {
+      "description": "Учитель предложил открытый диалог. Дмитрий немного успокоился, но всё ещё напряжён. Класс внимательно слушает. Теперь важно выбрать формат, который покажет объективность оценивания, не унизив ученика и сохранив учебное время.",
+      "image": "https://disk.yandex.ru/i/dTDAqDM1ThjfCw",
+      "choices": [
+        {
+          "id": "ch_1_2_1",
+          "description": "Пригласить ученика после урока для детального анализа",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 3,
+            "autonomy": 8,
+            "resources": [
+              "Образовательный",
+              "Человеческий",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.3,
+            "stress": -0.4,
+            "trust": 0.4,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.3,
+            "teacherBurnout": -0.1
+          },
+          "next": "out_8"
+        },
+        {
+          "id": "ch_1_2_2",
+          "description": "Напомнить всем критерии оценки данной работы",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Компромисс",
+            "risk": 4,
+            "autonomy": 6,
+            "resources": [
+              "Образовательный",
+              "Информационный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.2,
+            "trust": 0.3,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": 0
+          },
+          "next": "out_9"
+        },
+        {
+          "id": "ch_1_2_3",
+          "description": "Ученик может улучшить оценку, выполнив работу повторно",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 5,
+            "autonomy": 9,
+            "resources": [
+              "Образовательный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.4,
+            "stress": -0.3,
+            "trust": 0.3,
+            "classClimate": 0.3,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0.1
+          },
+          "next": "out_10"
+        }
+      ]
+    },
+    "node_1_3": {
+      "description": "Учитель выбрал формальный подход к решению конфликта. Дмитрий ожидает конкретных действий. Класс наблюдает, насколько серьёзно учитель относится к процедуре оценивания. Необходимо выбрать способ документирования, который покажет прозрачность без излишней бюрократизации.",
+      "image": "https://disk.yandex.ru/i/WPblkgyistH_xg",
+      "choices": [
+        {
+          "id": "ch_1_3_1",
+          "description": "Раздать распечатанные критерии с баллами за каждый пункт",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Компромисс",
+            "risk": 4,
+            "autonomy": 6,
+            "resources": [
+              "Информационный",
+              "Материальный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.3,
+            "trust": 0.3,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": -0.1
+          },
+          "next": "out_11"
+        },
+        {
+          "id": "ch_1_3_2",
+          "description": "Предложить проверить работу другим преподавателем",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Компромисс",
+            "risk": 6,
+            "autonomy": 7,
+            "resources": [
+              "Человеческий",
+              "Информационный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.1,
+            "stress": -0.2,
+            "trust": 0.2,
+            "classClimate": 0.1,
+            "teacherAuthority": -0.1,
+            "teacherBurnout": 0.1
+          },
+          "next": "out_12"
+        },
+        {
+          "id": "ch_1_3_3",
+          "description": "Попросить оформить претензию официально с подписью",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Избегание",
+            "risk": 5,
+            "autonomy": 5,
+            "resources": [
+              "Информационный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0,
+            "stress": -0.1,
+            "trust": 0.1,
+            "classClimate": 0,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": -0.1
+          },
+          "next": "out_13"
+        }
+      ]
+    },
+    "out_5": {
+      "outcomeDescription": "Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.",
+      "outcomeImage": "https://disk.yandex.ru/i/Mp_r4oytlcEl-A",
+      "outcome": {
+        "type": "failure",
+        "description": "Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0,
+          "stressChange": 0.1,
+          "trustChange": -0.1,
+          "classClimateChange": 0,
+          "teacherAuthorityChange": 0.5,
+          "burnoutChange": 0.7
+        }
+      }
+    },
+    "out_6": {
+      "outcomeDescription": "Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.",
+      "outcomeImage": "https://disk.yandex.ru/i/2pg4ARiPRqR56A",
+      "outcome": {
+        "type": "failure",
+        "description": "Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.1,
+          "stressChange": 0.9,
+          "trustChange": -0.2,
+          "classClimateChange": -0.1,
+          "teacherAuthorityChange": -0.1,
+          "burnoutChange": 0.8
+        }
+      }
+    },
+    "out_7": {
+      "outcomeDescription": "Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.",
+      "outcomeImage": "https://disk.yandex.ru/i/mUP5JM1C3LHSKw",
+      "outcome": {
+        "type": "failure",
+        "description": "Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.1,
+          "stressChange": 0.9,
+          "trustChange": 0,
+          "classClimateChange": -0.1,
+          "teacherAuthorityChange": 0.1,
+          "burnoutChange": 0.9
+        }
+      }
+    },
+    "out_8": {
+      "outcomeDescription": "Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.",
+      "outcomeImage": "https://disk.yandex.ru/i/7UWdAOmkDcoQrw",
+      "outcome": {
+        "type": "success",
+        "description": "Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.6,
+          "stressChange": -0.4,
+          "trustChange": 0.7,
+          "classClimateChange": 0.5,
+          "teacherAuthorityChange": 0.6,
+          "burnoutChange": -0.4
+        }
+      }
+    },
+    "out_9": {
+      "outcomeDescription": "Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.",
+      "outcomeImage": "https://disk.yandex.ru/i/MUv3_mw-3EIcEA",
+      "outcome": {
+        "type": "partial",
+        "description": "Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.5,
+          "stressChange": -0.3,
+          "trustChange": 0.6,
+          "classClimateChange": 0.3,
+          "teacherAuthorityChange": 0.3,
+          "burnoutChange": -0.4
+        }
+      }
+    },
+    "out_10": {
+      "outcomeDescription": "Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».",
+      "outcomeImage": "https://disk.yandex.ru/i/FxLaUpbRmkc-6A",
+      "outcome": {
+        "type": "success",
+        "description": "Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.7,
+          "stressChange": -0.5,
+          "trustChange": 0.6,
+          "classClimateChange": 0.5,
+          "teacherAuthorityChange": 0.3,
+          "burnoutChange": 0.1
+        }
+      }
+    },
+    "out_11": {
+      "outcomeDescription": "Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.",
+      "outcomeImage": "https://disk.yandex.ru/i/BRVTsSbj3ANniw",
+      "outcome": {
+        "type": "partial",
+        "description": "Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.5,
+          "stressChange": -0.5,
+          "trustChange": 0.4,
+          "classClimateChange": 0.2,
+          "teacherAuthorityChange": 0.2,
+          "burnoutChange": 0.2
+        }
+      }
+    },
+    "out_12": {
+      "outcomeDescription": "Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.",
+      "outcomeImage": "https://disk.yandex.ru/i/4wvGVsxTEkQuaA",
+      "outcome": {
+        "type": "partial",
+        "description": "Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.4,
+          "stressChange": 0.2,
+          "trustChange": 0.1,
+          "classClimateChange": 0.1,
+          "teacherAuthorityChange": 0.2,
+          "burnoutChange": -0.1
+        }
+      }
+    },
+    "out_13": {
+      "outcomeDescription": "Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.",
+      "outcomeImage": "https://disk.yandex.ru/i/NI2ReFyZpBvOPw",
+      "outcome": {
+        "type": "partial",
+        "description": "Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.3,
+          "stressChange": -0.4,
+          "trustChange": 0.1,
+          "classClimateChange": 0.1,
+          "teacherAuthorityChange": 0,
+          "burnoutChange": 0.1
+        }
+      }
+    }
+  },
+  "solutionTypes": [
+    "ТактическоеРешение",
+    "СтратегическоеРешение"
+  ],
+  "responseStrategies": [
+    "Соперничество",
+    "Сотрудничество",
+    "Компромисс",
+    "Избегание"
+  ],
+  "resources": [
+    "Информационный",
+    "Временной",
+    "Образовательный",
+    "Материальный",
+    "Человеческий"
+  ],
+  "typeConsequences": [
+    "Неудача",
+    "Успех",
+    "ЧастичныйУспех"
+  ]
+}

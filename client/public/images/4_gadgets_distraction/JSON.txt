@@ -1,0 +1,410 @@
+{
+  "id": "sit_gadgets_na_uroke",
+  "title": "Отвлечение учеников гаджетами во время урока",
+  "initialNode": "node_1",
+  "context": {
+    "subject": "Информатика",
+    "grade": "8",
+    "lessonPhase": "Первичное закрепление",
+    "format": "Очный",
+    "duration": 45,
+    "techEquipment": "ПК+Интернет"
+  },
+  "participants": [
+    {
+      "type": "Учитель",
+      "name": "Елена Сергеевна",
+      "experience": 7,
+      "emotionalIntelligence": "Высокий",
+      "teachingStyle": "Демократический",
+      "professionalRole": "Предметник"
+    },
+    {
+      "type": "Ученик",
+      "name": "Максим",
+      "age": 14,
+      "motivation": 0.6,
+      "preparation": "Сильный",
+      "socialStatus": "Предпочитаемые",
+      "techEquip": "ПК+Интернет",
+      "commStyle": "Активный"
+    }
+  ],
+  "problem": {
+    "type": "Организационные конфликты",
+    "source": "Внешний",
+    "intensity": "Средняя",
+    "emotions": [
+      "Раздражение",
+      "Тревога"
+    ],
+    "description": "Во время практической работы ученики переключаются с учебной задачи на социальные сети и игры. Прямые запреты вызывают сопротивление, а отсутствие контроля срывает тему урока.",
+    "startMetrics": {
+      "motivation": 0.5,
+      "stress": 0.5,
+      "trust": 0.5,
+      "classClimate": 0.4,
+      "teacherAuthority": 0.5,
+      "teacherBurnout": 0.3
+    }
+  },
+  "nodes": {
+    "node_1": {
+      "description": "Урок информатики. Ученики работают за компьютерами над практическим заданием. Учитель замечает, что несколько учеников открыли соцсети и мессенджеры вместо учебной программы. При попытке сделать замечание, один из учеников отвечает: «Мы же на компьютерах, какая разница?».",
+      "image": "https://disk.yandex.ru/i/l8-vgL-AaJyGPg",
+      "choices": [
+        {
+          "id": "ch_1_1",
+          "description": "Строго потребовать закрыть все лишние вкладки и продолжить работу",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 7,
+            "autonomy": 2,
+            "resources": [
+              "Человеческий",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.2,
+            "stress": 0.2,
+            "trust": -0.2,
+            "classClimate": -0.2,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0.1
+          },
+          "next": "node_2"
+        },
+        {
+          "id": "ch_1_2",
+          "description": "Предложить интегрировать гаджеты в учебный процесс легально",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 4,
+            "autonomy": 7,
+            "resources": [
+              "Образовательный",
+              "Информационный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.3,
+            "stress": -0.2,
+            "trust": 0.3,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": -0.1
+          },
+          "next": "node_3"
+        },
+        {
+          "id": "ch_1_3",
+          "description": "Обсудить с классом правила использования гаджетов на уроке",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Компромисс",
+            "risk": 5,
+            "autonomy": 6,
+            "resources": [
+              "Образовательный",
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.1,
+            "stress": -0.1,
+            "trust": 0.2,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0
+          },
+          "next": "node_4"
+        }
+      ]
+    },
+    "node_2": {
+      "description": "Учитель жёстко требует закрыть все посторонние сайты. Ученики неохотно подчиняются, но атмосфера напряжённая. Часть класса продолжает работать, другие — формально выполняют задание.",
+      "image": "https://disk.yandex.ru/i/idF_9i_xGIXIQg",
+      "choices": [
+        {
+          "id": "ch_2_1",
+          "description": "Продолжить урок в том же режиме, усилить контроль",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 8,
+            "autonomy": 1,
+            "resources": [
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.3,
+            "stress": 0.2,
+            "trust": -0.2,
+            "classClimate": -0.3,
+            "teacherAuthority": 0,
+            "teacherBurnout": 0.2
+          },
+          "next": "out_1"
+        },
+        {
+          "id": "ch_2_2",
+          "description": "Предложить альтернативное задание с использованием гаджетов",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Компромисс",
+            "risk": 5,
+            "autonomy": 6,
+            "resources": [
+              "Образовательный",
+              "Информационный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.1,
+            "trust": 0.1,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0
+          },
+          "next": "out_2"
+        }
+      ]
+    },
+    "node_3": {
+      "description": "Учитель предлагает: «Давайте используем телефоны для образовательных целей — найдите информацию по теме, создайте мини-презентацию». Ученики заинтересованы, включаются в работу.",
+      "image": "https://disk.yandex.ru/i/w1qWv1odRDVBHg",
+      "choices": [
+        {
+          "id": "ch_3_1",
+          "description": "Закрепить новый формат работы как постоянный",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 4,
+            "autonomy": 7,
+            "resources": [
+              "Образовательный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.3,
+            "stress": -0.2,
+            "trust": 0.2,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": -0.1
+          },
+          "next": "out_3"
+        },
+        {
+          "id": "ch_3_2",
+          "description": "Вернуться к традиционному формату после эксперимента",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Компромисс",
+            "risk": 5,
+            "autonomy": 4,
+            "resources": [
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.1,
+            "stress": 0,
+            "trust": -0.1,
+            "classClimate": -0.1,
+            "teacherAuthority": 0,
+            "teacherBurnout": 0.1
+          },
+          "next": "out_4"
+        }
+      ]
+    },
+    "node_4": {
+      "description": "Класс обсуждает и формулирует правила: когда можно использовать гаджеты, а когда — нет. Ученики чувствуют свою причастность, правила воспринимаются как справедливые.",
+      "image": "https://disk.yandex.ru/i/FrCn0NFZ60Qehw",
+      "choices": [
+        {
+          "id": "ch_4_1",
+          "description": "Зафиксировать правила и внедрить их с следующего урока",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 3,
+            "autonomy": 7,
+            "resources": [
+              "Образовательный",
+              "Информационный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.2,
+            "trust": 0.3,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": -0.1
+          },
+          "next": "out_5"
+        },
+        {
+          "id": "ch_4_2",
+          "description": "Поблагодарить за обсуждение, но оставить решение за учителем",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Компромисс",
+            "risk": 5,
+            "autonomy": 4,
+            "resources": [
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0,
+            "stress": 0,
+            "trust": 0.1,
+            "classClimate": 0,
+            "teacherAuthority": 0,
+            "teacherBurnout": 0
+          },
+          "next": "out_6"
+        }
+      ]
+    },
+    "out_1": {
+      "outcomeDescription": "Урок завершён формально. Ученики подчинились, но мотивация снизилась. Доверие к учителю подорвано, риск повторных конфликтов высок.",
+      "outcomeImage": "https://disk.yandex.ru/i/j3QQ0FpIp7DlUA",
+      "outcome": {
+        "type": "failure",
+        "description": "Урок завершён формально. Ученики подчинились, но мотивация снизилась. Доверие к учителю подорвано, риск повторных конфликтов высок.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.3,
+          "stressChange": 0.2,
+          "trustChange": -0.2,
+          "classClimateChange": -0.3,
+          "teacherAuthorityChange": 0,
+          "burnoutChange": 0.2
+        }
+      }
+    },
+    "out_2": {
+      "outcomeDescription": "Ученики заинтересовались альтернативным заданием. Урок завершён с позитивным результатом, но тема частично не раскрыта.",
+      "outcomeImage": "https://disk.yandex.ru/i/o_KI5vfzJk433w",
+      "outcome": {
+        "type": "partial",
+        "description": "Ученики заинтересовались альтернативным заданием. Урок завершён с позитивным результатом, но тема частично не раскрыта.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.2,
+          "stressChange": -0.1,
+          "trustChange": 0.1,
+          "classClimateChange": 0.1,
+          "teacherAuthorityChange": 0.1,
+          "burnoutChange": 0
+        }
+      }
+    },
+    "out_3": {
+      "outcomeDescription": "Новый формат работы успешно внедрён. Ученики мотивированы, используют гаджеты по назначению. Учитель воспринимается как современный педагог.",
+      "outcomeImage": "https://disk.yandex.ru/i/UqsWb2ZaHz028A",
+      "outcome": {
+        "type": "success",
+        "description": "Новый формат работы успешно внедрён. Ученики мотивированы, используют гаджеты по назначению. Учитель воспринимается как современный педагог.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.3,
+          "stressChange": -0.2,
+          "trustChange": 0.3,
+          "classClimateChange": 0.2,
+          "teacherAuthorityChange": 0.2,
+          "burnoutChange": -0.1
+        }
+      }
+    },
+    "out_4": {
+      "outcomeDescription": "Эксперимент завершён, класс возвращается к традиционному формату. Ученики разочарованы, интерес к предмету снижается.",
+      "outcomeImage": "https://disk.yandex.ru/i/p6yszM5n4tQSiw",
+      "outcome": {
+        "type": "partial",
+        "description": "Эксперимент завершён, класс возвращается к традиционному формату. Ученики разочарованы, интерес к предмету снижается.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.1,
+          "stressChange": 0,
+          "trustChange": -0.1,
+          "classClimateChange": -0.1,
+          "teacherAuthorityChange": 0,
+          "burnoutChange": 0.1
+        }
+      }
+    },
+    "out_5": {
+      "outcomeDescription": "Правила, сформулированные классом, успешно внедрены. Ученики соблюдают их, чувствуя ответственность. Атмосфера доверия укрепляется.",
+      "outcomeImage": "https://disk.yandex.ru/i/Lxs51TNIVyHkUA",
+      "outcome": {
+        "type": "success",
+        "description": "Правила, сформулированные классом, успешно внедрены. Ученики соблюдают их, чувствуя ответственность. Атмосфера доверия укрепляется.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.2,
+          "stressChange": -0.2,
+          "trustChange": 0.3,
+          "classClimateChange": 0.2,
+          "teacherAuthorityChange": 0.2,
+          "burnoutChange": -0.1
+        }
+      }
+    },
+    "out_6": {
+      "outcomeDescription": "Обсуждение прошло, но правила остались прежними. Ученики ценят, что их выслушали, но существенных изменений не произошло.",
+      "outcomeImage": "https://disk.yandex.ru/i/afbLtihk4ggVZQ",
+      "outcome": {
+        "type": "partial",
+        "description": "Обсуждение прошло, но правила остались прежними. Ученики ценят, что их выслушали, но существенных изменений не произошло.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0,
+          "stressChange": 0,
+          "trustChange": 0.1,
+          "classClimateChange": 0,
+          "teacherAuthorityChange": 0,
+          "burnoutChange": 0
+        }
+      }
+    }
+  },
+  "solutionTypes": [
+    "ТактическоеРешение",
+    "СтратегическоеРешение"
+  ],
+  "responseStrategies": [
+    "Соперничество",
+    "Сотрудничество",
+    "Компромисс"
+  ],
+  "resources": [
+    "Человеческий",
+    "Временной",
+    "Образовательный",
+    "Информационный"
+  ],
+  "typeConsequences": [
+    "Неудача",
+    "ЧастичныйУспех",
+    "Успех"
+  ]
+}

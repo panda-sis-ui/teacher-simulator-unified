@@ -1,0 +1,512 @@
+-- ============================================
+-- ЭТАЛОННЫЙ СКРИПТ ИМПОРТА СИТУАЦИИ
+-- Ситуация: Обвинение ученика в предвзятости оценивания
+-- ID: sit_obvinenie_uchitelya_v_predvyatosti
+-- ============================================
+
+-- ============================================
+-- ТРАНЗАКЦИЯ 1: СПРАВОЧНИКИ
+-- ============================================
+BEGIN;
+
+-- Solution_type
+INSERT INTO solution_type (name) VALUES
+    ('ТактическоеРешение'),
+    ('СтратегическоеРешение')
+ON CONFLICT (name) DO NOTHING;
+
+-- Response_strategy
+INSERT INTO response_strategy (name) VALUES
+    ('Соперничество'),
+    ('Сотрудничество'),
+    ('Компромисс'),
+    ('Приспособление'),
+    ('Избегание')
+ON CONFLICT (name) DO NOTHING;
+
+-- Resource
+INSERT INTO resource (name) VALUES
+    ('Человеческий'),
+    ('Временной'),
+    ('Образовательный'),
+    ('Аппаратный'),
+    ('Информационный'),
+    ('Материальный')
+ON CONFLICT (name) DO NOTHING;
+
+-- Type_consequence
+INSERT INTO type_consequence (name) VALUES
+    ('Успех'),
+    ('ЧастичныйУспех'),
+    ('Неудача')
+ON CONFLICT (name) DO NOTHING;
+
+-- Emotion
+INSERT INTO emotion (name) VALUES
+    ('Раздражение'),
+    ('Тревога'),
+    ('Обида'),
+    ('Стыд'),
+    ('Страх'),
+    ('Апатия'),
+    ('Доверие'),
+    ('Радость'),
+    ('Гнев')
+ON CONFLICT (name) DO NOTHING;
+
+-- Emotion_intelligence
+INSERT INTO emotion_intelligence (name) VALUES
+    ('Низкий'),
+    ('Средний'),
+    ('Высокий')
+ON CONFLICT (name) DO NOTHING;
+
+-- Pedagogical_style
+INSERT INTO pedagogical_style (name) VALUES
+    ('Авторитарный'),
+    ('Демократический'),
+    ('Либеральный')
+ON CONFLICT (name) DO NOTHING;
+
+-- Professional_role
+INSERT INTO professional_role (name) VALUES
+    ('Предметник'),
+    ('Классный руководитель'),
+    ('Методист')
+ON CONFLICT (name) DO NOTHING;
+
+-- Communication_style
+INSERT INTO communication_style (name) VALUES
+    ('Пассивный'),
+    ('Активный'),
+    ('Конфликтный'),
+    ('Коммуникабельный')
+ON CONFLICT (name) DO NOTHING;
+
+-- Social_status
+INSERT INTO social_status (name) VALUES
+    ('Принятые'),
+    ('Предпочитаемые'),
+    ('Изолированные'),
+    ('Пренебрегаемые')
+ON CONFLICT (name) DO NOTHING;
+
+-- Type_problem
+INSERT INTO type_problem (name) VALUES
+    ('Мотивационные кризисы'),
+    ('Конфликты взаимодействия'),
+    ('Дисциплинарные проблемы')
+ON CONFLICT (name) DO NOTHING;
+
+-- Source_problem
+INSERT INTO source_problem (name) VALUES
+    ('Внутренний'),
+    ('Внешний'),
+    ('Смешанный')
+ON CONFLICT (name) DO NOTHING;
+
+COMMIT;
+
+-- ============================================
+-- ТРАНЗАКЦИЯ 2: КОНТЕКСТ УРОКА
+-- ============================================
+BEGIN;
+
+-- Lesson
+INSERT INTO lesson (name) VALUES
+    ('Информатика'),
+    ('Литература'),
+    ('Математика')
+ON CONFLICT (name) DO NOTHING;
+
+-- Classroom
+INSERT INTO classroom (name) VALUES
+    ('6 класс'),
+    ('7 класс'),
+    ('9 класс')
+ON CONFLICT (name) DO NOTHING;
+
+-- Lesson_stage
+INSERT INTO lesson_stage (name) VALUES
+    ('Актуализация знаний'),
+    ('Открытие нового знания'),
+    ('Первичное закрепление'),
+    ('Контроль знаний')
+ON CONFLICT (name) DO NOTHING;
+
+-- Lesson_format
+INSERT INTO lesson_format (name) VALUES
+    ('Очный'),
+    ('Дистанционный'),
+    ('Смешанный')
+ON CONFLICT (name) DO NOTHING;
+
+-- Tech_equip
+INSERT INTO tech_equip (name) VALUES
+    ('НетПК'),
+    ('ПК+Интернет'),
+    ('Интерактивная доска')
+ON CONFLICT (name) DO NOTHING;
+
+-- Context (уникальная комбинация)
+INSERT INTO context (lesson_id, classroom_id, lesson_stage_id, lesson_format_id, tech_equip_id, duration)
+SELECT
+    l.id, c.id, ls.id, lf.id, te.id, 45
+FROM lesson l
+CROSS JOIN classroom c
+CROSS JOIN lesson_stage ls
+CROSS JOIN lesson_format lf
+CROSS JOIN tech_equip te
+WHERE l.name = 'Информатика'
+  AND c.name = '9 класс'
+  AND ls.name = 'Первичное закрепление'
+  AND lf.name = 'Очный'
+  AND te.name = 'ПК+Интернет'
+ON CONFLICT DO NOTHING;
+
+COMMIT;
+
+-- ============================================
+-- ТРАНЗАКЦИЯ 3: УЧАСТНИКИ
+-- ============================================
+BEGIN;
+
+-- Participant (Учитель)
+INSERT INTO participant (full_name, age) VALUES
+    ('Мария Петровна', 45)
+ON CONFLICT (full_name) DO NOTHING;
+
+-- Participant (Ученик)
+INSERT INTO participant (full_name, age) VALUES
+    ('Дмитрий Волков', 15)
+ON CONFLICT (full_name) DO NOTHING;
+
+-- Teacher
+INSERT INTO teacher (participant_id, emotion_intell_id, style_id, prof_role_id, experience)
+SELECT
+    p.id, ei.id, ps.id, pr.id, 8
+FROM participant p
+CROSS JOIN emotion_intelligence ei
+CROSS JOIN pedagogical_style ps
+CROSS JOIN professional_role pr
+WHERE p.full_name = 'Мария Петровна'
+  AND ei.name = 'Средний'
+  AND ps.name = 'Демократический'
+  AND pr.name = 'Предметник'
+ON CONFLICT (participant_id) DO NOTHING;
+
+-- Student
+INSERT INTO student (participant_id, tech_equip_id, comm_style_id, social_status_id, motivation, preparation)
+SELECT
+    p.id, te.id, cs.id, ss.id, 0.5, 0.6
+FROM participant p
+CROSS JOIN tech_equip te
+CROSS JOIN communication_style cs
+CROSS JOIN social_status ss
+WHERE p.full_name = 'Дмитрий Волков'
+  AND te.name = 'ПК+Интернет'
+  AND cs.name = 'Конфликтный'
+  AND ss.name = 'Принятые'
+ON CONFLICT (participant_id) DO NOTHING;
+
+COMMIT;
+
+-- ============================================
+-- ТРАНЗАКЦИЯ 4: ПРОБЛЕМА
+-- ============================================
+BEGIN;
+
+-- Problem
+INSERT INTO problem (
+    type_problem_id, source_problem_id, intensity, tension_factor, description,
+    start_motivation, start_stress, start_trust, start_class_climate,
+    start_teacher_authority, start_teacher_burnout
+)
+SELECT
+    tp.id, sp.id, 0.8, 0.8,
+    'Ученик публично заявляет о предвзятости учителя после получения низкой оценки за контрольную работу.',
+    0.3, 0.8, 0.3, 0.3, 0.4, 0.5
+FROM type_problem tp
+CROSS JOIN source_problem sp
+WHERE tp.name = 'Конфликты взаимодействия'
+  AND sp.name = 'Внутренний'
+ON CONFLICT ON CONSTRAINT problem_description_key DO NOTHING;
+
+-- Problem_emotions
+INSERT INTO problem_emotions (emotion_id, problem_id)
+SELECT e.id, p.id
+FROM emotion e
+CROSS JOIN problem p
+WHERE e.name IN ('Раздражение', 'Тревога', 'Обида')
+  AND p.description = 'Ученик публично заявляет о предвзятости учителя после получения низкой оценки за контрольную работу.'
+ON CONFLICT (emotion_id, problem_id) DO NOTHING;
+
+COMMIT;
+
+-- ============================================
+-- ТРАНЗАКЦИЯ 5: УЗЛЫ СЦЕНАРИЯ
+-- ============================================
+BEGIN;
+
+-- Script_node (4 промежуточных + 9 терминальных = 13 узлов)
+INSERT INTO script_node (description, url_image, is_terminal) VALUES
+-- Промежуточные узлы
+('После объявления оценок за контрольную работу Дмитрий резко встаёт и заявляет: «Это несправедливо! Вы всегда занижаете мне оценки!». Класс затихает, все смотрят на учителя. Лицо Дмитрия покраснело от возмущения, несколько учеников переглядываются. Учитель чувствует, как нарастает напряжение — от её реакции зависит, перерастёт ли это в открытый конфликт или удастся перевести ситуацию в конструктивное русло.',
+ 'https://disk.yandex.ru/i/9sBlDMAJoHlTYw', false),
+
+('Учитель выбрал жёсткую позицию, но конфликт не исчерпан. Дмитрий продолжает настаивать на своём, его голос дрожит от обиды. Класс наблюдает за противостоянием. Необходимо выбрать конкретный способ защиты своей позиции, но каждый вариант несёт риски эскалации конфликта или потери доверия.',
+ 'https://disk.yandex.ru/i/3aY60bUnK3KgpA', false),
+
+('Учитель предложил открытый диалог. Дмитрий немного успокоился, но всё ещё напряжён. Класс внимательно слушает. Теперь важно выбрать формат, который покажет объективность оценивания, не унизив ученика и сохранив учебное время.',
+ 'https://disk.yandex.ru/i/dTDAqDM1ThjfCw', false),
+
+('Учитель выбрал формальный подход к решению конфликта. Дмитрий ожидает конкретных действий. Класс наблюдает, насколько серьёзно учитель относится к процедуре оценивания. Необходимо выбрать способ документирования, который покажет прозрачность без излишней бюрократизации.',
+ 'https://disk.yandex.ru/i/WPblkgyistH_xg', false),
+
+-- Терминальные узлы
+('Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.',
+ 'https://disk.yandex.ru/i/Mp_r4oytlcEl-A', true),
+
+('Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.',
+ 'https://disk.yandex.ru/i/2pg4ARiPRqR56A', true),
+
+('Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.',
+ 'https://disk.yandex.ru/i/mUP5JM1C3LHSKw', true),
+
+('Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.',
+ 'https://disk.yandex.ru/i/7UWdAOmkDcoQrw', true),
+
+('Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.',
+ 'https://disk.yandex.ru/i/MUv3_mw-3EIcEA', true),
+
+('Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».',
+ 'https://disk.yandex.ru/i/FxLaUpbRmkc-6A', true),
+
+('Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.',
+ 'https://disk.yandex.ru/i/BRVTsSbj3ANniw', true),
+
+('Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.',
+ 'https://disk.yandex.ru/i/4wvGVsxTEkQuaA', true),
+
+('Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.',
+ 'https://disk.yandex.ru/i/NI2ReFyZpBvOPw', true);
+
+COMMIT;
+
+-- ============================================
+-- ТРАНЗАКЦИЯ 6: МЕТРИКИ ИЗМЕНЕНИЙ И ПОСЛЕДСТВИЯ
+-- ============================================
+BEGIN;
+
+-- Change_metrics (9 записей для 9 исходов)
+INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout) VALUES
+(0, 0.1, -0.1, 0, 0.5, 0.7),    -- out_5
+(-0.1, 0.9, -0.2, -0.1, -0.1, 0.8),  -- out_6
+(0.1, 0.9, 0, -0.1, 0.1, 0.9),   -- out_7
+(0.6, -0.4, 0.7, 0.5, 0.6, -0.4),  -- out_8
+(0.5, -0.3, 0.6, 0.3, 0.3, -0.4),  -- out_9
+(0.7, -0.5, 0.6, 0.5, 0.3, 0.1),  -- out_10
+(0.5, -0.5, 0.4, 0.2, 0.2, 0.2),  -- out_11
+(0.4, 0.2, 0.1, 0.1, 0.2, -0.1),  -- out_12
+(0.3, -0.4, 0.1, 0.1, 0, 0.1);    -- out_13
+
+-- Consequence (9 записей)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+    cm.id,
+    tc.id,
+    CASE cm.id
+        WHEN 1 THEN 'Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.'
+        WHEN 2 THEN 'Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.'
+        WHEN 3 THEN 'Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.'
+        WHEN 4 THEN 'Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.'
+        WHEN 5 THEN 'Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.'
+        WHEN 6 THEN 'Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».'
+        WHEN 7 THEN 'Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.'
+        WHEN 8 THEN 'Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.'
+        WHEN 9 THEN 'Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.'
+    END,
+    true, true, 0.5
+FROM change_metrics cm
+JOIN type_consequence tc ON tc.name = CASE cm.id
+    WHEN 1 THEN 'Неудача'
+    WHEN 2 THEN 'Неудача'
+    WHEN 3 THEN 'Неудача'
+    WHEN 4 THEN 'Успех'
+    WHEN 5 THEN 'ЧастичныйУспех'
+    WHEN 6 THEN 'Успех'
+    WHEN 7 THEN 'ЧастичныйУспех'
+    WHEN 8 THEN 'ЧастичныйУспех'
+    WHEN 9 THEN 'ЧастичныйУспех'
+END;
+
+COMMIT;
+
+-- ============================================
+-- ТРАНЗАКЦИЯ 7: РЕШЕНИЯ (12 записей)
+-- ============================================
+BEGIN;
+
+INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+SELECT
+    st.id,
+    rs.id,
+    s.risk,
+    s.autonomy
+FROM (VALUES
+    (1, 'ТактическоеРешение', 'Соперничество', 7, 2),
+    (2, 'СтратегическоеРешение', 'Сотрудничество', 4, 7),
+    (3, 'СтратегическоеРешение', 'Компромисс', 5, 5),
+    (4, 'ТактическоеРешение', 'Соперничество', 8, 1),
+    (5, 'ТактическоеРешение', 'Соперничество', 9, 5),
+    (6, 'ТактическоеРешение', 'Соперничество', 10, 3),
+    (7, 'СтратегическоеРешение', 'Сотрудничество', 3, 8),
+    (8, 'ТактическоеРешение', 'Компромисс', 4, 6),
+    (9, 'СтратегическоеРешение', 'Сотрудничество', 5, 9),
+    (10, 'СтратегическоеРешение', 'Компромисс', 4, 6),
+    (11, 'СтратегическоеРешение', 'Компромисс', 6, 7),
+    (12, 'ТактическоеРешение', 'Избегание', 5, 5)
+) AS s(id, sol_type, strategy, risk, autonomy)
+JOIN solution_type st ON st.name = s.sol_type
+JOIN response_strategy rs ON rs.name = s.strategy;
+
+COMMIT;
+
+-- ============================================
+-- ТРАНЗАКЦИЯ 8: РЕСУРСЫ РЕШЕНИЙ
+-- ============================================
+BEGIN;
+
+INSERT INTO solution_resource (solution_id, resource_id)
+SELECT s.id, r.id
+FROM solution s
+CROSS JOIN resource r
+WHERE
+    (s.id = 1 AND r.name IN ('Информационный', 'Временной')) OR
+    (s.id = 2 AND r.name IN ('Образовательный', 'Информационный', 'Временной')) OR
+    (s.id = 3 AND r.name IN ('Информационный', 'Материальный')) OR
+    (s.id = 4 AND r.name = 'Временной') OR
+    (s.id = 5 AND r.name IN ('Информационный', 'Материальный')) OR
+    (s.id = 6 AND r.name IN ('Человеческий', 'Временной')) OR
+    (s.id = 7 AND r.name IN ('Образовательный', 'Человеческий', 'Временной')) OR
+    (s.id = 8 AND r.name IN ('Образовательный', 'Информационный')) OR
+    (s.id = 9 AND r.name IN ('Образовательный', 'Временной')) OR
+    (s.id = 10 AND r.name IN ('Информационный', 'Материальный')) OR
+    (s.id = 11 AND r.name IN ('Человеческий', 'Информационный', 'Временной')) OR
+    (s.id = 12 AND r.name IN ('Информационный', 'Временной'));
+
+COMMIT;
+
+-- ============================================
+-- ТРАНЗАКЦИЯ 9: ВЫБОРЫ (12 записей)
+-- ============================================
+BEGIN;
+
+INSERT INTO choice (
+    from_script_node_id, next_script_node_id, solution_id, description,
+    delta_motivation, delta_stress, delta_trust,
+    delta_class_climate, delta_teacher_authority, delta_teacher_burnout,
+    consequence_text, type_consequence_id
+)
+SELECT
+    from_sn.id,
+    next_sn.id,
+    sol.id,
+    c.description,
+    c.delta_motivation, c.delta_stress, c.delta_trust,
+    c.delta_class_climate, c.delta_teacher_authority, c.delta_teacher_burnout,
+    c.consequence_text,
+    tc.id
+FROM (VALUES
+    -- node_1 (ID=1) -> node_2,3,4 (ID=2,3,4)
+    (1, 2, 1, 'Жёсткая защита позиции. Оценка выставлена по правилам, обсуждению не подлежит',
+     -0.3, 0.3, -0.4, -0.3, 0.1, 0.2, NULL, 'Неудача'),
+    (1, 3, 2, 'Давайте разберём критерии оценивания вместе',
+     0.3, -0.4, 0.4, 0.2, 0.3, -0.1, NULL, 'Успех'),
+    (1, 4, 3, 'Предоставлю письменные критерии оценки',
+     0.2, -0.3, 0.3, 0.1, 0.2, -0.1, NULL, 'ЧастичныйУспех'),
+    -- node_2 (ID=2) -> out_5,6,7 (ID=5,6,7)
+    (2, 5, 4, 'Заявить, что оценка выставлена по правилам, не погружаясь в детали',
+     -0.3, 0.3, -0.4, -0.3, 0.1, 0.2,
+     'Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.', 'Неудача'),
+    (2, 6, 5, 'Показать лучшие работы класса в качестве примера',
+     -0.4, 0.5, -0.5, -0.4, -0.2, 0.3,
+     'Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.', 'Неудача'),
+    (2, 7, 6, 'Если не согласны — идите к завучу',
+     -0.2, 0.4, -0.3, -0.3, 0, 0.4,
+     'Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.', 'Неудача'),
+    -- node_3 (ID=3) -> out_8,9,10 (ID=8,9,10)
+    (3, 8, 7, 'Пригласить ученика после урока для детального анализа',
+     0.3, -0.4, 0.4, 0.2, 0.3, -0.1,
+     'Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.', 'Успех'),
+    (3, 9, 8, 'Напомнить всем критерии оценки данной работы',
+     0.2, -0.2, 0.3, 0.2, 0.2, 0,
+     'Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.', 'ЧастичныйУспех'),
+    (3, 10, 9, 'Ученик может улучшить оценку, выполнив работу повторно',
+     0.4, -0.3, 0.3, 0.3, 0.1, 0.1,
+     'Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».', 'Успех'),
+    -- node_4 (ID=4) -> out_11,12,13 (ID=11,12,13)
+    (4, 11, 10, 'Раздать распечатанные критерии с баллами за каждый пункт',
+     0.2, -0.3, 0.3, 0.1, 0.2, -0.1,
+     'Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.', 'ЧастичныйУспех'),
+    (4, 12, 11, 'Предложить проверить работу другим преподавателем',
+     0.1, -0.2, 0.2, 0.1, -0.1, 0.1,
+     'Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.', 'ЧастичныйУспех'),
+    (4, 13, 12, 'Попросить оформить претензию официально с подписью',
+     0, -0.1, 0.1, 0, 0.1, -0.1,
+     'Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.', 'ЧастичныйУспех')
+) AS c(from_ord, next_ord, sol_ord, description,
+      delta_motivation, delta_stress, delta_trust,
+      delta_class_climate, delta_teacher_authority, delta_teacher_burnout,
+      consequence_text, type_conseq_name)
+JOIN script_node from_sn ON from_sn.id = c.from_ord
+JOIN script_node next_sn ON next_sn.id = c.next_ord
+JOIN solution sol ON sol.id = c.sol_ord
+JOIN type_consequence tc ON tc.name = c.type_conseq_name;
+
+COMMIT;
+
+-- ============================================
+-- ТРАНЗАКЦИЯ 10: СИТУАЦИЯ И УЧАСТНИКИ
+-- ============================================
+BEGIN;
+
+-- Situation
+INSERT INTO situation (context_id, problem_id, script_node_id, name)
+SELECT
+    ctx.id,
+    p.id,
+    sn.id,
+    'Обвинение ученика в предвзятости оценивания'
+FROM context ctx
+CROSS JOIN problem p
+CROSS JOIN script_node sn
+WHERE ctx.lesson_id = (SELECT id FROM lesson WHERE name = 'Информатика' LIMIT 1)
+  AND ctx.classroom_id = (SELECT id FROM classroom WHERE name = '9 класс' LIMIT 1)
+  AND p.description = 'Ученик публично заявляет о предвзятости учителя после получения низкой оценки за контрольную работу.'
+  AND sn.id = 1
+ON CONFLICT DO NOTHING;
+
+-- Situation_participants
+INSERT INTO situation_participants (situation_id, participant_id)
+SELECT s.id, p.id
+FROM situation s
+CROSS JOIN participant p
+WHERE s.name = 'Обвинение ученика в предвзятости оценивания'
+  AND p.full_name IN ('Мария Петровна', 'Дмитрий Волков')
+ON CONFLICT (situation_id, participant_id) DO NOTHING;
+
+COMMIT;
+
+-- ============================================
+-- ПРОВЕРКА РЕЗУЛЬТАТОВ
+-- ============================================
+SELECT
+    'solution' AS table_name, COUNT(*) AS count FROM solution
+UNION ALL SELECT 'choice', COUNT(*) FROM choice
+UNION ALL SELECT 'solution_resource', COUNT(*) FROM solution_resource
+UNION ALL SELECT 'consequence', COUNT(*) FROM consequence
+UNION ALL SELECT 'change_metrics', COUNT(*) FROM change_metrics
+UNION ALL SELECT 'script_node', COUNT(*) FROM script_node
+UNION ALL SELECT 'situation', COUNT(*) FROM situation
+UNION ALL SELECT 'situation_participants', COUNT(*) FROM situation_participants;

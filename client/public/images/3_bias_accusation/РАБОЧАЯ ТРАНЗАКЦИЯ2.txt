@@ -1,0 +1,543 @@
+-- ====================================================================
+-- Загрузка сценария "Обвинение ученика в предвзятости оценивания"
+-- ====================================================================
+BEGIN;
+
+-- --------------------------------------------------------------------
+-- 1. Вспомогательная функция для получения или создания справочных записей
+-- --------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION get_or_create_id(
+    table_name text,
+    name_column text,
+    name_value text
+) RETURNS integer AS $$
+DECLARE
+    result_id integer;
+BEGIN
+    EXECUTE format('SELECT id FROM %I WHERE %I = $1', table_name, name_column) INTO result_id USING name_value;
+    IF result_id IS NULL THEN
+        EXECUTE format('INSERT INTO %I (%I) VALUES ($1) RETURNING id', table_name, name_column) INTO result_id USING name_value;
+    END IF;
+    RETURN result_id;
+END;
+$$ LANGUAGE plpgsql;
+
+-- --------------------------------------------------------------------
+-- 2. Справочники
+-- --------------------------------------------------------------------
+SELECT get_or_create_id('lesson', 'name', 'Информатика');
+SELECT get_or_create_id('classroom', 'name', '9');
+SELECT get_or_create_id('lesson_stage', 'name', 'Первичное закрепление');
+SELECT get_or_create_id('lesson_format', 'name', 'Очный');
+SELECT get_or_create_id('tech_equip', 'name', 'ПК+Интернет');
+SELECT get_or_create_id('type_problem', 'name', 'Конфликты взаимодействия');
+SELECT get_or_create_id('source_problem', 'name', 'Внутренний');
+
+SELECT get_or_create_id('emotion', 'name', 'Раздражение');
+SELECT get_or_create_id('emotion', 'name', 'Тревога');
+SELECT get_or_create_id('emotion', 'name', 'Обида');
+
+SELECT get_or_create_id('solution_type', 'name', 'ТактическоеРешение');
+SELECT get_or_create_id('solution_type', 'name', 'СтратегическоеРешение');
+
+SELECT get_or_create_id('response_strategy', 'name', 'Соперничество');
+SELECT get_or_create_id('response_strategy', 'name', 'Сотрудничество');
+SELECT get_or_create_id('response_strategy', 'name', 'Компромисс');
+SELECT get_or_create_id('response_strategy', 'name', 'Избегание');
+
+SELECT get_or_create_id('resource', 'name', 'Информационный');
+SELECT get_or_create_id('resource', 'name', 'Временной');
+SELECT get_or_create_id('resource', 'name', 'Образовательный');
+SELECT get_or_create_id('resource', 'name', 'Материальный');
+SELECT get_or_create_id('resource', 'name', 'Человеческий');
+
+SELECT get_or_create_id('type_consequence', 'name', 'Неудача');
+SELECT get_or_create_id('type_consequence', 'name', 'Успех');
+SELECT get_or_create_id('type_consequence', 'name', 'ЧастичныйУспех');
+
+SELECT get_or_create_id('communication_style', 'name', 'Конфликтный');
+SELECT get_or_create_id('social_status', 'name', 'Принятые');
+SELECT get_or_create_id('pedagogical_style', 'name', 'Демократический');
+SELECT get_or_create_id('professional_role', 'name', 'Предметник');
+SELECT get_or_create_id('emotion_intelligence', 'name', 'Средний');
+
+-- --------------------------------------------------------------------
+-- 3. Контекст ситуации
+-- --------------------------------------------------------------------
+WITH ctx AS (
+    SELECT
+        (SELECT id FROM lesson WHERE name = 'Информатика') AS lesson_id,
+        (SELECT id FROM classroom WHERE name = '9') AS classroom_id,
+        (SELECT id FROM lesson_stage WHERE name = 'Первичное закрепление') AS lesson_stage_id,
+        (SELECT id FROM lesson_format WHERE name = 'Очный') AS lesson_format_id,
+        (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет') AS tech_equip_id,
+        45 AS duration
+)
+INSERT INTO context (lesson_id, classroom_id, lesson_stage_id, lesson_format_id, tech_equip_id, duration)
+SELECT lesson_id, classroom_id, lesson_stage_id, lesson_format_id, tech_equip_id, duration
+FROM ctx
+WHERE NOT EXISTS (
+    SELECT 1 FROM context c
+    WHERE c.lesson_id = ctx.lesson_id
+      AND c.classroom_id = ctx.classroom_id
+      AND c.lesson_stage_id = ctx.lesson_stage_id
+      AND c.lesson_format_id = ctx.lesson_format_id
+      AND (c.tech_equip_id = ctx.tech_equip_id OR (c.tech_equip_id IS NULL AND ctx.tech_equip_id IS NULL))
+      AND c.duration = ctx.duration
+);
+
+-- --------------------------------------------------------------------
+-- 4. Участники
+-- --------------------------------------------------------------------
+INSERT INTO participant (full_name, age) VALUES ('Мария Петровна', NULL)
+ON CONFLICT (full_name) WHERE age IS NULL DO NOTHING;
+
+INSERT INTO teacher (participant_id, emotion_intell_id, style_id, prof_role_id, experience)
+SELECT
+    p.id,
+    (SELECT id FROM emotion_intelligence WHERE name = 'Средний'),
+    (SELECT id FROM pedagogical_style WHERE name = 'Демократический'),
+    (SELECT id FROM professional_role WHERE name = 'Предметник'),
+    8
+FROM participant p
+WHERE p.full_name = 'Мария Петровна'
+ON CONFLICT (participant_id) DO NOTHING;
+
+INSERT INTO participant (full_name, age) VALUES ('Дмитрий Волков', 15)
+ON CONFLICT (full_name, age) DO NOTHING;
+
+INSERT INTO student (participant_id, tech_equip_id, comm_style_id, social_status_id, motivation, preparation)
+SELECT
+    p.id,
+    (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет'),
+    (SELECT id FROM communication_style WHERE name = 'Конфликтный'),
+    (SELECT id FROM social_status WHERE name = 'Принятые'),
+    0.5,
+    0.5
+FROM participant p
+WHERE p.full_name = 'Дмитрий Волков'
+ON CONFLICT (participant_id) DO NOTHING;
+
+-- --------------------------------------------------------------------
+-- 5. Проблема (сохраняем id во временную таблицу, гарантируем одну строку)
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE problem_ids (id int);
+
+-- Ищем существующую проблему
+INSERT INTO problem_ids
+SELECT id FROM problem
+WHERE type_problem_id = (SELECT id FROM type_problem WHERE name = 'Конфликты взаимодействия')
+  AND source_problem_id = (SELECT id FROM source_problem WHERE name = 'Внутренний')
+  AND description = 'Ученик публично заявляет о предвзятости учителя после получения низкой оценки за контрольную работу.'
+LIMIT 1;
+
+-- Если не нашли, создаём новую (с intensity = 0.8, т.к. в JSON "Высокая")
+WITH new_problem AS (
+    INSERT INTO problem (
+        type_problem_id,
+        source_problem_id,
+        intensity,
+        tension_factor,
+        description,
+        start_motivation,
+        start_stress,
+        start_trust,
+        start_class_climate,
+        start_teacher_authority,
+        start_teacher_burnout
+    )
+    SELECT
+        (SELECT id FROM type_problem WHERE name = 'Конфликты взаимодействия'),
+        (SELECT id FROM source_problem WHERE name = 'Внутренний'),
+        0.8,          -- intensity (высокая)
+        NULL,         -- tension_factor
+        'Ученик публично заявляет о предвзятости учителя после получения низкой оценки за контрольную работу.',
+        0.3, 0.8, 0.3, 0.3, 0.4, 0.5
+    WHERE NOT EXISTS (SELECT 1 FROM problem_ids)
+    RETURNING id
+)
+INSERT INTO problem_ids SELECT id FROM new_problem;
+
+-- Эмоции проблемы
+INSERT INTO problem_emotions (emotion_id, problem_id)
+SELECT e.id, (SELECT id FROM problem_ids)
+FROM emotion e
+WHERE e.name IN ('Раздражение', 'Тревога', 'Обида')
+  AND NOT EXISTS (
+      SELECT 1 FROM problem_emotions pe
+      WHERE pe.emotion_id = e.id AND pe.problem_id = (SELECT id FROM problem_ids)
+  );
+
+-- --------------------------------------------------------------------
+-- 6. Узлы сценария
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE tmp_nodes (
+    node_id text PRIMARY KEY,
+    description text,
+    image text,
+    is_terminal boolean
+);
+
+INSERT INTO tmp_nodes (node_id, description, image, is_terminal) VALUES
+('node_1',
+ 'После объявления оценок за контрольную работу Дмитрий резко встаёт и заявляет: «Это несправедливо! Вы всегда занижаете мне оценки!». Класс затихает, все смотрят на учителя. Лицо Дмитрия покраснело от возмущения, несколько учеников переглядываются. Учитель чувствует, как нарастает напряжение — от её реакции зависит, перерастёт ли это в открытый конфликт или удастся перевести ситуацию в конструктивное русло.',
+ 'https://disk.yandex.ru/i/9sBlDMAJoHlTYw', false),
+('node_1_1',
+ 'Учитель выбрал жёсткую позицию, но конфликт не исчерпан. Дмитрий продолжает настаивать на своём, его голос дрожит от обиды. Класс наблюдает за противостоянием. Необходимо выбрать конкретный способ защиты своей позиции, но каждый вариант несёт риски эскалации конфликта или потери доверия.',
+ 'https://disk.yandex.ru/i/3aY60bUnK3KgpA', false),
+('node_1_2',
+ 'Учитель предложил открытый диалог. Дмитрий немного успокоился, но всё ещё напряжён. Класс внимательно слушает. Теперь важно выбрать формат, который покажет объективность оценивания, не унизив ученика и сохранив учебное время.',
+ 'https://disk.yandex.ru/i/dTDAqDM1ThjfCw', false),
+('node_1_3',
+ 'Учитель выбрал формальный подход к решению конфликта. Дмитрий ожидает конкретных действий. Класс наблюдает, насколько серьёзно учитель относится к процедуре оценивания. Необходимо выбрать способ документирования, который покажет прозрачность без излишней бюрократизации.',
+ 'https://disk.yandex.ru/i/WPblkgyistH_xg', false),
+('out_5',
+ 'Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.',
+ 'https://disk.yandex.ru/i/Mp_r4oytlcEl-A', true),
+('out_6',
+ 'Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.',
+ 'https://disk.yandex.ru/i/2pg4ARiPRqR56A', true),
+('out_7',
+ 'Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.',
+ 'https://disk.yandex.ru/i/mUP5JM1C3LHSKw', true),
+('out_8',
+ 'Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.',
+ 'https://disk.yandex.ru/i/7UWdAOmkDcoQrw', true),
+('out_9',
+ 'Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.',
+ 'https://disk.yandex.ru/i/MUv3_mw-3EIcEA', true),
+('out_10',
+ 'Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».',
+ 'https://disk.yandex.ru/i/FxLaUpbRmkc-6A', true),
+('out_11',
+ 'Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.',
+ 'https://disk.yandex.ru/i/BRVTsSbj3ANniw', true),
+('out_12',
+ 'Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.',
+ 'https://disk.yandex.ru/i/4wvGVsxTEkQuaA', true),
+('out_13',
+ 'Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.',
+ 'https://disk.yandex.ru/i/NI2ReFyZpBvOPw', true);
+
+INSERT INTO script_node (description, url_image, is_terminal)
+SELECT description, image, is_terminal FROM tmp_nodes
+ON CONFLICT (description) DO NOTHING;
+
+CREATE TEMP TABLE node_ids AS
+SELECT n.node_id, sn.id
+FROM tmp_nodes n
+JOIN script_node sn ON sn.description = n.description;
+
+-- --------------------------------------------------------------------
+-- 7. Выборы, решения, ресурсы
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE tmp_choices (
+    choice_id text,
+    from_node text,
+    next_node text,
+    description text,
+    delta_motivation double precision,
+    delta_stress double precision,
+    delta_trust double precision,
+    delta_class_climate double precision,
+    delta_teacher_authority double precision,
+    delta_teacher_burnout double precision,
+    sol_type text,
+    sol_strategy text,
+    sol_risk int,
+    sol_autonomy int,
+    resources text[]
+);
+
+INSERT INTO tmp_choices VALUES
+('ch_1_1', 'node_1', 'node_1_1',
+ 'Жёсткая защита позиции. Оценка выставлена по правилам, обсуждению не подлежит',
+ -0.3, 0.3, -0.4, -0.3, 0.1, 0.2,
+ 'ТактическоеРешение', 'Соперничество', 7, 2, ARRAY['Информационный','Временной']),
+('ch_1_2', 'node_1', 'node_1_2',
+ 'Давайте разберём критерии оценивания вместе',
+ 0.3, -0.4, 0.4, 0.2, 0.3, -0.1,
+ 'СтратегическоеРешение', 'Сотрудничество', 4, 7, ARRAY['Образовательный','Информационный','Временной']),
+('ch_1_3', 'node_1', 'node_1_3',
+ 'Предоставлю письменные критерии оценки',
+ 0.2, -0.3, 0.3, 0.1, 0.2, -0.1,
+ 'СтратегическоеРешение', 'Компромисс', 5, 5, ARRAY['Информационный','Материальный']),
+('ch_1_1_1', 'node_1_1', 'out_5',
+ 'Заявить, что оценка выставлена по правилам, не погружаясь в детали',
+ -0.3, 0.3, -0.4, -0.3, 0.1, 0.2,
+ 'ТактическоеРешение', 'Соперничество', 8, 1, ARRAY['Временной']),
+('ch_1_1_2', 'node_1_1', 'out_6',
+ 'Показать лучшие работы класса в качестве примера',
+ -0.4, 0.5, -0.5, -0.4, -0.2, 0.3,
+ 'ТактическоеРешение', 'Соперничество', 9, 5, ARRAY['Информационный','Материальный']),
+('ch_1_1_3', 'node_1_1', 'out_7',
+ 'Если не согласны — идите к завучу',
+ -0.2, 0.4, -0.3, -0.3, 0, 0.4,
+ 'ТактическоеРешение', 'Соперничество', 10, 3, ARRAY['Человеческий','Временной']),
+('ch_1_2_1', 'node_1_2', 'out_8',
+ 'Пригласить ученика после урока для детального анализа',
+ 0.3, -0.4, 0.4, 0.2, 0.3, -0.1,
+ 'СтратегическоеРешение', 'Сотрудничество', 3, 8, ARRAY['Образовательный','Человеческий','Временной']),
+('ch_1_2_2', 'node_1_2', 'out_9',
+ 'Напомнить всем критерии оценки данной работы',
+ 0.2, -0.2, 0.3, 0.2, 0.2, 0,
+ 'ТактическоеРешение', 'Компромисс', 4, 6, ARRAY['Образовательный','Информационный']),
+('ch_1_2_3', 'node_1_2', 'out_10',
+ 'Ученик может улучшить оценку, выполнив работу повторно',
+ 0.4, -0.3, 0.3, 0.3, 0.1, 0.1,
+ 'СтратегическоеРешение', 'Сотрудничество', 5, 9, ARRAY['Образовательный','Временной']),
+('ch_1_3_1', 'node_1_3', 'out_11',
+ 'Раздать распечатанные критерии с баллами за каждый пункт',
+ 0.2, -0.3, 0.3, 0.1, 0.2, -0.1,
+ 'СтратегическоеРешение', 'Компромисс', 4, 6, ARRAY['Информационный','Материальный']),
+('ch_1_3_2', 'node_1_3', 'out_12',
+ 'Предложить проверить работу другим преподавателем',
+ 0.1, -0.2, 0.2, 0.1, -0.1, 0.1,
+ 'СтратегическоеРешение', 'Компромисс', 6, 7, ARRAY['Человеческий','Информационный','Временной']),
+('ch_1_3_3', 'node_1_3', 'out_13',
+ 'Попросить оформить претензию официально с подписью',
+ 0, -0.1, 0.1, 0, 0.1, -0.1,
+ 'ТактическоеРешение', 'Избегание', 5, 5, ARRAY['Информационный','Временной']);
+
+CREATE TEMP TABLE tmp_solutions AS
+SELECT DISTINCT
+    sol_type, sol_strategy, sol_risk, sol_autonomy,
+    (SELECT id FROM solution_type WHERE name = sol_type) AS sol_type_id,
+    (SELECT id FROM response_strategy WHERE name = sol_strategy) AS resp_strat_id
+FROM tmp_choices;
+
+INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+SELECT sol_type_id, resp_strat_id, sol_risk, sol_autonomy
+FROM tmp_solutions
+ON CONFLICT (sol_type_id, resp_strat_id, risk, student_autonomy) DO NOTHING;
+
+CREATE TEMP TABLE solution_map AS
+SELECT
+    s.sol_type_id,
+    s.resp_strat_id,
+    s.risk,
+    s.student_autonomy,
+    s.id AS solution_id
+FROM solution s
+JOIN tmp_solutions ts ON ts.sol_type_id = s.sol_type_id
+                     AND ts.resp_strat_id = s.resp_strat_id
+                     AND ts.sol_risk = s.risk
+                     AND ts.sol_autonomy = s.student_autonomy;
+
+INSERT INTO solution_resource (resource_id, solution_id)
+SELECT r.id, sm.solution_id
+FROM tmp_choices tc
+CROSS JOIN UNNEST(tc.resources) AS res_name
+JOIN resource r ON r.name = res_name
+JOIN solution_map sm ON sm.sol_type_id = (SELECT id FROM solution_type WHERE name = tc.sol_type)
+                    AND sm.resp_strat_id = (SELECT id FROM response_strategy WHERE name = tc.sol_strategy)
+                    AND sm.risk = tc.sol_risk
+                    AND sm.student_autonomy = tc.sol_autonomy
+WHERE NOT EXISTS (
+    SELECT 1 FROM solution_resource sr
+    WHERE sr.resource_id = r.id AND sr.solution_id = sm.solution_id
+);
+
+-- --------------------------------------------------------------------
+-- 8. Подготовка данных для последствий (outcome) из JSON
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE outcome_data AS
+SELECT
+    node_id,
+    type_name,
+    description,
+    long_term,
+    reversible
+FROM (VALUES
+    ('out_5', 'failure', 'Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.', true, true),
+    ('out_6', 'failure', 'Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.', true, true),
+    ('out_7', 'failure', 'Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.', true, true),
+    ('out_8', 'success', 'Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.', true, true),
+    ('out_9', 'partial', 'Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.', true, true),
+    ('out_10', 'success', 'Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».', true, true),
+    ('out_11', 'partial', 'Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.', true, true),
+    ('out_12', 'partial', 'Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.', true, true),
+    ('out_13', 'partial', 'Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.', true, true)
+) AS t(node_id, type_name, description, long_term, reversible);
+
+-- --------------------------------------------------------------------
+-- 9. Вставка выборов (choice) с заполнением consequence_text и type_consequence_id
+-- --------------------------------------------------------------------
+INSERT INTO choice (
+    solution_id,
+    from_script_node_id,
+    next_script_node_id,
+    description,
+    delta_motivation,
+    delta_stress,
+    delta_trust,
+    delta_class_climate,
+    delta_teacher_authority,
+    delta_teacher_burnout,
+    consequence_text,
+    type_consequence_id
+)
+SELECT
+    sm.solution_id,
+    n_from.id,
+    n_to.id,
+    tc.description,
+    tc.delta_motivation,
+    tc.delta_stress,
+    tc.delta_trust,
+    tc.delta_class_climate,
+    tc.delta_teacher_authority,
+    tc.delta_teacher_burnout,
+    od.description,   -- consequence_text для терминальных узлов, иначе NULL
+    tc2.id            -- type_consequence_id для терминальных узлов, иначе NULL
+FROM tmp_choices tc
+JOIN node_ids n_from ON n_from.node_id = tc.from_node
+JOIN node_ids n_to ON n_to.node_id = tc.next_node
+JOIN solution_map sm ON sm.sol_type_id = (SELECT id FROM solution_type WHERE name = tc.sol_type)
+                     AND sm.resp_strat_id = (SELECT id FROM response_strategy WHERE name = tc.sol_strategy)
+                     AND sm.risk = tc.sol_risk
+                     AND sm.student_autonomy = tc.sol_autonomy
+LEFT JOIN outcome_data od ON od.node_id = tc.next_node
+LEFT JOIN type_consequence tc2 ON tc2.name = CASE
+    WHEN od.type_name = 'failure' THEN 'Неудача'
+    WHEN od.type_name = 'success' THEN 'Успех'
+    WHEN od.type_name = 'partial' THEN 'ЧастичныйУспех'
+END
+WHERE NOT EXISTS (
+    SELECT 1 FROM choice c
+    WHERE c.solution_id = sm.solution_id
+      AND c.from_script_node_id = n_from.id
+      AND c.next_script_node_id = n_to.id
+      AND c.description = tc.description
+);
+
+-- --------------------------------------------------------------------
+-- 10. Метрики и последствия (consequence)
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE path_metrics AS
+WITH RECURSIVE
+    start_metrics AS (
+        SELECT
+            start_motivation AS motivation,
+            start_stress AS stress,
+            start_trust AS trust,
+            start_class_climate AS class_climate,
+            start_teacher_authority AS teacher_authority,
+            start_teacher_burnout AS teacher_burnout
+        FROM problem
+        WHERE id = (SELECT id FROM problem_ids)
+    ),
+    path_metrics_rec AS (
+        SELECT
+            sn.id AS node_id,
+            sm.motivation,
+            sm.stress,
+            sm.trust,
+            sm.class_climate,
+            sm.teacher_authority,
+            sm.teacher_burnout,
+            sn.is_terminal
+        FROM script_node sn
+        CROSS JOIN start_metrics sm
+        WHERE sn.description = (SELECT description FROM tmp_nodes WHERE node_id = 'node_1')
+        UNION ALL
+        SELECT
+            sn.id,
+            pm.motivation + c.delta_motivation,
+            pm.stress + c.delta_stress,
+            pm.trust + c.delta_trust,
+            pm.class_climate + c.delta_class_climate,
+            pm.teacher_authority + c.delta_teacher_authority,
+            pm.teacher_burnout + c.delta_teacher_burnout,
+            sn.is_terminal
+        FROM path_metrics_rec pm
+        JOIN choice c ON c.from_script_node_id = pm.node_id
+        JOIN script_node sn ON sn.id = c.next_script_node_id
+    )
+SELECT * FROM path_metrics_rec;
+
+INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+SELECT DISTINCT
+    motivation,
+    stress,
+    trust,
+    class_climate,
+    teacher_authority,
+    teacher_burnout
+FROM path_metrics
+WHERE is_terminal = true
+ON CONFLICT (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout) DO NOTHING;
+
+CREATE TEMP TABLE term_metrics AS
+SELECT
+    pm.node_id,
+    cm.id AS change_metrics_id
+FROM path_metrics pm
+JOIN change_metrics cm ON cm.motivation = pm.motivation
+                      AND cm.stress = pm.stress
+                      AND cm.trust = pm.trust
+                      AND cm.class_climate = pm.class_climate
+                      AND cm.teacher_authority = pm.teacher_authority
+                      AND cm.teacher_burnout = pm.teacher_burnout
+WHERE pm.is_terminal = true;
+
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+    tm.change_metrics_id,
+    tc.id,
+    od.description,
+    od.long_term,
+    od.reversible,
+    0.5  -- intensity задаём значение по умолчанию (например, средняя)
+FROM outcome_data od
+JOIN term_metrics tm ON tm.node_id = (SELECT id FROM node_ids WHERE node_id = od.node_id)
+JOIN type_consequence tc ON tc.name = CASE
+    WHEN od.type_name = 'failure' THEN 'Неудача'
+    WHEN od.type_name = 'success' THEN 'Успех'
+    WHEN od.type_name = 'partial' THEN 'ЧастичныйУспех'
+END
+ON CONFLICT (change_metrics_id, type_conseq_id, text) DO NOTHING;
+
+-- --------------------------------------------------------------------
+-- 11. Ситуация
+-- --------------------------------------------------------------------
+INSERT INTO situation (
+    context_id,
+    problem_id,
+    script_node_id,
+    name
+)
+VALUES (
+    (SELECT id FROM context
+     WHERE lesson_id = (SELECT id FROM lesson WHERE name = 'Информатика')
+       AND classroom_id = (SELECT id FROM classroom WHERE name = '9')
+       AND lesson_stage_id = (SELECT id FROM lesson_stage WHERE name = 'Первичное закрепление')
+       AND lesson_format_id = (SELECT id FROM lesson_format WHERE name = 'Очный')
+       AND tech_equip_id = (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет')
+       AND duration = 45),
+    (SELECT id FROM problem_ids),
+    (SELECT id FROM node_ids WHERE node_id = 'node_1'),
+    'Обвинение ученика в предвзятости оценивания'
+)
+ON CONFLICT (script_node_id) DO NOTHING;
+
+-- --------------------------------------------------------------------
+-- 12. Участники ситуации
+-- --------------------------------------------------------------------
+WITH sit AS (
+    SELECT id FROM situation WHERE name = 'Обвинение ученика в предвзятости оценивания'
+)
+INSERT INTO situation_participants (situation_id, participant_id)
+SELECT sit.id, p.id
+FROM sit
+CROSS JOIN participant p
+WHERE p.full_name IN ('Мария Петровна', 'Дмитрий Волков')
+AND NOT EXISTS (
+    SELECT 1 FROM situation_participants sp
+    WHERE sp.situation_id = sit.id AND sp.participant_id = p.id
+);
+
+COMMIT;
+
+-- Очистка (опционально)
+DROP FUNCTION IF EXISTS get_or_create_id(text, text, text) CASCADE;
