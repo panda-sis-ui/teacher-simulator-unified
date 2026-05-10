@@ -322,7 +322,8 @@ const Situation = () => {
             padding: '25px',
             borderRadius: '12px',
             marginBottom: '30px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+            display: 'flex'
           }}>
             {currentNode.urlImage && (
               <img
@@ -333,7 +334,8 @@ const Situation = () => {
                   maxHeight: '300px',
                   objectFit: 'cover',
                   borderRadius: '8px',
-                  marginBottom: '20px'
+                  marginBottom: '20px',
+                  marginRight: '1%'
                 }}
                 onError={(e) => { e.target.style.display = 'none'; }}
               />
