@@ -58,7 +58,7 @@ const Header = () => {
             </NavLink>
           ))}
 
-          {/* Внешняя ссылка на отдельный HTML‑сайт */}
+          {/* Внешняя ссылка на отдельный HTML‑сайт Создание ситуаций */}
           {<a 
             href="/generator.html" 
             target="_blank" 
@@ -66,6 +66,16 @@ const Header = () => {
             className="nav-link"
           >
             Создание ситуаций
+          </a> }
+
+          {/* Внешняя ссылка на отдельный HTML‑сайт Руководство пользователя*/}
+          {<a 
+            href="/help.html" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="nav-link"
+          >
+            Руководство пользователя
           </a> }
         </nav>
 
