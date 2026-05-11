@@ -86,7 +86,7 @@ WHERE NOT EXISTS (
 );
 
 
-INSERT INTO participant (full_name, age) VALUES ('Елена Сергеевна', NULL)
+INSERT INTO participant (full_name, age) VALUES ('Елена Сергеевна', 35)
 ON CONFLICT (full_name) WHERE age IS NULL DO NOTHING;
 
 INSERT INTO teacher (participant_id, emotion_intell_id, style_id, prof_role_id, experience)
@@ -183,16 +183,16 @@ CREATE TEMP TABLE tmp_nodes (
 );
 
 INSERT INTO tmp_nodes (node_id, description, image, is_terminal) VALUES
-('node_1', 'Урок информатики. Ученики работают за компьютерами над практическим заданием. Учитель замечает, что несколько учеников открыли соцсети и мессенджеры вместо учебной программы. При попытке сделать замечание, один из учеников отвечает: «Мы же на компьютерах, какая разница?».', 'https://disk.yandex.ru/i/l8-vgL-AaJyGPg', false),
-('node_2', 'Учитель жёстко требует закрыть все посторонние сайты. Ученики неохотно подчиняются, но атмосфера напряжённая. Часть класса продолжает работать, другие — формально выполняют задание.', 'https://disk.yandex.ru/i/idF_9i_xGIXIQg', false),
-('node_3', 'Учитель предлагает: «Давайте используем телефоны для образовательных целей — найдите информацию по теме, создайте мини-презентацию». Ученики заинтересованы, включаются в работу.', 'https://disk.yandex.ru/i/w1qWv1odRDVBHg', false),
-('node_4', 'Класс обсуждает и формулирует правила: когда можно использовать гаджеты, а когда — нет. Ученики чувствуют свою причастность, правила воспринимаются как справедливые.', 'https://disk.yandex.ru/i/FrCn0NFZ60Qehw', false),
-('out_1', 'Урок завершён формально. Ученики подчинились, но мотивация снизилась. Доверие к учителю подорвано, риск повторных конфликтов высок.', 'https://disk.yandex.ru/i/j3QQ0FpIp7DlUA', true),
-('out_2', 'Ученики заинтересовались альтернативным заданием. Урок завершён с позитивным результатом, но тема частично не раскрыта.', 'https://disk.yandex.ru/i/o_KI5vfzJk433w', true),
-('out_3', 'Новый формат работы успешно внедрён. Ученики мотивированы, используют гаджеты по назначению. Учитель воспринимается как современный педагог.', 'https://disk.yandex.ru/i/UqsWb2ZaHz028A', true),
-('out_4', 'Эксперимент завершён, класс возвращается к традиционному формату. Ученики разочарованы, интерес к предмету снижается.', 'https://disk.yandex.ru/i/p6yszM5n4tQSiw', true),
-('out_5', 'Правила, сформулированные классом, успешно внедрены. Ученики соблюдают их, чувствуя ответственность. Атмосфера доверия укрепляется.', 'https://disk.yandex.ru/i/Lxs51TNIVyHkUA', true),
-('out_6', 'Обсуждение прошло, но правила остались прежними. Ученики ценят, что их выслушали, но существенных изменений не произошло.', 'https://disk.yandex.ru/i/afbLtihk4ggVZQ', true);
+('node_1', 'Урок информатики. Ученики работают за компьютерами над практическим заданием. Учитель замечает, что несколько учеников открыли соцсети и мессенджеры вместо учебной программы. При попытке сделать замечание, один из учеников отвечает: «Мы же на компьютерах, какая разница?».', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/node_1.png?raw=true', false),
+('node_2', 'Учитель жёстко требует закрыть все посторонние сайты. Ученики неохотно подчиняются, но атмосфера напряжённая. Часть класса продолжает работать, другие — формально выполняют задание.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/node_2.png?raw=true', false),
+('node_3', 'Учитель предлагает: «Давайте используем телефоны для образовательных целей — найдите информацию по теме, создайте мини-презентацию». Ученики заинтересованы, включаются в работу.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/node_3.png?raw=true', false),
+('node_4', 'Класс обсуждает и формулирует правила: когда можно использовать гаджеты, а когда — нет. Ученики чувствуют свою причастность, правила воспринимаются как справедливые.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/node_3.png?raw=true', false),
+('out_1', 'Урок завершён формально. Ученики подчинились, но мотивация снизилась. Доверие к учителю подорвано, риск повторных конфликтов высок.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_1.png?raw=true', true),
+('out_2', 'Ученики заинтересовались альтернативным заданием. Урок завершён с позитивным результатом, но тема частично не раскрыта.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_2.png?raw=true', true),
+('out_3', 'Новый формат работы успешно внедрён. Ученики мотивированы, используют гаджеты по назначению. Учитель воспринимается как современный педагог.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_3.png?raw=true', true),
+('out_4', 'Эксперимент завершён, класс возвращается к традиционному формату. Ученики разочарованы, интерес к предмету снижается.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_4.png?raw=true', true),
+('out_5', 'Правила, сформулированные классом, успешно внедрены. Ученики соблюдают их, чувствуя ответственность. Атмосфера доверия укрепляется.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_5.png?raw=true', true),
+('out_6', 'Обсуждение прошло, но правила остались прежними. Ученики ценят, что их выслушали, но существенных изменений не произошло.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_6.png?raw=true', true);
 
 INSERT INTO script_node (description, url_image, is_terminal)
 SELECT description, image, is_terminal FROM tmp_nodes

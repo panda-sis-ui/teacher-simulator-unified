@@ -85,7 +85,7 @@ WHERE NOT EXISTS (
 );
 
 
-INSERT INTO participant (full_name, age) VALUES ('Елена Сергеевна', NULL)
+INSERT INTO participant (full_name, age) VALUES ('Елена Сергеевна', 35)
 ON CONFLICT (full_name) WHERE age IS NULL DO NOTHING;
 
 INSERT INTO teacher (participant_id, emotion_intell_id, style_id, prof_role_id, experience)
@@ -182,19 +182,19 @@ CREATE TEMP TABLE tmp_nodes (
 );
 
 INSERT INTO tmp_nodes (node_id, description, image, is_terminal) VALUES
-('node_1', 'Урок информатики. Учитель даёт классу серию однотипных упражнений по программированию. Ученик Максим, быстро справившись с первыми заданиями, начинает откровенно скучать: он отодвигается от клавиатуры, смотрит в окно, тихо переговаривается с соседом. На замечание учителя отвечает: «Я всё это уже умею, зачем делать одно и то же?». Класс начинает отвлекаться, атмосфера становится вялой.', 'https://disk.yandex.ru/i/GRNjwYsGakvQSw', false),
-('node_1_1', 'Учитель жёстко требует прекратить отвлекаться и выполнять задания. Максим насупился, но приступил к работе формально. Класс притих, чувствуется напряжение.', 'https://disk.yandex.ru/i/2JG1h5N3gXT6AQ', false),
-('node_1_2', 'Учитель предлагает Максиму более сложное задание или творческий проект. Максим оживился, с интересом рассматривает условие. Класс наблюдает, некоторые тоже просят альтернативу.', 'https://disk.yandex.ru/i/rM4gVpsD2TF_6A', false),
-('node_1_3', 'Учитель предлагает классу соревнование или игру. Ученики оживляются, Максим с азартом включается в работу.', 'https://disk.yandex.ru/i/NAr3P9FcF5JrkQ', false),
-('out_1', 'Ученик формально выполняет задания, но без интереса. Атмосфера в классе напряжённая, доверие к учителю снижено. Урок завершён, но мотивация к предмету упала.', 'https://disk.yandex.ru/i/04SZw6fEzAQftQ', true),
-('out_2', 'Ученик воспринял увеличение объёма как наказание, делает задания кое-как, обижен на учителя. Класс сочувствует ему, атмосфера враждебная.', 'https://disk.yandex.ru/i/QdaJ2PUVvODc5A', true),
-('out_3', 'Ученик испытывает стыд и обиду, замыкается. Класс осуждает учителя за публичное сравнение. Доверие подорвано, возможны дальнейшие конфликты.', 'https://disk.yandex.ru/i/AtdX7riuIdtNWg', true),
-('out_4', 'Ученик увлечённо решает сложную задачу, чувствует признание. Урок проходит в рабочей атмосфере, интерес к предмету растёт.', 'https://disk.yandex.ru/i/_706ePPMFg9KVg', true),
-('out_5', 'Ученик создаёт творческий проект, проявляет инициативу. Класс вдохновлён, многие просят альтернативные задания. Учитель воспринимается как современный педагог.', 'https://disk.yandex.ru/i/FSRr8AUTKnxL5g', true),
-('out_6', 'Ученик помогает отстающим, чувствует свою значимость. В классе укрепляется взаимопомощь, дисциплина улучшается.', 'https://disk.yandex.ru/i/fqkkrnJcXom2Jw', true),
-('out_7', 'Соревнование прошло динамично, ученик работал быстро, но иногда спешил. Класс получил заряд энергии, но качество выполнения снизилось.', 'https://disk.yandex.ru/i/Qo-jXOKcy3CZHA', true),
-('out_8', 'Командная игра сплотила класс, ученик работал в группе с интересом. Урок прошёл продуктивно, атмосфера дружелюбная.', 'https://disk.yandex.ru/i/rIk6y2iBA1iIBg', true),
-('out_9', 'Мини-проект увлёк ученика, он проявил творчество, но не все успели завершить. Учитель планирует продолжить в следующий раз, интерес к теме высок.', 'https://disk.yandex.ru/i/UPotZjEZdoJvRg', true);
+('node_1', 'Урок информатики. Учитель даёт классу серию однотипных упражнений по программированию. Ученик Максим, быстро справившись с первыми заданиями, начинает откровенно скучать: он отодвигается от клавиатуры, смотрит в окно, тихо переговаривается с соседом. На замечание учителя отвечает: «Я всё это уже умею, зачем делать одно и то же?». Класс начинает отвлекаться, атмосфера становится вялой.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/node_1.png?raw=true', false),
+('node_1_1', 'Учитель жёстко требует прекратить отвлекаться и выполнять задания. Максим насупился, но приступил к работе формально. Класс притих, чувствуется напряжение.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/node_1_1.png?raw=true', false),
+('node_1_2', 'Учитель предлагает Максиму более сложное задание или творческий проект. Максим оживился, с интересом рассматривает условие. Класс наблюдает, некоторые тоже просят альтернативу.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/node_1_2.png?raw=true', false),
+('node_1_3', 'Учитель предлагает классу соревнование или игру. Ученики оживляются, Максим с азартом включается в работу.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/node_1_3.png?raw=true', false),
+('out_1', 'Ученик формально выполняет задания, но без интереса. Атмосфера в классе напряжённая, доверие к учителю снижено. Урок завершён, но мотивация к предмету упала.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_1.png?raw=true', true),
+('out_2', 'Ученик воспринял увеличение объёма как наказание, делает задания кое-как, обижен на учителя. Класс сочувствует ему, атмосфера враждебная.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_2.png?raw=true', true),
+('out_3', 'Ученик испытывает стыд и обиду, замыкается. Класс осуждает учителя за публичное сравнение. Доверие подорвано, возможны дальнейшие конфликты.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_3.png?raw=true', true),
+('out_4', 'Ученик увлечённо решает сложную задачу, чувствует признание. Урок проходит в рабочей атмосфере, интерес к предмету растёт.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_4.png?raw=true', true),
+('out_5', 'Ученик создаёт творческий проект, проявляет инициативу. Класс вдохновлён, многие просят альтернативные задания. Учитель воспринимается как современный педагог.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_5.png?raw=true', true),
+('out_6', 'Ученик помогает отстающим, чувствует свою значимость. В классе укрепляется взаимопомощь, дисциплина улучшается.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_6.png?raw=true', true),
+('out_7', 'Соревнование прошло динамично, ученик работал быстро, но иногда спешил. Класс получил заряд энергии, но качество выполнения снизилось.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_7.png?raw=true', true),
+('out_8', 'Командная игра сплотила класс, ученик работал в группе с интересом. Урок прошёл продуктивно, атмосфера дружелюбная.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_8.png?raw=true', true),
+('out_9', 'Мини-проект увлёк ученика, он проявил творчество, но не все успели завершить. Учитель планирует продолжить в следующий раз, интерес к теме высок.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_9.png?raw=true', true);
 
 INSERT INTO script_node (description, url_image, is_terminal)
 SELECT description, image, is_terminal FROM tmp_nodes

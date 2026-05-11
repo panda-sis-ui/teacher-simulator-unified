@@ -1,5 +1,4 @@
 {
-  "id": "sit_gadgets_na_uroke",
   "title": "Отвлечение учеников гаджетами во время урока",
   "initialNode": "node_1",
   "context": {
@@ -14,6 +13,7 @@
     {
       "type": "Учитель",
       "name": "Елена Сергеевна",
+      "age": 35,
       "experience": 7,
       "emotionalIntelligence": "Высокий",
       "teachingStyle": "Демократический",
@@ -51,7 +51,7 @@
   "nodes": {
     "node_1": {
       "description": "Урок информатики. Ученики работают за компьютерами над практическим заданием. Учитель замечает, что несколько учеников открыли соцсети и мессенджеры вместо учебной программы. При попытке сделать замечание, один из учеников отвечает: «Мы же на компьютерах, какая разница?».",
-      "image": "https://disk.yandex.ru/i/l8-vgL-AaJyGPg",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/node_1.png?raw=true",
       "choices": [
         {
           "id": "ch_1_1",
@@ -127,7 +127,7 @@
     },
     "node_2": {
       "description": "Учитель жёстко требует закрыть все посторонние сайты. Ученики неохотно подчиняются, но атмосфера напряжённая. Часть класса продолжает работать, другие — формально выполняют задание.",
-      "image": "https://disk.yandex.ru/i/idF_9i_xGIXIQg",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/node_2.png?raw=true",
       "choices": [
         {
           "id": "ch_2_1",
@@ -178,7 +178,7 @@
     },
     "node_3": {
       "description": "Учитель предлагает: «Давайте используем телефоны для образовательных целей — найдите информацию по теме, создайте мини-презентацию». Ученики заинтересованы, включаются в работу.",
-      "image": "https://disk.yandex.ru/i/w1qWv1odRDVBHg",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/node_3.png?raw=true",
       "choices": [
         {
           "id": "ch_3_1",
@@ -229,7 +229,7 @@
     },
     "node_4": {
       "description": "Класс обсуждает и формулирует правила: когда можно использовать гаджеты, а когда — нет. Ученики чувствуют свою причастность, правила воспринимаются как справедливые.",
-      "image": "https://disk.yandex.ru/i/FrCn0NFZ60Qehw",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/node_3.png?raw=true",
       "choices": [
         {
           "id": "ch_4_1",
@@ -280,7 +280,7 @@
     },
     "out_1": {
       "outcomeDescription": "Урок завершён формально. Ученики подчинились, но мотивация снизилась. Доверие к учителю подорвано, риск повторных конфликтов высок.",
-      "outcomeImage": "https://disk.yandex.ru/i/j3QQ0FpIp7DlUA",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_1.png?raw=true",
       "outcome": {
         "type": "failure",
         "description": "Урок завершён формально. Ученики подчинились, но мотивация снизилась. Доверие к учителю подорвано, риск повторных конфликтов высок.",
@@ -298,7 +298,7 @@
     },
     "out_2": {
       "outcomeDescription": "Ученики заинтересовались альтернативным заданием. Урок завершён с позитивным результатом, но тема частично не раскрыта.",
-      "outcomeImage": "https://disk.yandex.ru/i/o_KI5vfzJk433w",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_2.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Ученики заинтересовались альтернативным заданием. Урок завершён с позитивным результатом, но тема частично не раскрыта.",
@@ -316,7 +316,7 @@
     },
     "out_3": {
       "outcomeDescription": "Новый формат работы успешно внедрён. Ученики мотивированы, используют гаджеты по назначению. Учитель воспринимается как современный педагог.",
-      "outcomeImage": "https://disk.yandex.ru/i/UqsWb2ZaHz028A",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_3.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Новый формат работы успешно внедрён. Ученики мотивированы, используют гаджеты по назначению. Учитель воспринимается как современный педагог.",
@@ -334,7 +334,7 @@
     },
     "out_4": {
       "outcomeDescription": "Эксперимент завершён, класс возвращается к традиционному формату. Ученики разочарованы, интерес к предмету снижается.",
-      "outcomeImage": "https://disk.yandex.ru/i/p6yszM5n4tQSiw",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_4.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Эксперимент завершён, класс возвращается к традиционному формату. Ученики разочарованы, интерес к предмету снижается.",
@@ -352,7 +352,7 @@
     },
     "out_5": {
       "outcomeDescription": "Правила, сформулированные классом, успешно внедрены. Ученики соблюдают их, чувствуя ответственность. Атмосфера доверия укрепляется.",
-      "outcomeImage": "https://disk.yandex.ru/i/Lxs51TNIVyHkUA",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_5.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Правила, сформулированные классом, успешно внедрены. Ученики соблюдают их, чувствуя ответственность. Атмосфера доверия укрепляется.",
@@ -370,7 +370,7 @@
     },
     "out_6": {
       "outcomeDescription": "Обсуждение прошло, но правила остались прежними. Ученики ценят, что их выслушали, но существенных изменений не произошло.",
-      "outcomeImage": "https://disk.yandex.ru/i/afbLtihk4ggVZQ",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/4_gadgets_distraction/out_6.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Обсуждение прошло, но правила остались прежними. Ученики ценят, что их выслушали, но существенных изменений не произошло.",

@@ -1,5 +1,4 @@
 {
-  "id": "sit_ignor_tb_komp_class",
   "title": "Игнорирование техники безопасности в компьютерном классе",
   "initialNode": "node_1",
   "context": {
@@ -14,6 +13,7 @@
     {
       "type": "Учитель",
       "name": "Игорь Алексеевич",
+      "age": 35,
       "experience": 9,
       "emotionalIntelligence": "Средний",
       "teachingStyle": "Демократический",
@@ -52,7 +52,7 @@
   "nodes": {
     "node_1": {
       "description": "Класс работает за компьютерами. Внезапно учитель замечает, что Максим ест бутерброд прямо над клавиатурой, рядом с ним Артём подключает флешку неизвестного происхождения, а у окна двое учеников бегают, путаясь в проводах. Игорь Алексеевич делает замечание, но слышит в ответ: «Да ладно, ничего же не случится!» Несколько учеников смеются, напряжение нарастает. Учитель понимает, что простым напоминанием правил не обойтись — нужно выбирать стратегию: либо жёстко пресечь, либо объяснять, либо найти творческий подход.",
-      "image": "https://disk.yandex.ru/i/YDykNh-_5GaX8A",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1.png?raw=true",
       "choices": [
         {
           "id": "ch_1_1",
@@ -126,7 +126,7 @@
     },
     "node_1_1": {
       "description": "Учитель жёстко пресёк нарушение, потребовал прекратить и объявил, что будут санкции. Нарушители замерли, но в классе повисло напряжение. Теперь нужно выбрать конкретную форму наказания.",
-      "image": "https://disk.yandex.ru/i/FLBIkOcxBl8KJA",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1_1.png?raw=true",
       "choices": [
         {
           "id": "ch_1_1_1",
@@ -198,7 +198,7 @@
     },
     "node_1_2": {
       "description": "Учитель приостановил работу и начал объяснять, почему правила техники безопасности важны, привёл примеры поломок и травм. Класс притих, некоторые задумались. Нужно выбрать формат обучения безопасности.",
-      "image": "https://disk.yandex.ru/i/yHGaptATDVmGhw",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1_2.png?raw=true",
       "choices": [
         {
           "id": "ch_1_2_1",
@@ -271,7 +271,7 @@
     },
     "node_1_3": {
       "description": "Учитель решил не давить, а увлечь класс: предложил провести мини-квест по поиску опасных мест в кабинете. Ученики оживились, начали с интересом осматривать рабочее место. Но нужно выбрать способ интеграции техники безопасности в урок.",
-      "image": "https://disk.yandex.ru/i/Oi_XJFyHGY8rMQ",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1_3.png?raw=true",
       "choices": [
         {
           "id": "ch_1_3_1",
@@ -345,7 +345,7 @@
     },
     "out_1": {
       "outcomeDescription": "Максима и Артёма отправляют к директору. Остальные работают в напряжённой тишине. Нарушения прекратились, но атмосфера стала холодной. Родители позже жалуются на «чрезмерную строгость». Учитель чувствует усталость от конфликта.",
-      "outcomeImage": "https://disk.yandex.ru/i/8f1ammBMk_IzEQ",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_1.png?raw=true",
       "outcome": {
         "type": "failure",
         "description": "Максима и Артёма отправляют к директору. Остальные работают в напряжённой тишине. Нарушения прекратились, но атмосфера стала холодной. Родители позже жалуются на «чрезмерную строгость». Учитель чувствует усталость от конфликта.",
@@ -363,7 +363,7 @@
     },
     "out_2": {
       "outcomeDescription": "Учитель объявляет, что все нарушители получат «2» за урок. Ученики воспринимают это как несправедливость, правила техники безопасности начинают ассоциироваться с наказанием, а не с заботой. Класс разделяется: одни злятся, другие боятся.",
-      "outcomeImage": "https://disk.yandex.ru/i/s6iYtiryPrPiug",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_2.png?raw=true",
       "outcome": {
         "type": "failure",
         "description": "Учитель объявляет, что все нарушители получат «2» за урок. Ученики воспринимают это как несправедливость, правила техники безопасности начинают ассоциироваться с наказанием, а не с заботой. Класс разделяется: одни злятся, другие боятся.",
@@ -381,7 +381,7 @@
     },
     "out_3": {
       "outcomeDescription": "Учитель зачитывает правила и указывает на конкретных нарушителей. Те чувствуют стыд, но затаивают обиду. Класс понимает серьёзность, но атмосфера становится тяжёлой. Часть учеников начинает скрывать свои действия.",
-      "outcomeImage": "https://disk.yandex.ru/i/NuTkcMk4xVZcGA",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_3.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Учитель зачитывает правила и указывает на конкретных нарушителей. Те чувствуют стыд, но затаивают обиду. Класс понимает серьёзность, но атмосфера становится тяжёлой. Часть учеников начинает скрывать свои действия.",
@@ -399,7 +399,7 @@
     },
     "out_4": {
       "outcomeDescription": "Показ фото сгоревшей техники и рассказ о травмах производят впечатление. Ученики осознают серьёзность рисков, но некоторые воспринимают это как «запугивание». Большинство задумываются, дисциплина улучшается.",
-      "outcomeImage": "https://disk.yandex.ru/i/x4JlYWHZ2nLQXw",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_4.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Показ фото сгоревшей техники и рассказ о травмах производят впечатление. Ученики осознают серьёзность рисков, но некоторые воспринимают это как «запугивание». Большинство задумываются, дисциплина улучшается.",
@@ -417,7 +417,7 @@
     },
     "out_5": {
       "outcomeDescription": "Ученики сами формулируют риски, чувствуют причастность. Правила воспринимаются как логичные, а не навязанные. Класс становится более сплочённым, учитель выступает как наставник.",
-      "outcomeImage": "https://disk.yandex.ru/i/qIPCLBa-XUDG4A",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_5.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Ученики сами формулируют риски, чувствуют причастность. Правила воспринимаются как логичные, а не навязанные. Класс становится более сплочённым, учитель выступает как наставник.",
@@ -435,7 +435,7 @@
     },
     "out_6": {
       "outcomeDescription": "Ученики чувствуют доверие и ответственность. Дежурные следят за порядком, нарушения снижаются. Однако есть риск, что дежурные могут злоупотреблять полномочиями или игнорировать друзей.",
-      "outcomeImage": "https://disk.yandex.ru/i/1LhVOHFL14YkKw",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_6.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Ученики чувствуют доверие и ответственность. Дежурные следят за порядком, нарушения снижаются. Однако есть риск, что дежурные могут злоупотреблять полномочиями или игнорировать друзей.",
@@ -453,7 +453,7 @@
     },
     "out_7": {
       "outcomeDescription": "Ученики с азартом ищут «опасные места», сами составляют инструкцию. Техника безопасности изучается через действие, запоминается лучше. Учитель выглядит креативным, класс увлечён.",
-      "outcomeImage": "https://disk.yandex.ru/i/8G0WMldlKw5KFg",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_7.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Ученики с азартом ищут «опасные места», сами составляют инструкцию. Техника безопасности изучается через действие, запоминается лучше. Учитель выглядит креативным, класс увлечён.",
@@ -471,7 +471,7 @@
     },
     "out_8": {
       "outcomeDescription": "Ученики видят последствия нарушений в виртуальной среде без реального риска. Высокая наглядность и современный подход впечатляют. Требует технической подготовки, но результат стоит затрат.",
-      "outcomeImage": "https://disk.yandex.ru/i/_P8U6dAAuXPYhQ",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_8.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Ученики видят последствия нарушений в виртуальной среде без реального риска. Высокая наглядность и современный подход впечатляют. Требует технической подготовки, но результат стоит затрат.",
@@ -489,7 +489,7 @@
     },
     "out_9": {
       "outcomeDescription": "Формализация ответственности: каждый ученик подписывает документ с правилами и последствиями. Ученики воспринимают серьёзнее, но часть считает это бюрократией. Нарушения снижаются, но внутреннего принятия нет.",
-      "outcomeImage": "https://disk.yandex.ru/i/doTxFAegCzfwXg",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_9.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Формализация ответственности: каждый ученик подписывает документ с правилами и последствиями. Ученики воспринимают серьёзнее, но часть считает это бюрократией. Нарушения снижаются, но внутреннего принятия нет.",

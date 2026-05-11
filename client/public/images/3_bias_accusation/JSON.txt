@@ -1,5 +1,4 @@
 {
-  "id": "sit_obvinenie_uchitelya_v_predvyatosti",
   "title": "Обвинение ученика в предвзятости оценивания",
   "initialNode": "node_1",
   "context": {
@@ -14,6 +13,7 @@
     {
       "type": "Учитель",
       "name": "Мария Петровна",
+      "age": 35,
       "experience": 8,
       "emotionalIntelligence": "Средний",
       "teachingStyle": "Демократический",
@@ -52,7 +52,7 @@
   "nodes": {
     "node_1": {
       "description": "После объявления оценок за контрольную работу Дмитрий резко встаёт и заявляет: «Это несправедливо! Вы всегда занижаете мне оценки!». Класс затихает, все смотрят на учителя. Лицо Дмитрия покраснело от возмущения, несколько учеников переглядываются. Учитель чувствует, как нарастает напряжение — от её реакции зависит, перерастёт ли это в открытый конфликт или удастся перевести ситуацию в конструктивное русло.",
-      "image": "https://disk.yandex.ru/i/9sBlDMAJoHlTYw",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/node_1.png?raw=true",
       "choices": [
         {
           "id": "ch_1_1",
@@ -128,7 +128,7 @@
     },
     "node_1_1": {
       "description": "Учитель выбрал жёсткую позицию, но конфликт не исчерпан. Дмитрий продолжает настаивать на своём, его голос дрожит от обиды. Класс наблюдает за противостоянием. Необходимо выбрать конкретный способ защиты своей позиции, но каждый вариант несёт риски эскалации конфликта или потери доверия.",
-      "image": "https://disk.yandex.ru/i/3aY60bUnK3KgpA",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/node_1_1.png?raw=true",
       "choices": [
         {
           "id": "ch_1_1_1",
@@ -202,7 +202,7 @@
     },
     "node_1_2": {
       "description": "Учитель предложил открытый диалог. Дмитрий немного успокоился, но всё ещё напряжён. Класс внимательно слушает. Теперь важно выбрать формат, который покажет объективность оценивания, не унизив ученика и сохранив учебное время.",
-      "image": "https://disk.yandex.ru/i/dTDAqDM1ThjfCw",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/node_1_2.png?raw=true",
       "choices": [
         {
           "id": "ch_1_2_1",
@@ -278,7 +278,7 @@
     },
     "node_1_3": {
       "description": "Учитель выбрал формальный подход к решению конфликта. Дмитрий ожидает конкретных действий. Класс наблюдает, насколько серьёзно учитель относится к процедуре оценивания. Необходимо выбрать способ документирования, который покажет прозрачность без излишней бюрократизации.",
-      "image": "https://disk.yandex.ru/i/WPblkgyistH_xg",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/node_1_3.png?raw=true",
       "choices": [
         {
           "id": "ch_1_3_1",
@@ -354,7 +354,7 @@
     },
     "out_5": {
       "outcomeDescription": "Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.",
-      "outcomeImage": "https://disk.yandex.ru/i/Mp_r4oytlcEl-A",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/out_5.png?raw=true",
       "outcome": {
         "type": "failure",
         "description": "Ученик замолкает, но чувствует бессилие. Родители могут воспринять отказ от объяснений как неуважение. Конфликт не решён, напряжение сохраняется. Учитель сохраняет формальный авторитет, но доверие подорвано.",
@@ -372,7 +372,7 @@
     },
     "out_6": {
       "outcomeDescription": "Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.",
-      "outcomeImage": "https://disk.yandex.ru/i/2pg4ARiPRqR56A",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/out_6.png?raw=true",
       "outcome": {
         "type": "failure",
         "description": "Обвиняемый чувствует унижение, класс видит «любимчиков». Риск нарушения конфиденциальности оценок. Атмосфера в классе ухудшается, учитель воспринимается учениками как непонимающий.",
@@ -390,7 +390,7 @@
     },
     "out_7": {
       "outcomeDescription": "Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.",
-      "outcomeImage": "https://disk.yandex.ru/i/mUP5JM1C3LHSKw",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/out_7.png?raw=true",
       "outcome": {
         "type": "failure",
         "description": "Конфликт переходит на уровень администрации. Учитель теряет контроль над ситуацией. Родители занимают оборонительную позицию. Начинаются бюрократические разбирательства.",
@@ -408,7 +408,7 @@
     },
     "out_8": {
       "outcomeDescription": "Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.",
-      "outcomeImage": "https://disk.yandex.ru/i/7UWdAOmkDcoQrw",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/out_8.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Ученик видит конкретные ошибки, чувствует внимание к себе. Конфликт переводится в конструктивное русло. Личный контакт укрепляет доверие. Учитель демонстрирует профессионализм.",
@@ -426,7 +426,7 @@
     },
     "out_9": {
       "outcomeDescription": "Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.",
-      "outcomeImage": "https://disk.yandex.ru/i/MUv3_mw-3EIcEA",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/out_9.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Класс видит единые правила. Обвинение теряет почву. Есть риск восприятия как оправдания, но в целом ситуация стабилизируется. Учитель показывает системный подход.",
@@ -444,7 +444,7 @@
     },
     "out_10": {
       "outcomeDescription": "Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».",
-      "outcomeImage": "https://disk.yandex.ru/i/FxLaUpbRmkc-6A",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/out_10.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Снижается острота конфликта, появляется шанс на исправление. Ученик чувствует гибкость учителя. Мотивация растёт, но есть риск восприятия как «подачки».",
@@ -462,7 +462,7 @@
     },
     "out_11": {
       "outcomeDescription": "Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.",
-      "outcomeImage": "https://disk.yandex.ru/i/BRVTsSbj3ANniw",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/out_11.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Оценка становится объективной и проверяемой. Снижается пространство для субъективных обвинений. Учитель демонстрирует профессиональную подготовку.",
@@ -480,7 +480,7 @@
     },
     "out_12": {
       "outcomeDescription": "Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.",
-      "outcomeImage": "https://disk.yandex.ru/i/4wvGVsxTEkQuaA",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/out_12.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Максимальная объективность, но признание сомнений в своей оценке. Есть риск подрыва собственного авторитета. Ученик видит открытость к проверке.",
@@ -498,7 +498,7 @@
     },
     "out_13": {
       "outcomeDescription": "Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.",
-      "outcomeImage": "https://disk.yandex.ru/i/NI2ReFyZpBvOPw",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/3_bias_accusation/out_13.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Многие обвинения снимаются при необходимости документирования. Конфликт переводится в официальное русло. Снижается эмоциональность, но процесс формализуется.",

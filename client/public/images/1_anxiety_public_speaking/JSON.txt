@@ -1,5 +1,4 @@
 {
-  "id": "sit_rasskaz_stihotvoreniya",
   "title": "Тревога при публичном выступлении на уроке",
   "initialNode": "node_1",
   "context": {
@@ -13,7 +12,8 @@
   "participants": [
     {
       "type": "Учитель",
-      "name": "Анна Германовна",
+      "name": "Учитель",
+      "age": 35,
       "experience": 8,
       "emotionalIntelligence": "Средний",
       "teachingStyle": "Демократический",
@@ -21,7 +21,7 @@
     },
     {
       "type": "Ученик",
-      "name": "Саша",
+      "name": "Ученик",
       "age": 13,
       "motivation": 0.6,
       "preparation": "Средний",
@@ -39,7 +39,7 @@
       "Страх",
       "Тревога"
     ],
-    "description": "Учитель вызывает ученика рассказать стихотворение. Мальчик волнуется, сбивается, в классе кто-то начинает смеяться. Ученик не может рассказать стихотворение у доски, хотя выучил его. Этот ребёнок на уроках всегда активен, но ему сложно выступать перед большой аудиторией.",
+    "description": "Учитель вызывает ученика рассказать стихотворение. Ученик волнуется, сбивается, в классе кто-то начинает смеяться. Ученик не может рассказать стихотворение у доски, хотя выучил его. Этот ученик на уроках всегда активен, но ему сложно выступать перед большой аудиторией.",
     "startMetrics": {
       "motivation": 0.5,
       "stress": 0.7,
@@ -51,8 +51,8 @@
   },
   "nodes": {
     "node_1": {
-      "description": "Урок литературы. Анна Германовна вызывает Сашу к доске рассказать выученное стихотворение. Саша выходит, но начинает волноваться, сбивается на словах. В классе раздаётся тихий смех. Саша замолкает, смотрит в пол, не может продолжить.",
-      "image": "https://disk.yandex.ru/i/jxGdJndcs9sLDw",
+      "description": "Вы вызываете Сашу к доске читать выученное стихотворение Есенина. На третьей строфе он запинается, краснеет. Из класса слышен приглушённый смех и шёпот: «Забыл». Саша замолкает, опустив глаза в пол. Класс ждёт вашей реакции.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/node_1.png?raw=true",
       "choices": [
         {
           "id": "ch_1_1",
@@ -79,7 +79,7 @@
         },
         {
           "id": "ch_1_2",
-          "description": "Попросить класс поддержать одноклассника аплодисментами и продолжить у доски",
+          "description": "Попросить класс поддержать ученика аплодисментами и продолжить у доски",
           "solution": {
             "type": "ТактическоеРешение",
             "strategy": "Компромисс",
@@ -125,8 +125,8 @@
       ]
     },
     "node_2": {
-      "description": "Саша подходит к столу учителя, поворачивается к ней лицом и рассказывает стихотворение. Он вспоминает все строки, рассказывает уверенно, без ошибок. Учитель видит, что ученик действительно выучил материал. Класс замечает исключительную ситуацию, начинается шёпот.",
-      "image": "https://disk.yandex.ru/i/u7DPCdWR57cDFg",
+      "description": "Ученик подходит к столу учителя, поворачивается к учителю лицом и рассказывает стихотворение. Ученик вспоминает все строки, рассказывает уверенно, без ошибок. Учитель видит, что ученик действительно выучил материал. Класс замечает исключительную ситуацию, начинается шёпот.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/node_2.png?raw=true",
       "choices": [
         {
           "id": "ch_2_1",
@@ -200,8 +200,8 @@
       ]
     },
     "node_3": {
-      "description": "Класс хлопает, напряжение спадает. Саша собирается с мыслями и продолжает рассказывать у доски. Он допускает небольшие ошибки, но завершает стихотворение. Класс реагирует спокойно.",
-      "image": "https://disk.yandex.ru/i/N4MSwO-eXDao6g",
+      "description": "Класс хлопает, напряжение спадает. Ученик собирается с мыслями и продолжает рассказывать у доски. Он допускает небольшие ошибки, но завершает стихотворение. Класс реагирует спокойно.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/node_3.png?raw=true",
       "choices": [
         {
           "id": "ch_3_1",
@@ -273,8 +273,8 @@
       ]
     },
     "node_4": {
-      "description": "Смех прекращается, но напряжение растёт. Саша пытается продолжить, но сбивается ещё сильнее. Стресс очевиден, ученик выглядит подавленным.",
-      "image": "https://disk.yandex.ru/i/J0lLFMfBaEJULA",
+      "description": "Смех прекращается, но напряжение растёт. Ученик пытается продолжить, но сбивается ещё сильнее. Стресс очевиден, ученик выглядит подавленным.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/node_4.png?raw=true",
       "choices": [
         {
           "id": "ch_4_1",
@@ -346,11 +346,11 @@
       ]
     },
     "out_1": {
-      "outcomeDescription": "Класс возмущается, почему для Саши отдельные условия. Учитель проводит разговор о том, что у всех могут быть разные сложности. Оценку 5 он получил, поскольку задание было выучить стихотворение – он выучил. Результат – довольный ребёнок, всё хорошо в классе.",
-      "outcomeImage": "https://disk.yandex.ru/i/3pAwgNhoXz17-Q",
+      "outcomeDescription": "Класс возмущается, почему для ученика отдельные условия. Учитель проводит разговор о том, что у всех могут быть разные сложности. Оценку 5 ученик получил, поскольку задание было выучить стихотворение – он выучил. Результат – довольный ученик, хороший климат в классе.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_1.png?raw=true",
       "outcome": {
         "type": "success",
-        "description": "Класс возмущается, почему для Саши отдельные условия. Учитель проводит разговор о том, что у всех могут быть разные сложности. Оценку 5 он получил, поскольку задание было выучить стихотворение – он выучил. Результат – довольный ребёнок, всё хорошо в классе.",
+        "description": "Класс возмущается, почему для ученика отдельные условия. Учитель проводит разговор о том, что у всех могут быть разные сложности. Оценку 5 ученик получил, поскольку задание было выучить стихотворение – он выучил. Результат – довольный ученик, хороший климат в классе.",
         "longTerm": true,
         "reversible": true,
         "metrics": {
@@ -364,11 +364,11 @@
       }
     },
     "out_2": {
-      "outcomeDescription": "Класс возмущается. Учитель заявляет: «Я учитель и я здесь принимаю решение об оценке». Результат – довольный ребёнок, но в классе обстановка неспокойна.",
-      "outcomeImage": "https://disk.yandex.ru/i/OUN2W3Mvj73iXQ",
+      "outcomeDescription": "Класс возмущается. Учитель заявляет: «Я учитель и я здесь принимаю решение об оценке». Результат – довольный ученик, но в классе обстановка неспокойна.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_2.png?raw=true",
       "outcome": {
         "type": "partial",
-        "description": "Класс возмущается. Учитель заявляет: «Я учитель и я здесь принимаю решение об оценке». Результат – довольный ребёнок, но в классе обстановка неспокойна.",
+        "description": "Класс возмущается. Учитель заявляет: «Я учитель и я здесь принимаю решение об оценке». Результат – довольный ученик, но в классе обстановка неспокойна.",
         "longTerm": true,
         "reversible": true,
         "metrics": {
@@ -382,11 +382,11 @@
       }
     },
     "out_3": {
-      "outcomeDescription": "Учитель ставит 4- и говорит: «Условия для всех одинаковы». Результат: класс спокоен, но ребёнок расстроен.",
-      "outcomeImage": "https://disk.yandex.ru/i/7DYtgCuoDkHinw",
+      "outcomeDescription": "Учитель ставит 4- и говорит: «Условия для всех одинаковы». Результат: класс спокоен, но ученик расстроен.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_3.png?raw=true",
       "outcome": {
         "type": "partial",
-        "description": "Учитель ставит 4- и говорит: «Условия для всех одинаковы». Результат: класс спокоен, но ребёнок расстроен.",
+        "description": "Учитель ставит 4- и говорит: «Условия для всех одинаковы». Результат: класс спокоен, но ученик расстроен.",
         "longTerm": true,
         "reversible": true,
         "metrics": {
@@ -400,11 +400,11 @@
       }
     },
     "out_4": {
-      "outcomeDescription": "Учитель хвалит за преодоление страха. Класс принимает оценку. Саша чувствует поддержку.",
-      "outcomeImage": "https://disk.yandex.ru/i/HTp-lIFTPVEzSQ",
+      "outcomeDescription": "Учитель хвалит за преодоление страха. Класс принимает оценку. Ученик чувствует поддержку.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_4.png?raw=true",
       "outcome": {
         "type": "success",
-        "description": "Учитель хвалит за преодоление страха. Класс принимает оценку. Саша чувствует поддержку.",
+        "description": "Учитель хвалит за преодоление страха. Класс принимает оценку. Ученик чувствует поддержку.",
         "longTerm": true,
         "reversible": true,
         "metrics": {
@@ -418,11 +418,11 @@
       }
     },
     "out_5": {
-      "outcomeDescription": "Справедливая оценка с учётом волнения. Саша согласен, класс не возмущается.",
-      "outcomeImage": "https://disk.yandex.ru/i/8KgwPmAoaEJXrw",
+      "outcomeDescription": "Справедливая оценка с учётом волнения. Ученик согласен, класс не возмущается.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_5.png?raw=true",
       "outcome": {
         "type": "partial",
-        "description": "Справедливая оценка с учётом волнения. Саша согласен, класс не возмущается.",
+        "description": "Справедливая оценка с учётом волнения. Ученик согласен, класс не возмущается.",
         "longTerm": true,
         "reversible": true,
         "metrics": {
@@ -436,11 +436,11 @@
       }
     },
     "out_6": {
-      "outcomeDescription": "Оценка занижена. Саша чувствует несправедливость, мотивация падает.",
-      "outcomeImage": "https://disk.yandex.ru/i/BRLrIgSf1sVaOw",
+      "outcomeDescription": "Оценка занижена. Ученик чувствует несправедливость, мотивация падает.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_6.png?raw=true",
       "outcome": {
         "type": "failure",
-        "description": "Оценка занижена. Саша чувствует несправедливость, мотивация падает.",
+        "description": "Оценка занижена. Ученик чувствует несправедливость, мотивация падает.",
         "longTerm": true,
         "reversible": true,
         "metrics": {
@@ -454,11 +454,11 @@
       }
     },
     "out_7": {
-      "outcomeDescription": "Учитель помог справиться. Саша благодарен, но чувствует слабость.",
-      "outcomeImage": "https://disk.yandex.ru/i/PqIr1xR2E-Fkzw",
+      "outcomeDescription": "Учитель помог справиться. Ученик благодарен, но чувствует слабость.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_7.png?raw=true",
       "outcome": {
         "type": "partial",
-        "description": "Учитель помог справиться. Саша благодарен, но чувствует слабость.",
+        "description": "Учитель помог справиться. Ученик благодарен, но чувствует слабость.",
         "longTerm": true,
         "reversible": true,
         "metrics": {
@@ -472,11 +472,11 @@
       }
     },
     "out_8": {
-      "outcomeDescription": "Ситуация замята, но проблема не решена. Саша чувствует облегчение, но некомпетентность.",
-      "outcomeImage": "https://disk.yandex.ru/i/5MoevSFaTJHdMw",
+      "outcomeDescription": "Ситуация сглажена, но проблема не решена. Ученик чувствует облегчение, но ощущает некомпетентность.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_8.png?raw=true",
       "outcome": {
         "type": "failure",
-        "description": "Ситуация замята, но проблема не решена. Саша чувствует облегчение, но некомпетентность.",
+        "description": "Ситуация сглажена, но проблема не решена. Ученик чувствует облегчение, но ощущает некомпетентность.",
         "longTerm": true,
         "reversible": true,
         "metrics": {
@@ -490,11 +490,11 @@
       }
     },
     "out_9": {
-      "outcomeDescription": "Саша дочитал через силу. Класс напряжён. Доверие к учителю подорвано.",
-      "outcomeImage": "https://disk.yandex.ru/i/wrdiVb_h3NDt8A",
+      "outcomeDescription": "Ученик дочитал через силу. Класс напряжён. Доверие к учителю подорвано.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_9.png?raw=true",
       "outcome": {
         "type": "failure",
-        "description": "Саша дочитал через силу. Класс напряжён. Доверие к учителю подорвано.",
+        "description": "Ученик дочитал через силу. Класс напряжён. Доверие к учителю подорвано.",
         "longTerm": true,
         "reversible": true,
         "metrics": {

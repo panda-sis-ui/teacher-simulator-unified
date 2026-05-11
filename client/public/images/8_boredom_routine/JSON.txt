@@ -1,5 +1,4 @@
 {
-  "id": "sit_boredom_repetitive_tasks",
   "title": "Скука при выполнении однотипных заданий",
   "initialNode": "node_1",
   "context": {
@@ -14,6 +13,7 @@
     {
       "type": "Учитель",
       "name": "Елена Сергеевна",
+      "age": 35,
       "experience": 7,
       "emotionalIntelligence": "Высокий",
       "teachingStyle": "Демократический",
@@ -51,7 +51,7 @@
   "nodes": {
     "node_1": {
       "description": "Урок информатики. Учитель даёт классу серию однотипных упражнений по программированию. Ученик Максим, быстро справившись с первыми заданиями, начинает откровенно скучать: он отодвигается от клавиатуры, смотрит в окно, тихо переговаривается с соседом. На замечание учителя отвечает: «Я всё это уже умею, зачем делать одно и то же?». Класс начинает отвлекаться, атмосфера становится вялой.",
-      "image": "https://disk.yandex.ru/i/GRNjwYsGakvQSw",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/node_1.png?raw=true",
       "choices": [
         {
           "id": "ch_1_1",
@@ -127,7 +127,7 @@
     },
     "node_1_1": {
       "description": "Учитель жёстко требует прекратить отвлекаться и выполнять задания. Максим насупился, но приступил к работе формально. Класс притих, чувствуется напряжение.",
-      "image": "https://disk.yandex.ru/i/2JG1h5N3gXT6AQ",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/node_1_1.png?raw=true",
       "choices": [
         {
           "id": "ch_1_1_1",
@@ -199,7 +199,7 @@
     },
     "node_1_2": {
       "description": "Учитель предлагает Максиму более сложное задание или творческий проект. Максим оживился, с интересом рассматривает условие. Класс наблюдает, некоторые тоже просят альтернативу.",
-      "image": "https://disk.yandex.ru/i/rM4gVpsD2TF_6A",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/node_1_2.png?raw=true",
       "choices": [
         {
           "id": "ch_1_2_1",
@@ -272,7 +272,7 @@
     },
     "node_1_3": {
       "description": "Учитель предлагает классу соревнование или игру. Ученики оживляются, Максим с азартом включается в работу.",
-      "image": "https://disk.yandex.ru/i/NAr3P9FcF5JrkQ",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/node_1_3.png?raw=true",
       "choices": [
         {
           "id": "ch_1_3_1",
@@ -348,7 +348,7 @@
     },
     "out_1": {
       "outcomeDescription": "Ученик формально выполняет задания, но без интереса. Атмосфера в классе напряжённая, доверие к учителю снижено. Урок завершён, но мотивация к предмету упала.",
-      "outcomeImage": "https://disk.yandex.ru/i/04SZw6fEzAQftQ",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_1.png?raw=true",
       "outcome": {
         "type": "failure",
         "description": "Ученик формально выполняет задания, но без интереса. Атмосфера в классе напряжённая, доверие к учителю снижено. Урок завершён, но мотивация к предмету упала.",
@@ -366,7 +366,7 @@
     },
     "out_2": {
       "outcomeDescription": "Ученик воспринял увеличение объёма как наказание, делает задания кое-как, обижен на учителя. Класс сочувствует ему, атмосфера враждебная.",
-      "outcomeImage": "https://disk.yandex.ru/i/QdaJ2PUVvODc5A",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_2.png?raw=true",
       "outcome": {
         "type": "failure",
         "description": "Ученик воспринял увеличение объёма как наказание, делает задания кое-как, обижен на учителя. Класс сочувствует ему, атмосфера враждебная.",
@@ -384,7 +384,7 @@
     },
     "out_3": {
       "outcomeDescription": "Ученик испытывает стыд и обиду, замыкается. Класс осуждает учителя за публичное сравнение. Доверие подорвано, возможны дальнейшие конфликты.",
-      "outcomeImage": "https://disk.yandex.ru/i/AtdX7riuIdtNWg",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_3.png?raw=true",
       "outcome": {
         "type": "failure",
         "description": "Ученик испытывает стыд и обиду, замыкается. Класс осуждает учителя за публичное сравнение. Доверие подорвано, возможны дальнейшие конфликты.",
@@ -402,7 +402,7 @@
     },
     "out_4": {
       "outcomeDescription": "Ученик увлечённо решает сложную задачу, чувствует признание. Урок проходит в рабочей атмосфере, интерес к предмету растёт.",
-      "outcomeImage": "https://disk.yandex.ru/i/_706ePPMFg9KVg",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_4.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Ученик увлечённо решает сложную задачу, чувствует признание. Урок проходит в рабочей атмосфере, интерес к предмету растёт.",
@@ -420,7 +420,7 @@
     },
     "out_5": {
       "outcomeDescription": "Ученик создаёт творческий проект, проявляет инициативу. Класс вдохновлён, многие просят альтернативные задания. Учитель воспринимается как современный педагог.",
-      "outcomeImage": "https://disk.yandex.ru/i/FSRr8AUTKnxL5g",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_5.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Ученик создаёт творческий проект, проявляет инициативу. Класс вдохновлён, многие просят альтернативные задания. Учитель воспринимается как современный педагог.",
@@ -438,7 +438,7 @@
     },
     "out_6": {
       "outcomeDescription": "Ученик помогает отстающим, чувствует свою значимость. В классе укрепляется взаимопомощь, дисциплина улучшается.",
-      "outcomeImage": "https://disk.yandex.ru/i/fqkkrnJcXom2Jw",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_6.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Ученик помогает отстающим, чувствует свою значимость. В классе укрепляется взаимопомощь, дисциплина улучшается.",
@@ -456,7 +456,7 @@
     },
     "out_7": {
       "outcomeDescription": "Соревнование прошло динамично, ученик работал быстро, но иногда спешил. Класс получил заряд энергии, но качество выполнения снизилось.",
-      "outcomeImage": "https://disk.yandex.ru/i/Qo-jXOKcy3CZHA",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_7.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Соревнование прошло динамично, ученик работал быстро, но иногда спешил. Класс получил заряд энергии, но качество выполнения снизилось.",
@@ -474,7 +474,7 @@
     },
     "out_8": {
       "outcomeDescription": "Командная игра сплотила класс, ученик работал в группе с интересом. Урок прошёл продуктивно, атмосфера дружелюбная.",
-      "outcomeImage": "https://disk.yandex.ru/i/rIk6y2iBA1iIBg",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_8.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Командная игра сплотила класс, ученик работал в группе с интересом. Урок прошёл продуктивно, атмосфера дружелюбная.",
@@ -492,7 +492,7 @@
     },
     "out_9": {
       "outcomeDescription": "Мини-проект увлёк ученика, он проявил творчество, но не все успели завершить. Учитель планирует продолжить в следующий раз, интерес к теме высок.",
-      "outcomeImage": "https://disk.yandex.ru/i/UPotZjEZdoJvRg",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/8_boredom_routine/out_9.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Мини-проект увлёк ученика, он проявил творчество, но не все успели завершить. Учитель планирует продолжить в следующий раз, интерес к теме высок.",

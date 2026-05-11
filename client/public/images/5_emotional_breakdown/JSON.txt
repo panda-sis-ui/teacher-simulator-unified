@@ -1,5 +1,4 @@
 {
-  "id": "sit_emotional_breakdown",
   "title": "Эмоциональный срыв ученика после неудачи",
   "initialNode": "node_1",
   "context": {
@@ -14,6 +13,7 @@
     {
       "type": "Учитель",
       "name": "Елена Сергеевна",
+      "age": 35,
       "experience": 7,
       "emotionalIntelligence": "Высокий",
       "teachingStyle": "Демократический",
@@ -53,7 +53,7 @@
   "nodes": {
     "node_1": {
       "description": "Урок информатики. Ученики работают над практическим заданием по программированию. Максим, обычно активный и успешный, после вашего мягкого замечания о синтаксической ошибке внезапно отталкивает клавиатуру, начинает громко плакать и кричит: «Я бездарь, у меня никогда не получится!». Класс замирает, некоторые ученики переглядываются, кто-то хихикает. Ситуация требует немедленной реакции, но каждое действие несёт риски.",
-      "image": "https://disk.yandex.ru/i/2AMSrrF9LDxgQQ",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/5_emotional_breakdown/node_1.png?raw=true",
       "choices": [
         {
           "id": "ch_1_1",
@@ -129,7 +129,7 @@
     },
     "node_1_1": {
       "description": "Учитель жёстко потребовал прекратить истерику. Максим замолкает, но продолжает тихо плакать, опустив голову. Класс наблюдает в напряжённом молчании. Урок формально продолжается, но атмосфера тяжёлая. Необходимо выбрать способ завершения инцидента, чтобы минимизировать ущерб для ученика и класса.",
-      "image": "https://disk.yandex.ru/i/LEmXejwrZE07lg",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/5_emotional_breakdown/node_1_1.png?raw=true",
       "choices": [
         {
           "id": "ch_1_1_1",
@@ -179,7 +179,7 @@
     },
     "node_1_2": {
       "description": "Учитель подошёл к Максиму, тихо спросил, что случилось. Ученик сквозь слёзы говорит, что «всё валится из рук», «родители ругают за оценки», «друзья смеются». Класс работает самостоятельно, но некоторые поглядывают в вашу сторону. Важно выбрать формат поддержки, который поможет ученику, не нарушая учебный процесс.",
-      "image": "https://disk.yandex.ru/i/0zuVadcQ5bYAsA",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/5_emotional_breakdown/node_1_2.png?raw=true",
       "choices": [
         {
           "id": "ch_1_2_1",
@@ -254,7 +254,7 @@
     },
     "node_1_3": {
       "description": "Староста сопроводил Максима к психологу. Класс работает, но атмосфера напряжённая: ученики шепчутся, некоторые отвлекаются. Урок продолжается, но продуктивность снизилась. Необходимо выбрать способ восстановления рабочего настроя класса без обесценивания произошедшего.",
-      "image": "https://disk.yandex.ru/i/DvbyaYpQpd_xaQ",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/5_emotional_breakdown/node_1_3.png?raw=true",
       "choices": [
         {
           "id": "ch_1_3_1",
@@ -306,7 +306,7 @@
     },
     "out_1": {
       "outcomeDescription": "Максим уходит из класса, чувствуя себя отвергнутым. Урок завершается формально, но атмосфера тяжёлая. Ученики воспринимают учителя как бесчувственного, доверие подорвано. Родители могут подать жалобу. Ситуация требует последующей работы с психологом и классом.",
-      "outcomeImage": "https://disk.yandex.ru/i/bQBir9CBQMfzrQ",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/5_emotional_breakdown/out_1.png?raw=true",
       "outcome": {
         "type": "failure",
         "description": "Максим уходит из класса, чувствуя себя отвергнутым. Урок завершается формально, но атмосфера тяжёлая. Ученики воспринимают учителя как бесчувственного, доверие подорвано. Родители могут подать жалобу. Ситуация требует последующей работы с психологом и классом.",
@@ -324,7 +324,7 @@
     },
     "out_2": {
       "outcomeDescription": "Урок продолжается, но Максим сидит молча, не участвуя. Класс работает с пониженной вовлечённостью. Учитель сохраняет контроль, но упускает возможность поддержать ученика. Ситуация остаётся неразрешённой, риск повторения высок.",
-      "outcomeImage": "https://disk.yandex.ru/i/u1d8Os06F-asrg",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/5_emotional_breakdown/out_2.png?raw=true",
       "outcome": {
         "type": "failure",
         "description": "Урок продолжается, но Максим сидит молча, не участвуя. Класс работает с пониженной вовлечённостью. Учитель сохраняет контроль, но упускает возможность поддержать ученика. Ситуация остаётся неразрешённой, риск повторения высок.",
@@ -342,7 +342,7 @@
     },
     "out_3": {
       "outcomeDescription": "Наедине Максим делится переживаниями: давление родителей, страх не соответствовать ожиданиям. Учитель выслушивает без оценки. Ученик успокаивается, возвращается к работе с новыми силами. Класс видит пример эмпатии, доверие к учителю растёт.",
-      "outcomeImage": "https://disk.yandex.ru/i/grrStx1wOCOjyA",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/5_emotional_breakdown/out_3.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Наедине Максим делится переживаниями: давление родителей, страх не соответствовать ожиданиям. Учитель выслушивает без оценки. Ученик успокаивается, возвращается к работе с новыми силами. Класс видит пример эмпатии, доверие к учителю растёт.",
@@ -360,7 +360,7 @@
     },
     "out_4": {
       "outcomeDescription": "Максим соглашается поговорить с психологом позже. Учитель возвращается к классу, объясняет, что иногда нужна профессиональная помощь. Ученики воспринимают это как норму. Ситуация стабилизирована, но требует последующего контроля.",
-      "outcomeImage": "https://disk.yandex.ru/i/2V1vHiLzRDMNEQ",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/5_emotional_breakdown/out_4.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Максим соглашается поговорить с психологом позже. Учитель возвращается к классу, объясняет, что иногда нужна профессиональная помощь. Ученики воспринимают это как норму. Ситуация стабилизирована, но требует последующего контроля.",
@@ -378,7 +378,7 @@
     },
     "out_5": {
       "outcomeDescription": "Максим пьёт воду, глубоко дышит, через 5 минут возвращается к работе. Учитель не давит, даёт пространство. Ученик чувствует уважение к своему состоянию, мотивация постепенно восстанавливается. Класс видит пример саморегуляции.",
-      "outcomeImage": "https://disk.yandex.ru/i/TIzfFED6B2D2_w",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/5_emotional_breakdown/out_5.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Максим пьёт воду, глубоко дышит, через 5 минут возвращается к работе. Учитель не давит, даёт пространство. Ученик чувствует уважение к своему состоянию, мотивация постепенно восстанавливается. Класс видит пример саморегуляции.",
@@ -396,7 +396,7 @@
     },
     "out_6": {
       "outcomeDescription": "Класс понимает ситуацию, шёпот прекращается. Ученики возвращаются к работе, атмосфера становится более поддерживающей. Максим позже благодарит учителя за понимание.",
-      "outcomeImage": "https://disk.yandex.ru/i/xLviQOnIVtRzkQ",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/5_emotional_breakdown/out_6.png?raw=true",
       "outcome": {
         "type": "success",
         "description": "Класс понимает ситуацию, шёпот прекращается. Ученики возвращаются к работе, атмосфера становится более поддерживающей. Максим позже благодарит учителя за понимание.",
@@ -414,7 +414,7 @@
     },
     "out_7": {
       "outcomeDescription": "Класс работает самостоятельно, шум стихает. Учитель успевает кратко поговорить с Максимом после урока. Ситуация не эскалирует, но и не получает глубокого разрешения. Требуется последующая работа с учеником.",
-      "outcomeImage": "https://disk.yandex.ru/i/782wveMG5BSSUg",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/5_emotional_breakdown/out_7.png?raw=true",
       "outcome": {
         "type": "partial",
         "description": "Класс работает самостоятельно, шум стихает. Учитель успевает кратко поговорить с Максимом после урока. Ситуация не эскалирует, но и не получает глубокого разрешения. Требуется последующая работа с учеником.",

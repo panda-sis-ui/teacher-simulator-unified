@@ -87,7 +87,7 @@ WHERE NOT EXISTS (
 );
 
 
-INSERT INTO participant (full_name, age) VALUES ('Анна Германовна', 35)
+INSERT INTO participant (full_name, age) VALUES ('Учитель', 35)
 ON CONFLICT (full_name) WHERE age IS NULL DO NOTHING;
 
 INSERT INTO teacher (participant_id, emotion_intell_id, style_id, prof_role_id, experience)
@@ -98,10 +98,10 @@ SELECT
     (SELECT id FROM professional_role WHERE name = 'Предметник'),
     8
 FROM participant p
-WHERE p.full_name = 'Анна Германовна'
+WHERE p.full_name = 'Учитель'
 ON CONFLICT (participant_id) DO NOTHING;
 
-INSERT INTO participant (full_name, age) VALUES ('Саша', 35)
+INSERT INTO participant (full_name, age) VALUES ('Ученик', 13)
 ON CONFLICT (full_name) WHERE age IS NULL DO NOTHING;
 
 INSERT INTO student (participant_id, tech_equip_id, comm_style_id, social_status_id, motivation, preparation)
@@ -113,7 +113,7 @@ SELECT
     0.6,
     0.6
 FROM participant p
-WHERE p.full_name = 'Саша'
+WHERE p.full_name = 'Ученик'
 ON CONFLICT (participant_id) DO NOTHING;
 
 
@@ -127,7 +127,7 @@ INSERT INTO problem_ids
 SELECT id FROM problem
 WHERE type_problem_id = (SELECT id FROM type_problem WHERE name = 'Мотивационные кризисы')
   AND source_problem_id = (SELECT id FROM source_problem WHERE name = 'Внутренний')
-  AND description = 'Учитель вызывает ученика рассказать стихотворение. Мальчик волнуется, сбивается, в классе кто-то начинает смеяться. Ученик не может рассказать стихотворение у доски, хотя выучил его. Этот ребёнок на уроках всегда активен, но ему сложно выступать перед большой аудиторией.'
+  AND description = 'Учитель вызывает ученика рассказать стихотворение. Ученик волнуется, сбивается, в классе кто-то начинает смеяться. Ученик не может рассказать стихотворение у доски, хотя выучил его. Этот ученик на уроках всегда активен, но ему сложно выступать перед большой аудиторией.'
 LIMIT 1;
 
 -- Если не нашли, создаём новую
@@ -150,7 +150,7 @@ WITH new_problem AS (
         (SELECT id FROM source_problem WHERE name = 'Внутренний'),
         0.6,
         NULL,
-        'Учитель вызывает ученика рассказать стихотворение. Мальчик волнуется, сбивается, в классе кто-то начинает смеяться. Ученик не может рассказать стихотворение у доски, хотя выучил его. Этот ребёнок на уроках всегда активен, но ему сложно выступать перед большой аудиторией.',
+        'Учитель вызывает ученика рассказать стихотворение. Ученик волнуется, сбивается, в классе кто-то начинает смеяться. Ученик не может рассказать стихотворение у доски, хотя выучил его. Этот ученик на уроках всегда активен, но ему сложно выступать перед большой аудиторией.',
         0.5,
         0.7,
         0.6,
@@ -184,19 +184,19 @@ CREATE TEMP TABLE tmp_nodes (
 );
 
 INSERT INTO tmp_nodes (node_id, description, image, is_terminal) VALUES
-('node_1', 'Урок литературы. Анна Германовна вызывает Сашу к доске рассказать выученное стихотворение. Саша выходит, но начинает волноваться, сбивается на словах. В классе раздаётся тихий смех. Саша замолкает, смотрит в пол, не может продолжить.', 'https://disk.yandex.ru/i/jxGdJndcs9sLDw', false),
-('node_2', 'Саша подходит к столу учителя, поворачивается к ней лицом и рассказывает стихотворение. Он вспоминает все строки, рассказывает уверенно, без ошибок. Учитель видит, что ученик действительно выучил материал. Класс замечает исключительную ситуацию, начинается шёпот.', 'https://disk.yandex.ru/i/u7DPCdWR57cDFg', false),
-('node_3', 'Класс хлопает, напряжение спадает. Саша собирается с мыслями и продолжает рассказывать у доски. Он допускает небольшие ошибки, но завершает стихотворение. Класс реагирует спокойно.', 'https://disk.yandex.ru/i/N4MSwO-eXDao6g', false),
-('node_4', 'Смех прекращается, но напряжение растёт. Саша пытается продолжить, но сбивается ещё сильнее. Стресс очевиден, ученик выглядит подавленным.', 'https://disk.yandex.ru/i/J0lLFMfBaEJULA', false),
-('out_1', 'Класс возмущается, почему для Саши отдельные условия. Учитель проводит разговор о том, что у всех могут быть разные сложности. Оценку 5 он получил, поскольку задание было выучить стихотворение – он выучил. Результат – довольный ребёнок, всё хорошо в классе.', 'https://disk.yandex.ru/i/3pAwgNhoXz17-Q', true),
-('out_2', 'Класс возмущается. Учитель заявляет: «Я учитель и я здесь принимаю решение об оценке». Результат – довольный ребёнок, но в классе обстановка неспокойна.', 'https://disk.yandex.ru/i/OUN2W3Mvj73iXQ', true),
-('out_3', 'Учитель ставит 4- и говорит: «Условия для всех одинаковы». Результат: класс спокоен, но ребёнок расстроен.', 'https://disk.yandex.ru/i/7DYtgCuoDkHinw', true),
-('out_4', 'Учитель хвалит за преодоление страха. Класс принимает оценку. Саша чувствует поддержку.', 'https://disk.yandex.ru/i/HTp-lIFTPVEzSQ', true),
-('out_5', 'Справедливая оценка с учётом волнения. Саша согласен, класс не возмущается.', 'https://disk.yandex.ru/i/8KgwPmAoaEJXrw', true),
-('out_6', 'Оценка занижена. Саша чувствует несправедливость, мотивация падает.', 'https://disk.yandex.ru/i/BRLrIgSf1sVaOw', true),
-('out_7', 'Учитель помог справиться. Саша благодарен, но чувствует слабость.', 'https://disk.yandex.ru/i/PqIr1xR2E-Fkzw', true),
-('out_8', 'Ситуация замята, но проблема не решена. Саша чувствует облегчение, но некомпетентность.', 'https://disk.yandex.ru/i/5MoevSFaTJHdMw', true),
-('out_9', 'Саша дочитал через силу. Класс напряжён. Доверие к учителю подорвано.', 'https://disk.yandex.ru/i/wrdiVb_h3NDt8A', true);
+('node_1', 'Вы вызываете Сашу к доске читать выученное стихотворение Есенина. На третьей строфе он запинается, краснеет. Из класса слышен приглушённый смех и шёпот: «Забыл». Саша замолкает, опустив глаза в пол. Класс ждёт вашей реакции.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/node_1.png?raw=true', false),
+('node_2', 'Ученик подходит к столу учителя, поворачивается к учителю лицом и рассказывает стихотворение. Ученик вспоминает все строки, рассказывает уверенно, без ошибок. Учитель видит, что ученик действительно выучил материал. Класс замечает исключительную ситуацию, начинается шёпот.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/node_2.png?raw=true', false),
+('node_3', 'Класс хлопает, напряжение спадает. Ученик собирается с мыслями и продолжает рассказывать у доски. Он допускает небольшие ошибки, но завершает стихотворение. Класс реагирует спокойно.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/node_3.png?raw=true', false),
+('node_4', 'Смех прекращается, но напряжение растёт. Ученик пытается продолжить, но сбивается ещё сильнее. Стресс очевиден, ученик выглядит подавленным.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/node_4.png?raw=true', false),
+('out_1', 'Класс возмущается, почему для ученика отдельные условия. Учитель проводит разговор о том, что у всех могут быть разные сложности. Оценку 5 ученик получил, поскольку задание было выучить стихотворение – он выучил. Результат – довольный ученик, хороший климат в классе.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_1.png?raw=true', true),
+('out_2', 'Класс возмущается. Учитель заявляет: «Я учитель и я здесь принимаю решение об оценке». Результат – довольный ученик, но в классе обстановка неспокойна.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_2.png?raw=true', true),
+('out_3', 'Учитель ставит 4- и говорит: «Условия для всех одинаковы». Результат: класс спокоен, но ученик расстроен.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_3.png?raw=true', true),
+('out_4', 'Учитель хвалит за преодоление страха. Класс принимает оценку. Ученик чувствует поддержку.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_4.png?raw=true', true),
+('out_5', 'Справедливая оценка с учётом волнения. Ученик согласен, класс не возмущается.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_5.png?raw=true', true),
+('out_6', 'Оценка занижена. Ученик чувствует несправедливость, мотивация падает.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_6.png?raw=true', true),
+('out_7', 'Учитель помог справиться. Ученик благодарен, но чувствует слабость.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_7.png?raw=true', true),
+('out_8', 'Ситуация сглажена, но проблема не решена. Ученик чувствует облегчение, но ощущает некомпетентность.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_8.png?raw=true', true),
+('out_9', 'Ученик дочитал через силу. Класс напряжён. Доверие к учителю подорвано.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/1_anxiety_public_speaking/out_9.png?raw=true', true);
 
 INSERT INTO script_node (description, url_image, is_terminal)
 SELECT description, image, is_terminal FROM tmp_nodes
@@ -230,7 +230,7 @@ CREATE TEMP TABLE tmp_choices (
 
 INSERT INTO tmp_choices VALUES
 ('node_1', 'node_2', 'Предложить ученику подойти к учителю и рассказать стихотворение лично', 0.1, -0.3, 0.2, 0.1, 0.1, 0, 'ТактическоеРешение', 'Сотрудничество', 3, 6, ARRAY['Человеческий','Временной']),
-('node_1', 'node_3', 'Попросить класс поддержать одноклассника аплодисментами и продолжить у доски', 0, -0.1, 0.1, 0.2, 0, 0, 'ТактическоеРешение', 'Компромисс', 5, 5, ARRAY['Образовательный','Человеческий']),
+('node_1', 'node_3', 'Попросить класс поддержать ученика аплодисментами и продолжить у доски', 0, -0.1, 0.1, 0.2, 0, 0, 'ТактическоеРешение', 'Компромисс', 5, 5, ARRAY['Образовательный','Человеческий']),
 ('node_1', 'node_4', 'Строго пресечь смех и потребовать от ученика продолжить выступление у доски', -0.2, 0.2, -0.1, -0.2, 0.1, 0.1, 'ТактическоеРешение', 'Соперничество', 8, 2, ARRAY['Человеческий']),
 ('node_2', 'out_1', 'Поставить 5 и провести разговор с классом о разных условиях', 0.3, -0.2, 0.3, 0.2, 0.2, 0.1, 'СтратегическоеРешение', 'Сотрудничество', 4, 5, ARRAY['Образовательный','Человеческий','Временной']),
 ('node_2', 'out_2', 'Поставить 5 и заявить «Я учитель, я принимаю решение»', 0.2, -0.1, -0.2, -0.3, -0.1, 0.1, 'ТактическоеРешение', 'Соперничество', 7, 2, ARRAY['Человеческий']),
@@ -268,7 +268,7 @@ JOIN tmp_solutions ts ON ts.sol_type_id = s.sol_type_id
                      AND ts.sol_autonomy = s.student_autonomy;
 
 INSERT INTO solution_resource (resource_id, solution_id)
-SELECT r.id, sm.solution_id
+SELECT DISTINCT r.id, sm.solution_id
 FROM tmp_choices tc
 CROSS JOIN UNNEST(tc.resources) AS res_name
 JOIN resource r ON r.name = res_name
@@ -276,10 +276,7 @@ JOIN solution_map sm ON sm.sol_type_id = (SELECT id FROM solution_type WHERE nam
                     AND sm.resp_strat_id = (SELECT id FROM response_strategy WHERE name = tc.sol_strategy)
                     AND sm.risk = tc.sol_risk
                     AND sm.student_autonomy = tc.sol_autonomy
-WHERE NOT EXISTS (
-    SELECT 1 FROM solution_resource sr
-    WHERE sr.resource_id = r.id AND sr.solution_id = sm.solution_id
-);
+ON CONFLICT (resource_id, solution_id) DO NOTHING;
 
 
 -- --------------------------------------------------------------------
@@ -293,15 +290,15 @@ SELECT
     long_term,
     reversible
 FROM (VALUES
-('out_1', 'success', 'Класс возмущается, почему для Саши отдельные условия. Учитель проводит разговор о том, что у всех могут быть разные сложности. Оценку 5 он получил, поскольку задание было выучить стихотворение – он выучил. Результат – довольный ребёнок, всё хорошо в классе.', true, true),
-('out_2', 'partial', 'Класс возмущается. Учитель заявляет: «Я учитель и я здесь принимаю решение об оценке». Результат – довольный ребёнок, но в классе обстановка неспокойна.', true, true),
-('out_3', 'partial', 'Учитель ставит 4- и говорит: «Условия для всех одинаковы». Результат: класс спокоен, но ребёнок расстроен.', true, true),
-('out_4', 'success', 'Учитель хвалит за преодоление страха. Класс принимает оценку. Саша чувствует поддержку.', true, true),
-('out_5', 'partial', 'Справедливая оценка с учётом волнения. Саша согласен, класс не возмущается.', true, true),
-('out_6', 'failure', 'Оценка занижена. Саша чувствует несправедливость, мотивация падает.', true, true),
-('out_7', 'partial', 'Учитель помог справиться. Саша благодарен, но чувствует слабость.', true, true),
-('out_8', 'failure', 'Ситуация замята, но проблема не решена. Саша чувствует облегчение, но некомпетентность.', true, true),
-('out_9', 'failure', 'Саша дочитал через силу. Класс напряжён. Доверие к учителю подорвано.', true, true)
+('out_1', 'success', 'Класс возмущается, почему для ученика отдельные условия. Учитель проводит разговор о том, что у всех могут быть разные сложности. Оценку 5 ученик получил, поскольку задание было выучить стихотворение – он выучил. Результат – довольный ученик, хороший климат в классе.', true, true),
+('out_2', 'partial', 'Класс возмущается. Учитель заявляет: «Я учитель и я здесь принимаю решение об оценке». Результат – довольный ученик, но в классе обстановка неспокойна.', true, true),
+('out_3', 'partial', 'Учитель ставит 4- и говорит: «Условия для всех одинаковы». Результат: класс спокоен, но ученик расстроен.', true, true),
+('out_4', 'success', 'Учитель хвалит за преодоление страха. Класс принимает оценку. Ученик чувствует поддержку.', true, true),
+('out_5', 'partial', 'Справедливая оценка с учётом волнения. Ученик согласен, класс не возмущается.', true, true),
+('out_6', 'failure', 'Оценка занижена. Ученик чувствует несправедливость, мотивация падает.', true, true),
+('out_7', 'partial', 'Учитель помог справиться. Ученик благодарен, но чувствует слабость.', true, true),
+('out_8', 'failure', 'Ситуация сглажена, но проблема не решена. Ученик чувствует облегчение, но ощущает некомпетентность.', true, true),
+('out_9', 'failure', 'Ученик дочитал через силу. Класс напряжён. Доверие к учителю подорвано.', true, true)
 ) AS t(node_id, type_name, description, long_term, reversible);
 
 
@@ -362,15 +359,15 @@ WHERE NOT EXISTS (
 -- --------------------------------------------------------------------
 CREATE TEMP TABLE outcome_metrics AS
 SELECT * FROM (VALUES
-    ('out_1', 0.2, -0.1, 0.2, 0.1, 0.1, -0.1),
-    ('out_2', 0.1, 0, -0.1, -0.2, -0.1, 0.1),
-    ('out_3', -0.2, 0.1, -0.1, 0, 0.1, 0),
-    ('out_4', 0.3, -0.2, 0.2, 0.1, 0.1, -0.1),
+('out_1', 0.2, 0.2, 0.2, 0.2, 0.1, 0.1),
+    ('out_2', -0.1, 0, -0.2, -0.3, -0.2, 0.2),
+    ('out_3', -0.3, 0.1, -0.2, 0, 0, 0.1),
+    ('out_4', 0.3, -0.3, 0.2, 0.1, 0.1, 0),
     ('out_5', 0.1, -0.1, 0.1, 0, 0, 0),
-    ('out_6', -0.2, 0.1, -0.1, -0.1, -0.1, 0.2),
-    ('out_7', 0, -0.2, 0, 0, -0.1, 0.1),
-    ('out_8', -0.1, 0, -0.1, 0, -0.1, 0),
-    ('out_9', -0.3, 0.2, -0.2, -0.1, -0.1, 0.2)
+    ('out_6', -0.2, 0.1, -0.1, -0.1, 0, 0.1),
+    ('out_7', 0.1, -0.2, 0.1, 0, 0, 0),
+    ('out_8', 0, -0.3, 0, 0.1, -0.1, 0),
+    ('out_9', -0.3, 0.1, -0.2, -0.2, 0, 0.2)
 ) AS t(node_id, motivation, stress, trust, class_climate, teacher_authority, teacher_burnout);
 
 INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
@@ -439,7 +436,7 @@ INSERT INTO situation_participants (situation_id, participant_id)
 SELECT sit.id, p.id
 FROM sit
 CROSS JOIN participant p
-WHERE p.full_name IN ('Анна Германовна', 'Саша')
+WHERE p.full_name IN ('Учитель', 'Ученик')
 AND NOT EXISTS (
     SELECT 1 FROM situation_participants sp
     WHERE sp.situation_id = sit.id AND sp.participant_id = p.id
