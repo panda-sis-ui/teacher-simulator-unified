@@ -7,7 +7,7 @@
     <title>Руководство — Симулятор учителя</title>
     <style>
         /* ================================================================
-       1. Глобальные переменные и сбросы (из предоставленной библиотеки)
+       1. Глобальные переменные и сбросы
     ================================================================ */
         :root {
             --primary: #6366f1;
@@ -39,7 +39,6 @@
             padding: 20px 0;
         }
 
-        /* расширенный контейнер */
         .container,
         body {
             max-width: 100%;
@@ -55,9 +54,8 @@
         }
 
         /* ================================================================
-       2. Дополнительные стили для руководства (сохраняем структуру)
+       2. Стили для руководства
     ================================================================ */
-        /* шапка (hero-подобная) */
         .guide-header {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px 20px;
@@ -85,7 +83,6 @@
             background: white;
         }
 
-        /* макет: боковое меню + контент */
         .guide-layout {
             display: flex;
             gap: 2rem;
@@ -139,7 +136,6 @@
             box-shadow: var(--shadow);
         }
 
-        /* карточки разделов */
         .guide-section {
             margin-bottom: 2.5rem;
             scroll-margin-top: 1rem;
@@ -201,7 +197,6 @@
             border: 1px solid #fed7aa;
         }
 
-        /* сетка для метрик */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -231,7 +226,6 @@
             font-weight: 500;
         }
 
-        /* вердикты */
         .verdict-card {
             border-radius: 0.75rem;
             padding: 1rem;
@@ -253,7 +247,6 @@
             border-left: 4px solid #ef4444;
         }
 
-        /* faq */
         .faq-item {
             background: white;
             border-radius: 0.75rem;
@@ -284,6 +277,14 @@
             color: #64748b;
             border-top: 1px solid #e2e8f0;
             margin-top: 1.5rem;
+        }
+
+        /* Подсветка поиска */
+        mark {
+            background-color: #fef08a;
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #1e293b;
         }
 
         @media (max-width: 768px) {
@@ -317,6 +318,7 @@
                 <ul>
                     <li><a href="#quick">⚡ Быстрый старт</a></li>
                     <li><a href="#auth">🔐 Регистрация и вход</a></li>
+                    <li><a href="#logout">🚪 Выход из системы</a></li>
                     <li><a href="#catalog">📂 Каталог ситуаций</a></li>
                     <li><a href="#play">🎮 Прохождение сценария</a></li>
                     <li><a href="#metrics">📊 Метрики</a></li>
@@ -335,8 +337,8 @@
                 <h3>🚀 Первые шаги</h3>
                 <ol class="list-ordered">
                     <li>Откройте главную страницу приложения.</li>
-                    <li>Нажмите кнопку <strong>«Регистрация»</strong>, чтобы создать аккаунт или кнопку
-                        <strong>Войти</strong>, если аккаунт уже имеется.</li>
+                    <li>Нажмите кнопку <strong>«Регистрация»</strong>, чтобы создать аккаунт, или кнопку
+                        <strong>«Войти»</strong>, если аккаунт уже имеется.</li>
                     <li>На главной странице выберите одну из случайных ситуаций в блоке «Случайные ситуации» или
                         перейдите в <strong>«Каталог ситуаций»</strong>.</li>
                     <li>Нажмите <strong>«Начать»</strong> на карточке сценария.</li>
@@ -344,13 +346,11 @@
                     <li>Продолжайте до финального узла — система покажет результат.</li>
                 </ol>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/1.png?raw=true"
-                        alt="Главная страница приложения">
+                    <img src="./images/user_manual/1.png" alt="Главная страница приложения">
                     <div class="figcaption">Рис. 1 — Главная страница: кнопки «Регистрация» и «Войти»</div>
                 </div>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/4.png?raw=true"
-                        alt="Пример выбора сценария">
+                    <img src="./images/user_manual/4.png" alt="Пример выбора сценария">
                     <div class="figcaption">Рис. 2 — Выбор сценария: карточка с названием, типом проблемы и кнопкой
                         «Начать»</div>
                 </div>
@@ -377,8 +377,7 @@
                         сообщение об успехе и автоматически войдёте в систему.</li>
                 </ol>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/3.png?raw=true"
-                        alt="Форма регистрации">
+                    <img src="./images/user_manual/3.png" alt="Форма регистрации">
                     <div class="figcaption">Рис. 3 — Пример формы регистрации</div>
                 </div>
                 <h3>🔑 Вход в систему</h3>
@@ -389,14 +388,13 @@
                         логин.</li>
                 </ol>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/2.png?raw=true"
-                        alt="Форма входа">
+                    <img src="./images/user_manual/2.png" alt="Форма входа">
                     <div class="figcaption">Рис. 4 — Пример формы входа</div>
                 </div>
                 <div class="highlight">
                     💡 <strong>Попробовать без регистрации</strong><br>
                     Если вы хотите просто познакомиться с интерфейсом, нажмите кнопку <strong>«Студент»</strong> на
-                    главной странице. В этом режиме история прохождений не сохраняется, но вы сможете пройти любой
+                    <strong>странице входа</strong> (форма «Войти»). В этом режиме история прохождений не сохраняется, но вы сможете пройти любой
                     сценарий.
                 </div>
                 <div class="test-block">
@@ -405,6 +403,22 @@
                     • <strong>«Пароль должен содержать не менее 6 символов»</strong> — увеличьте длину пароля.<br>
                     • <strong>«Неверный логин или пароль»</strong> — проверьте раскладку клавиатуры и Caps Lock. Если
                     забыли пароль — обратитесь к администратору.
+                </div>
+            </section>
+
+            <!-- Выход из системы (новый раздел) -->
+            <section id="logout" class="guide-section">
+                <h2>🚪 Выход из системы</h2>
+                <p>Когда вы закончили работу в симуляторе, рекомендуется выйти из учётной записи, особенно если вы используете общее устройство.</p>
+                <h3>Как выйти из аккаунта</h3>
+                <ol class="list-ordered">
+                    <li>Убедитесь, что вы авторизованы (в шапке сайта отображается ваш логин).</li>
+                    <li>Нажмите на кнопку <strong>«Выйти»</strong> в правом верхнем углу (рядом с логином).</li>
+                    <li>Система перенаправит вас на главную страницу с формой входа.</li>
+                </ol>
+                <div class="figure">
+                    <img src="./images/user_manual/8.png" alt="Кнопка Выйти в шапке">
+                    <div class="figcaption">Рис. 5 — Кнопка «Выйти» доступна после авторизации</div>
                 </div>
             </section>
 
@@ -423,34 +437,25 @@
                 <p>Фильтры работают как по отдельности, так и в комбинации. Список сценариев обновляется мгновенно без
                     перезагрузки страницы.</p>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/5.png?raw=true"
-                        alt="Каталог ситуаций с фильтрами">
-                    <div class="figcaption">Рис. 5 — Страница каталога с панелью фильтров и карточками сценариев</div>
+                    <img src="./images/user_manual/5.png" alt="Каталог ситуаций с фильтрами">
+                    <div class="figcaption">Рис. 6 — Страница каталога с панелью фильтров и карточками сценариев</div>
                 </div>
                 <h3>📋 Карточка педагогической ситуации</h3>
                 <p>Каждый сценарий представлен в виде карточки, содержащей:</p>
                 <ul class="list-unordered">
                     <li>название ситуации;</li>
                     <li>тип проблемы;</li>
-                    <li>учебный предмет и класс;</li>
                     <li>кнопку <strong>«Начать»</strong> для запуска сценария.</li>
                 </ul>
+                <p><em>Примечание: в текущей версии учебный предмет и класс могут не отображаться — они указываются только автором при создании сценария.</em></p>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/6.png?raw=true"
-                        alt="Карточка сценария">
-                    <div class="figcaption">Рис. 6 — Пример карточки педагогической ситуации</div>
+                    <img src="./images/user_manual/6.png" alt="Карточка сценария">
+                    <div class="figcaption">Рис. 7 — Пример карточки педагогической ситуации</div>
                 </div>
                 <div class="highlight">
                     💡 <strong>Совет</strong><br>
                     Если вы не знаете, с какой ситуации начать, воспользуйтесь блоком «Случайные ситуации» на главной
                     странице — система предложит три случайных сценария.
-                </div>
-                <div class="test-block">
-                    ❗ <strong>Примечание</strong><br>
-                    • При отсутствии подключения к интернету каталог отображает локальные тестовые данные, чтобы вы
-                    могли продолжить работу.<br>
-                    • Если ни один сценарий не соответствует выбранным фильтрам, вы увидите сообщение «Ничего не
-                    найдено».
                 </div>
             </section>
 
@@ -469,9 +474,8 @@
                     <li><strong>Варианты выбора</strong> — от 2 до 6 кнопок с возможными действиями учителя.</li>
                 </ul>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/7.png?raw=true"
-                        alt="Экран прохождения сценария">
-                    <div class="figcaption">Рис. 7 — Пример экрана прохождения: описание ситуации, метрики и кнопки
+                    <img src="./images/user_manual/7.png" alt="Экран прохождения сценария">
+                    <div class="figcaption">Рис. 8 — Пример экрана прохождения: описание ситуации, метрики и кнопки
                         выбора</div>
                 </div>
                 <h3>🖱️ Как сделать выбор</h3>
@@ -484,9 +488,8 @@
                     <li>Повторяйте шаги, пока не дойдёте до финального узла (исхода сценария).</li>
                 </ol>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/9.png?raw=true"
-                        alt="Варианты выбора">
-                    <div class="figcaption">Рис. 8 — Пример вариантов выбора на промежуточном узле</div>
+                    <img src="./images/user_manual/9.png" alt="Варианты выбора">
+                    <div class="figcaption">Рис. 9 — Пример вариантов выбора на промежуточном узле</div>
                 </div>
                 <div class="highlight">
                     💡 <strong>Совет</strong><br>
@@ -496,22 +499,19 @@
                 </div>
                 <h3>🔄 Навигация и управление</h3>
                 <ul class="list-unordered">
-                    <li><strong>«Начать заново»</strong> — перезапускает текущий сценарий с начальными метриками.</li>
+                    <li><strong>«Начать заново»</strong> — перезапускает текущий сценарий с начальными метриками (у каждой ситуации свои стартовые значения).</li>
                     <li><strong>«К каталогу»</strong> — прерывает прохождение и возвращает вас к списку ситуаций.</li>
-                    <li><strong>Обновление страницы (F5)</strong> — сессия сохраняется, вы продолжите с того же узла.
-                    </li>
+                    <li><strong>Обновление страницы (F5)</strong> — в демо-режиме прогресс теряется; авторизованные пользователи могут продолжить с того же узла после повторного входа.</li>
                 </ul>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/8.png?raw=true"
-                        alt="Панель навигации при прохождении">
-                    <div class="figcaption">Рис. 9 — Панель навигации (кнопки управления сценарием)</div>
+                    <img src="./images/user_manual/8.png" alt="Панель навигации при прохождении">
+                    <div class="figcaption">Рис. 10 — Панель навигации (кнопки управления сценарием)</div>
                 </div>
                 <div class="test-block">
                     ❗ <strong>Что происходит после выбора?</strong><br>
-                    • Метрики меняются в реальном времени (например, мотивация может повыситься, а стресс —
-                    снизиться).<br>
+                    • Метрики меняются в реальном времени (например, мотивация может повыситься, а стресс — снизиться).<br>
                     • Отображается новый текст ситуации, отражающий последствия вашего решения.<br>
-                    • Если узел финальный, вы увидите итоговый отчёт с диаграммой-паутинкой и вердиктом.
+                    • Если узел финальный, вы увидите итоговый отчёт с радарной диаграммой и вердиктом.
                 </div>
             </section>
 
@@ -532,9 +532,12 @@
                         стресса/выгорания) значение, критическая ситуация.</li>
                 </ul>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/12.png?raw=true"
-                        alt="Пример цветовых индикаторов метрик">
-                    <div class="figcaption">Рис. 10 — Пример отображения шести метрик с цветовой индикацией</div>
+                    <img src="./images/user_manual/12.png" alt="Пример цветовых индикаторов метрик">
+                    <div class="figcaption">Рис. 11 — Пример отображения шести метрик с цветовой индикацией</div>
+                </div>
+                <div class="highlight">
+                    💡 <strong>Примечание</strong><br>
+                    В некоторых браузерах цвет индикаторов может отображаться не сразу — убедитесь, что используете актуальную версию. Также цветовая схема может меняться в зависимости от темы оформления.
                 </div>
                 <h3>📈 Список метрик и нормативы</h3>
                 <div class="grid-3">
@@ -579,9 +582,8 @@
                 <div class="test-block">
                     ❗ <strong>Важно</strong><br>
                     • Итоговый результат («Успех», «Частичный успех», «Неудача») рассчитывается по количеству метрик,
-                    достигших норматива.<br>
-                    • Обращайте внимание на цвет индикатора — он помогает быстро оценить ситуацию без чтения точных
-                    чисел.<br>
+                    достигших норматива. <strong>Метрика считается достигшей нормы, если её значение соответствует критерию: мотивация, доверие, климат, авторитет ≥ порога; стресс и выгорание ≤ порога.</strong><br>
+                    • Обращайте внимание на цвет индикатора — он помогает быстро оценить ситуацию без чтения точных чисел.<br>
                     • Даже одна метрика в красной зоне может привести к негативным последствиям в финале сценария.
                 </div>
             </section>
@@ -597,14 +599,12 @@
                         решения.</li>
                     <li><strong>Вердикт</strong> — итоговая оценка (Успех / Частичный успех / Неудача).</li>
                     <li><strong>Итоговые значения шести метрик</strong> — числа и цветовые индикаторы.</li>
-                    <li><strong>Диаграмма-паутинка (спайдер-чарт)</strong> — наглядное сравнение всех метрик.</li>
+                    <li><strong>Радарная диаграмма (паутинка)</strong> — наглядное сравнение всех метрик.</li>
                     <li><strong>Кнопки навигации</strong> — «Начать заново», «К началу ситуации», «В каталог».</li>
                 </ul>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/10.png?raw=true"
-                        alt="Итоговый экран с результатами">
-                    <div class="figcaption">Рис. 11 — Пример итогового экрана с вердиктом «Успех» и диаграммой-паутинкой
-                    </div>
+                    <img src="./images/user_manual/10.png" alt="Итоговый экран с результатами">
+                    <div class="figcaption">Рис. 12 — Пример итогового экрана с вердиктом «Успех» и радарной диаграммой</div>
                 </div>
                 <h3>🏅 Значение вердиктов</h3>
                 <div class="grid-3">
@@ -622,26 +622,21 @@
                     </div>
                 </div>
                 <div class="figure">
-                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/user_manual/11.png?raw=true"
-                        alt="Пример диаграммы-паутинки">
-                    <div class="figcaption">Рис. 12 — Диаграмма-паутинка: наглядно показывает сильные и слабые стороны
+                    <img src="./images/user_manual/11.png" alt="Пример радарной диаграммы">
+                    <div class="figcaption">Рис. 13 — Радарная диаграмма: наглядно показывает сильные и слабые стороны
                         принятых решений</div>
                 </div>
                 <div class="highlight">
                     💡 <strong>Как использовать результаты?</strong><br>
-                    • Сравнивайте диаграммы после разных попыток — это поможет увидеть, какие метрики страдают чаще
-                    всего.<br>
+                    • Сравнивайте диаграммы после разных попыток — это поможет увидеть, какие метрики страдают чаще всего.<br>
                     • Вердикт «Частичный успех» — это не плохо, а сигнал, какие навыки стоит подтянуть.<br>
                     • Пробуйте разные стратегии в одном сценарии: авторитарную, демократическую, сотрудничество.
                 </div>
                 <div class="test-block">
                     ❗ <strong>Примечание</strong><br>
                     • Если вы завершили сценарий, но хотите его перепройти — нажмите «Начать заново». Старые результаты
-                    не сохраняются автоматически.<br>
-                    • Для методистов и администраторов доступна расширенная статистика по прохождениям (в
-                    разработке).<br>
-                    • Итоговый отчёт можно сохранить через скриншот — функция экспорта в PDF планируется в следующих
-                    версиях.
+                    не сохраняются автоматически. Чтобы сохранить результат, сделайте скриншот — экспорт в PDF планируется в будущих версиях.<br>
+                    • Для методистов и администраторов доступна расширенная статистика по прохождениям (в разработке).
                 </div>
             </section>
 
@@ -654,7 +649,7 @@
                     <details>
                         <summary class="faq-summary">❓ Нужно ли регистрироваться для работы с симулятором?</summary>
                         <div class="faq-text">Регистрация не обязательна. Вы можете нажать кнопку
-                            <strong>«Студент»</strong> на главной странице и сразу начать проходить сценарии. Однако без
+                            <strong>«Студент»</strong> на странице входа и сразу начать проходить сценарии. Однако без
                             регистрации история ваших прохождений не сохраняется. Если вы хотите отслеживать прогресс и
                             анализировать свои ошибки — зарегистрируйтесь.</div>
                     </details>
@@ -671,10 +666,8 @@
                 <div class="faq-item">
                     <details>
                         <summary class="faq-summary">❓ Как сохранить прогресс прохождения?</summary>
-                        <div class="faq-text">Прогресс сохраняется автоматически в рамках текущей сессии. Если вы
-                            обновите страницу (F5), то продолжите с того же узла. Если вы закроете браузер и откроете
-                            его снова — сессия не восстановится. Для постоянного сохранения результатов проходите
-                            сценарии в авторизованном режиме.</div>
+                        <div class="faq-text">В демо-режиме (без регистрации) прогресс теряется при закрытии браузера.
+                            Авторизованные пользователи могут продолжить прохождение после повторного входа — текущий узел сохраняется. Если вы обновите страницу (F5) в авторизованном режиме, сессия восстановится.</div>
                     </details>
                 </div>
                 <div class="faq-item">
@@ -682,8 +675,7 @@
                         <summary class="faq-summary">❓ Можно ли прервать прохождение и вернуться к нему позже?</summary>
                         <div class="faq-text">Да, вы можете в любой момент нажать кнопку <strong>«К каталогу»</strong>
                             или перейти на другую страницу. Текущая сессия будет завершена. Чтобы вернуться к
-                            прерванному сценарию, придётся начать его заново. Если вы хотите сохранить прогресс, не
-                            прерывайте прохождение.</div>
+                            прерванному сценарию, придётся начать его заново (если вы не авторизованы). Авторизованные пользователи могут продолжить с того же узла после повторного входа в каталог.</div>
                     </details>
                 </div>
                 <div class="faq-item">
@@ -708,7 +700,7 @@
                         <summary class="faq-summary">❓ Как создаются новые педагогические ситуации?</summary>
                         <div class="faq-text">Сценарии создаются только пользователями с ролью «Методист» через
                             специальный конструктор. Студенты могут только проходить готовые ситуации. Если вы хотите
-                            добавить свой сценарий, обратитесь к методисту вашего учебного заведения.</div>
+                            добавить свой сценарий, обратитесь к методисту вашего учебного заведения. Подробная инструкция для методистов доступна по запросу.</div>
                     </details>
                 </div>
                 <div class="faq-item">
@@ -743,51 +735,79 @@
         // Элементы
         const searchInput = document.getElementById('searchInput');
         const allSections = document.querySelectorAll('.guide-section');
+        const guideContent = document.querySelector('.guide-content');
 
-        // Функция для плавной прокрутки к первому видимому разделу
-        function scrollToFirstVisibleSection() {
-            const visibleSections = Array.from(allSections).filter(section => section.style.display !== 'none');
-            if (visibleSections.length > 0) {
-                visibleSections[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
-                // Временная подсветка
-                visibleSections[0].style.transition = 'background-color 0.3s';
-                visibleSections[0].style.backgroundColor = '#fef9c3';
-                setTimeout(() => {
-                    visibleSections[0].style.backgroundColor = '';
-                }, 1500);
-            }
-        }
+        // Функция для подсветки текста во всех элементах, кроме скриптов и стилей
+        function highlightText(term) {
+            // Удаляем предыдущие подсветки
+            const marked = document.querySelectorAll('mark');
+            marked.forEach(mark => {
+                const parent = mark.parentNode;
+                parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                parent.normalize();
+            });
 
-        // Поиск + авто-прокрутка
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                const term = e.target.value.toLowerCase().trim();
-                let firstVisible = null;
+            if (!term || term.trim() === '') return;
 
-                allSections.forEach(section => {
-                    const text = section.textContent.toLowerCase();
-                    if (term === '' || text.includes(term)) {
-                        section.style.display = 'block';
-                        if (!firstVisible) firstVisible = section;
-                    } else {
-                        section.style.display = 'none';
+            const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            // Обходим все текстовые узлы внутри guide-content (кроме скриптов и уже помеченных)
+            const walker = document.createTreeWalker(
+                guideContent,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: function(node) {
+                        // Пропускаем скрипты и уже существующие mark
+                        if (node.parentElement.tagName === 'SCRIPT' || node.parentElement.tagName === 'MARK' || node.parentElement.closest('mark')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
                     }
-                });
-
-                // Если есть результат и поисковый запрос не пуст → прокрутить к первому видимому
-                if (term !== '' && firstVisible) {
-                    firstVisible.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Временная подсветка
-                    firstVisible.style.transition = 'background-color 0.3s';
-                    firstVisible.style.backgroundColor = '#fef9c3';
-                    setTimeout(() => {
-                        firstVisible.style.backgroundColor = '';
-                    }, 1500);
+                }
+            );
+            const textNodes = [];
+            while (walker.nextNode()) textNodes.push(walker.currentNode);
+            
+            textNodes.forEach(node => {
+                if (regex.test(node.textContent)) {
+                    const span = document.createElement('span');
+                    span.innerHTML = node.textContent.replace(regex, `<mark>$1</mark>`);
+                    node.parentNode.replaceChild(span, node);
                 }
             });
         }
 
-        // ===== ОСТАЛЬНАЯ ЛОГИКА (подсветка активного пункта меню и плавная прокрутка) без изменений =====
+        // Фильтрация разделов (показывать/скрывать) с авто-прокруткой к первому видимому
+        function filterSections(term) {
+            let firstVisible = null;
+            allSections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (term === '' || text.includes(term)) {
+                    section.style.display = 'block';
+                    if (!firstVisible) firstVisible = section;
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+            if (term !== '' && firstVisible) {
+                firstVisible.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                firstVisible.style.transition = 'background-color 0.3s';
+                firstVisible.style.backgroundColor = '#fef9c3';
+                setTimeout(() => {
+                    firstVisible.style.backgroundColor = '';
+                }, 1500);
+            }
+        }
+
+        // Обработчик поиска
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                filterSections(term);
+                highlightText(term);
+            });
+        }
+
+        // ===== Подсветка активного пункта меню и плавная прокрутка =====
         const sections = document.querySelectorAll('.guide-section');
         const navLinks = document.querySelectorAll('.guide-sidebar nav a');
 
