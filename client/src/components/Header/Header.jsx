@@ -29,17 +29,17 @@ const Header = () => {
     window.location.href = '/';
   };
 
-  // Определяем роль пользователя (значение может быть 'ROLE_СТУДЕНТ' или 'ROLE_МЕТОДИСТ')
   const userRole = user?.role || '';
 
-  // Базовые пункты меню для всех авторизованных
+  // Базовые пункты для всех авторизованных (и для неавторизованных тоже, если нужно)
   const baseNavItems = [
     { path: '/', label: 'Главная' },
     { path: '/catalog', label: 'Каталог ситуаций' },
   ];
 
-  // Дополнительные пункты для методиста
+  // Дополнительные пункты только для методиста
   const metodistNavItems = [
+    { path: '/ontology', label: 'Онтология' },          // внутренняя ссылка
     { 
       type: 'external', 
       href: '/generator.html', 
@@ -48,13 +48,10 @@ const Header = () => {
     },
   ];
 
-  // Пункты для незарегистрированных пользователей
-  const publicNavItems = [...baseNavItems];
-
-  // Формируем итоговый массив навигации
+  // Формируем итоговую навигацию
   let navItems = [];
   if (!isLoggedIn) {
-    navItems = publicNavItems;
+    navItems = [...baseNavItems];
   } else {
     navItems = [...baseNavItems];
     if (userRole === 'ROLE_МЕТОДИСТ') {
@@ -62,7 +59,7 @@ const Header = () => {
     }
   }
 
-  // Всегда добавляем "Руководство пользователя" для всех (доступно всегда)
+  // Ссылка на руководство (доступна всем)
   const helpLink = {
     type: 'external',
     href: '/help.html',
@@ -81,7 +78,6 @@ const Header = () => {
         </div>
         
         <nav className="nav">
-          {/* Внутренние и внешние ссылки в зависимости от роли */}
           {navItems.map((item, idx) => {
             if (item.type === 'external') {
               return (
@@ -107,7 +103,6 @@ const Header = () => {
             );
           })}
           
-          {/* Руководство пользователя отображается всегда */}
           <a 
             href={helpLink.href}
             target={helpLink.target}

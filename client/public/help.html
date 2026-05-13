@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,11 +23,13 @@
             --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -35,12 +38,15 @@
             min-height: 100vh;
             padding: 20px 0;
         }
+
         /* расширенный контейнер */
-        .container, body {
+        .container,
+        body {
             max-width: 100%;
             width: 95%;
             margin: 0 auto;
         }
+
         @media (min-width: 1200px) {
             .container {
                 max-width: 1600px;
@@ -60,14 +66,17 @@
             box-shadow: var(--shadow);
             text-align: center;
         }
+
         .guide-header h1 {
             color: var(--dark);
             margin-bottom: 10px;
         }
+
         .header-search {
             max-width: 300px;
             margin: 15px auto 0;
         }
+
         .header-search input {
             width: 100%;
             padding: 10px 15px;
@@ -81,6 +90,7 @@
             display: flex;
             gap: 2rem;
         }
+
         .guide-sidebar {
             width: 260px;
             background: white;
@@ -91,12 +101,15 @@
             top: 1rem;
             height: fit-content;
         }
+
         .guide-sidebar nav ul {
             list-style: none;
         }
+
         .guide-sidebar nav li {
             margin: 0.75rem 0;
         }
+
         .guide-sidebar nav a {
             text-decoration: none;
             color: var(--primary);
@@ -106,10 +119,12 @@
             border-radius: 0.5rem;
             transition: all 0.2s;
         }
+
         .guide-sidebar nav a:hover {
             background: #eef2ff;
             color: var(--primary-dark);
         }
+
         .guide-sidebar nav a.active {
             background: #dbeafe;
             color: var(--primary-dark);
@@ -123,6 +138,7 @@
             padding: 1.8rem;
             box-shadow: var(--shadow);
         }
+
         /* карточки разделов */
         .guide-section {
             margin-bottom: 2.5rem;
@@ -130,6 +146,7 @@
             border-left: 4px solid #e2e8f0;
             padding-left: 1.2rem;
         }
+
         .guide-section h2 {
             font-size: 1.7rem;
             margin-bottom: 1rem;
@@ -138,29 +155,36 @@
             align-items: center;
             gap: 8px;
         }
+
         .guide-section h3 {
             margin: 1.2rem 0 0.5rem;
             font-size: 1.3rem;
             color: var(--secondary);
         }
-        .list-ordered, .list-unordered {
+
+        .list-ordered,
+        .list-unordered {
             margin-left: 1.8rem;
             margin-bottom: 1rem;
         }
+
         .figure {
             margin: 1.2rem 0;
         }
+
         .figure img {
             max-width: 100%;
             border-radius: 0.75rem;
             border: 1px solid #e2e8f0;
         }
+
         .figcaption {
             font-size: 0.85rem;
             color: #64748b;
             margin-top: 0.5rem;
             text-align: center;
         }
+
         .highlight {
             background: #dbeafe;
             padding: 0.75rem;
@@ -168,6 +192,7 @@
             margin: 1rem 0;
             border-left: 4px solid var(--primary);
         }
+
         .test-block {
             background: #fff7ed;
             padding: 1rem;
@@ -183,6 +208,7 @@
             gap: 1rem;
             margin: 1rem 0;
         }
+
         .metric-card {
             background: #f8fafc;
             border-radius: 0.75rem;
@@ -190,35 +216,43 @@
             border-left: 4px solid;
             transition: transform 0.1s;
         }
+
         .metric-card p {
             margin: 0 0 0.5rem 0;
         }
+
         .metric-card .small {
             font-size: 0.9rem;
         }
+
         .metric-card .norm {
             margin-top: 0.5rem;
             font-size: 0.85rem;
             font-weight: 500;
         }
+
         /* вердикты */
         .verdict-card {
             border-radius: 0.75rem;
             padding: 1rem;
             text-align: center;
         }
+
         .verdict-success {
             background: #f0fdf4;
             border-left: 4px solid #10b981;
         }
+
         .verdict-partial {
             background: #fefce8;
             border-left: 4px solid #eab308;
         }
+
         .verdict-failure {
             background: #fef2f2;
             border-left: 4px solid #ef4444;
         }
+
         /* faq */
         .faq-item {
             background: white;
@@ -226,6 +260,7 @@
             margin-bottom: 1rem;
             border: 1px solid #e2e8f0;
         }
+
         .faq-summary {
             font-weight: 600;
             cursor: pointer;
@@ -233,13 +268,16 @@
             padding: 1rem;
             display: block;
         }
+
         .faq-summary:hover {
             text-decoration: underline;
         }
+
         .faq-text {
             padding: 0 1rem 1rem 1rem;
             color: #334155;
         }
+
         footer {
             text-align: center;
             padding: 1rem;
@@ -247,485 +285,566 @@
             border-top: 1px solid #e2e8f0;
             margin-top: 1.5rem;
         }
+
         @media (max-width: 768px) {
             .guide-layout {
                 flex-direction: column;
             }
+
             .guide-sidebar {
                 width: 100%;
                 position: static;
             }
+
             .grid-3 {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
-<div class="guide-header">
-    <h1>📘 Руководство пользователя</h1>
-    <div class="header-search">
-        <input type="text" placeholder="Поиск по руководству..." id="searchInput">
+    <div class="guide-header">
+        <h1>📘 Руководство пользователя</h1>
+        <div class="header-search">
+            <input type="text" placeholder="Поиск по руководству..." id="searchInput">
+        </div>
     </div>
-</div>
 
-<div class="guide-layout">
-    <aside class="guide-sidebar">
-        <nav>
-            <ul>
-                <li><a href="#quick">⚡ Быстрый старт</a></li>
-                <li><a href="#auth">🔐 Регистрация и вход</a></li>
-                <li><a href="#catalog">📂 Каталог ситуаций</a></li>
-                <li><a href="#play">🎮 Прохождение сценария</a></li>
-                <li><a href="#metrics">📊 Метрики</a></li>
-                <li><a href="#result">🏆 Результат</a></li>
-                <li><a href="#faq">❓ FAQ</a></li>
-            </ul>
-        </nav>
-    </aside>
+    <div class="guide-layout">
+        <aside class="guide-sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#quick">⚡ Быстрый старт</a></li>
+                    <li><a href="#auth">🔐 Регистрация и вход</a></li>
+                    <li><a href="#catalog">📂 Каталог ситуаций</a></li>
+                    <li><a href="#play">🎮 Прохождение сценария</a></li>
+                    <li><a href="#metrics">📊 Метрики</a></li>
+                    <li><a href="#result">🏆 Результат</a></li>
+                    <li><a href="#faq">❓ FAQ</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-    <main class="guide-content">
-        <!-- Быстрый старт -->
-        <section id="quick" class="guide-section">
-            <h2>⚡ Быстрый старт</h2>
-            <p>Добро пожаловать в «Симулятор учителя»! Всего за несколько минут вы сможете начать тренировку профессиональных навыков в безопасной среде. Ниже приведены основные шаги для первого запуска.</p>
-            <h3>🚀 Первые шаги</h3>
-            <ol class="list-ordered">
-                <li>Откройте главную страницу приложения.</li>
-                <li>Нажмите кнопку <strong>«Регистрация»</strong>, чтобы создать аккаунт или кнопку <strong>Войти</strong>, если аккаунт уже имеется.</li>
-                <li>На главной странице выберите одну из случайных ситуаций в блоке «Случайные ситуации» или перейдите в <strong>«Каталог ситуаций»</strong>.</li>
-                <li>Нажмите <strong>«Начать»</strong> на карточке сценария.</li>
-                <li>Читайте описание, оценивайте метрики и нажимайте на понравившийся вариант действия.</li>
-                <li>Продолжайте до финального узла — система покажет результат.</li>
-            </ol>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Главная страница приложения">
-                <div class="figcaption">Рис. 1 — Главная страница: кнопки «Студент», «Регистрация», «Войти» и блок со случайными ситуациями</div>
-            </div>
-            <div class="highlight">
-                💡 <strong>Совет для новичков</strong><br>
-                Начните с режима «Студент» — он не требует регистрации и позволяет сразу погрузиться в процесс. Когда освоитесь, зарегистрируйтесь, чтобы отслеживать свой прогресс.
-            </div>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Пример выбора сценария">
-                <div class="figcaption">Рис. 2 — Выбор сценария: карточка с названием, типом проблемы и кнопкой «Начать»</div>
-            </div>
-            <div class="test-block">
-                ❗ <strong>Что нужно знать перед стартом</strong><br>
-                • Все сценарии безопасны — вы можете ошибаться, никто не пострадает.<br>
-                • Метрики меняются в реальном времени, следите за цветом индикаторов.<br>
-                • Один сценарий можно проходить множество раз — пробуйте разные стратегии.<br>
-                • Если что-то непонятно, вернитесь к этому руководству или напишите в поддержку.
-            </div>
-        </section>
-
-        <!-- Регистрация и вход -->
-        <section id="auth" class="guide-section">
-            <h2>🔐 Регистрация и вход</h2>
-            <p>Для работы с системой необходимо создать учетную запись. Это займёт не более минуты.</p>
-            <h3>📝 Регистрация нового пользователя</h3>
-            <ol class="list-ordered">
-                <li>На главной странице нажмите кнопку <strong>«Регистрация»</strong>.</li>
-                <li>Придумайте <strong>логин</strong> — только латинские буквы, без пробелов.</li>
-                <li>Задайте <strong>пароль</strong> (минимум 6 символов). Для надёжности используйте цифры и буквы разного регистра.</li>
-                <li>Нажмите кнопку <strong>«Зарегистрироваться»</strong>. Если данные введены корректно, вы увидите сообщение об успехе и автоматически войдёте в систему.</li>
-            </ol>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Форма регистрации">
-                <div class="figcaption">Рис. 3 — Пример формы регистрации</div>
-            </div>
-            <h3>🔑 Вход в систему</h3>
-            <ol class="list-ordered">
-                <li>Нажмите кнопку <strong>«Войти»</strong> в правом верхнем углу.</li>
-                <li>Введите логин и пароль, указанные при регистрации.</li>
-                <li>Нажмите кнопку <strong>«Войти»</strong>. После успешного входа в шапке сайта отобразится ваш логин.</li>
-            </ol>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Форма входа">
-                <div class="figcaption">Рис. 4 — Пример формы входа</div>
-            </div>
-            <div class="highlight">
-                💡 <strong>Попробовать без регистрации</strong><br>
-                Если вы хотите просто познакомиться с интерфейсом, нажмите кнопку <strong>«Студент»</strong> на главной странице. В этом режиме история прохождений не сохраняется, но вы сможете пройти любой сценарий.
-            </div>
-            <div class="test-block">
-                ❗ <strong>Возможные ошибки</strong><br>
-                • <strong>«Пользователь с таким логином уже существует»</strong> — выберите другой логин.<br>
-                • <strong>«Пароль должен содержать не менее 6 символов»</strong> — увеличьте длину пароля.<br>
-                • <strong>«Неверный логин или пароль»</strong> — проверьте раскладку клавиатуры и Caps Lock. Если забыли пароль — обратитесь к администратору.
-            </div>
-        </section>
-
-        <!-- Каталог ситуаций -->
-        <section id="catalog" class="guide-section">
-            <h2>📂 Каталог ситуаций</h2>
-            <p>На странице «Каталог ситуаций» представлены все педагогические сценарии, доступные для прохождения. Вы можете фильтровать их по типу проблемы и уровню сложности, а также сразу переходить к выбранному сценарию.</p>
-            <h3>🔍 Фильтрация сценариев</h3>
-            <ul class="list-unordered">
-                <li><strong>По типу проблемы</strong> — мотивационные кризисы, организационные конфликты, конфликты взаимодействия.</li>
-                <li><strong>По уровню сложности</strong> — базовый, средний, продвинутый.</li>
-            </ul>
-            <p>Фильтры работают как по отдельности, так и в комбинации. Список сценариев обновляется мгновенно без перезагрузки страницы.</p>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Каталог ситуаций с фильтрами">
-                <div class="figcaption">Рис. 5 — Страница каталога с панелью фильтров и карточками сценариев</div>
-            </div>
-            <h3>📋 Карточка педагогической ситуации</h3>
-            <p>Каждый сценарий представлен в виде карточки, содержащей:</p>
-            <ul class="list-unordered">
-                <li>название ситуации;</li>
-                <li>тип проблемы;</li>
-                <li>учебный предмет и класс;</li>
-                <li>кнопку <strong>«Начать»</strong> для запуска сценария.</li>
-            </ul>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Карточка сценария">
-                <div class="figcaption">Рис. 6 — Пример карточки педагогической ситуации</div>
-            </div>
-            <div class="highlight">
-                💡 <strong>Совет</strong><br>
-                Если вы не знаете, с какой ситуации начать, воспользуйтесь блоком «Случайные ситуации» на главной странице — система предложит три случайных сценария.
-            </div>
-            <div class="test-block">
-                ❗ <strong>Примечание</strong><br>
-                • При отсутствии подключения к интернету каталог отображает локальные тестовые данные, чтобы вы могли продолжить работу.<br>
-                • Если ни один сценарий не соответствует выбранным фильтрам, вы увидите сообщение «Ничего не найдено».
-            </div>
-        </section>
-
-        <!-- Прохождение сценария -->
-        <section id="play" class="guide-section">
-            <h2>🎮 Прохождение сценария</h2>
-            <p>Прохождение педагогического сценария — это последовательное принятие решений в смоделированной школьной ситуации. Каждый ваш выбор влияет на шесть ключевых метрик и определяет дальнейшее развитие событий.</p>
-            <h3>📖 Структура экрана</h3>
-            <p>При запуске сценария вы попадаете на первый узел. Экран разделён на три основные зоны:</p>
-            <ul class="list-unordered">
-                <li><strong>Описание ситуации</strong> — текст и иллюстрация, погружающие в контекст.</li>
-                <li><strong>Панель метрик</strong> — цветные индикаторы текущего состояния (мотивация, стресс, доверие, климат, авторитет, выгорание).</li>
-                <li><strong>Варианты выбора</strong> — от 2 до 6 кнопок с возможными действиями учителя.</li>
-            </ul>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Экран прохождения сценария">
-                <div class="figcaption">Рис. 7 — Пример экрана прохождения: описание ситуации, метрики и кнопки выбора</div>
-            </div>
-            <h3>🖱️ Как сделать выбор</h3>
-            <ol class="list-ordered">
-                <li>Внимательно прочитайте описание текущей ситуации.</li>
-                <li>Оцените текущие значения метрик (цвет и числовое значение).</li>
-                <li>Выберите один из вариантов действия, нажав на соответствующую кнопку.</li>
-                <li>Система мгновенно обновит метрики согласно дельтам выбранного решения и покажет следующий узел с новым описанием.</li>
-                <li>Повторяйте шаги, пока не дойдёте до финального узла (исхода сценария).</li>
-            </ol>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Варианты выбора">
-                <div class="figcaption">Рис. 8 — Пример вариантов выбора на промежуточном узле</div>
-            </div>
-            <div class="highlight">
-                💡 <strong>Совет</strong><br>
-                Не бойтесь экспериментировать. Вы можете пройти один и тот же сценарий несколько раз, выбирая разные стратегии, и наблюдать, как меняются последствия. Это безопасная среда — никаких реальных учеников, только опыт!
-            </div>
-            <h3>🔄 Навигация и управление</h3>
-            <ul class="list-unordered">
-                <li><strong>«Начать заново»</strong> — перезапускает текущий сценарий с начальными метриками.</li>
-                <li><strong>«К каталогу»</strong> — прерывает прохождение и возвращает вас к списку ситуаций.</li>
-                <li><strong>Обновление страницы (F5)</strong> — сессия сохраняется, вы продолжите с того же узла.</li>
-            </ul>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Панель навигации при прохождении">
-                <div class="figcaption">Рис. 9 — Панель навигации (кнопки управления сценарием)</div>
-            </div>
-            <div class="test-block">
-                ❗ <strong>Что происходит после выбора?</strong><br>
-                • Метрики меняются в реальном времени (например, мотивация может повыситься, а стресс — снизиться).<br>
-                • Отображается новый текст ситуации, отражающий последствия вашего решения.<br>
-                • Если узел финальный, вы увидите итоговый отчёт с диаграммой-паутинкой и вердиктом.
-            </div>
-        </section>
-
-        <!-- Метрики -->
-        <section id="metrics" class="guide-section">
-            <h2>📊 Метрики</h2>
-            <p>В процессе прохождения сценария система отслеживает шесть ключевых показателей, которые отражают состояние педагогической системы. Каждая метрика измеряется в диапазоне от <strong>0,0 до 1,0</strong>. Ваши решения влияют на эти показатели — чем ближе значение к норме, тем успешнее выбранная стратегия.</p>
-            <h3>🎨 Цветовая индикация</h3>
-            <ul class="list-unordered">
-                <li><span style="color: #10b981; font-weight: bold;">🟢 Зелёный</span> — значение в норме или выше нормы.</li>
-                <li><span style="color: #eab308; font-weight: bold;">🟡 Жёлтый</span> — среднее значение, требует внимания.</li>
-                <li><span style="color: #ef4444; font-weight: bold;">🔴 Красный</span> — низкое (или высокое для стресса/выгорания) значение, критическая ситуация.</li>
-            </ul>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Пример цветовых индикаторов метрик">
-                <div class="figcaption">Рис. 10 — Пример отображения шести метрик с цветовой индикацией</div>
-            </div>
-            <h3>📈 Список метрик и нормативы</h3>
-            <div class="grid-3">
-                <div class="metric-card" style="border-left-color: #10b981;">
-                    <p><strong>🎯 Мотивация учащихся</strong></p>
-                    <p class="small">Степень заинтересованности и вовлечённости в учебный процесс.</p>
-                    <p class="norm" style="color: #10b981;">📌 Норматив: ≥ 0,7 (чем выше, тем лучше)</p>
+        <main class="guide-content">
+            <!-- Быстрый старт -->
+            <section id="quick" class="guide-section">
+                <h2>⚡ Быстрый старт</h2>
+                <p>Добро пожаловать в «Симулятор учителя»! Всего за несколько минут вы сможете начать тренировку
+                    профессиональных навыков в безопасной среде. Ниже приведены основные шаги для первого запуска.</p>
+                <h3>🚀 Первые шаги</h3>
+                <ol class="list-ordered">
+                    <li>Откройте главную страницу приложения.</li>
+                    <li>Нажмите кнопку <strong>«Регистрация»</strong>, чтобы создать аккаунт или кнопку
+                        <strong>Войти</strong>, если аккаунт уже имеется.</li>
+                    <li>На главной странице выберите одну из случайных ситуаций в блоке «Случайные ситуации» или
+                        перейдите в <strong>«Каталог ситуаций»</strong>.</li>
+                    <li>Нажмите <strong>«Начать»</strong> на карточке сценария.</li>
+                    <li>Читайте описание, оценивайте метрики и нажимайте на понравившийся вариант действия.</li>
+                    <li>Продолжайте до финального узла — система покажет результат.</li>
+                </ol>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Главная страница приложения">
+                    <div class="figcaption">Рис. 1 — Главная страница: кнопки «Регистрация» и «Войти»</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #ef4444;">
-                    <p><strong>😰 Стресс</strong></p>
-                    <p class="small">Уровень психологического напряжения у учеников и учителя.</p>
-                    <p class="norm" style="color: #ef4444;">📌 Норматив: ≤ 0,4 (чем ниже, тем лучше)</p>
+                <div class="highlight">
+                    💡 <strong>Совет для новичков</strong><br>
+                    Начните с режима «Студент» — он не требует регистрации и позволяет сразу погрузиться в процесс.
+                    Когда освоитесь, зарегистрируйтесь, чтобы отслеживать свой прогресс.
                 </div>
-                <div class="metric-card" style="border-left-color: #3b82f6;">
-                    <p><strong>🤝 Доверие</strong></p>
-                    <p class="small">Степень открытости и взаимопонимания между учителем и учениками.</p>
-                    <p class="norm" style="color: #3b82f6;">📌 Норматив: ≥ 0,6 (чем выше, тем лучше)</p>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Пример выбора сценария">
+                    <div class="figcaption">Рис. 2 — Выбор сценария: карточка с названием, типом проблемы и кнопкой
+                        «Начать»</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #eab308;">
-                    <p><strong>🏫 Психологический климат</strong></p>
-                    <p class="small">Общая атмосфера в классе, сплочённость, эмоциональный комфорт.</p>
-                    <p class="norm" style="color: #eab308;">📌 Норматив: ≥ 0,7 (чем выше, тем лучше)</p>
+                <div class="test-block">
+                    ❗ <strong>Что нужно знать перед стартом</strong><br>
+                    • Все сценарии безопасны — вы можете ошибаться, никто не пострадает.<br>
+                    • Метрики меняются в реальном времени, следите за цветом индикаторов.<br>
+                    • Один сценарий можно проходить множество раз — пробуйте разные стратегии.<br>
+                    • Если что-то непонятно, вернитесь к этому руководству или напишите в поддержку.
                 </div>
-                <div class="metric-card" style="border-left-color: #8b5cf6;">
-                    <p><strong>👩‍🏫 Авторитет учителя</strong></p>
-                    <p class="small">Признание профессиональной компетентности и уважение со стороны учеников.</p>
-                    <p class="norm" style="color: #8b5cf6;">📌 Норматив: ≥ 0,6 (чем выше, тем лучше)</p>
+            </section>
+
+            <!-- Регистрация и вход -->
+            <section id="auth" class="guide-section">
+                <h2>🔐 Регистрация и вход</h2>
+                <p>Для работы с системой необходимо создать учетную запись. Это займёт не более минуты.</p>
+                <h3>📝 Регистрация нового пользователя</h3>
+                <ol class="list-ordered">
+                    <li>На главной странице нажмите кнопку <strong>«Регистрация»</strong>.</li>
+                    <li>Придумайте <strong>логин</strong> — только латинские буквы, без пробелов.</li>
+                    <li>Задайте <strong>пароль</strong> (минимум 6 символов). Для надёжности используйте цифры и буквы
+                        разного регистра.</li>
+                    <li>Нажмите кнопку <strong>«Зарегистрироваться»</strong>. Если данные введены корректно, вы увидите
+                        сообщение об успехе и автоматически войдёте в систему.</li>
+                </ol>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Форма регистрации">
+                    <div class="figcaption">Рис. 3 — Пример формы регистрации</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #f97316;">
-                    <p><strong>🔥 Выгорание педагога</strong></p>
-                    <p class="small">Степень эмоционального истощения, усталости от работы.</p>
-                    <p class="norm" style="color: #f97316;">📌 Норматив: ≤ 0,3 (чем ниже, тем лучше)</p>
+                <h3>🔑 Вход в систему</h3>
+                <ol class="list-ordered">
+                    <li>Нажмите кнопку <strong>«Войти»</strong> в правом верхнем углу.</li>
+                    <li>Введите логин и пароль, указанные при регистрации.</li>
+                    <li>Нажмите кнопку <strong>«Войти»</strong>. После успешного входа в шапке сайта отобразится ваш
+                        логин.</li>
+                </ol>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Форма входа">
+                    <div class="figcaption">Рис. 4 — Пример формы входа</div>
                 </div>
-            </div>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Нормативные значения метрик в виде шкал">
-                <div class="figcaption">Рис. 11 — Нормативы метрик: зелёная зона — норма, жёлтая — внимание, красная — критично</div>
-            </div>
-            <div class="highlight">
-                💡 <strong>Как интерпретировать изменения?</strong><br>
-                После каждого выбора метрики могут увеличиваться или уменьшаться (дельты от –1,0 до +1,0). Например, если мотивация выросла на 0,2 — значит, ваше решение воодушевило учеников. Если выгорание увеличилось — возможно, вы выбрали слишком энергозатратную стратегию.
-            </div>
-            <div class="test-block">
-                ❗ <strong>Важно</strong><br>
-                • Итоговый результат («Успех», «Частичный успех», «Неудача») рассчитывается по количеству метрик, достигших норматива.<br>
-                • Обращайте внимание на цвет индикатора — он помогает быстро оценить ситуацию без чтения точных чисел.<br>
-                • Даже одна метрика в красной зоне может привести к негативным последствиям в финале сценария.
-            </div>
-        </section>
-
-        <!-- Итоговый результат -->
-        <section id="result" class="guide-section">
-            <h2>🏆 Итоговый результат</h2>
-            <p>Когда вы пройдёте все узлы сценария и достигнете финального исхода, система покажет подробный отчёт о ваших решениях и их последствиях.</p>
-            <h3>📋 Что содержит итоговый экран</h3>
-            <ul class="list-unordered">
-                <li><strong>Текстовое описание последствий</strong> — развёрнутый рассказ о том, к чему привели ваши решения.</li>
-                <li><strong>Вердикт</strong> — итоговая оценка (Успех / Частичный успех / Неудача).</li>
-                <li><strong>Итоговые значения шести метрик</strong> — числа и цветовые индикаторы.</li>
-                <li><strong>Диаграмма-паутинка (спайдер-чарт)</strong> — наглядное сравнение всех метрик.</li>
-                <li><strong>Кнопки навигации</strong> — «Начать заново», «К началу ситуации», «В каталог».</li>
-            </ul>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Итоговый экран с результатами">
-                <div class="figcaption">Рис. 12 — Пример итогового экрана с вердиктом «Успех» и диаграммой-паутинкой</div>
-            </div>
-            <h3>🏅 Значение вердиктов</h3>
-            <div class="grid-3">
-                <div class="verdict-card verdict-success">
-                    <p style="margin-bottom: 0.5rem; font-weight: bold; font-size: 1.2rem;">✅ Успех</p>
-                    <p>Все 6 метрик достигли норматива. Вы выбрали оптимальную стратегию!</p>
+                <div class="highlight">
+                    💡 <strong>Попробовать без регистрации</strong><br>
+                    Если вы хотите просто познакомиться с интерфейсом, нажмите кнопку <strong>«Студент»</strong> на
+                    главной странице. В этом режиме история прохождений не сохраняется, но вы сможете пройти любой
+                    сценарий.
                 </div>
-                <div class="verdict-card verdict-partial">
-                    <p style="margin-bottom: 0.5rem; font-weight: bold; font-size: 1.2rem;">🟡 Частичный успех</p>
-                    <p>4–5 метрик в норме. Хороший результат, но есть над чем работать.</p>
+                <div class="test-block">
+                    ❗ <strong>Возможные ошибки</strong><br>
+                    • <strong>«Пользователь с таким логином уже существует»</strong> — выберите другой логин.<br>
+                    • <strong>«Пароль должен содержать не менее 6 символов»</strong> — увеличьте длину пароля.<br>
+                    • <strong>«Неверный логин или пароль»</strong> — проверьте раскладку клавиатуры и Caps Lock. Если
+                    забыли пароль — обратитесь к администратору.
                 </div>
-                <div class="verdict-card verdict-failure">
-                    <p style="margin-bottom: 0.5rem; font-weight: bold; font-size: 1.2rem;">❌ Неудача</p>
-                    <p>3 и более метрик ниже нормы. Стоит попробовать другую стратегию.</p>
+            </section>
+
+            <!-- Каталог ситуаций -->
+            <section id="catalog" class="guide-section">
+                <h2>📂 Каталог ситуаций</h2>
+                <p>На странице «Каталог ситуаций» представлены все педагогические сценарии, доступные для прохождения.
+                    Вы можете фильтровать их по типу проблемы и уровню сложности, а также сразу переходить к выбранному
+                    сценарию.</p>
+                <h3>🔍 Фильтрация сценариев</h3>
+                <ul class="list-unordered">
+                    <li><strong>По типу проблемы</strong> — мотивационные кризисы, организационные конфликты, конфликты
+                        взаимодействия.</li>
+                    <li><strong>По уровню сложности</strong> — базовый, средний, продвинутый.</li>
+                </ul>
+                <p>Фильтры работают как по отдельности, так и в комбинации. Список сценариев обновляется мгновенно без
+                    перезагрузки страницы.</p>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Каталог ситуаций с фильтрами">
+                    <div class="figcaption">Рис. 5 — Страница каталога с панелью фильтров и карточками сценариев</div>
                 </div>
-            </div>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Пример диаграммы-паутинки">
-                <div class="figcaption">Рис. 13 — Диаграмма-паутинка: наглядно показывает сильные и слабые стороны принятых решений</div>
-            </div>
-            <div class="highlight">
-                💡 <strong>Как использовать результаты?</strong><br>
-                • Сравнивайте диаграммы после разных попыток — это поможет увидеть, какие метрики страдают чаще всего.<br>
-                • Вердикт «Частичный успех» — это не плохо, а сигнал, какие навыки стоит подтянуть.<br>
-                • Пробуйте разные стратегии в одном сценарии: авторитарную, демократическую, сотрудничество.
-            </div>
-            <div class="test-block">
-                ❗ <strong>Примечание</strong><br>
-                • Если вы завершили сценарий, но хотите его перепройти — нажмите «Начать заново». Старые результаты не сохраняются автоматически.<br>
-                • Для методистов и администраторов доступна расширенная статистика по прохождениям (в разработке).<br>
-                • Итоговый отчёт можно сохранить через скриншот — функция экспорта в PDF планируется в следующих версиях.
-            </div>
-        </section>
+                <h3>📋 Карточка педагогической ситуации</h3>
+                <p>Каждый сценарий представлен в виде карточки, содержащей:</p>
+                <ul class="list-unordered">
+                    <li>название ситуации;</li>
+                    <li>тип проблемы;</li>
+                    <li>учебный предмет и класс;</li>
+                    <li>кнопку <strong>«Начать»</strong> для запуска сценария.</li>
+                </ul>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Карточка сценария">
+                    <div class="figcaption">Рис. 6 — Пример карточки педагогической ситуации</div>
+                </div>
+                <div class="highlight">
+                    💡 <strong>Совет</strong><br>
+                    Если вы не знаете, с какой ситуации начать, воспользуйтесь блоком «Случайные ситуации» на главной
+                    странице — система предложит три случайных сценария.
+                </div>
+                <div class="test-block">
+                    ❗ <strong>Примечание</strong><br>
+                    • При отсутствии подключения к интернету каталог отображает локальные тестовые данные, чтобы вы
+                    могли продолжить работу.<br>
+                    • Если ни один сценарий не соответствует выбранным фильтрам, вы увидите сообщение «Ничего не
+                    найдено».
+                </div>
+            </section>
 
-        <!-- Часто задаваемые вопросы -->
-        <section id="faq" class="guide-section">
-            <h2>❓ Часто задаваемые вопросы</h2>
-            <p>Здесь собраны ответы на самые распространённые вопросы пользователей. Если вы не нашли нужную информацию, обратитесь в поддержку.</p>
-            <div class="faq-item">
-                <details>
-                    <summary class="faq-summary">❓ Нужно ли регистрироваться для работы с симулятором?</summary>
-                    <div class="faq-text">Регистрация не обязательна. Вы можете нажать кнопку <strong>«Студент»</strong> на главной странице и сразу начать проходить сценарии. Однако без регистрации история ваших прохождений не сохраняется. Если вы хотите отслеживать прогресс и анализировать свои ошибки — зарегистрируйтесь.</div>
-                </details>
-            </div>
-            <div class="faq-item">
-                <details>
-                    <summary class="faq-summary">❓ Что означают цветные индикаторы метрик?</summary>
-                    <div class="faq-text">🟢 Зелёный — значение в норме или выше нормы. 🟡 Жёлтый — среднее значение, требует внимания. 🔴 Красный — критическое значение (для стресса и выгорания красный означает слишком высокий уровень). Подробнее о каждой метрике и её нормативе смотрите в разделе <a href="#metrics">«📊 Метрики»</a>.</div>
-                </details>
-            </div>
-            <div class="faq-item">
-                <details>
-                    <summary class="faq-summary">❓ Как сохранить прогресс прохождения?</summary>
-                    <div class="faq-text">Прогресс сохраняется автоматически в рамках текущей сессии. Если вы обновите страницу (F5), то продолжите с того же узла. Если вы закроете браузер и откроете его снова — сессия не восстановится. Для постоянного сохранения результатов проходите сценарии в авторизованном режиме.</div>
-                </details>
-            </div>
-            <div class="faq-item">
-                <details>
-                    <summary class="faq-summary">❓ Можно ли прервать прохождение и вернуться к нему позже?</summary>
-                    <div class="faq-text">Да, вы можете в любой момент нажать кнопку <strong>«К каталогу»</strong> или перейти на другую страницу. Текущая сессия будет завершена. Чтобы вернуться к прерванному сценарию, придётся начать его заново. Если вы хотите сохранить прогресс, не прерывайте прохождение.</div>
-                </details>
-            </div>
-            <div class="faq-item">
-                <details>
-                    <summary class="faq-summary">❓ Почему после выбора варианта метрики не изменились?</summary>
-                    <div class="faq-text">Убедитесь, что вы нажали на кнопку выбора. Если метрики всё равно не изменились, возможно, в данном узле дельты равны нулю (такое бывает, если решение нейтрально). Проверьте также подключение к интернету — при обрыве связи изменения могут не отражаться.</div>
-                </details>
-            </div>
-            <div class="faq-item">
-                <details>
-                    <summary class="faq-summary">❓ Что делать, если я забыл пароль?</summary>
-                    <div class="faq-text">Самостоятельное восстановление пароля в текущей версии не предусмотрено. Обратитесь к администратору системы или напишите на почту поддержки <strong>lishi211@mail.ru</strong> — вам помогут сбросить пароль.</div>
-                </details>
-            </div>
-            <div class="faq-item">
-                <details>
-                    <summary class="faq-summary">❓ Как создаются новые педагогические ситуации?</summary>
-                    <div class="faq-text">Сценарии создаются только пользователями с ролью «Методист» через специальный конструктор. Студенты могут только проходить готовые ситуации. Если вы хотите добавить свой сценарий, обратитесь к методисту вашего учебного заведения.</div>
-                </details>
-            </div>
-            <div class="faq-item">
-                <details>
-                    <summary class="faq-summary">❓ Почему результат «Неудача», даже если я старался?</summary>
-                    <div class="faq-text">«Неудача» означает, что три или более метрик не достигли нормативных значений. Это не значит, что вы плохой педагог — просто выбранная стратегия не подошла для данной ситуации. Перепройдите сценарий, выбрав другие варианты, и проанализируйте, как менялись метрики. Симулятор нужен именно для таких экспериментов.</div>
-                </details>
-            </div>
-            <div class="faq-item">
-                <details>
-                    <summary class="faq-summary">❓ Как связаться с поддержкой?</summary>
-                    <div class="faq-text">Электронная почта: <strong>lishi211@mail.ru</strong>. По возможности описывайте проблему подробно: приложите скриншот, укажите браузер и операционную систему.</div>
-                </details>
-            </div>
-            <div class="figure">
-                <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true" alt="Поддержка пользователей">
-                <div class="figcaption">Рис. 14 — Если возникли вопросы, пишите в поддержку</div>
-            </div>
-            <div class="highlight">
-                💡 <strong>Не нашли ответа?</strong><br>
-                Задайте вопрос через форму обратной связи в приложении (в разработке) или напишите нам на почту. Мы постараемся ответить в течение 24 часов.
-            </div>
-        </section>
+            <!-- Прохождение сценария -->
+            <section id="play" class="guide-section">
+                <h2>🎮 Прохождение сценария</h2>
+                <p>Прохождение педагогического сценария — это последовательное принятие решений в смоделированной
+                    школьной ситуации. Каждый ваш выбор влияет на шесть ключевых метрик и определяет дальнейшее развитие
+                    событий.</p>
+                <h3>📖 Структура экрана</h3>
+                <p>При запуске сценария вы попадаете на первый узел. Экран разделён на три основные зоны:</p>
+                <ul class="list-unordered">
+                    <li><strong>Описание ситуации</strong> — текст и иллюстрация, погружающие в контекст.</li>
+                    <li><strong>Панель метрик</strong> — цветные индикаторы текущего состояния (мотивация, стресс,
+                        доверие, климат, авторитет, выгорание).</li>
+                    <li><strong>Варианты выбора</strong> — от 2 до 6 кнопок с возможными действиями учителя.</li>
+                </ul>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Экран прохождения сценария">
+                    <div class="figcaption">Рис. 7 — Пример экрана прохождения: описание ситуации, метрики и кнопки
+                        выбора</div>
+                </div>
+                <h3>🖱️ Как сделать выбор</h3>
+                <ol class="list-ordered">
+                    <li>Внимательно прочитайте описание текущей ситуации.</li>
+                    <li>Оцените текущие значения метрик (цвет и числовое значение).</li>
+                    <li>Выберите один из вариантов действия, нажав на соответствующую кнопку.</li>
+                    <li>Система мгновенно обновит метрики согласно дельтам выбранного решения и покажет следующий узел с
+                        новым описанием.</li>
+                    <li>Повторяйте шаги, пока не дойдёте до финального узла (исхода сценария).</li>
+                </ol>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Варианты выбора">
+                    <div class="figcaption">Рис. 8 — Пример вариантов выбора на промежуточном узле</div>
+                </div>
+                <div class="highlight">
+                    💡 <strong>Совет</strong><br>
+                    Не бойтесь экспериментировать. Вы можете пройти один и тот же сценарий несколько раз, выбирая разные
+                    стратегии, и наблюдать, как меняются последствия. Это безопасная среда — никаких реальных учеников,
+                    только опыт!
+                </div>
+                <h3>🔄 Навигация и управление</h3>
+                <ul class="list-unordered">
+                    <li><strong>«Начать заново»</strong> — перезапускает текущий сценарий с начальными метриками.</li>
+                    <li><strong>«К каталогу»</strong> — прерывает прохождение и возвращает вас к списку ситуаций.</li>
+                    <li><strong>Обновление страницы (F5)</strong> — сессия сохраняется, вы продолжите с того же узла.
+                    </li>
+                </ul>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Панель навигации при прохождении">
+                    <div class="figcaption">Рис. 9 — Панель навигации (кнопки управления сценарием)</div>
+                </div>
+                <div class="test-block">
+                    ❗ <strong>Что происходит после выбора?</strong><br>
+                    • Метрики меняются в реальном времени (например, мотивация может повыситься, а стресс —
+                    снизиться).<br>
+                    • Отображается новый текст ситуации, отражающий последствия вашего решения.<br>
+                    • Если узел финальный, вы увидите итоговый отчёт с диаграммой-паутинкой и вердиктом.
+                </div>
+            </section>
 
-        <footer>📧 Поддержка: lishi211@mail.ru | © 2026</footer>
-    </main>
-</div>
+            <!-- Метрики -->
+            <section id="metrics" class="guide-section">
+                <h2>📊 Метрики</h2>
+                <p>В процессе прохождения сценария система отслеживает шесть ключевых показателей, которые отражают
+                    состояние педагогической системы. Каждая метрика измеряется в диапазоне от <strong>0,0 до
+                        1,0</strong>. Ваши решения влияют на эти показатели — чем ближе значение к норме, тем успешнее
+                    выбранная стратегия.</p>
+                <h3>🎨 Цветовая индикация</h3>
+                <ul class="list-unordered">
+                    <li><span style="color: #10b981; font-weight: bold;">🟢 Зелёный</span> — значение в норме или выше
+                        нормы.</li>
+                    <li><span style="color: #eab308; font-weight: bold;">🟡 Жёлтый</span> — среднее значение, требует
+                        внимания.</li>
+                    <li><span style="color: #ef4444; font-weight: bold;">🔴 Красный</span> — низкое (или высокое для
+                        стресса/выгорания) значение, критическая ситуация.</li>
+                </ul>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Пример цветовых индикаторов метрик">
+                    <div class="figcaption">Рис. 10 — Пример отображения шести метрик с цветовой индикацией</div>
+                </div>
+                <h3>📈 Список метрик и нормативы</h3>
+                <div class="grid-3">
+                    <div class="metric-card" style="border-left-color: #10b981;">
+                        <p><strong>🎯 Мотивация учащихся</strong></p>
+                        <p class="small">Степень заинтересованности и вовлечённости в учебный процесс.</p>
+                        <p class="norm" style="color: #10b981;">📌 Норматив: ≥ 0,7 (чем выше, тем лучше)</p>
+                    </div>
+                    <div class="metric-card" style="border-left-color: #ef4444;">
+                        <p><strong>😰 Стресс</strong></p>
+                        <p class="small">Уровень психологического напряжения у учеников и учителя.</p>
+                        <p class="norm" style="color: #ef4444;">📌 Норматив: ≤ 0,4 (чем ниже, тем лучше)</p>
+                    </div>
+                    <div class="metric-card" style="border-left-color: #3b82f6;">
+                        <p><strong>🤝 Доверие</strong></p>
+                        <p class="small">Степень открытости и взаимопонимания между учителем и учениками.</p>
+                        <p class="norm" style="color: #3b82f6;">📌 Норматив: ≥ 0,6 (чем выше, тем лучше)</p>
+                    </div>
+                    <div class="metric-card" style="border-left-color: #eab308;">
+                        <p><strong>🏫 Психологический климат</strong></p>
+                        <p class="small">Общая атмосфера в классе, сплочённость, эмоциональный комфорт.</p>
+                        <p class="norm" style="color: #eab308;">📌 Норматив: ≥ 0,7 (чем выше, тем лучше)</p>
+                    </div>
+                    <div class="metric-card" style="border-left-color: #8b5cf6;">
+                        <p><strong>👩‍🏫 Авторитет учителя</strong></p>
+                        <p class="small">Признание профессиональной компетентности и уважение со стороны учеников.</p>
+                        <p class="norm" style="color: #8b5cf6;">📌 Норматив: ≥ 0,6 (чем выше, тем лучше)</p>
+                    </div>
+                    <div class="metric-card" style="border-left-color: #f97316;">
+                        <p><strong>🔥 Выгорание педагога</strong></p>
+                        <p class="small">Степень эмоционального истощения, усталости от работы.</p>
+                        <p class="norm" style="color: #f97316;">📌 Норматив: ≤ 0,3 (чем ниже, тем лучше)</p>
+                    </div>
+                </div>
 
-<script>
-    // Элементы
-    const searchInput = document.getElementById('searchInput');
-    const allSections = document.querySelectorAll('.guide-section');
+                <div class="highlight">
+                    💡 <strong>Как интерпретировать изменения?</strong><br>
+                    После каждого выбора метрики могут увеличиваться или уменьшаться (дельты от –1,0 до +1,0). Например,
+                    если мотивация выросла на 0,2 — значит, ваше решение воодушевило учеников. Если выгорание
+                    увеличилось — возможно, вы выбрали слишком энергозатратную стратегию.
+                </div>
+                <div class="test-block">
+                    ❗ <strong>Важно</strong><br>
+                    • Итоговый результат («Успех», «Частичный успех», «Неудача») рассчитывается по количеству метрик,
+                    достигших норматива.<br>
+                    • Обращайте внимание на цвет индикатора — он помогает быстро оценить ситуацию без чтения точных
+                    чисел.<br>
+                    • Даже одна метрика в красной зоне может привести к негативным последствиям в финале сценария.
+                </div>
+            </section>
 
-    // Функция для плавной прокрутки к первому видимому разделу
-    function scrollToFirstVisibleSection() {
-        const visibleSections = Array.from(allSections).filter(section => section.style.display !== 'none');
-        if (visibleSections.length > 0) {
-            visibleSections[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
-            // Временная подсветка
-            visibleSections[0].style.transition = 'background-color 0.3s';
-            visibleSections[0].style.backgroundColor = '#fef9c3';
-            setTimeout(() => {
-                visibleSections[0].style.backgroundColor = '';
-            }, 1500);
-        }
-    }
+            <!-- Итоговый результат -->
+            <section id="result" class="guide-section">
+                <h2>🏆 Итоговый результат</h2>
+                <p>Когда вы пройдёте все узлы сценария и достигнете финального исхода, система покажет подробный отчёт о
+                    ваших решениях и их последствиях.</p>
+                <h3>📋 Что содержит итоговый экран</h3>
+                <ul class="list-unordered">
+                    <li><strong>Текстовое описание последствий</strong> — развёрнутый рассказ о том, к чему привели ваши
+                        решения.</li>
+                    <li><strong>Вердикт</strong> — итоговая оценка (Успех / Частичный успех / Неудача).</li>
+                    <li><strong>Итоговые значения шести метрик</strong> — числа и цветовые индикаторы.</li>
+                    <li><strong>Диаграмма-паутинка (спайдер-чарт)</strong> — наглядное сравнение всех метрик.</li>
+                    <li><strong>Кнопки навигации</strong> — «Начать заново», «К началу ситуации», «В каталог».</li>
+                </ul>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Итоговый экран с результатами">
+                    <div class="figcaption">Рис. 11 — Пример итогового экрана с вердиктом «Успех» и диаграммой-паутинкой
+                    </div>
+                </div>
+                <h3>🏅 Значение вердиктов</h3>
+                <div class="grid-3">
+                    <div class="verdict-card verdict-success">
+                        <p style="margin-bottom: 0.5rem; font-weight: bold; font-size: 1.2rem;">✅ Успех</p>
+                        <p>Все 6 метрик достигли норматива. Вы выбрали оптимальную стратегию!</p>
+                    </div>
+                    <div class="verdict-card verdict-partial">
+                        <p style="margin-bottom: 0.5rem; font-weight: bold; font-size: 1.2rem;">🟡 Частичный успех</p>
+                        <p>4–5 метрик в норме. Хороший результат, но есть над чем работать.</p>
+                    </div>
+                    <div class="verdict-card verdict-failure">
+                        <p style="margin-bottom: 0.5rem; font-weight: bold; font-size: 1.2rem;">❌ Неудача</p>
+                        <p>3 и более метрик ниже нормы. Стоит попробовать другую стратегию.</p>
+                    </div>
+                </div>
+                <div class="figure">
+                    <img src="https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/2_low_motivation_theory/node_3.png?raw=true"
+                        alt="Пример диаграммы-паутинки">
+                    <div class="figcaption">Рис. 12 — Диаграмма-паутинка: наглядно показывает сильные и слабые стороны
+                        принятых решений</div>
+                </div>
+                <div class="highlight">
+                    💡 <strong>Как использовать результаты?</strong><br>
+                    • Сравнивайте диаграммы после разных попыток — это поможет увидеть, какие метрики страдают чаще
+                    всего.<br>
+                    • Вердикт «Частичный успех» — это не плохо, а сигнал, какие навыки стоит подтянуть.<br>
+                    • Пробуйте разные стратегии в одном сценарии: авторитарную, демократическую, сотрудничество.
+                </div>
+                <div class="test-block">
+                    ❗ <strong>Примечание</strong><br>
+                    • Если вы завершили сценарий, но хотите его перепройти — нажмите «Начать заново». Старые результаты
+                    не сохраняются автоматически.<br>
+                    • Для методистов и администраторов доступна расширенная статистика по прохождениям (в
+                    разработке).<br>
+                    • Итоговый отчёт можно сохранить через скриншот — функция экспорта в PDF планируется в следующих
+                    версиях.
+                </div>
+            </section>
 
-    // Поиск + авто-прокрутка
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase().trim();
-            let firstVisible = null;
+            <!-- Часто задаваемые вопросы -->
+            <section id="faq" class="guide-section">
+                <h2>❓ Часто задаваемые вопросы</h2>
+                <p>Здесь собраны ответы на самые распространённые вопросы пользователей. Если вы не нашли нужную
+                    информацию, обратитесь в поддержку.</p>
+                <div class="faq-item">
+                    <details>
+                        <summary class="faq-summary">❓ Нужно ли регистрироваться для работы с симулятором?</summary>
+                        <div class="faq-text">Регистрация не обязательна. Вы можете нажать кнопку
+                            <strong>«Студент»</strong> на главной странице и сразу начать проходить сценарии. Однако без
+                            регистрации история ваших прохождений не сохраняется. Если вы хотите отслеживать прогресс и
+                            анализировать свои ошибки — зарегистрируйтесь.</div>
+                    </details>
+                </div>
+                <div class="faq-item">
+                    <details>
+                        <summary class="faq-summary">❓ Что означают цветные индикаторы метрик?</summary>
+                        <div class="faq-text">🟢 Зелёный — значение в норме или выше нормы. 🟡 Жёлтый — среднее
+                            значение, требует внимания. 🔴 Красный — критическое значение (для стресса и выгорания
+                            красный означает слишком высокий уровень). Подробнее о каждой метрике и её нормативе
+                            смотрите в разделе <a href="#metrics">«📊 Метрики»</a>.</div>
+                    </details>
+                </div>
+                <div class="faq-item">
+                    <details>
+                        <summary class="faq-summary">❓ Как сохранить прогресс прохождения?</summary>
+                        <div class="faq-text">Прогресс сохраняется автоматически в рамках текущей сессии. Если вы
+                            обновите страницу (F5), то продолжите с того же узла. Если вы закроете браузер и откроете
+                            его снова — сессия не восстановится. Для постоянного сохранения результатов проходите
+                            сценарии в авторизованном режиме.</div>
+                    </details>
+                </div>
+                <div class="faq-item">
+                    <details>
+                        <summary class="faq-summary">❓ Можно ли прервать прохождение и вернуться к нему позже?</summary>
+                        <div class="faq-text">Да, вы можете в любой момент нажать кнопку <strong>«К каталогу»</strong>
+                            или перейти на другую страницу. Текущая сессия будет завершена. Чтобы вернуться к
+                            прерванному сценарию, придётся начать его заново. Если вы хотите сохранить прогресс, не
+                            прерывайте прохождение.</div>
+                    </details>
+                </div>
+                <div class="faq-item">
+                    <details>
+                        <summary class="faq-summary">❓ Почему после выбора варианта метрики не изменились?</summary>
+                        <div class="faq-text">Убедитесь, что вы нажали на кнопку выбора. Если метрики всё равно не
+                            изменились, возможно, в данном узле дельты равны нулю (такое бывает, если решение
+                            нейтрально). Проверьте также подключение к интернету — при обрыве связи изменения могут не
+                            отражаться.</div>
+                    </details>
+                </div>
+                <div class="faq-item">
+                    <details>
+                        <summary class="faq-summary">❓ Что делать, если я забыл пароль?</summary>
+                        <div class="faq-text">Самостоятельное восстановление пароля в текущей версии не предусмотрено.
+                            Обратитесь к администратору системы или напишите на почту поддержки
+                            <strong>lishi211@mail.ru</strong> — вам помогут сбросить пароль.</div>
+                    </details>
+                </div>
+                <div class="faq-item">
+                    <details>
+                        <summary class="faq-summary">❓ Как создаются новые педагогические ситуации?</summary>
+                        <div class="faq-text">Сценарии создаются только пользователями с ролью «Методист» через
+                            специальный конструктор. Студенты могут только проходить готовые ситуации. Если вы хотите
+                            добавить свой сценарий, обратитесь к методисту вашего учебного заведения.</div>
+                    </details>
+                </div>
+                <div class="faq-item">
+                    <details>
+                        <summary class="faq-summary">❓ Почему результат «Неудача», даже если я старался?</summary>
+                        <div class="faq-text">«Неудача» означает, что три или более метрик не достигли нормативных
+                            значений. Это не значит, что вы плохой педагог — просто выбранная стратегия не подошла для
+                            данной ситуации. Перепройдите сценарий, выбрав другие варианты, и проанализируйте, как
+                            менялись метрики. Симулятор нужен именно для таких экспериментов.</div>
+                    </details>
+                </div>
+                <div class="faq-item">
+                    <details>
+                        <summary class="faq-summary">❓ Как связаться с поддержкой?</summary>
+                        <div class="faq-text">Электронная почта: <strong>lishi211@mail.ru</strong>. По возможности
+                            описывайте проблему подробно: приложите скриншот, укажите браузер и операционную систему.
+                        </div>
+                    </details>
+                </div>
+                <div class="highlight">
+                    💡 <strong>Не нашли ответа?</strong><br>
+                    Задайте вопрос через форму обратной связи в приложении (в разработке) или напишите нам на почту. Мы
+                    постараемся ответить в течение 24 часов.
+                </div>
+            </section>
 
-            allSections.forEach(section => {
-                const text = section.textContent.toLowerCase();
-                if (term === '' || text.includes(term)) {
-                    section.style.display = 'block';
-                    if (!firstVisible) firstVisible = section;
-                } else {
-                    section.style.display = 'none';
-                }
-            });
+            <footer>📧 Поддержка: lishi211@mail.ru | © 2026</footer>
+        </main>
+    </div>
 
-            // Если есть результат и поисковый запрос не пуст → прокрутить к первому видимому
-            if (term !== '' && firstVisible) {
-                firstVisible.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    <script>
+        // Элементы
+        const searchInput = document.getElementById('searchInput');
+        const allSections = document.querySelectorAll('.guide-section');
+
+        // Функция для плавной прокрутки к первому видимому разделу
+        function scrollToFirstVisibleSection() {
+            const visibleSections = Array.from(allSections).filter(section => section.style.display !== 'none');
+            if (visibleSections.length > 0) {
+                visibleSections[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
                 // Временная подсветка
-                firstVisible.style.transition = 'background-color 0.3s';
-                firstVisible.style.backgroundColor = '#fef9c3';
+                visibleSections[0].style.transition = 'background-color 0.3s';
+                visibleSections[0].style.backgroundColor = '#fef9c3';
                 setTimeout(() => {
-                    firstVisible.style.backgroundColor = '';
+                    visibleSections[0].style.backgroundColor = '';
                 }, 1500);
             }
-        });
-    }
+        }
 
-    // ===== ОСТАЛЬНАЯ ЛОГИКА (подсветка активного пункта меню и плавная прокрутка) без изменений =====
-    const sections = document.querySelectorAll('.guide-section');
-    const navLinks = document.querySelectorAll('.guide-sidebar nav a');
+        // Поиск + авто-прокрутка
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                let firstVisible = null;
 
-    function setActiveLink(visibleSectionId) {
-        navLinks.forEach(link => {
-            const href = link.getAttribute('href').substring(1);
-            if (href === visibleSectionId) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
-    }
+                allSections.forEach(section => {
+                    const text = section.textContent.toLowerCase();
+                    if (term === '' || text.includes(term)) {
+                        section.style.display = 'block';
+                        if (!firstVisible) firstVisible = section;
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
 
-    const observer = new IntersectionObserver((entries) => {
-        let bestEntry = null;
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
-                    bestEntry = entry;
+                // Если есть результат и поисковый запрос не пуст → прокрутить к первому видимому
+                if (term !== '' && firstVisible) {
+                    firstVisible.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Временная подсветка
+                    firstVisible.style.transition = 'background-color 0.3s';
+                    firstVisible.style.backgroundColor = '#fef9c3';
+                    setTimeout(() => {
+                        firstVisible.style.backgroundColor = '';
+                    }, 1500);
                 }
-            }
-        });
-        if (bestEntry) setActiveLink(bestEntry.target.id);
-    }, { threshold: [0.2, 0.5, 0.8], rootMargin: "-80px 0px -80px 0px" });
+            });
+        }
 
-    sections.forEach(section => observer.observe(section));
+        // ===== ОСТАЛЬНАЯ ЛОГИКА (подсветка активного пункта меню и плавная прокрутка) без изменений =====
+        const sections = document.querySelectorAll('.guide-section');
+        const navLinks = document.querySelectorAll('.guide-sidebar nav a');
 
-    window.addEventListener('load', () => {
-        let visibleId = null;
-        sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top >= 0 && rect.top < window.innerHeight / 2) visibleId = section.id;
-        });
-        if (visibleId) setActiveLink(visibleId);
-        else if (sections.length) setActiveLink(sections[0].id);
-    });
+        function setActiveLink(visibleSectionId) {
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href').substring(1);
+                if (href === visibleSectionId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
 
-    // Плавная прокрутка при клике на пункт меню
-    document.querySelectorAll('.guide-sidebar nav a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                history.pushState(null, null, `#${targetId}`);
-                setActiveLink(targetId);
-            }
+        const observer = new IntersectionObserver((entries) => {
+            let bestEntry = null;
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
+                        bestEntry = entry;
+                    }
+                }
+            });
+            if (bestEntry) setActiveLink(bestEntry.target.id);
+        }, { threshold: [0.2, 0.5, 0.8], rootMargin: "-80px 0px -80px 0px" });
+
+        sections.forEach(section => observer.observe(section));
+
+        window.addEventListener('load', () => {
+            let visibleId = null;
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top >= 0 && rect.top < window.innerHeight / 2) visibleId = section.id;
+            });
+            if (visibleId) setActiveLink(visibleId);
+            else if (sections.length) setActiveLink(sections[0].id);
         });
-    });
-</script>
+
+        // Плавная прокрутка при клике на пункт меню
+        document.querySelectorAll('.guide-sidebar nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    history.pushState(null, null, `#${targetId}`);
+                    setActiveLink(targetId);
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
