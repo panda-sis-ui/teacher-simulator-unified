@@ -1012,6 +1012,7 @@
                 <button type="button" class="btn btn-outline canvas-btn" onclick="moveSelectedNode(-20, 0)">◀</button>
                 <button type="button" class="btn btn-outline canvas-btn" onclick="moveSelectedNode(20, 0)">▶</button>
                 <button type="button" class="btn btn-outline canvas-btn" onclick="moveSelectedNode(0, 20)">▼</button>
+                <button type="button" class="btn btn-outline canvas-btn" onclick="fitCanvasToNodes()">⛶</button>
             </div>
         </div>
         <div id="canvasInfo">Выбранный узел: <span id="selectedNodeIdDisplay">Нет</span></div>
@@ -1547,6 +1548,9 @@
         let selectedNodeId = null;
         const NODE_RADIUS = 30;
         const CHOICE_RADIUS = 10;
+        let canvasScale = 1;
+let canvasOffsetX = 0;
+let canvasOffsetY = 0;
 
         // Инициализирует холст (canvas) для визуализации графа сценария
         function initCanvas() {
@@ -2325,26 +2329,39 @@
 
             if (canvas) {
                 canvas.addEventListener('click', (e) => {
-                    const rect = canvas.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
+    const rect = canvas.getBoundingClientRect();
+    const screenX = e.clientX - rect.left;
+    const screenY = e.clientY - rect.top;
 
-                    let clickedNode = null;
-                    for (const [nodeId, pos] of Object.entries(nodePositions)) {
-                        const dist = Math.sqrt((x - pos.x) ** 2 + (y - pos.y) ** 2);
-                        if (dist <= NODE_RADIUS) {
-                            clickedNode = nodeId;
-                            break;
-                        }
-                    }
+    let clickedNode = null;
+    for (const [nodeId, pos] of Object.entries(nodePositions)) {
+        // Преобразуем мировые координаты узла в экранные с учётом текущего масштаба и смещения
+        const screenNodeX = pos.x * canvasScale + canvasOffsetX;
+        const screenNodeY = pos.y * canvasScale + canvasOffsetY;
+        const dist = Math.sqrt((screenX - screenNodeX) ** 2 + (screenY - screenNodeY) ** 2);
+        if (dist <= NODE_RADIUS) {
+            clickedNode = nodeId;
+            break;
+        }
+    }
 
-                    selectedNodeId = clickedNode;
-                    const displayEl = document.getElementById('selectedNodeIdDisplay');
-                    if (displayEl) displayEl.textContent = selectedNodeId || 'Нет';
-                    drawCanvas();
-                });
+    selectedNodeId = clickedNode;
+    const displayEl = document.getElementById('selectedNodeIdDisplay');
+    if (displayEl) displayEl.textContent = selectedNodeId || 'Нет';
+    drawCanvas();
+});
 
                 setTimeout(drawCanvas, 500);
+                window.addEventListener('resize', () => {
+    if (canvas) {
+        const container = document.getElementById('canvasContainer');
+        canvas.width = container.clientWidth;
+        // Если нужно автоматически центрировать при изменении окна:
+        fitCanvasToNodes();
+        // Или просто перерисовать без центрирования:
+        // drawCanvas();
+    }
+});
             }
 
             document.getElementById('addParticipantBtn')?.addEventListener('click', addParticipant);
@@ -2406,68 +2423,108 @@
             }
         });
 
+
+
         // Отрисовывает все узлы, их связи и подписи на холсте
         function drawCanvas() {
-            if (!ctx || !canvas) {
-                console.warn('Canvas не инициализирован');
-                return;
-            }
+    if (!ctx || !canvas) {
+        console.warn('Canvas не инициализирован');
+        return;
+    }
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawConnections();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.translate(canvasOffsetX, canvasOffsetY);
+    ctx.scale(canvasScale, canvasScale);
 
-            document.querySelectorAll('.node-item').forEach(nodeEl => {
-                const nodeId = nodeEl.dataset.nodeId;
-                if (!nodeId) return;
+    drawConnections();
 
-                if (!nodePositions[nodeId]) {
-                    const count = Object.keys(nodePositions).length;
-                    nodePositions[nodeId] = {
-                        x: 100 + (count % 5) * 150,
-                        y: 80 + Math.floor(count / 5) * 120
-                    };
-                }
+    document.querySelectorAll('.node-item').forEach(nodeEl => {
+        const nodeId = nodeEl.dataset.nodeId;
+        if (!nodeId) return;
 
-                const pos = nodePositions[nodeId];
-                const isTerminal = nodeId.startsWith('out_');
-
-                ctx.beginPath();
-                ctx.arc(pos.x, pos.y, NODE_RADIUS, 0, 2 * Math.PI);
-                ctx.fillStyle = selectedNodeId === nodeId ? '#ffe082' : (isTerminal ? '#a5d6a7' : '#90caf9');
-                ctx.fill();
-                ctx.lineWidth = selectedNodeId === nodeId ? 3 : 1;
-                ctx.strokeStyle = '#333';
-                ctx.stroke();
-
-                ctx.fillStyle = '#000';
-                ctx.font = '12px Arial';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                let label = nodeId.length > 6 ? nodeId.substring(0, 5) + '..' : nodeId;
-                ctx.fillText(label, pos.x, pos.y);
-
-                const choices = nodeEl.querySelectorAll('.choice-item');
-                let angleStep = (2 * Math.PI) / (choices.length || 1);
-                if (choices.length === 0) angleStep = 0;
-
-                choices.forEach((choiceEl, index) => {
-                    const choiceId = choiceEl.querySelector('.choice-id')?.value || 'ch';
-                    const angle = index * angleStep;
-                    const cx = pos.x + Math.cos(angle) * 50;
-                    const cy = pos.y + Math.sin(angle) * 50;
-
-                    ctx.beginPath();
-                    ctx.arc(cx, cy, CHOICE_RADIUS, 0, 2 * Math.PI);
-                    ctx.fillStyle = '#fff';
-                    ctx.fill();
-                    ctx.stroke();
-
-                    ctx.font = '10px Arial';
-                    ctx.fillText(choiceId, cx, cy);
-                });
-            });
+        if (!nodePositions[nodeId]) {
+            const count = Object.keys(nodePositions).length;
+            nodePositions[nodeId] = {
+                x: 100 + (count % 5) * 150,
+                y: 80 + Math.floor(count / 5) * 120
+            };
         }
 
+        const pos = nodePositions[nodeId];
+        const isTerminal = nodeId.startsWith('out_');
+
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, NODE_RADIUS, 0, 2 * Math.PI);
+        ctx.fillStyle = selectedNodeId === nodeId ? '#ffe082' : (isTerminal ? '#a5d6a7' : '#90caf9');
+        ctx.fill();
+        ctx.lineWidth = selectedNodeId === nodeId ? 3 : 1;
+        ctx.strokeStyle = '#333';
+        ctx.stroke();
+
+        ctx.fillStyle = '#000';
+        ctx.font = '12px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        let label = nodeId.length > 6 ? nodeId.substring(0, 5) + '..' : nodeId;
+        ctx.fillText(label, pos.x, pos.y);
+
+        const choices = nodeEl.querySelectorAll('.choice-item');
+        let angleStep = (2 * Math.PI) / (choices.length || 1);
+        if (choices.length === 0) angleStep = 0;
+
+        choices.forEach((choiceEl, index) => {
+            const choiceId = choiceEl.querySelector('.choice-id')?.value || 'ch';
+            const angle = index * angleStep;
+            const cx = pos.x + Math.cos(angle) * 50;
+            const cy = pos.y + Math.sin(angle) * 50;
+
+            ctx.beginPath();
+            ctx.arc(cx, cy, CHOICE_RADIUS, 0, 2 * Math.PI);
+            ctx.fillStyle = '#fff';
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.font = '10px Arial';
+            ctx.fillText(choiceId, cx, cy);
+        });
+    });
+
+    ctx.restore();
+}
+function fitCanvasToNodes() {
+    if (Object.keys(nodePositions).length === 0) return;
+
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (let pos of Object.values(nodePositions)) {
+        minX = Math.min(minX, pos.x);
+        minY = Math.min(minY, pos.y);
+        maxX = Math.max(maxX, pos.x);
+        maxY = Math.max(maxY, pos.y);
+    }
+
+    const padding = 50;
+    const graphWidth = maxX - minX + 2 * padding;
+    const graphHeight = maxY - minY + 2 * padding;
+
+    // Размеры видимой области canvas (в пикселях)
+    const targetWidth = canvas.clientWidth;
+    const targetHeight = canvas.clientHeight;
+
+    const scaleX = targetWidth / graphWidth;
+    const scaleY = targetHeight / graphHeight;
+    const newScale = Math.min(scaleX, scaleY, 1); // не увеличиваем мелкие графы
+
+    // Смещение, чтобы граф оказался по центру
+    const newOffsetX = (targetWidth - graphWidth * newScale) / 2 - minX * newScale + padding * newScale;
+    const newOffsetY = (targetHeight - graphHeight * newScale) / 2 - minY * newScale + padding * newScale;
+
+    canvasScale = newScale;
+    canvasOffsetX = newOffsetX;
+    canvasOffsetY = newOffsetY;
+
+    drawCanvas();
+}
         // Рисует пунктирные стрелки между узлами на основе выборов
         function drawConnections() {
             if (!canvas) return;
