@@ -1,0 +1,449 @@
+-- ====================================================================
+-- Загрузка сценария "Игнорирование техники безопасности в компьютерном классе"
+-- ====================================================================
+BEGIN;
+
+
+CREATE OR REPLACE FUNCTION get_or_create_id(
+    table_name text,
+    name_column text,
+    name_value text
+) RETURNS integer AS $$
+DECLARE
+    result_id integer;
+BEGIN
+    EXECUTE format('SELECT id FROM %I WHERE %I = $1', table_name, name_column) INTO result_id USING name_value;
+    IF result_id IS NULL THEN
+        EXECUTE format('INSERT INTO %I (%I) VALUES ($1) RETURNING id', table_name, name_column) INTO result_id USING name_value;
+    END IF;
+    RETURN result_id;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT get_or_create_id('lesson', 'name', 'Информатика');
+SELECT get_or_create_id('classroom', 'name', '5 класс');
+SELECT get_or_create_id('lesson_stage', 'name', 'Самостоятельная работа с самопроверкой');
+SELECT get_or_create_id('lesson_format', 'name', 'Очный');
+SELECT get_or_create_id('tech_equip', 'name', 'ПК+Интернет');
+SELECT get_or_create_id('type_problem', 'name', 'Организационные конфликты');
+SELECT get_or_create_id('source_problem', 'name', 'Внутренний');
+SELECT get_or_create_id('emotion', 'name', 'Раздражение');
+SELECT get_or_create_id('emotion', 'name', 'Страх');
+SELECT get_or_create_id('emotion', 'name', 'Тревога');
+SELECT get_or_create_id('solution_type', 'name', 'ТактическоеРешение');
+SELECT get_or_create_id('solution_type', 'name', 'СтратегическоеРешение');
+SELECT get_or_create_id('response_strategy', 'name', 'Соперничество');
+SELECT get_or_create_id('response_strategy', 'name', 'Сотрудничество');
+SELECT get_or_create_id('response_strategy', 'name', 'Компромисс');
+SELECT get_or_create_id('resource', 'name', 'Человеческий');
+SELECT get_or_create_id('resource', 'name', 'Образовательный');
+SELECT get_or_create_id('resource', 'name', 'Информационный');
+SELECT get_or_create_id('resource', 'name', 'Временной');
+SELECT get_or_create_id('resource', 'name', 'Аппаратный');
+SELECT get_or_create_id('type_consequence', 'name', 'Неудача');
+SELECT get_or_create_id('type_consequence', 'name', 'Успех');
+SELECT get_or_create_id('type_consequence', 'name', 'ЧастичныйУспех');
+SELECT get_or_create_id('communication_style', 'name', 'Пассивный');
+SELECT get_or_create_id('communication_style', 'name', 'Активный');
+SELECT get_or_create_id('communication_style', 'name', 'Конфликтный');
+SELECT get_or_create_id('communication_style', 'name', 'Коммуникабельный');
+SELECT get_or_create_id('social_status', 'name', 'Принятые');
+SELECT get_or_create_id('social_status', 'name', 'Предпочитаемые');
+SELECT get_or_create_id('social_status', 'name', 'Изолированные');
+SELECT get_or_create_id('social_status', 'name', 'Пренебрегаемые');
+SELECT get_or_create_id('pedagogical_style', 'name', 'Авторитарный');
+SELECT get_or_create_id('pedagogical_style', 'name', 'Демократический');
+SELECT get_or_create_id('pedagogical_style', 'name', 'Либеральный');
+SELECT get_or_create_id('professional_role', 'name', 'Предметник');
+SELECT get_or_create_id('professional_role', 'name', 'Классный руководитель');
+SELECT get_or_create_id('professional_role', 'name', 'Методист');
+SELECT get_or_create_id('emotion_intelligence', 'name', 'Низкий');
+SELECT get_or_create_id('emotion_intelligence', 'name', 'Средний');
+SELECT get_or_create_id('emotion_intelligence', 'name', 'Высокий');
+
+
+-- --------------------------------------------------------------------
+-- Контекст ситуации
+-- --------------------------------------------------------------------
+WITH ctx AS (
+    SELECT
+        (SELECT id FROM lesson WHERE name = 'Информатика') AS lesson_id,
+        (SELECT id FROM classroom WHERE name = '5 класс') AS classroom_id,
+        (SELECT id FROM lesson_stage WHERE name = 'Самостоятельная работа с самопроверкой') AS lesson_stage_id,
+        (SELECT id FROM lesson_format WHERE name = 'Очный') AS lesson_format_id,
+        (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет') AS tech_equip_id,
+        45 AS duration
+)
+INSERT INTO context (lesson_id, classroom_id, lesson_stage_id, lesson_format_id, tech_equip_id, duration)
+SELECT lesson_id, classroom_id, lesson_stage_id, lesson_format_id, tech_equip_id, duration
+FROM ctx
+WHERE NOT EXISTS (
+    SELECT 1 FROM context c
+    WHERE c.lesson_id = ctx.lesson_id
+      AND c.classroom_id = ctx.classroom_id
+      AND c.lesson_stage_id = ctx.lesson_stage_id
+      AND c.lesson_format_id = ctx.lesson_format_id
+      AND (c.tech_equip_id = ctx.tech_equip_id OR (c.tech_equip_id IS NULL AND ctx.tech_equip_id IS NULL))
+      AND c.duration = ctx.duration
+);
+
+
+INSERT INTO participant (full_name, age) VALUES ('Игорь Алексеевич', 35)
+ON CONFLICT (full_name) WHERE age IS NULL DO NOTHING;
+
+INSERT INTO teacher (participant_id, emotion_intell_id, style_id, prof_role_id, experience)
+SELECT
+    p.id,
+    (SELECT id FROM emotion_intelligence WHERE name = 'Средний'),
+    (SELECT id FROM pedagogical_style WHERE name = 'Демократический'),
+    (SELECT id FROM professional_role WHERE name = 'Предметник'),
+    9
+FROM participant p
+WHERE p.full_name = 'Игорь Алексеевич'
+ON CONFLICT (participant_id) DO NOTHING;
+
+INSERT INTO participant (full_name, age) VALUES ('Максим Соколов', 14)
+ON CONFLICT (full_name) WHERE age IS NULL DO NOTHING;
+
+INSERT INTO student (participant_id, tech_equip_id, comm_style_id, social_status_id, motivation, preparation)
+SELECT
+    p.id,
+    (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет'),
+    (SELECT id FROM communication_style WHERE name = 'Активный'),
+    (SELECT id FROM social_status WHERE name = 'Предпочитаемые'),
+    0.5,
+    0.6
+FROM participant p
+WHERE p.full_name = 'Максим Соколов'
+ON CONFLICT (participant_id) DO NOTHING;
+
+
+-- --------------------------------------------------------------------
+-- Проблема (сохраняем id во временную таблицу)
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE problem_ids (id int);
+
+-- Ищем существующую проблему
+INSERT INTO problem_ids
+SELECT id FROM problem
+WHERE type_problem_id = (SELECT id FROM type_problem WHERE name = 'Организационные конфликты')
+  AND source_problem_id = (SELECT id FROM source_problem WHERE name = 'Внутренний')
+  AND description = 'Во время самостоятельной работы несколько учеников демонстративно нарушают правила техники безопасности: едят за компьютерами, подключают неизвестные USB-устройства, бегают между рядами с проводами. На замечания учителя отвечают: «Ничего страшного не случится». Создаётся реальная угроза поломки дорогостоящего оборудования и травматизма.'
+LIMIT 1;
+
+-- Если не нашли, создаём новую
+WITH new_problem AS (
+    INSERT INTO problem (
+        type_problem_id,
+        source_problem_id,
+        intensity,
+        tension_factor,
+        description,
+        start_motivation,
+        start_stress,
+        start_trust,
+        start_class_climate,
+        start_teacher_authority,
+        start_teacher_burnout
+    )
+    SELECT
+        (SELECT id FROM type_problem WHERE name = 'Организационные конфликты'),
+        (SELECT id FROM source_problem WHERE name = 'Внутренний'),
+        0.6,
+        NULL,
+        'Во время самостоятельной работы несколько учеников демонстративно нарушают правила техники безопасности: едят за компьютерами, подключают неизвестные USB-устройства, бегают между рядами с проводами. На замечания учителя отвечают: «Ничего страшного не случится». Создаётся реальная угроза поломки дорогостоящего оборудования и травматизма.',
+        0.5,
+        0.5,
+        0.5,
+        0.4,
+        0.5,
+        0.3
+    WHERE NOT EXISTS (SELECT 1 FROM problem_ids)
+    RETURNING id
+)
+INSERT INTO problem_ids SELECT id FROM new_problem;
+
+-- Эмоции проблемы
+INSERT INTO problem_emotions (emotion_id, problem_id)
+SELECT e.id, (SELECT id FROM problem_ids)
+FROM emotion e
+WHERE e.name IN ('Раздражение', 'Страх', 'Тревога')
+  AND NOT EXISTS (
+      SELECT 1 FROM problem_emotions pe
+      WHERE pe.emotion_id = e.id AND pe.problem_id = (SELECT id FROM problem_ids)
+  );
+
+
+-- --------------------------------------------------------------------
+-- Узлы сценария
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE tmp_nodes (
+    node_id text PRIMARY KEY,
+    description text,
+    image text,
+    is_terminal boolean
+);
+
+INSERT INTO tmp_nodes (node_id, description, image, is_terminal) VALUES
+('node_1', 'Класс работает за компьютерами. Внезапно учитель замечает, что Максим ест бутерброд прямо над клавиатурой, рядом с ним Артём подключает флешку неизвестного происхождения, а у окна двое учеников бегают, путаясь в проводах. Игорь Алексеевич делает замечание, но слышит в ответ: «Да ладно, ничего же не случится!» Несколько учеников смеются, напряжение нарастает. Учитель понимает, что простым напоминанием правил не обойтись — нужно выбирать стратегию: либо жёстко пресечь, либо объяснять, либо найти творческий подход.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1.png?raw=true', false),
+('node_1_1', 'Учитель жёстко пресёк нарушение, потребовал прекратить и объявил, что будут санкции. Нарушители замерли, но в классе повисло напряжение. Теперь нужно выбрать конкретную форму наказания.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1_1.png?raw=true', false),
+('node_1_2', 'Учитель приостановил работу и начал объяснять, почему правила техники безопасности важны, привёл примеры поломок и травм. Класс притих, некоторые задумались. Нужно выбрать формат обучения безопасности.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1_2.png?raw=true', false),
+('node_1_3', 'Учитель решил не давить, а увлечь класс: предложил провести мини-квест по поиску опасных мест в кабинете. Ученики оживились, начали с интересом осматривать рабочее место. Но нужно выбрать способ интеграции техники безопасности в урок.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1_3.png?raw=true', false),
+('out_1', 'Максима и Артёма отправляют к директору. Остальные работают в напряжённой тишине. Нарушения прекратились, но атмосфера стала холодной. Родители позже жалуются на «чрезмерную строгость». Учитель чувствует усталость от конфликта.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_1.png?raw=true', true),
+('out_2', 'Учитель объявляет, что все нарушители получат «2» за урок. Ученики воспринимают это как несправедливость, правила техники безопасности начинают ассоциироваться с наказанием, а не с заботой. Класс разделяется: одни злятся, другие боятся.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_2.png?raw=true', true),
+('out_3', 'Учитель зачитывает правила и указывает на конкретных нарушителей. Те чувствуют стыд, но затаивают обиду. Класс понимает серьёзность, но атмосфера становится тяжёлой. Часть учеников начинает скрывать свои действия.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_3.png?raw=true', true),
+('out_4', 'Показ фото сгоревшей техники и рассказ о травмах производят впечатление. Ученики осознают серьёзность рисков, но некоторые воспринимают это как «запугивание». Большинство задумываются, дисциплина улучшается.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_4.png?raw=true', true),
+('out_5', 'Ученики сами формулируют риски, чувствуют причастность. Правила воспринимаются как логичные, а не навязанные. Класс становится более сплочённым, учитель выступает как наставник.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_5.png?raw=true', true),
+('out_6', 'Ученики чувствуют доверие и ответственность. Дежурные следят за порядком, нарушения снижаются. Однако есть риск, что дежурные могут злоупотреблять полномочиями или игнорировать друзей.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_6.png?raw=true', true),
+('out_7', 'Ученики с азартом ищут «опасные места», сами составляют инструкцию. Техника безопасности изучается через действие, запоминается лучше. Учитель выглядит креативным, класс увлечён.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_7.png?raw=true', true),
+('out_8', 'Ученики видят последствия нарушений в виртуальной среде без реального риска. Высокая наглядность и современный подход впечатляют. Требует технической подготовки, но результат стоит затрат.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_8.png?raw=true', true),
+('out_9', 'Формализация ответственности: каждый ученик подписывает документ с правилами и последствиями. Ученики воспринимают серьёзнее, но часть считает это бюрократией. Нарушения снижаются, но внутреннего принятия нет.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_9.png?raw=true', true);
+
+INSERT INTO script_node (description, url_image, is_terminal)
+SELECT description, image, is_terminal FROM tmp_nodes
+ON CONFLICT (description) DO NOTHING;
+
+CREATE TEMP TABLE node_ids AS
+SELECT n.node_id, sn.id
+FROM tmp_nodes n
+JOIN script_node sn ON sn.description = n.description;
+
+
+-- --------------------------------------------------------------------
+-- Выборы, решения, ресурсы
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE tmp_choices (
+    from_node text,
+    next_node text,
+    description text,
+    delta_motivation double precision,
+    delta_stress double precision,
+    delta_trust double precision,
+    delta_class_climate double precision,
+    delta_teacher_authority double precision,
+    delta_teacher_burnout double precision,
+    sol_type text,
+    sol_strategy text,
+    sol_risk int,
+    sol_autonomy int,
+    resources text[]
+);
+
+INSERT INTO tmp_choices VALUES
+('node_1', 'node_1_1', 'Жёсткое пресечение: немедленно остановить урок и применить санкции к нарушителям.', -0.3, 0.3, -0.3, -0.2, 0.2, 0.2, 'ТактическоеРешение', 'Соперничество', 7, 2, ARRAY['Человеческий']),
+('node_1', 'node_1_2', 'Объяснение последствий: приостановить работу, рассказать о реальных рисках.', 0.1, -0.1, 0.2, 0.1, 0.2, 0, 'СтратегическоеРешение', 'Сотрудничество', 4, 5, ARRAY['Образовательный','Информационный']),
+('node_1', 'node_1_3', 'Практическое закрепление: превратить изучение техники безопасности в игру или квест.', 0.3, -0.2, 0.2, 0.2, 0.2, 0, 'СтратегическоеРешение', 'Сотрудничество', 5, 7, ARRAY['Образовательный','Временной']),
+('node_1_1', 'out_1', 'Удаление нарушителей из класса (отправить к директору).', -0.3, 0.3, -0.3, -0.2, 0.2, 0.2, 'ТактическоеРешение', 'Соперничество', 8, 1, ARRAY['Человеческий']),
+('node_1_1', 'out_2', 'Снижение оценки за поведение (независимо от выполненной работы).', -0.4, 0.2, -0.4, -0.3, -0.1, 0.3, 'ТактическоеРешение', 'Соперничество', 6, 2, ARRAY['Человеческий']),
+('node_1_1', 'out_3', 'Публичное осуждение нарушителей с зачитыванием правил.', -0.2, 0.4, -0.3, -0.3, 0.1, 0.2, 'ТактическоеРешение', 'Соперничество', 7, 1, ARRAY['Человеческий']),
+('node_1_2', 'out_4', 'Демонстрация реальных случаев поломок (фото/видео).', 0.1, -0.1, 0.2, 0.1, 0.2, 0, 'СтратегическоеРешение', 'Сотрудничество', 3, 4, ARRAY['Информационный']),
+('node_1_2', 'out_5', 'Коллективное обсуждение правил: «Почему они существуют?»', 0.2, -0.2, 0.3, 0.2, 0.1, -0.1, 'СтратегическоеРешение', 'Сотрудничество', 2, 6, ARRAY['Образовательный','Человеческий']),
+('node_1_2', 'out_6', 'Назначение «ответственных за технику безопасности» из учеников.', 0.2, -0.1, 0.2, 0.1, 0.1, -0.1, 'СтратегическоеРешение', 'Сотрудничество', 4, 5, ARRAY['Человеческий']),
+('node_1_3', 'out_7', 'Квест по поиску нарушений в классе (игровой формат).', 0.3, -0.2, 0.2, 0.2, 0.2, 0, 'СтратегическоеРешение', 'Сотрудничество', 3, 8, ARRAY['Образовательный']),
+('node_1_3', 'out_8', 'Симуляция последствий в виртуальной среде (программа).', 0.3, -0.3, 0.2, 0.1, 0.2, 0.1, 'СтратегическоеРешение', 'Сотрудничество', 4, 6, ARRAY['Аппаратный','Информационный']),
+('node_1_3', 'out_9', 'Подписание «договора о безопасности» (формализация).', 0.1, -0.1, 0.1, 0, 0.1, 0, 'ТактическоеРешение', 'Компромисс', 5, 4, ARRAY['Образовательный','Временной']);
+
+CREATE TEMP TABLE tmp_solutions AS
+SELECT DISTINCT
+    sol_type, sol_strategy, sol_risk, sol_autonomy,
+    (SELECT id FROM solution_type WHERE name = sol_type) AS sol_type_id,
+    (SELECT id FROM response_strategy WHERE name = sol_strategy) AS resp_strat_id
+FROM tmp_choices;
+
+INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+SELECT sol_type_id, resp_strat_id, sol_risk, sol_autonomy
+FROM tmp_solutions
+ON CONFLICT (sol_type_id, resp_strat_id, risk, student_autonomy) DO NOTHING;
+
+CREATE TEMP TABLE solution_map AS
+SELECT
+    s.sol_type_id,
+    s.resp_strat_id,
+    s.risk,
+    s.student_autonomy,
+    s.id AS solution_id
+FROM solution s
+JOIN tmp_solutions ts ON ts.sol_type_id = s.sol_type_id
+                     AND ts.resp_strat_id = s.resp_strat_id
+                     AND ts.sol_risk = s.risk
+                     AND ts.sol_autonomy = s.student_autonomy;
+
+INSERT INTO solution_resource (resource_id, solution_id)
+SELECT DISTINCT r.id, sm.solution_id
+FROM tmp_choices tc
+CROSS JOIN UNNEST(tc.resources) AS res_name
+JOIN resource r ON r.name = res_name
+JOIN solution_map sm ON sm.sol_type_id = (SELECT id FROM solution_type WHERE name = tc.sol_type)
+                    AND sm.resp_strat_id = (SELECT id FROM response_strategy WHERE name = tc.sol_strategy)
+                    AND sm.risk = tc.sol_risk
+                    AND sm.student_autonomy = tc.sol_autonomy
+ON CONFLICT (resource_id, solution_id) DO NOTHING;
+
+
+-- --------------------------------------------------------------------
+-- Подготовка данных для последствий (outcome)
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE outcome_data AS
+SELECT
+    node_id,
+    type_name,
+    description,
+    long_term,
+    reversible
+FROM (VALUES
+('out_1', 'failure', 'Максима и Артёма отправляют к директору. Остальные работают в напряжённой тишине. Нарушения прекратились, но атмосфера стала холодной. Родители позже жалуются на «чрезмерную строгость». Учитель чувствует усталость от конфликта.', true, true),
+('out_2', 'failure', 'Учитель объявляет, что все нарушители получат «2» за урок. Ученики воспринимают это как несправедливость, правила техники безопасности начинают ассоциироваться с наказанием, а не с заботой. Класс разделяется: одни злятся, другие боятся.', true, true),
+('out_3', 'partial', 'Учитель зачитывает правила и указывает на конкретных нарушителей. Те чувствуют стыд, но затаивают обиду. Класс понимает серьёзность, но атмосфера становится тяжёлой. Часть учеников начинает скрывать свои действия.', true, true),
+('out_4', 'success', 'Показ фото сгоревшей техники и рассказ о травмах производят впечатление. Ученики осознают серьёзность рисков, но некоторые воспринимают это как «запугивание». Большинство задумываются, дисциплина улучшается.', true, true),
+('out_5', 'success', 'Ученики сами формулируют риски, чувствуют причастность. Правила воспринимаются как логичные, а не навязанные. Класс становится более сплочённым, учитель выступает как наставник.', true, true),
+('out_6', 'success', 'Ученики чувствуют доверие и ответственность. Дежурные следят за порядком, нарушения снижаются. Однако есть риск, что дежурные могут злоупотреблять полномочиями или игнорировать друзей.', true, true),
+('out_7', 'success', 'Ученики с азартом ищут «опасные места», сами составляют инструкцию. Техника безопасности изучается через действие, запоминается лучше. Учитель выглядит креативным, класс увлечён.', true, true),
+('out_8', 'success', 'Ученики видят последствия нарушений в виртуальной среде без реального риска. Высокая наглядность и современный подход впечатляют. Требует технической подготовки, но результат стоит затрат.', true, true),
+('out_9', 'partial', 'Формализация ответственности: каждый ученик подписывает документ с правилами и последствиями. Ученики воспринимают серьёзнее, но часть считает это бюрократией. Нарушения снижаются, но внутреннего принятия нет.', true, true)
+) AS t(node_id, type_name, description, long_term, reversible);
+
+
+-- --------------------------------------------------------------------
+-- Вставка выборов (choice)
+-- --------------------------------------------------------------------
+INSERT INTO choice (
+    solution_id,
+    from_script_node_id,
+    next_script_node_id,
+    description,
+    delta_motivation,
+    delta_stress,
+    delta_trust,
+    delta_class_climate,
+    delta_teacher_authority,
+    delta_teacher_burnout,
+    consequence_text,
+    type_consequence_id
+)
+SELECT
+    sm.solution_id,
+    n_from.id,
+    n_to.id,
+    tc.description,
+    tc.delta_motivation,
+    tc.delta_stress,
+    tc.delta_trust,
+    tc.delta_class_climate,
+    tc.delta_teacher_authority,
+    tc.delta_teacher_burnout,
+    od.description,
+    tc2.id
+FROM tmp_choices tc
+JOIN node_ids n_from ON n_from.node_id = tc.from_node
+JOIN node_ids n_to ON n_to.node_id = tc.next_node
+JOIN solution_map sm ON sm.sol_type_id = (SELECT id FROM solution_type WHERE name = tc.sol_type)
+                     AND sm.resp_strat_id = (SELECT id FROM response_strategy WHERE name = tc.sol_strategy)
+                     AND sm.risk = tc.sol_risk
+                     AND sm.student_autonomy = tc.sol_autonomy
+LEFT JOIN outcome_data od ON od.node_id = tc.next_node
+LEFT JOIN type_consequence tc2 ON tc2.name = CASE
+    WHEN od.type_name = 'failure' THEN 'Неудача'
+    WHEN od.type_name = 'success' THEN 'Успех'
+    WHEN od.type_name = 'partial' THEN 'ЧастичныйУспех'
+END
+WHERE NOT EXISTS (
+    SELECT 1 FROM choice c
+    WHERE c.solution_id = sm.solution_id
+      AND c.from_script_node_id = n_from.id
+      AND c.next_script_node_id = n_to.id
+      AND c.description = tc.description
+);
+
+
+-- --------------------------------------------------------------------
+-- Метрики и последствия (consequence)
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE outcome_metrics AS
+SELECT * FROM (VALUES
+('out_1', -0.6, 0.6, -0.6, -0.4, 0.4, 0.4),
+    ('out_2', -0.7, 0.5, -0.7, -0.5, 0.1, 0.5),
+    ('out_3', -0.5, 0.7, -0.6, -0.5, 0.3, 0.4),
+    ('out_4', 0.2, -0.2, 0.4, 0.2, 0.4, 0),
+    ('out_5', 0.3, -0.3, 0.5, 0.3, 0.3, -0.1),
+    ('out_6', 0.3, -0.2, 0.4, 0.2, 0.3, -0.1),
+    ('out_7', 0.6, -0.4, 0.4, 0.4, 0.4, 0),
+    ('out_8', 0.6, -0.5, 0.4, 0.3, 0.4, 0.1),
+    ('out_9', 0.4, -0.3, 0.3, 0.2, 0.3, 0)
+) AS t(node_id, motivation, stress, trust, class_climate, teacher_authority, teacher_burnout);
+
+INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+SELECT motivation, stress, trust, class_climate, teacher_authority, teacher_burnout
+FROM outcome_metrics
+ON CONFLICT (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout) DO NOTHING;
+
+WITH inserted_metrics AS (
+    SELECT om.node_id, cm.id AS change_metrics_id
+    FROM outcome_metrics om
+    JOIN change_metrics cm ON cm.motivation = om.motivation
+                          AND cm.stress = om.stress
+                          AND cm.trust = om.trust
+                          AND cm.class_climate = om.class_climate
+                          AND cm.teacher_authority = om.teacher_authority
+                          AND cm.teacher_burnout = om.teacher_burnout
+)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+    im.change_metrics_id,
+    tc.id,
+    od.description,
+    od.long_term,
+    od.reversible,
+    0.5
+FROM inserted_metrics im
+JOIN outcome_data od ON od.node_id = im.node_id
+JOIN type_consequence tc ON tc.name = CASE od.type_name
+    WHEN 'failure' THEN 'Неудача'
+    WHEN 'success' THEN 'Успех'
+    WHEN 'partial' THEN 'ЧастичныйУспех'
+END
+ON CONFLICT (change_metrics_id, type_conseq_id, text) DO NOTHING;
+
+
+-- --------------------------------------------------------------------
+-- Ситуация
+-- --------------------------------------------------------------------
+INSERT INTO situation (
+    context_id,
+    problem_id,
+    script_node_id,
+    name
+)
+VALUES (
+    (SELECT id FROM context
+     WHERE lesson_id = (SELECT id FROM lesson WHERE name = 'Информатика')
+       AND classroom_id = (SELECT id FROM classroom WHERE name = '5 класс')
+       AND lesson_stage_id = (SELECT id FROM lesson_stage WHERE name = 'Самостоятельная работа с самопроверкой')
+       AND lesson_format_id = (SELECT id FROM lesson_format WHERE name = 'Очный')
+       AND tech_equip_id = (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет')
+       AND duration = 45),
+    (SELECT id FROM problem_ids),
+    (SELECT id FROM node_ids WHERE node_id = 'node_1'),
+    'Игнорирование техники безопасности в компьютерном классе'
+)
+ON CONFLICT (script_node_id) DO NOTHING;
+
+-- --------------------------------------------------------------------
+-- Участники ситуации
+-- --------------------------------------------------------------------
+WITH sit AS (
+    SELECT id FROM situation WHERE name = 'Игнорирование техники безопасности в компьютерном классе'
+)
+INSERT INTO situation_participants (situation_id, participant_id)
+SELECT sit.id, p.id
+FROM sit
+CROSS JOIN participant p
+WHERE p.full_name IN ('Игорь Алексеевич', 'Максим Соколов')
+AND NOT EXISTS (
+    SELECT 1 FROM situation_participants sp
+    WHERE sp.situation_id = sit.id AND sp.participant_id = p.id
+);
+
+COMMIT;
+
+-- Очистка (опционально)
+DROP FUNCTION IF EXISTS get_or_create_id(text, text, text) CASCADE;

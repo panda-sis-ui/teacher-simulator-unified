@@ -1,0 +1,748 @@
+{
+  "title": "Разный уровень подготовки при изучении Python",
+  "initialNode": "node_1",
+  "context": {
+    "subject": "Информатика",
+    "grade": "8",
+    "lessonPhase": "Самостоятельная работа с самопроверкой",
+    "format": "Очный",
+    "duration": 45,
+    "techEquipment": "ПК+Интернет"
+  },
+  "participants": [
+    {
+      "type": "Учитель",
+      "name": "Анна Сергеевна",
+      "age": 35,
+      "experience": 8,
+      "emotionalIntelligence": "Средний",
+      "teachingStyle": "Демократический",
+      "professionalRole": "Предметник"
+    },
+    {
+      "type": "Ученик",
+      "name": "Андрей",
+      "age": 14,
+      "motivation": 0.8,
+      "preparation": "Сильный",
+      "socialStatus": "Звёзды",
+      "techEquip": "ПК+Интернет",
+      "commStyle": "Активный"
+    },
+    {
+      "type": "Ученик",
+      "name": "Дмитрий",
+      "age": 14,
+      "motivation": 0.3,
+      "preparation": "Слабый",
+      "socialStatus": "Принятые",
+      "techEquip": "ПК+Интернет",
+      "commStyle": "Пассивный"
+    }
+  ],
+  "problem": {
+    "type": "Мотивационные кризисы",
+    "source": "Внутренний",
+    "intensity": "Средняя",
+    "emotions": [
+      "Апатия",
+      "Раздражение"
+    ],
+    "description": "На уроке информатики при изучении основ Python часть учеников быстро справляется с заданиями и начинает отвлекаться, а другая часть испытывает трудности с базовыми понятиями (циклы, условия). Это снижает мотивацию и у сильных (скучно), и у слабых (не успевают), а также ведёт к нарушению дисциплины.",
+    "startMetrics": {
+      "motivation": 0.5,
+      "stress": 0.4,
+      "trust": 0.6,
+      "classClimate": 0.5,
+      "teacherAuthority": 0.6,
+      "teacherBurnout": 0.2
+    }
+  },
+  "nodes": {
+    "node_1": {
+      "description": "Учитель информатики Анна Сергеевна даёт классу задание на отработку циклов for и while в Python. Андрей и ещё несколько сильных учеников решают задачи за 5 минут и начинают отвлекаться: листают соцсети, переговариваются. Дмитрий и другие слабые ученики путаются в синтаксисе, не понимают, как организовать итерацию, и просто сидят, уставившись в экран. Анна Сергеевна видит, что темп урока не подходит ни тем, ни другим. Если она пойдёт быстрее — слабые потеряются, если медленнее — сильные устроят хаос.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_1.png?raw=true",
+      "choices": [
+        {
+          "id": "ch_1_1",
+          "description": "Разделить класс на фиксированные или гибкие группы по уровню подготовки",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 4,
+            "autonomy": 6,
+            "resources": [
+              "Человеческий",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.1,
+            "stress": -0.1,
+            "trust": 0.1,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0
+          },
+          "next": "node_2"
+        },
+        {
+          "id": "ch_1_2",
+          "description": "Дать каждому ученику задание под его уровень, от базового к продвинутому",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 5,
+            "autonomy": 7,
+            "resources": [
+              "Образовательный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.2,
+            "trust": 0.1,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0.1
+          },
+          "next": "node_3"
+        },
+        {
+          "id": "ch_1_3",
+          "description": "Организовать командные или индивидуальные проекты с разными ролями",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 6,
+            "autonomy": 8,
+            "resources": [
+              "Образовательный",
+              "Человеческий",
+              "Информационный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.1,
+            "trust": 0.1,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0
+          },
+          "next": "node_4"
+        },
+        {
+          "id": "ch_1_4",
+          "description": "Вести урок «для среднего ученика», не меняя подход",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Избегание",
+            "risk": 8,
+            "autonomy": 2,
+            "resources": [
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.2,
+            "stress": 0.2,
+            "trust": -0.2,
+            "classClimate": -0.2,
+            "teacherAuthority": -0.1,
+            "teacherBurnout": 0.1
+          },
+          "next": "node_5"
+        },
+        {
+          "id": "ch_1_5",
+          "description": "Назначить сильных учеников «кураторами» слабых без контроля или сказать «разбирайтесь сами»",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Приспособление",
+            "risk": 7,
+            "autonomy": 9,
+            "resources": [
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.1,
+            "stress": 0.1,
+            "trust": -0.2,
+            "classClimate": -0.1,
+            "teacherAuthority": -0.2,
+            "teacherBurnout": -0.1
+          },
+          "next": "node_6"
+        },
+        {
+          "id": "ch_1_6",
+          "description": "Публично сравнивать учеников, применять штрафные задания",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 9,
+            "autonomy": 1,
+            "resources": [
+              "Материальный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.3,
+            "stress": 0.4,
+            "trust": -0.4,
+            "classClimate": -0.3,
+            "teacherAuthority": -0.2,
+            "teacherBurnout": 0.3
+          },
+          "next": "node_7"
+        }
+      ]
+    },
+    "node_2": {
+      "description": "Анна Сергеевна получает согласие завуча на деление класса на подгруппы. Теперь ей нужно выбрать, как именно организовать группы: закрепить учеников по фиксированным уровням (сильные/средние/слабые) или сделать гибкие группы, которые меняются в зависимости от темы.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_2.png?raw=true",
+      "choices": [
+        {
+          "id": "ch_2_1",
+          "description": "Фиксированные группы (сильные/средние/слабые) на весь модуль",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 5,
+            "autonomy": 4,
+            "resources": [
+              "Образовательный",
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.1,
+            "stress": -0.1,
+            "trust": 0.1,
+            "classClimate": 0.1,
+            "teacherAuthority": 0,
+            "teacherBurnout": 0.1
+          },
+          "next": "out_1"
+        },
+        {
+          "id": "ch_2_2",
+          "description": "Гибкие группы (переход между группами по темам)",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 6,
+            "autonomy": 7,
+            "resources": [
+              "Информационный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.2,
+            "trust": 0.2,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0.2
+          },
+          "next": "out_2"
+        }
+      ]
+    },
+    "node_3": {
+      "description": "Анна Сергеевна решает давать каждому ученику задания разного уровня сложности. Теперь нужно выбрать формат: постепенное усложнение для всех с одной стартовой точки или предоставление выбора заданий по интересам (квесты, математические задачи, игры).",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_3.png?raw=true",
+      "choices": [
+        {
+          "id": "ch_3_1",
+          "description": "Задания с постепенным усложнением (от базового к продвинутому)",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 4,
+            "autonomy": 5,
+            "resources": [
+              "Образовательный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.1,
+            "stress": -0.2,
+            "trust": 0.1,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0.1
+          },
+          "next": "out_3"
+        },
+        {
+          "id": "ch_3_2",
+          "description": "Выбор заданий по интересам (квесты, математические задачи, игры)",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 5,
+            "autonomy": 8,
+            "resources": [
+              "Информационный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.2,
+            "trust": 0.2,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0.2
+          },
+          "next": "out_4"
+        }
+      ]
+    },
+    "node_4": {
+      "description": "Анна Сергеевна решает заменить рутинные задания проектом, чтобы показать практическую пользу программирования. Нужно выбрать формат: командные проекты с распределением ролей или индивидуальные проекты с публичной защитой.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_4.png?raw=true",
+      "choices": [
+        {
+          "id": "ch_4_1",
+          "description": "Командные проекты с разными ролями (программист, дизайнер, тестировщик)",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 6,
+            "autonomy": 7,
+            "resources": [
+              "Образовательный",
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.1,
+            "trust": 0.1,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0.1
+          },
+          "next": "out_5"
+        },
+        {
+          "id": "ch_4_2",
+          "description": "Индивидуальные проекты с защитой",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 7,
+            "autonomy": 9,
+            "resources": [
+              "Информационный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.3,
+            "stress": -0.2,
+            "trust": 0.2,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": 0.3
+          },
+          "next": "out_6"
+        }
+      ]
+    },
+    "node_5": {
+      "description": "Анна Сергеевна решает ничего не менять и вести урок в среднем темпе. Но нужно выбрать конкретную линию поведения: ориентироваться на среднего ученика или вообще отказаться от помощи слабым «ради успеваемости класса».",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_5.png?raw=true",
+      "choices": [
+        {
+          "id": "ch_5_1",
+          "description": "Ведение урока «для среднего ученика» без дифференциации",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Избегание",
+            "risk": 7,
+            "autonomy": 2,
+            "resources": [
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.2,
+            "stress": 0.2,
+            "trust": -0.2,
+            "classClimate": -0.2,
+            "teacherAuthority": -0.1,
+            "teacherBurnout": 0.1
+          },
+          "next": "out_7"
+        },
+        {
+          "id": "ch_5_2",
+          "description": "Отказ от помощи слабым ученикам «ради успеваемости класса»",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 9,
+            "autonomy": 1,
+            "resources": [
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.4,
+            "stress": 0.3,
+            "trust": -0.4,
+            "classClimate": -0.3,
+            "teacherAuthority": -0.2,
+            "teacherBurnout": 0.2
+          },
+          "next": "out_8"
+        }
+      ]
+    },
+    "node_6": {
+      "description": "Анна Сергеевна считает, что ученики сами должны решать свои проблемы. Осталось выбрать конкретную форму: просто сказать «разбирайтесь сами» или назначить сильных кураторами без контроля.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_6.png?raw=true",
+      "choices": [
+        {
+          "id": "ch_6_1",
+          "description": "«Самостоятельно разбирайтесь, у меня нет времени на каждого»",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Избегание",
+            "risk": 8,
+            "autonomy": 10,
+            "resources": [
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.3,
+            "stress": 0.2,
+            "trust": -0.3,
+            "classClimate": -0.2,
+            "teacherAuthority": -0.3,
+            "teacherBurnout": -0.1
+          },
+          "next": "out_9"
+        },
+        {
+          "id": "ch_6_2",
+          "description": "Назначение сильных учеников «кураторами» слабых без контроля",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Приспособление",
+            "risk": 7,
+            "autonomy": 8,
+            "resources": [
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.1,
+            "stress": 0.1,
+            "trust": -0.2,
+            "classClimate": -0.1,
+            "teacherAuthority": -0.2,
+            "teacherBurnout": -0.1
+          },
+          "next": "out_10"
+        }
+      ]
+    },
+    "node_7": {
+      "description": "Анна Сергеевна решает действовать жёстко, чтобы «дожать» учеников. Нужно выбрать, как именно: публичное сравнение или штрафные задания за медлительность.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_7.png?raw=true",
+      "choices": [
+        {
+          "id": "ch_7_1",
+          "description": "Публичное сравнение учеников («Петя решил задачу за 5 минут, а вы?»)",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 9,
+            "autonomy": 1,
+            "resources": [
+              "Материальный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.3,
+            "stress": 0.4,
+            "trust": -0.4,
+            "classClimate": -0.3,
+            "teacherAuthority": -0.2,
+            "teacherBurnout": 0.3
+          },
+          "next": "out_11"
+        },
+        {
+          "id": "ch_7_2",
+          "description": "Штрафные задания за медлительность (дополнительные задачи)",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 8,
+            "autonomy": 1,
+            "resources": [
+              "Материальный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.2,
+            "stress": 0.3,
+            "trust": -0.3,
+            "classClimate": -0.2,
+            "teacherAuthority": -0.1,
+            "teacherBurnout": 0.2
+          },
+          "next": "out_12"
+        }
+      ]
+    },
+    "out_1": {
+      "outcomeDescription": "Сильные ученики получают углублённые задания и работают с интересом, слабые — базовые задачи с поддержкой учителя. Однако средние ученики могут заскучать, а слабые иногда чувствуют себя «отстающими». В целом успеваемость растёт, дисциплина улучшается, но требуется периодическая ротация.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_1.png?raw=true",
+      "outcome": {
+        "type": "partial",
+        "description": "Сильные ученики получают углублённые задания и работают с интересом, слабые — базовые задачи с поддержкой учителя. Однако средние ученики могут заскучать, а слабые иногда чувствуют себя «отстающими». В целом успеваемость растёт, дисциплина улучшается, но требуется периодическая ротация.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.1,
+          "stressChange": -0.2,
+          "trustChange": 0.1,
+          "classClimateChange": 0.1,
+          "teacherAuthorityChange": 0.1,
+          "burnoutChange": 0.1
+        }
+      }
+    },
+    "out_2": {
+      "outcomeDescription": "Ученики могут переходить между группами в зависимости от темы, что повышает вовлечённость и снижает чувство несправедливости. Однако требует от учителя больших временных затрат на организацию и мониторинг. Некоторые ученики испытывают стресс из-за постоянной оценки.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_2.png?raw=true",
+      "outcome": {
+        "type": "success",
+        "description": "Ученики могут переходить между группами в зависимости от темы, что повышает вовлечённость и снижает чувство несправедливости. Однако требует от учителя больших временных затрат на организацию и мониторинг. Некоторые ученики испытывают стресс из-за постоянной оценки.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.2,
+          "stressChange": -0.3,
+          "trustChange": 0.2,
+          "classClimateChange": 0.2,
+          "teacherAuthorityChange": 0.2,
+          "burnoutChange": 0.2
+        }
+      }
+    },
+    "out_3": {
+      "outcomeDescription": "Все начинают с одного уровня, сильные быстро переходят к сложным задачам, слабые не чувствуют давления. Но некоторые ученики застревают на базовых заданиях, не успевая за темпом, а сильные могут потерять интерес, если задачи слишком простые.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_3.png?raw=true",
+      "outcome": {
+        "type": "partial",
+        "description": "Все начинают с одного уровня, сильные быстро переходят к сложным задачам, слабые не чувствуют давления. Но некоторые ученики застревают на базовых заданиях, не успевая за темпом, а сильные могут потерять интерес, если задачи слишком простые.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.1,
+          "stressChange": -0.2,
+          "trustChange": 0.1,
+          "classClimateChange": 0.1,
+          "teacherAuthorityChange": 0.1,
+          "burnoutChange": 0.1
+        }
+      }
+    },
+    "out_4": {
+      "outcomeDescription": "Ученики с удовольствием выбирают задания, связанные с их хобби (игры, квесты). Мотивация резко растёт. Однако учитель тратит много времени на подготовку разнообразных материалов, а некоторые ученики выбирают только «удобные» задания, избегая развития слабых навыков.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_4.png?raw=true",
+      "outcome": {
+        "type": "success",
+        "description": "Ученики с удовольствием выбирают задания, связанные с их хобби (игры, квесты). Мотивация резко растёт. Однако учитель тратит много времени на подготовку разнообразных материалов, а некоторые ученики выбирают только «удобные» задания, избегая развития слабых навыков.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.2,
+          "stressChange": -0.2,
+          "trustChange": 0.2,
+          "classClimateChange": 0.2,
+          "teacherAuthorityChange": 0.1,
+          "burnoutChange": 0.2
+        }
+      }
+    },
+    "out_5": {
+      "outcomeDescription": "Ученики учатся сотрудничать, слабые выполняют простые задачи, сильные — сложные. Но возникают конфликты из-за неравномерного распределения обязанностей, некоторые сильные ученики перегружены, а слабые могут отсиживаться.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_5.png?raw=true",
+      "outcome": {
+        "type": "partial",
+        "description": "Ученики учатся сотрудничать, слабые выполняют простые задачи, сильные — сложные. Но возникают конфликты из-за неравномерного распределения обязанностей, некоторые сильные ученики перегружены, а слабые могут отсиживаться.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.2,
+          "stressChange": -0.1,
+          "trustChange": 0.1,
+          "classClimateChange": 0.2,
+          "teacherAuthorityChange": 0.1,
+          "burnoutChange": 0.1
+        }
+      }
+    },
+    "out_6": {
+      "outcomeDescription": "Ученики демонстрируют креативность, сильные создают амбициозные проекты, вдохновляя других. Слабые тратят много времени на простые проекты, но чувствуют ответственность. Учитель сильно загружен проверкой, но удовлетворён результатом.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_6.png?raw=true",
+      "outcome": {
+        "type": "success",
+        "description": "Ученики демонстрируют креативность, сильные создают амбициозные проекты, вдохновляя других. Слабые тратят много времени на простые проекты, но чувствуют ответственность. Учитель сильно загружен проверкой, но удовлетворён результатом.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.3,
+          "stressChange": -0.2,
+          "trustChange": 0.2,
+          "classClimateChange": 0.1,
+          "teacherAuthorityChange": 0.2,
+          "burnoutChange": 0.3
+        }
+      }
+    },
+    "out_7": {
+      "outcomeDescription": "Сильные ученики теряют интерес, начинают мешать другим, а слабые не успевают за темпом, накапливая пробелы. Учитель тратит время на повторение базовых понятий, что вызывает раздражение у сильных. Атмосфера в классе ухудшается.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_7.png?raw=true",
+      "outcome": {
+        "type": "failure",
+        "description": "Сильные ученики теряют интерес, начинают мешать другим, а слабые не успевают за темпом, накапливая пробелы. Учитель тратит время на повторение базовых понятий, что вызывает раздражение у сильных. Атмосфера в классе ухудшается.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.2,
+          "stressChange": 0.2,
+          "trustChange": -0.2,
+          "classClimateChange": -0.2,
+          "teacherAuthorityChange": -0.1,
+          "burnoutChange": 0.1
+        }
+      }
+    },
+    "out_8": {
+      "outcomeDescription": "Слабые ученики окончательно теряют мотивацию, перестают даже пытаться. Сильные, не получая вызова, тоже снижают качество. Родители слабых жалуются администрации, учитель получает выговор. Класс раскалывается на «успешных» и «безнадёжных».",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_8.png?raw=true",
+      "outcome": {
+        "type": "failure",
+        "description": "Слабые ученики окончательно теряют мотивацию, перестают даже пытаться. Сильные, не получая вызова, тоже снижают качество. Родители слабых жалуются администрации, учитель получает выговор. Класс раскалывается на «успешных» и «безнадёжных».",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.4,
+          "stressChange": 0.3,
+          "trustChange": -0.4,
+          "classClimateChange": -0.3,
+          "teacherAuthorityChange": -0.2,
+          "burnoutChange": 0.2
+        }
+      }
+    },
+    "out_9": {
+      "outcomeDescription": "Ученики чувствуют себя брошенными, дисциплина падает. Слабые перестают пытаться, сильные начинают доминировать, подавляя остальных. Учитель теряет авторитет, класс погружается в хаос.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_9.png?raw=true",
+      "outcome": {
+        "type": "failure",
+        "description": "Ученики чувствуют себя брошенными, дисциплина падает. Слабые перестают пытаться, сильные начинают доминировать, подавляя остальных. Учитель теряет авторитет, класс погружается в хаос.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.3,
+          "stressChange": 0.2,
+          "trustChange": -0.3,
+          "classClimateChange": -0.2,
+          "teacherAuthorityChange": -0.3,
+          "burnoutChange": -0.1
+        }
+      }
+    },
+    "out_10": {
+      "outcomeDescription": "Сильные ученики злоупотребляют ролью, подсказывая готовые решения вместо объяснений. Слабые начинают списывать, а сильные тратят время на помощь, не успевая за своими заданиями. В итоге не развивается никто, возникают конфликты.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_10.png?raw=true",
+      "outcome": {
+        "type": "failure",
+        "description": "Сильные ученики злоупотребляют ролью, подсказывая готовые решения вместо объяснений. Слабые начинают списывать, а сильные тратят время на помощь, не успевая за своими заданиями. В итоге не развивается никто, возникают конфликты.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.1,
+          "stressChange": 0.1,
+          "trustChange": -0.2,
+          "classClimateChange": -0.1,
+          "teacherAuthorityChange": -0.2,
+          "burnoutChange": -0.1
+        }
+      }
+    },
+    "out_11": {
+      "outcomeDescription": "Слабые ученики испытывают стыд и стресс, сильные — давление из-за завышенных ожиданий. Возникает агрессия между учениками, класс раскалывается на «любимчиков» и «изгоев». Родители жалуются на травлю, учитель получает выговор.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_11.png?raw=true",
+      "outcome": {
+        "type": "failure",
+        "description": "Слабые ученики испытывают стыд и стресс, сильные — давление из-за завышенных ожиданий. Возникает агрессия между учениками, класс раскалывается на «любимчиков» и «изгоев». Родители жалуются на травлю, учитель получает выговор.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.3,
+          "stressChange": 0.4,
+          "trustChange": -0.4,
+          "classClimateChange": -0.3,
+          "teacherAuthorityChange": -0.2,
+          "burnoutChange": 0.3
+        }
+      }
+    },
+    "out_12": {
+      "outcomeDescription": "Слабые ученики перегружены, теряют интерес к предмету. Сильные начинают нарочно затягивать выполнение, чтобы не получать дополнительных заданий. Ученики скрывают ошибки, учитель не видит реальной картины знаний.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_12.png?raw=true",
+      "outcome": {
+        "type": "failure",
+        "description": "Слабые ученики перегружены, теряют интерес к предмету. Сильные начинают нарочно затягивать выполнение, чтобы не получать дополнительных заданий. Ученики скрывают ошибки, учитель не видит реальной картины знаний.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.2,
+          "stressChange": 0.3,
+          "trustChange": -0.3,
+          "classClimateChange": -0.2,
+          "teacherAuthorityChange": -0.1,
+          "burnoutChange": 0.2
+        }
+      }
+    }
+  },
+  "solutionTypes": [
+    "СтратегическоеРешение",
+    "ТактическоеРешение"
+  ],
+  "responseStrategies": [
+    "Сотрудничество",
+    "Избегание",
+    "Приспособление",
+    "Соперничество"
+  ],
+  "resources": [
+    "Человеческий",
+    "Временной",
+    "Образовательный",
+    "Информационный",
+    "Материальный"
+  ],
+  "typeConsequences": [
+    "ЧастичныйУспех",
+    "Успех",
+    "Неудача"
+  ]
+}

@@ -31,8 +31,10 @@ const Header = () => {
     window.location.href = '/';
   };
 
-  // Внутренние маршруты (через React Router)
-  const internalNavItems = [
+  const userRole = user?.role || '';
+
+  // Базовые пункты для всех авторизованных (и для неавторизованных тоже, если нужно)
+  const baseNavItems = [
     { path: '/', label: 'Главная' },
     { path: '/catalog', label: 'Каталог ситуаций' },
     ...(isMethodist ? [
@@ -40,6 +42,36 @@ const Header = () => {
       { path: '/converter', label: 'Конвертер JSON' },
     ] : []),
   ];
+
+  // Дополнительные пункты только для методиста
+  const metodistNavItems = [
+    { path: '/ontology', label: 'Онтология' },          // внутренняя ссылка
+    { 
+      type: 'external', 
+      href: '/generator.html', 
+      label: 'Создание ситуаций',
+      target: '_blank'
+    },
+  ];
+
+  // Формируем итоговую навигацию
+  let navItems = [];
+  if (!isLoggedIn) {
+    navItems = [...baseNavItems];
+  } else {
+    navItems = [...baseNavItems];
+    if (userRole === 'ROLE_МЕТОДИСТ') {
+      navItems.push(...metodistNavItems);
+    }
+  }
+
+  // Ссылка на руководство (доступна всем)
+  const helpLink = {
+    type: 'external',
+    href: '/help.html',
+    label: 'Руководство пользователя',
+    target: '_blank'
+  };
 
   return (
     <header className="header">
@@ -52,49 +84,63 @@ const Header = () => {
         </div>
         
         <nav className="nav">
-          {/* Внутренние ссылки */}
-          {internalNavItems.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-            >
-              {item.label}
-            </NavLink>
-          ))}
-
-          {/* Внешняя ссылка на отдельный HTML‑сайт */}
-          {/* <a 
-            href="/generator.html" 
-            target="_blank" 
+          {navItems.map((item, idx) => {
+            if (item.type === 'external') {
+              return (
+                <a 
+                  key={idx}
+                  href={item.href}
+                  target={item.target || '_self'}
+                  rel="noopener noreferrer"
+                  className="nav-link"
+                >
+                  {item.label}
+                </a>
+              );
+            }
+            return (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              >
+                {item.label}
+              </NavLink>
+            );
+          })}
+          
+          <a 
+            href={helpLink.href}
+            target={helpLink.target}
             rel="noopener noreferrer"
             className="nav-link"
           >
-            Создание ситуаций
-          </a> */}
+            {helpLink.label}
+          </a>
         </nav>
 
         <div className="auth">
           {isLoggedIn ? (
             <>
               <span style={{ 
-                      marginRight: '15px', 
-                      color: '#555', 
-                      fontSize: '20px',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      fontWeight: 'bold'
-                    }}>
-                      <img 
-                        src="/user.png" 
-                        alt="avatar" 
-                        style={{ 
-                          width: '50px', 
-                          borderRadius: '50%',
-                          objectFit: 'cover'
-                        }} 
-      /> {user?.login || 'Пользователь'}
+                marginRight: '15px', 
+                color: '#555', 
+                fontSize: '20px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontWeight: 'bold'
+              }}>
+                <img 
+                  src="/user.png" 
+                  alt="avatar" 
+                  style={{ 
+                    width: '50px', 
+                    borderRadius: '50%',
+                    objectFit: 'cover'
+                  }} 
+                /> 
+                {user?.login || 'Пользователь'}
               </span>
               <Button variant="outline" onClick={handleLogout}>
                 <i className="fas fa-sign-out-alt"></i> Выйти

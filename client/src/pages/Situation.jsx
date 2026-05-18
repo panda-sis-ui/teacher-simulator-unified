@@ -26,13 +26,13 @@ const Situation = () => {
   const [result, setResult] = useState(null);
 
   const metricNames = {
-  motivation: 'Мотивация',
-  stress: 'Стресс',
-  trust: 'Доверие',
-  classClimate: 'Климат в классе',
-  teacherAuthority: 'Авторитет учителя',
-  teacherBurnout: 'Выгорание учителя'
-};
+    motivation: 'Мотивация',
+    stress: 'Стресс',
+    trust: 'Доверие',
+    classClimate: 'Климат в классе',
+    teacherAuthority: 'Авторитет учителя',
+    teacherBurnout: 'Выгорание учителя'
+  };
 
   // Прокрутка к началу
   const scrollToTop = () => {
@@ -74,7 +74,7 @@ const Situation = () => {
 
       } catch (err) {
         console.error('❌ Ошибка загрузки:', err);
-        
+
         if (err.message.includes('авториз')) {
           navigate('/login', { state: { from: { pathname: `/situation/${sitId}` } } });
         } else {
@@ -88,6 +88,7 @@ const Situation = () => {
     if (sitId) {
       loadData();
     }
+
   }, [sitId, nodeId]);
 
   // Прокрутка при изменении узла
@@ -111,7 +112,7 @@ const Situation = () => {
 
       // Отправляем выбор на сервер
       const choiceData = await apiService.makeChoice(sitId, choice.id);
-      
+
       console.log('✅ Результат выбора:', choiceData);
 
       // Обновляем состояние
@@ -130,7 +131,7 @@ const Situation = () => {
 
     } catch (err) {
       console.error('❌ Ошибка выбора:', err);
-      
+
       if (err.message.includes('авториз')) {
         navigate('/login');
       } else {
@@ -232,6 +233,31 @@ const Situation = () => {
       </div>
     );
   }
+  const metricNormatives = {
+    motivation: { good: 0.7, medium: 0.4, reverse: false },
+    stress: { good: 0.4, medium: 0.7, reverse: true },
+    trust: { good: 0.6, medium: 0.4, reverse: false },
+    classClimate: { good: 0.7, medium: 0.5, reverse: false },
+    teacherAuthority: { good: 0.6, medium: 0.4, reverse: false },
+    teacherBurnout: { good: 0.3, medium: 0.6, reverse: true }
+  };
+
+  const getMetricColor = (key, value) => {
+    const norm = metricNormatives[key];
+    if (!norm) return '#f8d7da'; // fallback красный
+
+    if (norm.reverse) {
+      // чем меньше, тем лучше
+      if (value <= norm.good) return '#d4edda'; // зелёный
+      if (value <= norm.medium) return '#fff3cd'; // жёлтый
+      return '#f8d7da'; // красный
+    } else {
+      // чем больше, тем лучше
+      if (value >= norm.good) return '#d4edda';
+      if (value >= norm.medium) return '#fff3cd';
+      return '#f8d7da';
+    }
+  };
 
   return (
     <div className="situation-page">
@@ -366,9 +392,9 @@ const Situation = () => {
 
           {/* Отображение метрик */}
           {currentMetrics && !isFinished && (
-            <div className="metrics-panel" style={{ 
-              background: 'white', 
-              padding: '15px', 
+            <div className="metrics-panel" style={{
+              background: 'white',
+              padding: '15px',
               borderRadius: '8px',
               marginBottom: '20px',
               boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
@@ -377,38 +403,44 @@ const Situation = () => {
                 <i className="fas fa-chart-line"></i> Текущие метрики:
               </h4>
               <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-                {Object.entries(currentMetrics).map(([key, value]) => (
-                  <div key={key} style={{ 
-                    padding: '5px 10px', 
-                    background: value > 0.5 ? '#d4edda' : value < 0.4 ? '#f8d7da' : '#fff3cd',
-                    borderRadius: '4px',
-                    fontSize: '14px'
-                  }}>
-                    <strong>{metricNames[key] || key}:</strong> {typeof value === 'number' ? value.toFixed(1) : value}
-                  </div>
-                ))}
+                {Object.entries(currentMetrics).map(([key, value]) => {
+                  const color = getMetricColor(key, value);
+                  return (
+                    <div key={key} style={{
+                      padding: '5px 10px',
+                      background: color,
+                      borderRadius: '4px',
+                      fontSize: '14px'
+                    }}>
+                      <strong>{metricNames[key] || key}:</strong> {typeof value === 'number' ? value.toFixed(1) : value}
+                    </div>
+                  );
+                })}
+
               </div>
             </div>
           )}
 
           {/* Описание ситуации */}
-          <div className="situation-description" style={{ 
-            background: 'white', 
-            padding: '25px', 
+          <div className="situation-description" style={{
+            background: 'white',
+            padding: '25px',
             borderRadius: '12px',
             marginBottom: '30px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+            display: 'flex'
           }}>
             {currentNode.urlImage && (
-              <img 
-                src={currentNode.urlImage} 
+              <img
+                src={currentNode.urlImage}
                 alt="Иллюстрация ситуации"
-                style={{ 
-                  width: '100%', 
-                  maxHeight: '300px', 
+                style={{
+                  width: '100%',
+                  maxHeight: '300px',
                   objectFit: 'cover',
                   borderRadius: '8px',
-                  marginBottom: '20px'
+                  marginBottom: '20px',
+                  marginRight: '1%'
                 }}
                 onError={(e) => { e.target.style.display = 'none'; }}
               />
@@ -426,16 +458,16 @@ const Situation = () => {
               borderRadius: '12px',
               marginBottom: '30px',
               border: result.result === 'SUCCESS' ? '3px solid #28a745' :
-                     result.result === 'PARTIAL_SUCCESS' ? '3px solid #ffc107' : '3px solid #dc3545'
+                result.result === 'PARTIAL_SUCCESS' ? '3px solid #ffc107' : '3px solid #dc3545'
             }}>
-              <h2 style={{ 
-                color: result.result === 'SUCCESS' ? '#28a745' : 
-                       result.result === 'PARTIAL_SUCCESS' ? '#ffc107' : '#dc3545',
+              <h2 style={{
+                color: result.result === 'SUCCESS' ? '#28a745' :
+                  result.result === 'PARTIAL_SUCCESS' ? '#ffc107' : '#dc3545',
                 marginBottom: '20px'
               }}>
-                {result.result === 'SUCCESS' ? '✅ Успех!' : 
-                 result.result === 'PARTIAL_SUCCESS' ? '⚠️ Частичный успех' : 
-                 '❌ Неудача'}
+                {result.result === 'SUCCESS' ? '✅ Успех!' :
+                  result.result === 'PARTIAL_SUCCESS' ? '⚠️ Частичный успех' :
+                    '❌ Неудача'}
               </h2>
 
               <div style={{ marginBottom: '20px' }}>

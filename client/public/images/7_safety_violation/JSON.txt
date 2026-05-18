@@ -1,0 +1,530 @@
+{
+  "title": "Игнорирование техники безопасности в компьютерном классе",
+  "initialNode": "node_1",
+  "context": {
+    "subject": "Информатика",
+    "grade": "5",
+    "lessonPhase": "Самостоятельная работа с самопроверкой",
+    "format": "Очный",
+    "duration": 45,
+    "techEquipment": "ПК+Интернет"
+  },
+  "participants": [
+    {
+      "type": "Учитель",
+      "name": "Игорь Алексеевич",
+      "age": 35,
+      "experience": 9,
+      "emotionalIntelligence": "Средний",
+      "teachingStyle": "Демократический",
+      "professionalRole": "Предметник"
+    },
+    {
+      "type": "Ученик",
+      "name": "Максим Соколов",
+      "age": 14,
+      "motivation": 0.5,
+      "preparation": "Средний",
+      "socialStatus": "Предпочитаемые",
+      "techEquip": "ПК+Интернет",
+      "commStyle": "Активный"
+    }
+  ],
+  "problem": {
+    "type": "Организационные конфликты",
+    "source": "Внутренний",
+    "intensity": "Средняя",
+    "emotions": [
+      "Раздражение",
+      "Страх",
+      "Тревога"
+    ],
+    "description": "Во время самостоятельной работы несколько учеников демонстративно нарушают правила техники безопасности: едят за компьютерами, подключают неизвестные USB-устройства, бегают между рядами с проводами. На замечания учителя отвечают: «Ничего страшного не случится». Создаётся реальная угроза поломки дорогостоящего оборудования и травматизма.",
+    "startMetrics": {
+      "motivation": 0.5,
+      "stress": 0.5,
+      "trust": 0.5,
+      "classClimate": 0.4,
+      "teacherAuthority": 0.5,
+      "teacherBurnout": 0.3
+    }
+  },
+  "nodes": {
+    "node_1": {
+      "description": "Класс работает за компьютерами. Внезапно учитель замечает, что Максим ест бутерброд прямо над клавиатурой, рядом с ним Артём подключает флешку неизвестного происхождения, а у окна двое учеников бегают, путаясь в проводах. Игорь Алексеевич делает замечание, но слышит в ответ: «Да ладно, ничего же не случится!» Несколько учеников смеются, напряжение нарастает. Учитель понимает, что простым напоминанием правил не обойтись — нужно выбирать стратегию: либо жёстко пресечь, либо объяснять, либо найти творческий подход.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1.png?raw=true",
+      "choices": [
+        {
+          "id": "ch_1_1",
+          "description": "Жёсткое пресечение: немедленно остановить урок и применить санкции к нарушителям.",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 7,
+            "autonomy": 2,
+            "resources": [
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.3,
+            "stress": 0.3,
+            "trust": -0.3,
+            "classClimate": -0.2,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": 0.2
+          },
+          "next": "node_1_1"
+        },
+        {
+          "id": "ch_1_2",
+          "description": "Объяснение последствий: приостановить работу, рассказать о реальных рисках.",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 4,
+            "autonomy": 5,
+            "resources": [
+              "Образовательный",
+              "Информационный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.1,
+            "stress": -0.1,
+            "trust": 0.2,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": 0
+          },
+          "next": "node_1_2"
+        },
+        {
+          "id": "ch_1_3",
+          "description": "Практическое закрепление: превратить изучение техники безопасности в игру или квест.",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 5,
+            "autonomy": 7,
+            "resources": [
+              "Образовательный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.3,
+            "stress": -0.2,
+            "trust": 0.2,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": 0
+          },
+          "next": "node_1_3"
+        }
+      ]
+    },
+    "node_1_1": {
+      "description": "Учитель жёстко пресёк нарушение, потребовал прекратить и объявил, что будут санкции. Нарушители замерли, но в классе повисло напряжение. Теперь нужно выбрать конкретную форму наказания.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1_1.png?raw=true",
+      "choices": [
+        {
+          "id": "ch_1_1_1",
+          "description": "Удаление нарушителей из класса (отправить к директору).",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 8,
+            "autonomy": 1,
+            "resources": [
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.3,
+            "stress": 0.3,
+            "trust": -0.3,
+            "classClimate": -0.2,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": 0.2
+          },
+          "next": "out_1"
+        },
+        {
+          "id": "ch_1_1_2",
+          "description": "Снижение оценки за поведение (независимо от выполненной работы).",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 6,
+            "autonomy": 2,
+            "resources": [
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.4,
+            "stress": 0.2,
+            "trust": -0.4,
+            "classClimate": -0.3,
+            "teacherAuthority": -0.1,
+            "teacherBurnout": 0.3
+          },
+          "next": "out_2"
+        },
+        {
+          "id": "ch_1_1_3",
+          "description": "Публичное осуждение нарушителей с зачитыванием правил.",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Соперничество",
+            "risk": 7,
+            "autonomy": 1,
+            "resources": [
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": -0.2,
+            "stress": 0.4,
+            "trust": -0.3,
+            "classClimate": -0.3,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0.2
+          },
+          "next": "out_3"
+        }
+      ]
+    },
+    "node_1_2": {
+      "description": "Учитель приостановил работу и начал объяснять, почему правила техники безопасности важны, привёл примеры поломок и травм. Класс притих, некоторые задумались. Нужно выбрать формат обучения безопасности.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1_2.png?raw=true",
+      "choices": [
+        {
+          "id": "ch_1_2_1",
+          "description": "Демонстрация реальных случаев поломок (фото/видео).",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 3,
+            "autonomy": 4,
+            "resources": [
+              "Информационный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.1,
+            "stress": -0.1,
+            "trust": 0.2,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": 0
+          },
+          "next": "out_4"
+        },
+        {
+          "id": "ch_1_2_2",
+          "description": "Коллективное обсуждение правил: «Почему они существуют?»",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 2,
+            "autonomy": 6,
+            "resources": [
+              "Образовательный",
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.2,
+            "trust": 0.3,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": -0.1
+          },
+          "next": "out_5"
+        },
+        {
+          "id": "ch_1_2_3",
+          "description": "Назначение «ответственных за технику безопасности» из учеников.",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 4,
+            "autonomy": 5,
+            "resources": [
+              "Человеческий"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.2,
+            "stress": -0.1,
+            "trust": 0.2,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": -0.1
+          },
+          "next": "out_6"
+        }
+      ]
+    },
+    "node_1_3": {
+      "description": "Учитель решил не давить, а увлечь класс: предложил провести мини-квест по поиску опасных мест в кабинете. Ученики оживились, начали с интересом осматривать рабочее место. Но нужно выбрать способ интеграции техники безопасности в урок.",
+      "image": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/node_1_3.png?raw=true",
+      "choices": [
+        {
+          "id": "ch_1_3_1",
+          "description": "Квест по поиску нарушений в классе (игровой формат).",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 3,
+            "autonomy": 8,
+            "resources": [
+              "Образовательный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.3,
+            "stress": -0.2,
+            "trust": 0.2,
+            "classClimate": 0.2,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": 0
+          },
+          "next": "out_7"
+        },
+        {
+          "id": "ch_1_3_2",
+          "description": "Симуляция последствий в виртуальной среде (программа).",
+          "solution": {
+            "type": "СтратегическоеРешение",
+            "strategy": "Сотрудничество",
+            "risk": 4,
+            "autonomy": 6,
+            "resources": [
+              "Аппаратный",
+              "Информационный"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.3,
+            "stress": -0.3,
+            "trust": 0.2,
+            "classClimate": 0.1,
+            "teacherAuthority": 0.2,
+            "teacherBurnout": 0.1
+          },
+          "next": "out_8"
+        },
+        {
+          "id": "ch_1_3_3",
+          "description": "Подписание «договора о безопасности» (формализация).",
+          "solution": {
+            "type": "ТактическоеРешение",
+            "strategy": "Компромисс",
+            "risk": 5,
+            "autonomy": 4,
+            "resources": [
+              "Образовательный",
+              "Временной"
+            ]
+          },
+          "deltaMetrics": {
+            "motivation": 0.1,
+            "stress": -0.1,
+            "trust": 0.1,
+            "classClimate": 0,
+            "teacherAuthority": 0.1,
+            "teacherBurnout": 0
+          },
+          "next": "out_9"
+        }
+      ]
+    },
+    "out_1": {
+      "outcomeDescription": "Максима и Артёма отправляют к директору. Остальные работают в напряжённой тишине. Нарушения прекратились, но атмосфера стала холодной. Родители позже жалуются на «чрезмерную строгость». Учитель чувствует усталость от конфликта.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_1.png?raw=true",
+      "outcome": {
+        "type": "failure",
+        "description": "Максима и Артёма отправляют к директору. Остальные работают в напряжённой тишине. Нарушения прекратились, но атмосфера стала холодной. Родители позже жалуются на «чрезмерную строгость». Учитель чувствует усталость от конфликта.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.6,
+          "stressChange": 0.6,
+          "trustChange": -0.6,
+          "classClimateChange": -0.4,
+          "teacherAuthorityChange": 0.4,
+          "burnoutChange": 0.4
+        }
+      }
+    },
+    "out_2": {
+      "outcomeDescription": "Учитель объявляет, что все нарушители получат «2» за урок. Ученики воспринимают это как несправедливость, правила техники безопасности начинают ассоциироваться с наказанием, а не с заботой. Класс разделяется: одни злятся, другие боятся.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_2.png?raw=true",
+      "outcome": {
+        "type": "failure",
+        "description": "Учитель объявляет, что все нарушители получат «2» за урок. Ученики воспринимают это как несправедливость, правила техники безопасности начинают ассоциироваться с наказанием, а не с заботой. Класс разделяется: одни злятся, другие боятся.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.7,
+          "stressChange": 0.5,
+          "trustChange": -0.7,
+          "classClimateChange": -0.5,
+          "teacherAuthorityChange": 0.1,
+          "burnoutChange": 0.5
+        }
+      }
+    },
+    "out_3": {
+      "outcomeDescription": "Учитель зачитывает правила и указывает на конкретных нарушителей. Те чувствуют стыд, но затаивают обиду. Класс понимает серьёзность, но атмосфера становится тяжёлой. Часть учеников начинает скрывать свои действия.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_3.png?raw=true",
+      "outcome": {
+        "type": "partial",
+        "description": "Учитель зачитывает правила и указывает на конкретных нарушителей. Те чувствуют стыд, но затаивают обиду. Класс понимает серьёзность, но атмосфера становится тяжёлой. Часть учеников начинает скрывать свои действия.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": -0.5,
+          "stressChange": 0.7,
+          "trustChange": -0.6,
+          "classClimateChange": -0.5,
+          "teacherAuthorityChange": 0.3,
+          "burnoutChange": 0.4
+        }
+      }
+    },
+    "out_4": {
+      "outcomeDescription": "Показ фото сгоревшей техники и рассказ о травмах производят впечатление. Ученики осознают серьёзность рисков, но некоторые воспринимают это как «запугивание». Большинство задумываются, дисциплина улучшается.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_4.png?raw=true",
+      "outcome": {
+        "type": "success",
+        "description": "Показ фото сгоревшей техники и рассказ о травмах производят впечатление. Ученики осознают серьёзность рисков, но некоторые воспринимают это как «запугивание». Большинство задумываются, дисциплина улучшается.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.2,
+          "stressChange": -0.2,
+          "trustChange": 0.4,
+          "classClimateChange": 0.2,
+          "teacherAuthorityChange": 0.4,
+          "burnoutChange": 0
+        }
+      }
+    },
+    "out_5": {
+      "outcomeDescription": "Ученики сами формулируют риски, чувствуют причастность. Правила воспринимаются как логичные, а не навязанные. Класс становится более сплочённым, учитель выступает как наставник.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_5.png?raw=true",
+      "outcome": {
+        "type": "success",
+        "description": "Ученики сами формулируют риски, чувствуют причастность. Правила воспринимаются как логичные, а не навязанные. Класс становится более сплочённым, учитель выступает как наставник.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.3,
+          "stressChange": -0.3,
+          "trustChange": 0.5,
+          "classClimateChange": 0.3,
+          "teacherAuthorityChange": 0.3,
+          "burnoutChange": -0.1
+        }
+      }
+    },
+    "out_6": {
+      "outcomeDescription": "Ученики чувствуют доверие и ответственность. Дежурные следят за порядком, нарушения снижаются. Однако есть риск, что дежурные могут злоупотреблять полномочиями или игнорировать друзей.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_6.png?raw=true",
+      "outcome": {
+        "type": "success",
+        "description": "Ученики чувствуют доверие и ответственность. Дежурные следят за порядком, нарушения снижаются. Однако есть риск, что дежурные могут злоупотреблять полномочиями или игнорировать друзей.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.3,
+          "stressChange": -0.2,
+          "trustChange": 0.4,
+          "classClimateChange": 0.2,
+          "teacherAuthorityChange": 0.3,
+          "burnoutChange": -0.1
+        }
+      }
+    },
+    "out_7": {
+      "outcomeDescription": "Ученики с азартом ищут «опасные места», сами составляют инструкцию. Техника безопасности изучается через действие, запоминается лучше. Учитель выглядит креативным, класс увлечён.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_7.png?raw=true",
+      "outcome": {
+        "type": "success",
+        "description": "Ученики с азартом ищут «опасные места», сами составляют инструкцию. Техника безопасности изучается через действие, запоминается лучше. Учитель выглядит креативным, класс увлечён.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.6,
+          "stressChange": -0.4,
+          "trustChange": 0.4,
+          "classClimateChange": 0.4,
+          "teacherAuthorityChange": 0.4,
+          "burnoutChange": 0
+        }
+      }
+    },
+    "out_8": {
+      "outcomeDescription": "Ученики видят последствия нарушений в виртуальной среде без реального риска. Высокая наглядность и современный подход впечатляют. Требует технической подготовки, но результат стоит затрат.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_8.png?raw=true",
+      "outcome": {
+        "type": "success",
+        "description": "Ученики видят последствия нарушений в виртуальной среде без реального риска. Высокая наглядность и современный подход впечатляют. Требует технической подготовки, но результат стоит затрат.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.6,
+          "stressChange": -0.5,
+          "trustChange": 0.4,
+          "classClimateChange": 0.3,
+          "teacherAuthorityChange": 0.4,
+          "burnoutChange": 0.1
+        }
+      }
+    },
+    "out_9": {
+      "outcomeDescription": "Формализация ответственности: каждый ученик подписывает документ с правилами и последствиями. Ученики воспринимают серьёзнее, но часть считает это бюрократией. Нарушения снижаются, но внутреннего принятия нет.",
+      "outcomeImage": "https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/7_safety_violation/out_9.png?raw=true",
+      "outcome": {
+        "type": "partial",
+        "description": "Формализация ответственности: каждый ученик подписывает документ с правилами и последствиями. Ученики воспринимают серьёзнее, но часть считает это бюрократией. Нарушения снижаются, но внутреннего принятия нет.",
+        "longTerm": true,
+        "reversible": true,
+        "metrics": {
+          "motivationChange": 0.4,
+          "stressChange": -0.3,
+          "trustChange": 0.3,
+          "classClimateChange": 0.2,
+          "teacherAuthorityChange": 0.3,
+          "burnoutChange": 0
+        }
+      }
+    }
+  },
+  "solutionTypes": [
+    "ТактическоеРешение",
+    "СтратегическоеРешение"
+  ],
+  "responseStrategies": [
+    "Соперничество",
+    "Сотрудничество",
+    "Компромисс"
+  ],
+  "resources": [
+    "Человеческий",
+    "Образовательный",
+    "Информационный",
+    "Временной",
+    "Аппаратный"
+  ],
+  "typeConsequences": [
+    "Неудача",
+    "ЧастичныйУспех",
+    "Успех"
+  ]
+}

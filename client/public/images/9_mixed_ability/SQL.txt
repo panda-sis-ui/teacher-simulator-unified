@@ -1,0 +1,482 @@
+-- ====================================================================
+-- Загрузка сценария "Разный уровень подготовки при изучении Python"
+-- ====================================================================
+BEGIN;
+
+
+CREATE OR REPLACE FUNCTION get_or_create_id(
+    table_name text,
+    name_column text,
+    name_value text
+) RETURNS integer AS $$
+DECLARE
+    result_id integer;
+BEGIN
+    EXECUTE format('SELECT id FROM %I WHERE %I = $1', table_name, name_column) INTO result_id USING name_value;
+    IF result_id IS NULL THEN
+        EXECUTE format('INSERT INTO %I (%I) VALUES ($1) RETURNING id', table_name, name_column) INTO result_id USING name_value;
+    END IF;
+    RETURN result_id;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT get_or_create_id('lesson', 'name', 'Информатика');
+SELECT get_or_create_id('classroom', 'name', '8 класс');
+SELECT get_or_create_id('lesson_stage', 'name', 'Самостоятельная работа с самопроверкой');
+SELECT get_or_create_id('lesson_format', 'name', 'Очный');
+SELECT get_or_create_id('tech_equip', 'name', 'ПК+Интернет');
+SELECT get_or_create_id('type_problem', 'name', 'Мотивационные кризисы');
+SELECT get_or_create_id('source_problem', 'name', 'Внутренний');
+SELECT get_or_create_id('emotion', 'name', 'Апатия');
+SELECT get_or_create_id('emotion', 'name', 'Раздражение');
+SELECT get_or_create_id('solution_type', 'name', 'СтратегическоеРешение');
+SELECT get_or_create_id('solution_type', 'name', 'ТактическоеРешение');
+SELECT get_or_create_id('response_strategy', 'name', 'Сотрудничество');
+SELECT get_or_create_id('response_strategy', 'name', 'Избегание');
+SELECT get_or_create_id('response_strategy', 'name', 'Приспособление');
+SELECT get_or_create_id('response_strategy', 'name', 'Соперничество');
+SELECT get_or_create_id('resource', 'name', 'Человеческий');
+SELECT get_or_create_id('resource', 'name', 'Временной');
+SELECT get_or_create_id('resource', 'name', 'Образовательный');
+SELECT get_or_create_id('resource', 'name', 'Информационный');
+SELECT get_or_create_id('resource', 'name', 'Материальный');
+SELECT get_or_create_id('type_consequence', 'name', 'Неудача');
+SELECT get_or_create_id('type_consequence', 'name', 'Успех');
+SELECT get_or_create_id('type_consequence', 'name', 'ЧастичныйУспех');
+SELECT get_or_create_id('communication_style', 'name', 'Пассивный');
+SELECT get_or_create_id('communication_style', 'name', 'Активный');
+SELECT get_or_create_id('communication_style', 'name', 'Конфликтный');
+SELECT get_or_create_id('communication_style', 'name', 'Коммуникабельный');
+SELECT get_or_create_id('social_status', 'name', 'Принятые');
+SELECT get_or_create_id('social_status', 'name', 'Предпочитаемые');
+SELECT get_or_create_id('social_status', 'name', 'Изолированные');
+SELECT get_or_create_id('social_status', 'name', 'Пренебрегаемые');
+SELECT get_or_create_id('pedagogical_style', 'name', 'Авторитарный');
+SELECT get_or_create_id('pedagogical_style', 'name', 'Демократический');
+SELECT get_or_create_id('pedagogical_style', 'name', 'Либеральный');
+SELECT get_or_create_id('professional_role', 'name', 'Предметник');
+SELECT get_or_create_id('professional_role', 'name', 'Классный руководитель');
+SELECT get_or_create_id('professional_role', 'name', 'Методист');
+SELECT get_or_create_id('emotion_intelligence', 'name', 'Низкий');
+SELECT get_or_create_id('emotion_intelligence', 'name', 'Средний');
+SELECT get_or_create_id('emotion_intelligence', 'name', 'Высокий');
+
+
+-- --------------------------------------------------------------------
+-- Контекст ситуации
+-- --------------------------------------------------------------------
+WITH ctx AS (
+    SELECT
+        (SELECT id FROM lesson WHERE name = 'Информатика') AS lesson_id,
+        (SELECT id FROM classroom WHERE name = '8 класс') AS classroom_id,
+        (SELECT id FROM lesson_stage WHERE name = 'Самостоятельная работа с самопроверкой') AS lesson_stage_id,
+        (SELECT id FROM lesson_format WHERE name = 'Очный') AS lesson_format_id,
+        (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет') AS tech_equip_id,
+        45 AS duration
+)
+INSERT INTO context (lesson_id, classroom_id, lesson_stage_id, lesson_format_id, tech_equip_id, duration)
+SELECT lesson_id, classroom_id, lesson_stage_id, lesson_format_id, tech_equip_id, duration
+FROM ctx
+WHERE NOT EXISTS (
+    SELECT 1 FROM context c
+    WHERE c.lesson_id = ctx.lesson_id
+      AND c.classroom_id = ctx.classroom_id
+      AND c.lesson_stage_id = ctx.lesson_stage_id
+      AND c.lesson_format_id = ctx.lesson_format_id
+      AND (c.tech_equip_id = ctx.tech_equip_id OR (c.tech_equip_id IS NULL AND ctx.tech_equip_id IS NULL))
+      AND c.duration = ctx.duration
+);
+
+
+INSERT INTO participant (full_name, age) VALUES ('Анна Сергеевна', 35)
+ON CONFLICT (full_name) WHERE age IS NULL DO NOTHING;
+
+INSERT INTO teacher (participant_id, emotion_intell_id, style_id, prof_role_id, experience)
+SELECT
+    p.id,
+    (SELECT id FROM emotion_intelligence WHERE name = 'Средний'),
+    (SELECT id FROM pedagogical_style WHERE name = 'Демократический'),
+    (SELECT id FROM professional_role WHERE name = 'Предметник'),
+    8
+FROM participant p
+WHERE p.full_name = 'Анна Сергеевна'
+ON CONFLICT (participant_id) DO NOTHING;
+
+INSERT INTO participant (full_name, age) VALUES ('Андрей', 14)
+ON CONFLICT (full_name) WHERE age IS NULL DO NOTHING;
+
+INSERT INTO student (participant_id, tech_equip_id, comm_style_id, social_status_id, motivation, preparation)
+SELECT
+    p.id,
+    (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет'),
+    (SELECT id FROM communication_style WHERE name = 'Активный'),
+    (SELECT id FROM social_status WHERE name = 'Звёзды'),
+    0.8,
+    0.9
+FROM participant p
+WHERE p.full_name = 'Андрей'
+ON CONFLICT (participant_id) DO NOTHING;
+
+INSERT INTO participant (full_name, age) VALUES ('Дмитрий', 14)
+ON CONFLICT (full_name) WHERE age IS NULL DO NOTHING;
+
+INSERT INTO student (participant_id, tech_equip_id, comm_style_id, social_status_id, motivation, preparation)
+SELECT
+    p.id,
+    (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет'),
+    (SELECT id FROM communication_style WHERE name = 'Пассивный'),
+    (SELECT id FROM social_status WHERE name = 'Принятые'),
+    0.3,
+    0.3
+FROM participant p
+WHERE p.full_name = 'Дмитрий'
+ON CONFLICT (participant_id) DO NOTHING;
+
+
+-- --------------------------------------------------------------------
+-- Проблема (сохраняем id во временную таблицу)
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE problem_ids (id int);
+
+-- Ищем существующую проблему
+INSERT INTO problem_ids
+SELECT id FROM problem
+WHERE type_problem_id = (SELECT id FROM type_problem WHERE name = 'Мотивационные кризисы')
+  AND source_problem_id = (SELECT id FROM source_problem WHERE name = 'Внутренний')
+  AND description = 'На уроке информатики при изучении основ Python часть учеников быстро справляется с заданиями и начинает отвлекаться, а другая часть испытывает трудности с базовыми понятиями (циклы, условия). Это снижает мотивацию и у сильных (скучно), и у слабых (не успевают), а также ведёт к нарушению дисциплины.'
+LIMIT 1;
+
+-- Если не нашли, создаём новую
+WITH new_problem AS (
+    INSERT INTO problem (
+        type_problem_id,
+        source_problem_id,
+        intensity,
+        tension_factor,
+        description,
+        start_motivation,
+        start_stress,
+        start_trust,
+        start_class_climate,
+        start_teacher_authority,
+        start_teacher_burnout
+    )
+    SELECT
+        (SELECT id FROM type_problem WHERE name = 'Мотивационные кризисы'),
+        (SELECT id FROM source_problem WHERE name = 'Внутренний'),
+        0.6,
+        NULL,
+        'На уроке информатики при изучении основ Python часть учеников быстро справляется с заданиями и начинает отвлекаться, а другая часть испытывает трудности с базовыми понятиями (циклы, условия). Это снижает мотивацию и у сильных (скучно), и у слабых (не успевают), а также ведёт к нарушению дисциплины.',
+        0.5,
+        0.4,
+        0.6,
+        0.5,
+        0.6,
+        0.2
+    WHERE NOT EXISTS (SELECT 1 FROM problem_ids)
+    RETURNING id
+)
+INSERT INTO problem_ids SELECT id FROM new_problem;
+
+-- Эмоции проблемы
+INSERT INTO problem_emotions (emotion_id, problem_id)
+SELECT e.id, (SELECT id FROM problem_ids)
+FROM emotion e
+WHERE e.name IN ('Апатия', 'Раздражение')
+  AND NOT EXISTS (
+      SELECT 1 FROM problem_emotions pe
+      WHERE pe.emotion_id = e.id AND pe.problem_id = (SELECT id FROM problem_ids)
+  );
+
+
+-- --------------------------------------------------------------------
+-- Узлы сценария
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE tmp_nodes (
+    node_id text PRIMARY KEY,
+    description text,
+    image text,
+    is_terminal boolean
+);
+
+INSERT INTO tmp_nodes (node_id, description, image, is_terminal) VALUES
+('node_1', 'Учитель информатики Анна Сергеевна даёт классу задание на отработку циклов for и while в Python. Андрей и ещё несколько сильных учеников решают задачи за 5 минут и начинают отвлекаться: листают соцсети, переговариваются. Дмитрий и другие слабые ученики путаются в синтаксисе, не понимают, как организовать итерацию, и просто сидят, уставившись в экран. Анна Сергеевна видит, что темп урока не подходит ни тем, ни другим. Если она пойдёт быстрее — слабые потеряются, если медленнее — сильные устроят хаос.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_1.png?raw=true', false),
+('node_2', 'Анна Сергеевна получает согласие завуча на деление класса на подгруппы. Теперь ей нужно выбрать, как именно организовать группы: закрепить учеников по фиксированным уровням (сильные/средние/слабые) или сделать гибкие группы, которые меняются в зависимости от темы.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_2.png?raw=true', false),
+('node_3', 'Анна Сергеевна решает давать каждому ученику задания разного уровня сложности. Теперь нужно выбрать формат: постепенное усложнение для всех с одной стартовой точки или предоставление выбора заданий по интересам (квесты, математические задачи, игры).', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_3.png?raw=true', false),
+('node_4', 'Анна Сергеевна решает заменить рутинные задания проектом, чтобы показать практическую пользу программирования. Нужно выбрать формат: командные проекты с распределением ролей или индивидуальные проекты с публичной защитой.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_4.png?raw=true', false),
+('node_5', 'Анна Сергеевна решает ничего не менять и вести урок в среднем темпе. Но нужно выбрать конкретную линию поведения: ориентироваться на среднего ученика или вообще отказаться от помощи слабым «ради успеваемости класса».', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_5.png?raw=true', false),
+('node_6', 'Анна Сергеевна считает, что ученики сами должны решать свои проблемы. Осталось выбрать конкретную форму: просто сказать «разбирайтесь сами» или назначить сильных кураторами без контроля.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_6.png?raw=true', false),
+('node_7', 'Анна Сергеевна решает действовать жёстко, чтобы «дожать» учеников. Нужно выбрать, как именно: публичное сравнение или штрафные задания за медлительность.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/node_7.png?raw=true', false),
+('out_1', 'Сильные ученики получают углублённые задания и работают с интересом, слабые — базовые задачи с поддержкой учителя. Однако средние ученики могут заскучать, а слабые иногда чувствуют себя «отстающими». В целом успеваемость растёт, дисциплина улучшается, но требуется периодическая ротация.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_1.png?raw=true', true),
+('out_2', 'Ученики могут переходить между группами в зависимости от темы, что повышает вовлечённость и снижает чувство несправедливости. Однако требует от учителя больших временных затрат на организацию и мониторинг. Некоторые ученики испытывают стресс из-за постоянной оценки.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_2.png?raw=true', true),
+('out_3', 'Все начинают с одного уровня, сильные быстро переходят к сложным задачам, слабые не чувствуют давления. Но некоторые ученики застревают на базовых заданиях, не успевая за темпом, а сильные могут потерять интерес, если задачи слишком простые.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_3.png?raw=true', true),
+('out_4', 'Ученики с удовольствием выбирают задания, связанные с их хобби (игры, квесты). Мотивация резко растёт. Однако учитель тратит много времени на подготовку разнообразных материалов, а некоторые ученики выбирают только «удобные» задания, избегая развития слабых навыков.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_4.png?raw=true', true),
+('out_5', 'Ученики учатся сотрудничать, слабые выполняют простые задачи, сильные — сложные. Но возникают конфликты из-за неравномерного распределения обязанностей, некоторые сильные ученики перегружены, а слабые могут отсиживаться.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_5.png?raw=true', true),
+('out_6', 'Ученики демонстрируют креативность, сильные создают амбициозные проекты, вдохновляя других. Слабые тратят много времени на простые проекты, но чувствуют ответственность. Учитель сильно загружен проверкой, но удовлетворён результатом.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_6.png?raw=true', true),
+('out_7', 'Сильные ученики теряют интерес, начинают мешать другим, а слабые не успевают за темпом, накапливая пробелы. Учитель тратит время на повторение базовых понятий, что вызывает раздражение у сильных. Атмосфера в классе ухудшается.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_7.png?raw=true', true),
+('out_8', 'Слабые ученики окончательно теряют мотивацию, перестают даже пытаться. Сильные, не получая вызова, тоже снижают качество. Родители слабых жалуются администрации, учитель получает выговор. Класс раскалывается на «успешных» и «безнадёжных».', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_8.png?raw=true', true),
+('out_9', 'Ученики чувствуют себя брошенными, дисциплина падает. Слабые перестают пытаться, сильные начинают доминировать, подавляя остальных. Учитель теряет авторитет, класс погружается в хаос.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_9.png?raw=true', true),
+('out_10', 'Сильные ученики злоупотребляют ролью, подсказывая готовые решения вместо объяснений. Слабые начинают списывать, а сильные тратят время на помощь, не успевая за своими заданиями. В итоге не развивается никто, возникают конфликты.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_10.png?raw=true', true),
+('out_11', 'Слабые ученики испытывают стыд и стресс, сильные — давление из-за завышенных ожиданий. Возникает агрессия между учениками, класс раскалывается на «любимчиков» и «изгоев». Родители жалуются на травлю, учитель получает выговор.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_11.png?raw=true', true),
+('out_12', 'Слабые ученики перегружены, теряют интерес к предмету. Сильные начинают нарочно затягивать выполнение, чтобы не получать дополнительных заданий. Ученики скрывают ошибки, учитель не видит реальной картины знаний.', 'https://github.com/panda-sis-ui/teacher-simulator-unified/blob/test/client/public/images/9_mixed_ability/out_12.png?raw=true', true);
+
+INSERT INTO script_node (description, url_image, is_terminal)
+SELECT description, image, is_terminal FROM tmp_nodes
+ON CONFLICT (description) DO NOTHING;
+
+CREATE TEMP TABLE node_ids AS
+SELECT n.node_id, sn.id
+FROM tmp_nodes n
+JOIN script_node sn ON sn.description = n.description;
+
+
+-- --------------------------------------------------------------------
+-- Выборы, решения, ресурсы
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE tmp_choices (
+    from_node text,
+    next_node text,
+    description text,
+    delta_motivation double precision,
+    delta_stress double precision,
+    delta_trust double precision,
+    delta_class_climate double precision,
+    delta_teacher_authority double precision,
+    delta_teacher_burnout double precision,
+    sol_type text,
+    sol_strategy text,
+    sol_risk int,
+    sol_autonomy int,
+    resources text[]
+);
+
+INSERT INTO tmp_choices VALUES
+('node_1', 'node_2', 'Разделить класс на фиксированные или гибкие группы по уровню подготовки', 0.1, -0.1, 0.1, 0.1, 0.1, 0, 'СтратегическоеРешение', 'Сотрудничество', 4, 6, ARRAY['Человеческий','Временной']),
+('node_1', 'node_3', 'Дать каждому ученику задание под его уровень, от базового к продвинутому', 0.2, -0.2, 0.1, 0.1, 0.1, 0.1, 'СтратегическоеРешение', 'Сотрудничество', 5, 7, ARRAY['Образовательный','Временной']),
+('node_1', 'node_4', 'Организовать командные или индивидуальные проекты с разными ролями', 0.2, -0.1, 0.1, 0.2, 0.1, 0, 'СтратегическоеРешение', 'Сотрудничество', 6, 8, ARRAY['Образовательный','Человеческий','Информационный']),
+('node_1', 'node_5', 'Вести урок «для среднего ученика», не меняя подход', -0.2, 0.2, -0.2, -0.2, -0.1, 0.1, 'ТактическоеРешение', 'Избегание', 8, 2, ARRAY['Временной']),
+('node_1', 'node_6', 'Назначить сильных учеников «кураторами» слабых без контроля или сказать «разбирайтесь сами»', -0.1, 0.1, -0.2, -0.1, -0.2, -0.1, 'ТактическоеРешение', 'Приспособление', 7, 9, ARRAY['Человеческий']),
+('node_1', 'node_7', 'Публично сравнивать учеников, применять штрафные задания', -0.3, 0.4, -0.4, -0.3, -0.2, 0.3, 'ТактическоеРешение', 'Соперничество', 9, 1, ARRAY['Материальный']),
+('node_2', 'out_1', 'Фиксированные группы (сильные/средние/слабые) на весь модуль', 0.1, -0.1, 0.1, 0.1, 0, 0.1, 'СтратегическоеРешение', 'Сотрудничество', 5, 4, ARRAY['Образовательный','Человеческий']),
+('node_2', 'out_2', 'Гибкие группы (переход между группами по темам)', 0.2, -0.2, 0.2, 0.2, 0.1, 0.2, 'СтратегическоеРешение', 'Сотрудничество', 6, 7, ARRAY['Информационный','Временной']),
+('node_3', 'out_3', 'Задания с постепенным усложнением (от базового к продвинутому)', 0.1, -0.2, 0.1, 0.1, 0.1, 0.1, 'СтратегическоеРешение', 'Сотрудничество', 4, 5, ARRAY['Образовательный']),
+('node_3', 'out_4', 'Выбор заданий по интересам (квесты, математические задачи, игры)', 0.2, -0.2, 0.2, 0.2, 0.1, 0.2, 'СтратегическоеРешение', 'Сотрудничество', 5, 8, ARRAY['Информационный','Временной']),
+('node_4', 'out_5', 'Командные проекты с разными ролями (программист, дизайнер, тестировщик)', 0.2, -0.1, 0.1, 0.2, 0.1, 0.1, 'СтратегическоеРешение', 'Сотрудничество', 6, 7, ARRAY['Образовательный','Человеческий']),
+('node_4', 'out_6', 'Индивидуальные проекты с защитой', 0.3, -0.2, 0.2, 0.1, 0.2, 0.3, 'СтратегическоеРешение', 'Сотрудничество', 7, 9, ARRAY['Информационный','Временной']),
+('node_5', 'out_7', 'Ведение урока «для среднего ученика» без дифференциации', -0.2, 0.2, -0.2, -0.2, -0.1, 0.1, 'ТактическоеРешение', 'Избегание', 7, 2, ARRAY['Временной']),
+('node_5', 'out_8', 'Отказ от помощи слабым ученикам «ради успеваемости класса»', -0.4, 0.3, -0.4, -0.3, -0.2, 0.2, 'ТактическоеРешение', 'Соперничество', 9, 1, ARRAY['Временной']),
+('node_6', 'out_9', '«Самостоятельно разбирайтесь, у меня нет времени на каждого»', -0.3, 0.2, -0.3, -0.2, -0.3, -0.1, 'ТактическоеРешение', 'Избегание', 8, 10, ARRAY['Временной']),
+('node_6', 'out_10', 'Назначение сильных учеников «кураторами» слабых без контроля', -0.1, 0.1, -0.2, -0.1, -0.2, -0.1, 'ТактическоеРешение', 'Приспособление', 7, 8, ARRAY['Человеческий']),
+('node_7', 'out_11', 'Публичное сравнение учеников («Петя решил задачу за 5 минут, а вы?»)', -0.3, 0.4, -0.4, -0.3, -0.2, 0.3, 'ТактическоеРешение', 'Соперничество', 9, 1, ARRAY['Материальный']),
+('node_7', 'out_12', 'Штрафные задания за медлительность (дополнительные задачи)', -0.2, 0.3, -0.3, -0.2, -0.1, 0.2, 'ТактическоеРешение', 'Соперничество', 8, 1, ARRAY['Материальный']);
+
+CREATE TEMP TABLE tmp_solutions AS
+SELECT DISTINCT
+    sol_type, sol_strategy, sol_risk, sol_autonomy,
+    (SELECT id FROM solution_type WHERE name = sol_type) AS sol_type_id,
+    (SELECT id FROM response_strategy WHERE name = sol_strategy) AS resp_strat_id
+FROM tmp_choices;
+
+INSERT INTO solution (sol_type_id, resp_strat_id, risk, student_autonomy)
+SELECT sol_type_id, resp_strat_id, sol_risk, sol_autonomy
+FROM tmp_solutions
+ON CONFLICT (sol_type_id, resp_strat_id, risk, student_autonomy) DO NOTHING;
+
+CREATE TEMP TABLE solution_map AS
+SELECT
+    s.sol_type_id,
+    s.resp_strat_id,
+    s.risk,
+    s.student_autonomy,
+    s.id AS solution_id
+FROM solution s
+JOIN tmp_solutions ts ON ts.sol_type_id = s.sol_type_id
+                     AND ts.resp_strat_id = s.resp_strat_id
+                     AND ts.sol_risk = s.risk
+                     AND ts.sol_autonomy = s.student_autonomy;
+
+INSERT INTO solution_resource (resource_id, solution_id)
+SELECT DISTINCT r.id, sm.solution_id
+FROM tmp_choices tc
+CROSS JOIN UNNEST(tc.resources) AS res_name
+JOIN resource r ON r.name = res_name
+JOIN solution_map sm ON sm.sol_type_id = (SELECT id FROM solution_type WHERE name = tc.sol_type)
+                    AND sm.resp_strat_id = (SELECT id FROM response_strategy WHERE name = tc.sol_strategy)
+                    AND sm.risk = tc.sol_risk
+                    AND sm.student_autonomy = tc.sol_autonomy
+ON CONFLICT (resource_id, solution_id) DO NOTHING;
+
+
+-- --------------------------------------------------------------------
+-- Подготовка данных для последствий (outcome)
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE outcome_data AS
+SELECT
+    node_id,
+    type_name,
+    description,
+    long_term,
+    reversible
+FROM (VALUES
+('out_1', 'partial', 'Сильные ученики получают углублённые задания и работают с интересом, слабые — базовые задачи с поддержкой учителя. Однако средние ученики могут заскучать, а слабые иногда чувствуют себя «отстающими». В целом успеваемость растёт, дисциплина улучшается, но требуется периодическая ротация.', true, true),
+('out_2', 'success', 'Ученики могут переходить между группами в зависимости от темы, что повышает вовлечённость и снижает чувство несправедливости. Однако требует от учителя больших временных затрат на организацию и мониторинг. Некоторые ученики испытывают стресс из-за постоянной оценки.', true, true),
+('out_3', 'partial', 'Все начинают с одного уровня, сильные быстро переходят к сложным задачам, слабые не чувствуют давления. Но некоторые ученики застревают на базовых заданиях, не успевая за темпом, а сильные могут потерять интерес, если задачи слишком простые.', true, true),
+('out_4', 'success', 'Ученики с удовольствием выбирают задания, связанные с их хобби (игры, квесты). Мотивация резко растёт. Однако учитель тратит много времени на подготовку разнообразных материалов, а некоторые ученики выбирают только «удобные» задания, избегая развития слабых навыков.', true, true),
+('out_5', 'partial', 'Ученики учатся сотрудничать, слабые выполняют простые задачи, сильные — сложные. Но возникают конфликты из-за неравномерного распределения обязанностей, некоторые сильные ученики перегружены, а слабые могут отсиживаться.', true, true),
+('out_6', 'success', 'Ученики демонстрируют креативность, сильные создают амбициозные проекты, вдохновляя других. Слабые тратят много времени на простые проекты, но чувствуют ответственность. Учитель сильно загружен проверкой, но удовлетворён результатом.', true, true),
+('out_7', 'failure', 'Сильные ученики теряют интерес, начинают мешать другим, а слабые не успевают за темпом, накапливая пробелы. Учитель тратит время на повторение базовых понятий, что вызывает раздражение у сильных. Атмосфера в классе ухудшается.', true, true),
+('out_8', 'failure', 'Слабые ученики окончательно теряют мотивацию, перестают даже пытаться. Сильные, не получая вызова, тоже снижают качество. Родители слабых жалуются администрации, учитель получает выговор. Класс раскалывается на «успешных» и «безнадёжных».', true, true),
+('out_9', 'failure', 'Ученики чувствуют себя брошенными, дисциплина падает. Слабые перестают пытаться, сильные начинают доминировать, подавляя остальных. Учитель теряет авторитет, класс погружается в хаос.', true, true),
+('out_10', 'failure', 'Сильные ученики злоупотребляют ролью, подсказывая готовые решения вместо объяснений. Слабые начинают списывать, а сильные тратят время на помощь, не успевая за своими заданиями. В итоге не развивается никто, возникают конфликты.', true, true),
+('out_11', 'failure', 'Слабые ученики испытывают стыд и стресс, сильные — давление из-за завышенных ожиданий. Возникает агрессия между учениками, класс раскалывается на «любимчиков» и «изгоев». Родители жалуются на травлю, учитель получает выговор.', true, true),
+('out_12', 'failure', 'Слабые ученики перегружены, теряют интерес к предмету. Сильные начинают нарочно затягивать выполнение, чтобы не получать дополнительных заданий. Ученики скрывают ошибки, учитель не видит реальной картины знаний.', true, true)
+) AS t(node_id, type_name, description, long_term, reversible);
+
+
+-- --------------------------------------------------------------------
+-- Вставка выборов (choice)
+-- --------------------------------------------------------------------
+INSERT INTO choice (
+    solution_id,
+    from_script_node_id,
+    next_script_node_id,
+    description,
+    delta_motivation,
+    delta_stress,
+    delta_trust,
+    delta_class_climate,
+    delta_teacher_authority,
+    delta_teacher_burnout,
+    consequence_text,
+    type_consequence_id
+)
+SELECT
+    sm.solution_id,
+    n_from.id,
+    n_to.id,
+    tc.description,
+    tc.delta_motivation,
+    tc.delta_stress,
+    tc.delta_trust,
+    tc.delta_class_climate,
+    tc.delta_teacher_authority,
+    tc.delta_teacher_burnout,
+    od.description,
+    tc2.id
+FROM tmp_choices tc
+JOIN node_ids n_from ON n_from.node_id = tc.from_node
+JOIN node_ids n_to ON n_to.node_id = tc.next_node
+JOIN solution_map sm ON sm.sol_type_id = (SELECT id FROM solution_type WHERE name = tc.sol_type)
+                     AND sm.resp_strat_id = (SELECT id FROM response_strategy WHERE name = tc.sol_strategy)
+                     AND sm.risk = tc.sol_risk
+                     AND sm.student_autonomy = tc.sol_autonomy
+LEFT JOIN outcome_data od ON od.node_id = tc.next_node
+LEFT JOIN type_consequence tc2 ON tc2.name = CASE
+    WHEN od.type_name = 'failure' THEN 'Неудача'
+    WHEN od.type_name = 'success' THEN 'Успех'
+    WHEN od.type_name = 'partial' THEN 'ЧастичныйУспех'
+END
+WHERE NOT EXISTS (
+    SELECT 1 FROM choice c
+    WHERE c.solution_id = sm.solution_id
+      AND c.from_script_node_id = n_from.id
+      AND c.next_script_node_id = n_to.id
+      AND c.description = tc.description
+);
+
+
+-- --------------------------------------------------------------------
+-- Метрики и последствия (consequence)
+-- --------------------------------------------------------------------
+CREATE TEMP TABLE outcome_metrics AS
+SELECT * FROM (VALUES
+('out_1', 0.1, -0.2, 0.1, 0.1, 0.1, 0.1),
+    ('out_2', 0.2, -0.3, 0.2, 0.2, 0.2, 0.2),
+    ('out_3', 0.1, -0.2, 0.1, 0.1, 0.1, 0.1),
+    ('out_4', 0.2, -0.2, 0.2, 0.2, 0.1, 0.2),
+    ('out_5', 0.2, -0.1, 0.1, 0.2, 0.1, 0.1),
+    ('out_6', 0.3, -0.2, 0.2, 0.1, 0.2, 0.3),
+    ('out_7', -0.2, 0.2, -0.2, -0.2, -0.1, 0.1),
+    ('out_8', -0.4, 0.3, -0.4, -0.3, -0.2, 0.2),
+    ('out_9', -0.3, 0.2, -0.3, -0.2, -0.3, -0.1),
+    ('out_10', -0.1, 0.1, -0.2, -0.1, -0.2, -0.1),
+    ('out_11', -0.3, 0.4, -0.4, -0.3, -0.2, 0.3),
+    ('out_12', -0.2, 0.3, -0.3, -0.2, -0.1, 0.2)
+) AS t(node_id, motivation, stress, trust, class_climate, teacher_authority, teacher_burnout);
+
+INSERT INTO change_metrics (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout)
+SELECT motivation, stress, trust, class_climate, teacher_authority, teacher_burnout
+FROM outcome_metrics
+ON CONFLICT (motivation, stress, trust, class_climate, teacher_authority, teacher_burnout) DO NOTHING;
+
+WITH inserted_metrics AS (
+    SELECT om.node_id, cm.id AS change_metrics_id
+    FROM outcome_metrics om
+    JOIN change_metrics cm ON cm.motivation = om.motivation
+                          AND cm.stress = om.stress
+                          AND cm.trust = om.trust
+                          AND cm.class_climate = om.class_climate
+                          AND cm.teacher_authority = om.teacher_authority
+                          AND cm.teacher_burnout = om.teacher_burnout
+)
+INSERT INTO consequence (change_metrics_id, type_conseq_id, text, long_term, reversible, intensity)
+SELECT
+    im.change_metrics_id,
+    tc.id,
+    od.description,
+    od.long_term,
+    od.reversible,
+    0.5
+FROM inserted_metrics im
+JOIN outcome_data od ON od.node_id = im.node_id
+JOIN type_consequence tc ON tc.name = CASE od.type_name
+    WHEN 'failure' THEN 'Неудача'
+    WHEN 'success' THEN 'Успех'
+    WHEN 'partial' THEN 'ЧастичныйУспех'
+END
+ON CONFLICT (change_metrics_id, type_conseq_id, text) DO NOTHING;
+
+
+-- --------------------------------------------------------------------
+-- Ситуация
+-- --------------------------------------------------------------------
+INSERT INTO situation (
+    context_id,
+    problem_id,
+    script_node_id,
+    name
+)
+VALUES (
+    (SELECT id FROM context
+     WHERE lesson_id = (SELECT id FROM lesson WHERE name = 'Информатика')
+       AND classroom_id = (SELECT id FROM classroom WHERE name = '8 класс')
+       AND lesson_stage_id = (SELECT id FROM lesson_stage WHERE name = 'Самостоятельная работа с самопроверкой')
+       AND lesson_format_id = (SELECT id FROM lesson_format WHERE name = 'Очный')
+       AND tech_equip_id = (SELECT id FROM tech_equip WHERE name = 'ПК+Интернет')
+       AND duration = 45),
+    (SELECT id FROM problem_ids),
+    (SELECT id FROM node_ids WHERE node_id = 'node_1'),
+    'Разный уровень подготовки при изучении Python'
+)
+ON CONFLICT (script_node_id) DO NOTHING;
+
+-- --------------------------------------------------------------------
+-- Участники ситуации
+-- --------------------------------------------------------------------
+WITH sit AS (
+    SELECT id FROM situation WHERE name = 'Разный уровень подготовки при изучении Python'
+)
+INSERT INTO situation_participants (situation_id, participant_id)
+SELECT sit.id, p.id
+FROM sit
+CROSS JOIN participant p
+WHERE p.full_name IN ('Анна Сергеевна', 'Андрей', 'Дмитрий')
+AND NOT EXISTS (
+    SELECT 1 FROM situation_participants sp
+    WHERE sp.situation_id = sit.id AND sp.participant_id = p.id
+);
+
+COMMIT;
+
+-- Очистка (опционально)
+DROP FUNCTION IF EXISTS get_or_create_id(text, text, text) CASCADE;
