@@ -8,6 +8,7 @@ import Button from '../Button/Button';
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [isMethodist, setIsMethodist] = useState(false);
 
   useEffect(() => {
     const checkAuth = () => {
@@ -15,6 +16,7 @@ const Header = () => {
       const currentUser = apiService.getCurrentUser();
       setIsLoggedIn(authenticated);
       setUser(currentUser);
+      setIsMethodist(currentUser?.role === 'ROLE_МЕТОДИСТ');
     };
 
     checkAuth();
@@ -35,6 +37,10 @@ const Header = () => {
   const baseNavItems = [
     { path: '/', label: 'Главная' },
     { path: '/catalog', label: 'Каталог ситуаций' },
+    ...(isMethodist ? [
+      { path: '/ontology', label: 'Онтология' },
+      { path: '/converter', label: 'Конвертер JSON' },
+    ] : []),
   ];
 
   // Дополнительные пункты только для методиста
