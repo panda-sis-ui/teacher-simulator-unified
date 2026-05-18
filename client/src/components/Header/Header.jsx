@@ -37,10 +37,10 @@ const Header = () => {
   const baseNavItems = [
     { path: '/', label: 'Главная' },
     { path: '/catalog', label: 'Каталог ситуаций' },
-    ...(isMethodist ? [
-      { path: '/ontology', label: 'Онтология' },
-      { path: '/converter', label: 'Конвертер JSON' },
-    ] : []),
+    // ...(isMethodist ? [
+    //   { path: '/ontology', label: 'Онтология' },
+    //   { path: '/converter', label: 'Конвертер JSON' },
+    // ] : []),
   ];
 
   // Дополнительные пункты только для методиста
