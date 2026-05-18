@@ -1,6 +1,7 @@
 package com.mmarkov.eduteach.service;
 
 import com.mmarkov.eduteach.dto.play.*;
+import com.mmarkov.eduteach.dto.situation.*;
 import com.mmarkov.eduteach.entity.metrics.ChangeMetrics;
 import com.mmarkov.eduteach.entity.script.Choice;
 import com.mmarkov.eduteach.entity.script.ScriptNode;
@@ -77,6 +78,9 @@ public class PlayService {
         return StartSessionResponse.builder()
                 .currentNode(mapToNodeDto(startNode))
                 .metrics(mapToMetricsDto(metrics))
+                .context(mapToContextDto(situation))
+                .problem(mapToProblemDto(situation))
+                .participants(mapToParticipantsDto(situation))
                 .build();
     }
 
@@ -283,5 +287,79 @@ public class PlayService {
                 .teacherAuthority(m.getTeacherAuthority())
                 .teacherBurnout(m.getTeacherBurnout())
                 .build();
+    }
+
+    private ContextDto mapToContextDto(Situation situation) {
+        var ctx = situation.getContext();
+        return ContextDto.builder()
+                .lesson(ctx.getLesson() != null ? ctx.getLesson().getName() : null)
+                .classroom(ctx.getClassroom() != null ? ctx.getClassroom().getName() : null)
+                .lessonStage(ctx.getLessonStage() != null ? ctx.getLessonStage().getName() : null)
+                .lessonFormat(ctx.getLessonFormat() != null ? ctx.getLessonFormat().getName() : null)
+                .techEquip(ctx.getTechEquip() != null ? ctx.getTechEquip().getName() : null)
+                .duration(ctx.getDuration())
+                .build();
+    }
+
+    private ProblemDto mapToProblemDto(Situation situation) {
+        var problem = situation.getProblem();
+        return ProblemDto.builder()
+                .typeProblem(problem.getTypeProblem() != null ? problem.getTypeProblem().getName() : null)
+                .sourceProblem(problem.getSourceProblem() != null ? problem.getSourceProblem().getName() : null)
+                .intensity(problem.getIntensity())
+                .description(problem.getDescription())
+                .emotions(problem.getEmotions() != null ? 
+                        problem.getEmotions().stream().map(e -> e.getName()).toList() : null)
+                .build();
+    }
+
+    private List<ParticipantDto> mapToParticipantsDto(Situation situation) {
+        return situation.getParticipants().stream()
+                .map(p -> {
+                    String type = p.getTeacher() != null ? "TEACHER" : "STUDENT";
+                    
+                    String pedagogicalStyle = null;
+                    String emotionIntelligence = null;
+                    String professionalRole = null;
+                    Integer experience = null;
+                    
+                    String communicationStyle = null;
+                    String socialStatus = null;
+                    String techEquip = null;
+                    Double motivation = null;
+                    Double preparation = null;
+                    
+                    if (p.getTeacher() != null) {
+                        var teacher = p.getTeacher();
+                        pedagogicalStyle = teacher.getPedagogicalStyle() != null ? teacher.getPedagogicalStyle().getName() : null;
+                        emotionIntelligence = teacher.getEmotionIntelligence() != null ? teacher.getEmotionIntelligence().getName() : null;
+                        professionalRole = teacher.getProfessionalRole() != null ? teacher.getProfessionalRole().getName() : null;
+                        experience = teacher.getExperience();
+                    } else if (p.getStudent() != null) {
+                        var student = p.getStudent();
+                        communicationStyle = student.getCommStyle() != null ? student.getCommStyle().getName() : null;
+                        socialStatus = student.getSocialStatus() != null ? student.getSocialStatus().getName() : null;
+                        techEquip = student.getTechEquip() != null ? student.getTechEquip().getName() : null;
+                        motivation = student.getMotivation();
+                        preparation = student.getPreparation();
+                    }
+                    
+                    return ParticipantDto.builder()
+                            .id(p.getId())
+                            .fullName(p.getFullName())
+                            .age(p.getAge())
+                            .type(type)
+                            .pedagogicalStyle(pedagogicalStyle)
+                            .emotionIntelligence(emotionIntelligence)
+                            .professionalRole(professionalRole)
+                            .experience(experience)
+                            .communicationStyle(communicationStyle)
+                            .socialStatus(socialStatus)
+                            .techEquip(techEquip)
+                            .motivation(motivation)
+                            .preparation(preparation)
+                            .build();
+                })
+                .toList();
     }
 }

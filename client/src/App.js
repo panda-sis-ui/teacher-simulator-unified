@@ -12,6 +12,9 @@ import Situation from './pages/Situation';
 import Register from './pages/Register';
 import Login from './pages/Login';
 
+// Импорт компонентов
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+
 function App() {
   return (
     <Router
@@ -24,8 +27,16 @@ function App() {
         {/* Основные маршруты */}
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
-        <Route path="/ontology" element={<Ontology />} />
-        <Route path="/converter" element={<Converter />} />
+        <Route path="/ontology" element={
+          <ProtectedRoute>
+            <Ontology />
+          </ProtectedRoute>
+        } />
+        <Route path="/converter" element={
+          <ProtectedRoute>
+            <Converter />
+          </ProtectedRoute>
+        } />
         <Route path="/generator" element={<Generator />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
