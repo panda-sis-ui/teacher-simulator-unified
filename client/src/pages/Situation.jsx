@@ -16,6 +16,9 @@ const Situation = () => {
   const [situation, setSituation] = useState(null);
   const [currentNode, setCurrentNode] = useState(null);
   const [currentMetrics, setCurrentMetrics] = useState(null);
+  const [context, setContext] = useState(null);
+  const [problem, setProblem] = useState(null);
+  const [participants, setParticipants] = useState([]);
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -60,6 +63,9 @@ const Situation = () => {
           const startData = await apiService.startSituation(sitId);
           setCurrentNode(startData.currentNode);
           setCurrentMetrics(startData.metrics);
+          setContext(startData.context);
+          setProblem(startData.problem);
+          setParticipants(startData.participants || []);
           setSituation(startData);
         }
 
@@ -258,6 +264,105 @@ const Situation = () => {
               <i className="fas fa-list"></i> К каталогу
             </button>
           </div>
+
+          {/* Информация о контексте ситуации */}
+          {context && (
+            <div style={{ 
+              background: 'white', 
+              padding: '15px', 
+              borderRadius: '8px',
+              marginBottom: '20px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+            }}>
+              <h4 style={{ margin: '0 0 10px 0', color: '#2c6e49' }}>
+                <i className="fas fa-info-circle"></i> Контекст урока
+              </h4>
+              <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', fontSize: '14px' }}>
+                <span><strong>Предмет:</strong> {context.lesson}</span>
+                <span><strong>Класс:</strong> {context.classroom}</span>
+                <span><strong>Этап:</strong> {context.lessonStage}</span>
+                <span><strong>Формат:</strong> {context.lessonFormat}</span>
+                {context.techEquip && <span><strong>Оборудование:</strong> {context.techEquip}</span>}
+                {context.duration && <span><strong>Длительность:</strong> {context.duration} мин</span>}
+              </div>
+            </div>
+          )}
+
+          {/* Информация о проблеме */}
+          {problem && (
+            <div style={{ 
+              background: 'white', 
+              padding: '15px', 
+              borderRadius: '8px',
+              marginBottom: '20px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+            }}>
+              <h4 style={{ margin: '0 0 10px 0', color: '#dc3545' }}>
+                <i className="fas fa-exclamation-triangle"></i> Описание проблемы
+              </h4>
+              <div style={{ fontSize: '14px' }}>
+                <p><strong>Тип:</strong> {problem.typeProblem} | <strong>Источник:</strong> {problem.sourceProblem} | <strong>Интенсивность:</strong> {problem.intensity}</p>
+                <p style={{ fontStyle: 'italic' }}>{problem.description}</p>
+                {problem.emotions && problem.emotions.length > 0 && (
+                  <p><strong>Эмоции:</strong> {problem.emotions.join(', ')}</p>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Информация об участниках */}
+          {participants.length > 0 && (
+            <div style={{ 
+              background: 'white', 
+              padding: '15px', 
+              borderRadius: '8px',
+              marginBottom: '20px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+            }}>
+              <h4 style={{ margin: '0 0 10px 0', color: '#007bff' }}>
+                <i className="fas fa-users"></i> Участники
+              </h4>
+              <div style={{ display: 'grid', gap: '10px', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
+                {participants.map((p) => (
+                  <div key={p.id} style={{ 
+                    background: p.type === 'TEACHER' ? '#e7f3ff' : '#fff3e0', 
+                    padding: '12px', 
+                    borderRadius: '6px',
+                    fontSize: '13px'
+                  }}>
+                    <strong>{p.fullName}</strong> ({p.age} лет) - <span style={{ 
+                      background: p.type === 'TEACHER' ? '#0066cc' : '#ff9800',
+                      color: 'white',
+                      padding: '2px 8px',
+                      borderRadius: '4px',
+                      fontSize: '11px'
+                    }}>{p.type === 'TEACHER' ? 'Учитель' : 'Ученик'}</span>
+                    
+                    {p.type === 'TEACHER' && (
+                      <div style={{ marginTop: '8px', fontSize: '12px' }}>
+                        {p.pedagogicalStyle && <span><strong>Стиль:</strong> {p.pedagogicalStyle} | </span>}
+                        {p.emotionIntelligence && <span><strong>ЭИ:</strong> {p.emotionIntelligence} | </span>}
+                        {p.professionalRole && <span><strong>Роль:</strong> {p.professionalRole} | </span>}
+                        {p.experience && <span><strong>Стаж:</strong> {p.experience} лет</span>}
+                      </div>
+                    )}
+                    
+                    {p.type === 'STUDENT' && (
+                      <div style={{ marginTop: '8px', fontSize: '12px' }}>
+                        {p.communicationStyle && <span><strong>Стиль общения:</strong> {p.communicationStyle} | </span>}
+                        {p.socialStatus && <span><strong>Статус:</strong> {p.socialStatus} | </span>}
+                        {p.techEquip && <span><strong>Оборудование:</strong> {p.techEquip}</span>}
+                        <div>
+                          {p.motivation !== null && <span><strong>Мотивация:</strong> {p.motivation} | </span>}
+                          {p.preparation !== null && <span><strong>Подготовка:</strong> {p.preparation}</span>}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Отображение метрик */}
           {currentMetrics && !isFinished && (
