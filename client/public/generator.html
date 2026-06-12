@@ -829,7 +829,7 @@
             background: white;
             padding: 25px;
             width: 80%;
-            max-width: 600px;
+            max-width: 80vh;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-md);
         }
@@ -839,6 +839,13 @@
             justify-content: flex-end;
             gap: 10px;
             margin-top: 20px;
+        }
+
+        #json-input-area {
+            height: 400px;
+            /* желаемая высота */
+            resize: vertical;
+            /* чтобы пользователь мог менять вручную */
         }
 
         #json-input-area:focus {
@@ -1549,8 +1556,8 @@
         const NODE_RADIUS = 30;
         const CHOICE_RADIUS = 10;
         let canvasScale = 1;
-let canvasOffsetX = 0;
-let canvasOffsetY = 0;
+        let canvasOffsetX = 0;
+        let canvasOffsetY = 0;
 
         // Инициализирует холст (canvas) для визуализации графа сценария
         function initCanvas() {
@@ -2174,38 +2181,78 @@ let canvasOffsetY = 0;
                 if (val !== undefined && val !== null) setValue(id, val);
             });
 
-            // 5. Узлы
+            // 5. Узлы – создаём все узлы с правильными ID
             if (data.nodes && typeof data.nodes === 'object' && nodesContainer) {
+                // Очищаем текущие узлы (оставляем только один пустой?)
+                while (nodesContainer.firstChild) nodesContainer.removeChild(nodesContainer.firstChild);
+
                 const nodeEntries = Object.entries(data.nodes);
-                const intermediateNodes = nodeEntries.filter(([id]) => !id.startsWith('out_'));
-                const outcomeNodes = nodeEntries.filter(([id]) => id.startsWith('out_'));
+                // Сначала создаём все узлы (и промежуточные, и финальные) с ID из JSON
+                for (const [nodeId, nodeData] of nodeEntries) {
+                    const isOutcome = nodeId.startsWith('out_');
+                    const template = document.getElementById('nodeTemplate');
+                    const clone = template.content.cloneNode(true);
+                    const nodeEl = clone.querySelector('.node-item');
 
-                let firstNode = true;
-                for (const [nodeId, nodeData] of intermediateNodes) {
-                    if (!firstNode) addNode(false);
-                    firstNode = false;
-                }
-                for (const [nodeId, nodeData] of outcomeNodes) {
-                    addNode(true);
+                    // Устанавливаем ID сразу
+                    nodeEl.dataset.nodeId = nodeId;
+                    const nodeIdInput = nodeEl.querySelector('.node-id-input');
+                    if (nodeIdInput) nodeIdInput.value = nodeId;
+
+                    // Настройка внешнего вида
+                    nodeEl.querySelector('.node-type-badge').textContent = isOutcome ? '🎯 Исход' : '🔄 Узел';
+                    nodeEl.querySelector('.node-type-badge').className = `node-type-badge badge ${isOutcome ? 'difficulty-easy' : 'difficulty-medium'}`;
+
+                    // Скрыть/показать секции в зависимости от типа узла
+                    const situationDescSection = nodeEl.querySelector('.situation-desc-section');
+                    const outcomeDescSection = nodeEl.querySelector('.outcome-desc-section');
+                    const choicesSection = nodeEl.querySelector('.choices-section');
+                    const outcomeSection = nodeEl.querySelector('.outcome-section');
+
+                    if (isOutcome) {
+                        if (situationDescSection) situationDescSection.style.display = 'none';
+                        if (outcomeDescSection) outcomeDescSection.style.display = 'block';
+                        if (choicesSection) choicesSection.style.display = 'none';
+                        if (outcomeSection) outcomeSection.style.display = 'block';
+                    } else {
+                        if (situationDescSection) situationDescSection.style.display = 'block';
+                        if (outcomeDescSection) outcomeDescSection.style.display = 'none';
+                        if (choicesSection) choicesSection.style.display = 'block';
+                        if (outcomeSection) outcomeSection.style.display = 'none';
+                        // Вешаем обработчик добавления выбора (только для обычных узлов)
+                        const addChoiceBtn = nodeEl.querySelector('.add-choice');
+                        if (addChoiceBtn) {
+                            addChoiceBtn.addEventListener('click', () => { addChoice(nodeEl); });
+                        }
+                    }
+
+                    // Кнопка удаления узла
+                    nodeEl.querySelector('.remove-node')?.addEventListener('click', () => {
+                        if (nodesContainer.children.length > 1) {
+                            nodeEl.remove();
+                            updateNodeSelects();
+                            drawCanvas();
+                        } else {
+                            showModal('⚠️ Внимание', 'Должен остаться хотя бы один узел');
+                        }
+                    });
+
+                    nodesContainer.appendChild(nodeEl);
                 }
 
+                // Обновляем выпадающие списки после добавления всех узлов
                 updateNodeSelects();
 
+                // Теперь заполняем данные каждого узла (описания, выборы, исходы)
                 const allNodeItems = document.querySelectorAll('.node-item');
-                let itemIndex = 0;
-                for (const [nodeId, nodeData] of intermediateNodes) {
-                    if (allNodeItems[itemIndex]) {
-                        fillNodeData(allNodeItems[itemIndex], nodeId, nodeData, false);
-                        itemIndex++;
-                    }
-                }
-                for (const [nodeId, nodeData] of outcomeNodes) {
-                    if (allNodeItems[itemIndex]) {
-                        fillNodeData(allNodeItems[itemIndex], nodeId, nodeData, true);
-                        itemIndex++;
+                for (const [nodeId, nodeData] of nodeEntries) {
+                    const nodeEl = Array.from(allNodeItems).find(el => el.dataset.nodeId === nodeId);
+                    if (nodeEl) {
+                        fillNodeData(nodeEl, nodeId, nodeData, nodeId.startsWith('out_'));
                     }
                 }
 
+                // Ещё раз обновляем выпадающие списки (на случай, если fillNodeData добавила новые выборы)
                 updateNodeSelects();
             }
 
@@ -2301,10 +2348,11 @@ let canvasOffsetY = 0;
             setValueElement(choiceEl.querySelector('.solution-autonomy'), data.solution?.autonomy);
 
             const nextSelect = choiceEl.querySelector('.choice-next');
+            // Обновляем список опций, чтобы в нём точно были все узлы
             updateNodeSelectsForChoice(nextSelect);
-            setTimeout(() => {
-                setValueElement(nextSelect, data.next);
-            }, 10);
+            // Устанавливаем значение синхронно
+            nextSelect.value = data.next;
+            nextSelect.dispatchEvent(new Event('change', { bubbles: true }));
 
             if (data.solution?.resources && Array.isArray(data.solution.resources)) {
                 choiceEl.querySelectorAll('.resource-checkbox').forEach(cb => {
@@ -2329,39 +2377,39 @@ let canvasOffsetY = 0;
 
             if (canvas) {
                 canvas.addEventListener('click', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const screenX = e.clientX - rect.left;
-    const screenY = e.clientY - rect.top;
+                    const rect = canvas.getBoundingClientRect();
+                    const screenX = e.clientX - rect.left;
+                    const screenY = e.clientY - rect.top;
 
-    let clickedNode = null;
-    for (const [nodeId, pos] of Object.entries(nodePositions)) {
-        // Преобразуем мировые координаты узла в экранные с учётом текущего масштаба и смещения
-        const screenNodeX = pos.x * canvasScale + canvasOffsetX;
-        const screenNodeY = pos.y * canvasScale + canvasOffsetY;
-        const dist = Math.sqrt((screenX - screenNodeX) ** 2 + (screenY - screenNodeY) ** 2);
-        if (dist <= NODE_RADIUS) {
-            clickedNode = nodeId;
-            break;
-        }
-    }
+                    let clickedNode = null;
+                    for (const [nodeId, pos] of Object.entries(nodePositions)) {
+                        // Преобразуем мировые координаты узла в экранные с учётом текущего масштаба и смещения
+                        const screenNodeX = pos.x * canvasScale + canvasOffsetX;
+                        const screenNodeY = pos.y * canvasScale + canvasOffsetY;
+                        const dist = Math.sqrt((screenX - screenNodeX) ** 2 + (screenY - screenNodeY) ** 2);
+                        if (dist <= NODE_RADIUS) {
+                            clickedNode = nodeId;
+                            break;
+                        }
+                    }
 
-    selectedNodeId = clickedNode;
-    const displayEl = document.getElementById('selectedNodeIdDisplay');
-    if (displayEl) displayEl.textContent = selectedNodeId || 'Нет';
-    drawCanvas();
-});
+                    selectedNodeId = clickedNode;
+                    const displayEl = document.getElementById('selectedNodeIdDisplay');
+                    if (displayEl) displayEl.textContent = selectedNodeId || 'Нет';
+                    drawCanvas();
+                });
 
                 setTimeout(drawCanvas, 500);
                 window.addEventListener('resize', () => {
-    if (canvas) {
-        const container = document.getElementById('canvasContainer');
-        canvas.width = container.clientWidth;
-        // Если нужно автоматически центрировать при изменении окна:
-        fitCanvasToNodes();
-        // Или просто перерисовать без центрирования:
-        // drawCanvas();
-    }
-});
+                    if (canvas) {
+                        const container = document.getElementById('canvasContainer');
+                        canvas.width = container.clientWidth;
+                        // Если нужно автоматически центрировать при изменении окна:
+                        fitCanvasToNodes();
+                        // Или просто перерисовать без центрирования:
+                        // drawCanvas();
+                    }
+                });
             }
 
             document.getElementById('addParticipantBtn')?.addEventListener('click', addParticipant);
@@ -2427,104 +2475,104 @@ let canvasOffsetY = 0;
 
         // Отрисовывает все узлы, их связи и подписи на холсте
         function drawCanvas() {
-    if (!ctx || !canvas) {
-        console.warn('Canvas не инициализирован');
-        return;
-    }
+            if (!ctx || !canvas) {
+                console.warn('Canvas не инициализирован');
+                return;
+            }
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    ctx.translate(canvasOffsetX, canvasOffsetY);
-    ctx.scale(canvasScale, canvasScale);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(canvasOffsetX, canvasOffsetY);
+            ctx.scale(canvasScale, canvasScale);
 
-    drawConnections();
+            drawConnections();
 
-    document.querySelectorAll('.node-item').forEach(nodeEl => {
-        const nodeId = nodeEl.dataset.nodeId;
-        if (!nodeId) return;
+            document.querySelectorAll('.node-item').forEach(nodeEl => {
+                const nodeId = nodeEl.dataset.nodeId;
+                if (!nodeId) return;
 
-        if (!nodePositions[nodeId]) {
-            const count = Object.keys(nodePositions).length;
-            nodePositions[nodeId] = {
-                x: 100 + (count % 5) * 150,
-                y: 80 + Math.floor(count / 5) * 120
-            };
+                if (!nodePositions[nodeId]) {
+                    const count = Object.keys(nodePositions).length;
+                    nodePositions[nodeId] = {
+                        x: 100 + (count % 5) * 150,
+                        y: 80 + Math.floor(count / 5) * 120
+                    };
+                }
+
+                const pos = nodePositions[nodeId];
+                const isTerminal = nodeId.startsWith('out_');
+
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, NODE_RADIUS, 0, 2 * Math.PI);
+                ctx.fillStyle = selectedNodeId === nodeId ? '#ffe082' : (isTerminal ? '#a5d6a7' : '#90caf9');
+                ctx.fill();
+                ctx.lineWidth = selectedNodeId === nodeId ? 3 : 1;
+                ctx.strokeStyle = '#333';
+                ctx.stroke();
+
+                ctx.fillStyle = '#000';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                let label = nodeId.length > 6 ? nodeId.substring(0, 5) + '..' : nodeId;
+                ctx.fillText(label, pos.x, pos.y);
+
+                const choices = nodeEl.querySelectorAll('.choice-item');
+                let angleStep = (2 * Math.PI) / (choices.length || 1);
+                if (choices.length === 0) angleStep = 0;
+
+                choices.forEach((choiceEl, index) => {
+                    const choiceId = choiceEl.querySelector('.choice-id')?.value || 'ch';
+                    const angle = index * angleStep;
+                    const cx = pos.x + Math.cos(angle) * 50;
+                    const cy = pos.y + Math.sin(angle) * 50;
+
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, CHOICE_RADIUS, 0, 2 * Math.PI);
+                    ctx.fillStyle = '#fff';
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.font = '10px Arial';
+                    ctx.fillText(choiceId, cx, cy);
+                });
+            });
+
+            ctx.restore();
         }
+        function fitCanvasToNodes() {
+            if (Object.keys(nodePositions).length === 0) return;
 
-        const pos = nodePositions[nodeId];
-        const isTerminal = nodeId.startsWith('out_');
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            for (let pos of Object.values(nodePositions)) {
+                minX = Math.min(minX, pos.x);
+                minY = Math.min(minY, pos.y);
+                maxX = Math.max(maxX, pos.x);
+                maxY = Math.max(maxY, pos.y);
+            }
 
-        ctx.beginPath();
-        ctx.arc(pos.x, pos.y, NODE_RADIUS, 0, 2 * Math.PI);
-        ctx.fillStyle = selectedNodeId === nodeId ? '#ffe082' : (isTerminal ? '#a5d6a7' : '#90caf9');
-        ctx.fill();
-        ctx.lineWidth = selectedNodeId === nodeId ? 3 : 1;
-        ctx.strokeStyle = '#333';
-        ctx.stroke();
+            const padding = 50;
+            const graphWidth = maxX - minX + 2 * padding;
+            const graphHeight = maxY - minY + 2 * padding;
 
-        ctx.fillStyle = '#000';
-        ctx.font = '12px Arial';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        let label = nodeId.length > 6 ? nodeId.substring(0, 5) + '..' : nodeId;
-        ctx.fillText(label, pos.x, pos.y);
+            // Размеры видимой области canvas (в пикселях)
+            const targetWidth = canvas.clientWidth;
+            const targetHeight = canvas.clientHeight;
 
-        const choices = nodeEl.querySelectorAll('.choice-item');
-        let angleStep = (2 * Math.PI) / (choices.length || 1);
-        if (choices.length === 0) angleStep = 0;
+            const scaleX = targetWidth / graphWidth;
+            const scaleY = targetHeight / graphHeight;
+            const newScale = Math.min(scaleX, scaleY, 1); // не увеличиваем мелкие графы
 
-        choices.forEach((choiceEl, index) => {
-            const choiceId = choiceEl.querySelector('.choice-id')?.value || 'ch';
-            const angle = index * angleStep;
-            const cx = pos.x + Math.cos(angle) * 50;
-            const cy = pos.y + Math.sin(angle) * 50;
+            // Смещение, чтобы граф оказался по центру
+            const newOffsetX = (targetWidth - graphWidth * newScale) / 2 - minX * newScale + padding * newScale;
+            const newOffsetY = (targetHeight - graphHeight * newScale) / 2 - minY * newScale + padding * newScale;
 
-            ctx.beginPath();
-            ctx.arc(cx, cy, CHOICE_RADIUS, 0, 2 * Math.PI);
-            ctx.fillStyle = '#fff';
-            ctx.fill();
-            ctx.stroke();
+            canvasScale = newScale;
+            canvasOffsetX = newOffsetX;
+            canvasOffsetY = newOffsetY;
 
-            ctx.font = '10px Arial';
-            ctx.fillText(choiceId, cx, cy);
-        });
-    });
-
-    ctx.restore();
-}
-function fitCanvasToNodes() {
-    if (Object.keys(nodePositions).length === 0) return;
-
-    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-    for (let pos of Object.values(nodePositions)) {
-        minX = Math.min(minX, pos.x);
-        minY = Math.min(minY, pos.y);
-        maxX = Math.max(maxX, pos.x);
-        maxY = Math.max(maxY, pos.y);
-    }
-
-    const padding = 50;
-    const graphWidth = maxX - minX + 2 * padding;
-    const graphHeight = maxY - minY + 2 * padding;
-
-    // Размеры видимой области canvas (в пикселях)
-    const targetWidth = canvas.clientWidth;
-    const targetHeight = canvas.clientHeight;
-
-    const scaleX = targetWidth / graphWidth;
-    const scaleY = targetHeight / graphHeight;
-    const newScale = Math.min(scaleX, scaleY, 1); // не увеличиваем мелкие графы
-
-    // Смещение, чтобы граф оказался по центру
-    const newOffsetX = (targetWidth - graphWidth * newScale) / 2 - minX * newScale + padding * newScale;
-    const newOffsetY = (targetHeight - graphHeight * newScale) / 2 - minY * newScale + padding * newScale;
-
-    canvasScale = newScale;
-    canvasOffsetX = newOffsetX;
-    canvasOffsetY = newOffsetY;
-
-    drawCanvas();
-}
+            drawCanvas();
+        }
         // Рисует пунктирные стрелки между узлами на основе выборов
         function drawConnections() {
             if (!canvas) return;
@@ -2585,6 +2633,7 @@ function fitCanvasToNodes() {
 
         // Проверяет заполненность обязательных полей и корректность структуры, выводит результат в модальное окно
         function validateScenario() {
+            updateNodeSelects();
             const errors = [];
             const warnings = [];
 
@@ -2657,21 +2706,27 @@ function fitCanvasToNodes() {
             if (nodes.length === 0) {
                 errors.push('Добавьте хотя бы один узел');
             }
-            const uniqueIds = new Set();
-            nodes.forEach(node => {
-                const nodeId = node.dataset.nodeId;
-                if (uniqueIds.has(nodeId)) {
-                    errors.push(`Обнаружен дубликат Названия узла: "${nodeId}"`);
-                }
-                uniqueIds.add(nodeId);
-            });
 
+            // 1. Сначала собираем все ID узлов (для проверки ссылок)
+            const uniqueIds = new Set();
             const nodeIds = [];
             nodes.forEach(node => {
                 const nodeId = node.dataset.nodeId;
-                if (nodeId) nodeIds.push(nodeId);
+                if (nodeId) {
+                    nodeIds.push(nodeId);
+                    if (uniqueIds.has(nodeId)) {
+                        errors.push(`Обнаружен дубликат названия узла: "${nodeId}"`);
+                    }
+                    uniqueIds.add(nodeId);
+                }
+            });
 
-                if (nodeId?.startsWith('out_')) {
+            // 2. Теперь проверяем каждый узел и его выборы, используя собранный nodeIds
+            nodes.forEach(node => {
+                const nodeId = node.dataset.nodeId;
+                if (!nodeId) return;
+
+                if (nodeId.startsWith('out_')) {
                     const outcomeType = node.querySelector('.outcome-type')?.value;
                     const outcomeDesc = node.querySelector('.outcome-desc')?.value.trim();
                     if (!outcomeType) errors.push(`Узел "${nodeId}" не имеет типа исхода`);
@@ -3312,6 +3367,15 @@ AND NOT EXISTS (
 );`;
         }
 
+        function emp() {
+            const nodeIds = Array.from(document.querySelectorAll('.node-item')).map(n => n.dataset.nodeId);
+            console.log('Узлы:', nodeIds);
+            document.querySelectorAll('.choice-item').forEach(ch => {
+                const from = ch.closest('.node-item').dataset.nodeId;
+                const to = ch.querySelector('.choice-next').value;
+                console.log(`Из ${from} -> ${to}, существует: ${nodeIds.includes(to)}`);
+            });
+        }
 
     </script>
 </body>
