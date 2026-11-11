@@ -1,0 +1,5 @@
+  datasource:
+    url: jdbc:postgresql://db.prisma.io:5432/postgres?sslmode=require
+    username: 9a82b9da326f9893870c6e9237b866d896231a1a1de439b9b784a9b3bbc1a865
+    password: sk_UXYmDmuGuBX6-eo4Vgj7h
+    driver-class-name: org.postgresql.Driver
