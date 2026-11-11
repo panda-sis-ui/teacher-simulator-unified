@@ -1,0 +1,212 @@
+/* Герой секция */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 2.4rem;
+  max-width: 800px;
+  margin: 0 auto 24px;
+  color: white;
+  line-height: 1.3;
+}
+
+.hero-desc {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 32px;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Уменьшённый баннер для внутренних страниц */
+.hero-smaller {
+  padding: 40px 0 30px;
+  background: linear-gradient(135deg, #f1f8f5 0%, #e8f4ee 100%);
+  color: var(--primary);
+}
+
+.hero-smaller h2 {
+  font-size: 2rem;
+}
+
+.hero-smaller .hero-desc {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Онтология секция */
+.ontology-section {
+  padding: 4rem 0;
+  background: #f8f9fa;
+}
+
+/* Обёртка для скроллера */
+.ontology-scroller {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* Кнопки прокрутки */
+.scroll-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  background: white;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.scroll-btn:hover:not(:disabled) {
+  background-color: var(--primary);
+  color: white;
+  transform: scale(1.05);
+}
+
+.scroll-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Сетка карточек */
+.ontology-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  gap: 24px;
+  padding: 12px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ontology-card {
+  flex: 0 0 auto;
+  width: 250px;
+  background: white;
+  border-radius: 12px;
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.ontology-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-light);
+}
+
+.icon-box {
+  width: 64px;
+  height: 64px;
+  background-color: rgba(44, 110, 73, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: var(--primary);
+  font-size: 1.8rem;
+}
+
+.ontology-card h4 {
+  margin-bottom: 12px;
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.ontology-card p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* Сценарии секция */
+.scenarios-section {
+  padding: 4rem 0;
+  background: white;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .hero {
+    padding: 40px 0;
+  }
+
+  .hero h2 {
+    font-size: 1.8rem;
+    padding: 0 1rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .scroll-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .ontology-card {
+    width: 220px;
+  }
+
+  .ontology-scroller {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h2 {
+    font-size: 1.6rem;
+  }
+
+  .ontology-section {
+    padding: 3rem 0;
+  }
+
+  .ontology-card {
+    width: 200px;
+    padding: 20px 16px;
+  }
+}

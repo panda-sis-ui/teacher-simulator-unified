@@ -1,0 +1,168 @@
+.outcome-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  border: 2px solid;
+}
+
+.outcome-success {
+  border-color: #28a745;
+  background: linear-gradient(to right, #f8fff9, #ffffff);
+}
+
+.outcome-partial {
+  border-color: #ffc107;
+  background: linear-gradient(to right, #fffdf6, #ffffff);
+}
+
+.outcome-failure {
+  border-color: #dc3545;
+  background: linear-gradient(to right, #fff6f6, #ffffff);
+}
+
+.outcome-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.outcome-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.outcome-intensity {
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.outcome-intensity strong {
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.outcome-content {
+  line-height: 1.6;
+}
+
+.outcome-text {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.outcome-meta {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: var(--bg-light);
+  border-radius: 8px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.meta-item i {
+  color: var(--primary-light);
+}
+
+.outcome-metrics {
+  margin-bottom: 2rem;
+}
+
+.outcome-metrics h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.metric-item {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.metric-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.metric-value.positive {
+  color: #28a745;
+}
+
+.metric-value.negative {
+  color: #dc3545;
+}
+
+.metric-value.neutral {
+  color: #6c757d;
+}
+
+.outcome-actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.outcome-actions .btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .outcome-card {
+    padding: 1.5rem;
+  }
+
+  .outcome-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .outcome-meta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .outcome-actions {
+    flex-direction: column;
+  }
+}

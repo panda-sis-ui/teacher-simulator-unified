@@ -1,0 +1,85 @@
+/* Футер */
+.footer {
+  background-color: var(--primary);
+  color: white;
+  padding: 24px 0;
+  margin-top: 60px;
+}
+
+.footer .container {
+  text-align: center;
+}
+
+.footer p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.footer p:first-child {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.footer p:last-child {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+  margin: 0 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.footer a::before {
+  content: "|";
+  margin-right: 0.5rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.footer a:first-of-type::before {
+  content: "";
+  margin-right: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .footer {
+    padding: 20px 0;
+    margin-top: 40px;
+  }
+
+  .footer p:first-child {
+    font-size: 1rem;
+  }
+
+  .footer p:last-child {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer p:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer a {
+    margin: 0.25rem 0;
+  }
+
+  .footer a::before {
+    display: none;
+  }
+}
